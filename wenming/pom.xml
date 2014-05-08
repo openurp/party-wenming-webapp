@@ -1,0 +1,32 @@
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+  <parent>
+    <groupId>org.beangle.ems</groupId>
+    <artifactId>beangle-ems-parent</artifactId>
+    <version>3.4.14</version>
+  </parent>
+  <modelVersion>4.0.0</modelVersion>
+  <groupId>org.openurp.webapp.apps</groupId>
+  <artifactId>openurp-webapp-apps-party-wenming</artifactId>
+  <packaging>jar</packaging>
+  <version>0.0.1-SNAPSHOT</version>
+  <name>OpenURP Party-Masses Wenming System</name>
+
+  <properties>
+    <bundle.symbolicName>org.openurp.webapp.apps.party.wenming</bundle.symbolicName>
+    <bundle.namespace>org.openurp.webapp.apps.party.wenming</bundle.namespace>
+    <jqueryplugin.version>3.6.1</jqueryplugin.version>
+  </properties>
+
+  <dependencies>
+    <dependency>
+      <groupId>org.beangle.ems</groupId>
+      <artifactId>beangle-ems-web</artifactId>
+      <version>3.4.14</version>
+    </dependency>
+    <dependency>
+      <groupId>com.jgeppert.struts2.jquery</groupId>
+      <artifactId>struts2-jquery-plugin</artifactId>
+      <version>${jqueryplugin.version}</version>
+    </dependency>
+  </dependencies>
+</project>
