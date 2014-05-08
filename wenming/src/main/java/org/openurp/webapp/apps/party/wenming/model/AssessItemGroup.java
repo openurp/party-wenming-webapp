@@ -8,8 +8,8 @@ import org.beangle.commons.entity.pojo.NumberIdHierarchyObject;
  * @author chaostone
  * 
  */
-public class AssessItemCategory extends
-		NumberIdHierarchyObject<AssessItemCategory, Integer> {
+public class AssessItemGroup extends
+		NumberIdHierarchyObject<AssessItemGroup, Integer> {
 	private static final long serialVersionUID = -335322759192447543L;
 
 }
