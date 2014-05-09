@@ -10,41 +10,49 @@ import org.openurp.kernel.base.unit.model.Department;
  * 评价方案
  * 
  * @author chaostone
- * 
  */
 public class AssessSchema extends NumberIdTimeObject<Integer> {
 
-	private static final long serialVersionUID = 2565921632983531365L;
+  private static final long serialVersionUID = 2565921632983531365L;
 
-	private String name;
+  private String name;
 
-	private List<AssessItemGroup> groups = CollectUtils.newArrayList();
+  private List<AssessItemGroup> groups = CollectUtils.newArrayList();
 
-	private List<Department> departs = CollectUtils.newArrayList();
+  private List<Department> departs = CollectUtils.newArrayList();
 
-	
-	public String getName() {
-		return name;
-	}
+  private List<AssessBonus> bonuses = CollectUtils.newArrayList();
 
-	public void setName(String name) {
-		this.name = name;
-	}
+  public String getName() {
+    return name;
+  }
 
-	public List<AssessItemGroup> getGroups() {
-		return groups;
-	}
+  public void setName(String name) {
+    this.name = name;
+  }
 
-	public void setGroups(List<AssessItemGroup> groups) {
-		this.groups = groups;
-	}
+  public List<AssessItemGroup> getGroups() {
+    return groups;
+  }
 
-	public List<Department> getDeparts() {
-		return departs;
-	}
+  public void setGroups(List<AssessItemGroup> groups) {
+    this.groups = groups;
+  }
 
-	public void setDeparts(List<Department> departs) {
-		this.departs = departs;
-	}
+  public List<Department> getDeparts() {
+    return departs;
+  }
+
+  public void setDeparts(List<Department> departs) {
+    this.departs = departs;
+  }
+
+  public List<AssessBonus> getBonuses() {
+    return bonuses;
+  }
+
+  public void setBonuses(List<AssessBonus> bonuses) {
+    this.bonuses = bonuses;
+  }
 
 }

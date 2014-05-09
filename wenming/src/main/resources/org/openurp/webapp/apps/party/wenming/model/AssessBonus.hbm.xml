@@ -1,0 +1,15 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC
+	"-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+	"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<hibernate-mapping package="org.openurp.webapp.apps.party.wenming.model">
+	<class name="AssessBonus">
+		<id name="id" type="integer">
+			<generator class="org.beangle.orm.hibernate.TableSeqGenerator" />
+		</id>
+		<property name="name" length="300" not-null="true" />
+		<property name="content" length="600" not-null="true" />
+		<property name="method" length="50" not-null="true" />
+		<many-to-one name="schema" class="org.openurp.webapp.apps.party.wenming.model.AssessSchema"/>
+	</class>
+</hibernate-mapping>

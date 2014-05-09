@@ -12,5 +12,7 @@
     <mapping resource="org/openurp/webapp/apps/party/wenming/model/AssessItemGroup.hbm.xml"/>
     <mapping resource="org/openurp/webapp/apps/party/wenming/model/AssessSchema.hbm.xml"/>
     <mapping resource="org/openurp/webapp/apps/party/wenming/model/AssessSession.hbm.xml"/>
+    <mapping resource="org/openurp/webapp/apps/party/wenming/model/AssessBonusType.hbm.xml"/>
+    <mapping resource="org/openurp/webapp/apps/party/wenming/model/AssessBonus.hbm.xml"/>
   </session-factory>
 </hibernate-configuration>
