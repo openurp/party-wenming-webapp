@@ -7,15 +7,15 @@
 		<id name="id" type="integer">
 			<generator class="org.beangle.orm.hibernate.TableSeqGenerator" />
 		</id>
-		<property name="indexno" length="100" not-null="true" />
-    <many-to-one name="parent" class="org.openurp.webapp.apps.party.wenming.model.AssessItemGroup"></many-to-one>
+		<property name="name" length="100" not-null="true" />
+    <property name="indexno" length="100" not-null="true" />
+    <many-to-one name="parent" column="parent_id" class="org.openurp.webapp.apps.party.wenming.model.AssessItemGroup"></many-to-one>
+    <many-to-one name="schema" column="schema_id" class="org.openurp.webapp.apps.party.wenming.model.AssessSchema"></many-to-one>
     <bag name="children" inverse="true" cascade="all">
-      <key column="parent_id" not-null="true" />
-      <one-to-many class="org.openurp.webapp.apps.party.wenming.model.AssessItemGroup" />
+      <one-to-many column="parent_id" class="org.openurp.webapp.apps.party.wenming.model.AssessItemGroup" />
     </bag>
     <bag name="items" inverse="true" cascade="all">
-      <key column="group_id" not-null="true" />
-      <one-to-many class="org.openurp.webapp.apps.party.wenming.model.AssessItem" />
+      <one-to-many  column="group_id" class="org.openurp.webapp.apps.party.wenming.model.AssessItem" />
     </bag>
 	</class>
 </hibernate-mapping>

@@ -5,18 +5,19 @@ import java.util.List;
 import org.beangle.commons.collection.CollectUtils;
 import org.beangle.commons.entity.pojo.NumberIdHierarchyObject;
 
-
 /**
  * 评价指标分类
  * 
  * @author chaostone
  * 
  */
-public class AssessItemGroup extends
-		NumberIdHierarchyObject<AssessItemGroup, Integer> {
-	private static final long serialVersionUID = -335322759192447543L;
+public class AssessItemGroup extends NumberIdHierarchyObject<AssessItemGroup, Integer> {
 
-	private List<AssessItem> items= CollectUtils.newArrayList();
+	private String name;
+
+	private AssessSchema schema;
+
+	private List<AssessItem> items = CollectUtils.newArrayList();
 
 	public List<AssessItem> getItems() {
 		return items;
@@ -25,5 +26,21 @@ public class AssessItemGroup extends
 	public void setItems(List<AssessItem> items) {
 		this.items = items;
 	}
-	
+
+	public String getName() {
+		return name;
+	}
+
+	public void setName(String name) {
+		this.name = name;
+	}
+
+	public AssessSchema getSchema() {
+		return schema;
+	}
+
+	public void setSchema(AssessSchema schema) {
+		this.schema = schema;
+	}
+
 }

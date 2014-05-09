@@ -9,8 +9,7 @@
 		</id>
 		<property name="name" length="100" not-null="true" />
 		<bag name="groups" inverse="true" cascade="all">
-			<key column="schema_id" not-null="true" />
-			<many-to-many column="group_id"
+			<one-to-many column="schema_id"
 				class="org.openurp.webapp.apps.party.wenming.model.AssessItemGroup" />
 		</bag>
 		<bag name="departs">
