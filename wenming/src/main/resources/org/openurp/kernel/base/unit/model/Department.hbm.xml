@@ -7,6 +7,9 @@
     <id name="id" type="integer">
       <generator class="org.beangle.orm.hibernate.TableSeqGenerator"/>
     </id>
+    <property name="code" length="100" not-null="true"/>
     <property name="name" length="100" not-null="true"/>
+    <property name="beginOn" />
+    <property name="endOn"/>
   </class>
 </hibernate-mapping>

@@ -3,7 +3,7 @@ package org.openurp.webapp.apps.party.wenming.model;
 import java.util.List;
 
 import org.beangle.commons.collection.CollectUtils;
-import org.beangle.commons.entity.pojo.IntegerIdObject;
+import org.beangle.commons.entity.pojo.NumberIdTimeObject;
 import org.openurp.kernel.base.unit.model.Department;
 
 /**
@@ -12,7 +12,7 @@ import org.openurp.kernel.base.unit.model.Department;
  * @author chaostone
  * 
  */
-public class AssessSchema extends IntegerIdObject {
+public class AssessSchema extends NumberIdTimeObject<Integer> {
 
 	private static final long serialVersionUID = 2565921632983531365L;
 
@@ -22,6 +22,7 @@ public class AssessSchema extends IntegerIdObject {
 
 	private List<Department> departs = CollectUtils.newArrayList();
 
+	
 	public String getName() {
 		return name;
 	}
