@@ -3,17 +3,23 @@
 	"-//Hibernate/Hibernate Mapping DTD 3.0//EN"
 	"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
 <hibernate-mapping package="org.openurp.webapp.apps.party.wenming.model">
-  <class name="AssessSessionBean">
-    <id name="id">
-      <generator class="org.beangle.orm.hibernate.TableSeqGenerator"/>
-    </id>
-    <property name="name" length="100" not-null="true"/>
-    <property name="enabled" not-null="true"/>
-    <property name="opened" not-null="true"/>
-    <property name="beginOn" not-null="true"/>
-    <property name="endOn" not-null="true"/> 
-    <property name="voteBeginOn" not-null="true"/>
-    <property name="voteEndOn" not-null="true"/>
-	<property name="updatedAt"/>
-  </class>
+	<class name="AssessSession">
+		<id name="id" type="integer">
+			<generator class="org.beangle.orm.hibernate.TableSeqGenerator" />
+		</id>
+		<property name="name" length="100" not-null="true" />
+		<property name="enabled"/>
+		<property name="opened"/>
+		<property name="beginOn"/>
+		<property name="endOn"/>
+		<property name="voteBeginOn"/>
+		<property name="voteEndOn"/>
+		<property name="updatedAt"/>
+    <property name="createdAt"/>
+		<bag name="schemas" inverse="true" cascade="all">
+			<key column="session_id" not-null="true" />
+			<many-to-many column="schema_id"
+				class="org.openurp.webapp.apps.party.wenming.model.AssessSchema" />
+		</bag>
+	</class>
 </hibernate-mapping>

@@ -4,7 +4,6 @@ import java.util.List;
 
 import org.beangle.commons.collection.CollectUtils;
 import org.beangle.commons.entity.pojo.IntegerIdObject;
-import org.openurp.kernel.base.unit.model.Department;
 
 /**
  * 评价指标
@@ -13,21 +12,19 @@ import org.openurp.kernel.base.unit.model.Department;
  * 
  */
 public class AssessItem extends IntegerIdObject {
-	private static final long serialVersionUID = -2793874216028524341L;
-	private AssessItemGroup category;
+	/** 评价指标分类 **/
+	private AssessItemGroup group;
 	/** 指标内容 **/
 	private String content;
-	/** 指标分值 **/
-	private float score;
+	/** 评分单位 **/
+	private List<AssessItemDepartment> departs = CollectUtils.newArrayList();
 
-	private List<Department> departs = CollectUtils.newArrayList();
-
-	public AssessItemGroup getCategory() {
-		return category;
+	public AssessItemGroup getGroup() {
+		return group;
 	}
 
-	public void setCategory(AssessItemGroup category) {
-		this.category = category;
+	public void setGroup(AssessItemGroup category) {
+		this.group = category;
 	}
 
 	public String getContent() {
@@ -38,19 +35,11 @@ public class AssessItem extends IntegerIdObject {
 		this.content = content;
 	}
 
-	public float getScore() {
-		return score;
-	}
-
-	public void setScore(float score) {
-		this.score = score;
-	}
-
-	public List<Department> getDeparts() {
+	public List<AssessItemDepartment> getDeparts() {
 		return departs;
 	}
 
-	public void setDeparts(List<Department> departs) {
+	public void setDeparts(List<AssessItemDepartment> departs) {
 		this.departs = departs;
 	}
 

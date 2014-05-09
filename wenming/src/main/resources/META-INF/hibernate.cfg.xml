@@ -5,6 +5,11 @@
 
 <hibernate-configuration>
   <session-factory>
-    <mapping resource="org/openurp/webapp/apps/party/wenming/model/AssessSessionBean.hbm.xml"/>
+    <mapping resource="org/openurp/webapp/apps/party/wenming/model/AssessItem.hbm.xml"/>
+    <mapping resource="org/openurp/webapp/apps/party/wenming/model/AssessItemDepartment.hbm.xml"/>
+    <mapping resource="org/openurp/webapp/apps/party/wenming/model/AssessItemGroup.hbm.xml"/>
+    <mapping resource="org/openurp/webapp/apps/party/wenming/model/AssessSchema.hbm.xml"/>
+    <mapping resource="org/openurp/webapp/apps/party/wenming/model/AssessSession.hbm.xml"/>
+    <mapping resource="org/openurp/webapp/apps/party/wenming/model/Department.hbm.xml"/>
   </session-factory>
 </hibernate-configuration>

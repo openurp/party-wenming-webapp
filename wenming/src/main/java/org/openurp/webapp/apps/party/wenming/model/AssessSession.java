@@ -1,6 +1,7 @@
 package org.openurp.webapp.apps.party.wenming.model;
 
-import java.sql.Date;
+import java.util.Date;
+import java.util.List;
 
 import org.beangle.commons.entity.pojo.IntegerIdObject;
 
@@ -11,7 +12,6 @@ import org.beangle.commons.entity.pojo.IntegerIdObject;
  * 
  */
 public class AssessSession extends IntegerIdObject {
-	private static final long serialVersionUID = 8092092976619244395L;
 	/** 名称 */
 	private String name;
 	/** 是否有效 **/
@@ -28,8 +28,10 @@ public class AssessSession extends IntegerIdObject {
 	private Date voteEndOn;
 	/** 更新时间 **/
 	private Date updatedAt;
+	/** 创建时间 **/
+	private Date createdAt;
 	/** 评价方案 */
-	private AssessSchema schema;
+	private List<AssessSchema> schemas;
 
 	public String getName() {
 		return name;
@@ -95,12 +97,20 @@ public class AssessSession extends IntegerIdObject {
 		this.voteEndOn = voteEndOn;
 	}
 
-	public AssessSchema getSchema() {
-		return schema;
+	public List<AssessSchema> getSchemas() {
+		return schemas;
 	}
 
-	public void setSchema(AssessSchema schema) {
-		this.schema = schema;
+	public void setSchemas(List<AssessSchema> schemas) {
+		this.schemas = schemas;
+	}
+
+	public Date getCreatedAt() {
+		return createdAt;
+	}
+
+	public void setCreatedAt(Date createdAt) {
+		this.createdAt = createdAt;
 	}
 
 }
