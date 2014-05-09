@@ -7,7 +7,7 @@
 		<id name="id" type="integer">
 			<generator class="org.beangle.orm.hibernate.TableSeqGenerator" />
 		</id>
-		<many-to-one name="group"></many-to-one>
+		<many-to-one name="group" column="group_id" class="org.openurp.webapp.apps.party.wenming.model.AssessItemGroup" not-null="true"/>
 		<property name="content" length="300" not-null="true" />
 		<bag name="departs" inverse="true" cascade="all">
 		  <key column="item_id"></key>

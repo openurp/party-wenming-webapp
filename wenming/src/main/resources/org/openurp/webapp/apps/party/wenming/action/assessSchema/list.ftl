@@ -12,7 +12,7 @@
   [@b.row]
     [@b.boxcol /]
     [@b.col width="20%" property="name" title="方案名称"][@b.a href="!info?id=${assessSchema.id}"]${assessSchema.name}[/@][/@]
-    [@b.col width="60%" property="departs" title="包含單位"]
+    [@b.col width="60%" property="departs" title="包含部门"]
     [#list assessSchema.departs?sort_by("code") as depart]${depart.name}&nbsp;[/#list]
     [/@]
     [@b.col width="10%" property="createdAt" title="common.updatedAt"]${(assessSchema.updatedAt?date)!}[/@]
