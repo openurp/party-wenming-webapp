@@ -12,10 +12,12 @@
     <many-to-one name="parent" column="parent_id" class="org.openurp.webapp.apps.party.wenming.model.AssessItemGroup"></many-to-one>
     <many-to-one name="schema" column="schema_id" class="org.openurp.webapp.apps.party.wenming.model.AssessSchema"></many-to-one>
     <bag name="children" inverse="true" cascade="all">
-      <one-to-many column="parent_id" class="org.openurp.webapp.apps.party.wenming.model.AssessItemGroup" />
+      <key column="parent_id"></key>
+      <one-to-many class="org.openurp.webapp.apps.party.wenming.model.AssessItemGroup" />
     </bag>
     <bag name="items" inverse="true" cascade="all">
-      <one-to-many  column="group_id" class="org.openurp.webapp.apps.party.wenming.model.AssessItem" />
+      <key column="group_id"></key>
+      <one-to-many class="org.openurp.webapp.apps.party.wenming.model.AssessItem" />
     </bag>
 	</class>
 </hibernate-mapping>

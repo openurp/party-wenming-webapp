@@ -16,7 +16,7 @@
 		<property name="voteEndOn"/>
 		<property name="updatedAt"/>
     <property name="createdAt"/>
-		<bag name="schemas" inverse="true" cascade="all">
+		<bag name="schemas">
 			<key column="session_id" not-null="true" />
 			<many-to-many column="schema_id"
 				class="org.openurp.webapp.apps.party.wenming.model.AssessSchema" />

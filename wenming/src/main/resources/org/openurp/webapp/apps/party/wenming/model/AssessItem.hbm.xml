@@ -10,7 +10,8 @@
 		<many-to-one name="group"></many-to-one>
 		<property name="content" length="300" not-null="true" />
 		<bag name="departs" inverse="true" cascade="all">
-			<one-to-many column="item_id"
+		  <key column="item_id"></key>
+			<one-to-many
 				class="org.openurp.webapp.apps.party.wenming.model.AssessItemDepartment" />
 		</bag>
 	</class>
