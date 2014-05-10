@@ -13,6 +13,20 @@
     <mapping resource="org/openurp/webapp/apps/party/wenming/model/AssessSchema.hbm.xml"/>
     <mapping resource="org/openurp/webapp/apps/party/wenming/model/AssessSession.hbm.xml"/>
     <mapping resource="org/openurp/webapp/apps/party/wenming/model/AssessBonusType.hbm.xml"/>
+    <mapping resource="org/openurp/webapp/apps/party/wenming/model/AssessBonusItem.hbm.xml"/>
+    
+    <mapping resource="org/openurp/webapp/apps/party/wenming/model/AssessState.hbm.xml"/>
+    <mapping resource="org/openurp/webapp/apps/party/wenming/model/SelfAssess.hbm.xml"/>
+    <mapping resource="org/openurp/webapp/apps/party/wenming/model/SelfAssessItem.hbm.xml"/>
+    <mapping resource="org/openurp/webapp/apps/party/wenming/model/SupervisorAssess.hbm.xml"/>
+    <mapping resource="org/openurp/webapp/apps/party/wenming/model/SupervisorAssessItem.hbm.xml"/>
+    <mapping resource="org/openurp/webapp/apps/party/wenming/model/MutualAssess.hbm.xml"/>
+    <mapping resource="org/openurp/webapp/apps/party/wenming/model/MutualAssessItem.hbm.xml"/>
+    
+    <mapping resource="org/openurp/webapp/apps/party/wenming/model/AssessStat.hbm.xml"/>
+    <mapping resource="org/openurp/webapp/apps/party/wenming/model/AssessStatItem.hbm.xml"/>
+    
+    <mapping resource="org/openurp/webapp/apps/party/wenming/model/AssessApply.hbm.xml"/>
     <mapping resource="org/openurp/webapp/apps/party/wenming/model/AssessBonus.hbm.xml"/>
   </session-factory>
 </hibernate-configuration>

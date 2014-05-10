@@ -21,7 +21,7 @@ public class AssessSchema extends NumberIdTimeObject<Integer> {
 
   private List<Department> departs = CollectUtils.newArrayList();
 
-  private List<AssessBonus> bonuses = CollectUtils.newArrayList();
+  private List<AssessBonusItem> bonusItems = CollectUtils.newArrayList();
 
   public String getName() {
     return name;
@@ -47,12 +47,12 @@ public class AssessSchema extends NumberIdTimeObject<Integer> {
     this.departs = departs;
   }
 
-  public List<AssessBonus> getBonuses() {
-    return bonuses;
+  public List<AssessBonusItem> getBonusItems() {
+    return bonusItems;
   }
 
-  public void setBonuses(List<AssessBonus> bonuses) {
-    this.bonuses = bonuses;
+  public void setBonusItems(List<AssessBonusItem> bonusItems) {
+    this.bonusItems = bonusItems;
   }
 
 }

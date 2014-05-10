@@ -12,8 +12,9 @@ import org.beangle.commons.entity.pojo.NumberIdHierarchyObject;
  * 
  */
 public class AssessItemGroup extends NumberIdHierarchyObject<AssessItemGroup, Integer> {
+  private static final long serialVersionUID = 1L;
 
-	private String name;
+  private String name;
 
 	private AssessSchema schema;
 

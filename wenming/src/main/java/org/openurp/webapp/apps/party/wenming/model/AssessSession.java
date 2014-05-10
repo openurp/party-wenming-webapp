@@ -12,7 +12,8 @@ import org.beangle.commons.entity.pojo.IntegerIdObject;
  * 
  */
 public class AssessSession extends IntegerIdObject {
-	/** 名称 */
+  private static final long serialVersionUID = 1L;
+  /** 名称 */
 	private String name;
 	/** 是否有效 **/
 	private boolean enabled = true;

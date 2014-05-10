@@ -1,0 +1,28 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC
+    "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+    "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<hibernate-mapping package="org.openurp.webapp.apps.party.wenming.model">
+    <class name="AssessApply">
+        <id name="id" type="long">
+            <generator class="org.beangle.orm.hibernate.TableSeqGenerator" />
+        </id>
+        <many-to-one name="department" column="department_id" not-null="true"/>
+        <many-to-one name="session" column="session_id" not-null="true"/>
+        <property name="state" type="assessState" not-null="true" />
+        <many-to-one name="submitBy" column="submit_by_id" not-null="true"/>
+        <property name="activitySummary" length="2000"/>
+        <property name="wenmingSummary" length="2000"/>
+        <property name="detail" length="4000"/>
+        <property name="bonus"/>
+        <property name="confirmBonus"/>
+        <component name="attachment">
+            <property name="name" column="attach_name"/>
+            <property name="filePath" column="attach_file_path"/>
+        </component>
+        <bag name="bonuses" inverse="true" cascade="all">
+          <key column="apply_id"></key>
+          <one-to-many class="org.openurp.webapp.apps.party.wenming.model.AssessBonus" />
+        </bag>
+    </class>
+</hibernate-mapping>

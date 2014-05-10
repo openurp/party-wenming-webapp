@@ -1,22 +1,26 @@
 <?xml version="1.0"?>
 <!DOCTYPE hibernate-mapping PUBLIC
-	"-//Hibernate/Hibernate Mapping DTD 3.0//EN"
-	"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+    "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+    "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
 <hibernate-mapping package="org.openurp.webapp.apps.party.wenming.model">
-	<class name="AssessSchema">
-		<id name="id" type="integer">
-			<generator class="org.beangle.orm.hibernate.TableSeqGenerator" />
-		</id>
-		<property name="name" length="100" not-null="true" />
-		<bag name="groups" inverse="true" cascade="all">
-      <key column="schema_id"></key>
-			<one-to-many class="org.openurp.webapp.apps.party.wenming.model.AssessItemGroup" />
-		</bag>
-		<bag name="departs">
-			<key column="schema_id" not-null="true" />
-			<many-to-many column="department_id"	class="org.openurp.kernel.base.unit.model.Department" />
-		</bag>
-		<property name="updatedAt"/>
+    <class name="AssessSchema">
+        <id name="id" type="integer">
+            <generator class="org.beangle.orm.hibernate.TableSeqGenerator" />
+        </id>
+        <property name="name" length="100" not-null="true" />
+        <bag name="groups" inverse="true" cascade="all">
+          <key column="schema_id"></key>
+          <one-to-many class="org.openurp.webapp.apps.party.wenming.model.AssessItemGroup" />
+        </bag>
+        <bag name="departs">
+            <key column="schema_id" not-null="true" />
+            <many-to-many column="department_id"    class="org.openurp.kernel.base.unit.model.Department" />
+        </bag>
+        <bag name="bonusItems">
+          <key column="schema_id"></key>
+          <many-to-many column="item_id" class="org.openurp.webapp.apps.party.wenming.model.AssessBonusItem" />
+        </bag>
+        <property name="updatedAt"/>
     <property name="createdAt"/>
-	</class>
+    </class>
 </hibernate-mapping>

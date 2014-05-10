@@ -10,7 +10,8 @@ import org.openurp.kernel.base.unit.model.Department;
  * 
  */
 public class AssessItemDepartment extends IntegerIdObject {
-	/** 评价指标 **/
+  private static final long serialVersionUID = 1L;
+  /** 评价指标 **/
 	private AssessItem item;
 	/** 评分单位 **/
 	private Department department;

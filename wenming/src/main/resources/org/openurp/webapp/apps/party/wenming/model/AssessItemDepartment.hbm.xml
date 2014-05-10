@@ -1,14 +1,14 @@
 <?xml version="1.0"?>
 <!DOCTYPE hibernate-mapping PUBLIC
-	"-//Hibernate/Hibernate Mapping DTD 3.0//EN"
-	"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+    "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+    "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
 <hibernate-mapping package="org.openurp.webapp.apps.party.wenming.model">
   <class name="AssessItemDepartment">
     <id name="id" type="integer">
       <generator class="org.beangle.orm.hibernate.TableSeqGenerator"/>
     </id>
     <property name="score" not-null="true"/>
-    <many-to-one name="item" not-null="true"></many-to-one>
-    <many-to-one name="department" not-null="true"></many-to-one>
+    <many-to-one name="item" column="item_id" not-null="true"/>
+    <many-to-one name="department" column="department_id" not-null="true"/>
   </class>
 </hibernate-mapping>

@@ -1,56 +1,58 @@
 package org.openurp.webapp.apps.party.wenming.model;
 
-import org.beangle.commons.entity.pojo.IntegerIdObject;
+import java.util.List;
+
+import org.beangle.commons.collection.CollectUtils;
+import org.beangle.commons.entity.pojo.LongIdObject;
 
 /**
- * 加分项目
+ * 部门测评加分项和材料
  * 
  * @author chaostone
  */
-public class AssessBonus extends IntegerIdObject {
+public class AssessBonus extends LongIdObject {
+  private static final long serialVersionUID = 7084016781165137870L;
 
-  private static final long serialVersionUID = 1625841007012233533L;
+  private AssessApply apply;
 
-  private String name;
+  /** 加分分值 **/
+  private float score;
 
-  private AssessSchema schema;
+  /** 加分项 */
+  private AssessBonusItem item;
 
-  /** 具体加分内容 **/
-  private String content;
+  private List<Attachment> attachments = CollectUtils.newArrayList();
 
-  /** 加分方法 */
-  private String method;
-
-  public String getName() {
-    return name;
+  public AssessApply getApply() {
+    return apply;
   }
 
-  public void setName(String name) {
-    this.name = name;
+  public void setApply(AssessApply apply) {
+    this.apply = apply;
   }
 
-  public AssessSchema getSchema() {
-    return schema;
+  public float getScore() {
+    return score;
   }
 
-  public void setSchema(AssessSchema schema) {
-    this.schema = schema;
+  public void setScore(float score) {
+    this.score = score;
   }
 
-  public String getContent() {
-    return content;
+  public AssessBonusItem getItem() {
+    return item;
   }
 
-  public void setContent(String content) {
-    this.content = content;
+  public void setItem(AssessBonusItem item) {
+    this.item = item;
   }
 
-  public String getMethod() {
-    return method;
+  public List<Attachment> getAttachments() {
+    return attachments;
   }
 
-  public void setMethod(String method) {
-    this.method = method;
+  public void setAttachments(List<Attachment> attachments) {
+    this.attachments = attachments;
   }
 
 }

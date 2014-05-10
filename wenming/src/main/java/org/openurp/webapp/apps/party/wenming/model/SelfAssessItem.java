@@ -1,0 +1,26 @@
+package org.openurp.webapp.apps.party.wenming.model;
+
+/**
+ * 每个自评指标对应的分数
+ * 
+ * @author chaostone
+ */
+public class SelfAssessItem extends AbstractAssessItemInfo {
+
+  private static final long serialVersionUID = -1848383446708874473L;
+
+  private SelfAssess assess;
+
+  public SelfAssess getAssess() {
+    return assess;
+  }
+
+  public void setAssess(SelfAssess assess) {
+    this.assess = assess;
+  }
+
+  public static long getSerialversionuid() {
+    return serialVersionUID;
+  }
+
+}
