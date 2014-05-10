@@ -6,8 +6,12 @@ public enum AssessState {
 
   DepartApproved("部门审核通过"),
 
-  DepartUnpassed("部门审核不通过");
+  DepartUnpassed("部门审核不通过"),
 
+  SchoolApproved("文明办审核通过"),
+
+  SchoolUnpassed("文明办审核通过");
+  
   private String description;
 
   private AssessState(String description) {
