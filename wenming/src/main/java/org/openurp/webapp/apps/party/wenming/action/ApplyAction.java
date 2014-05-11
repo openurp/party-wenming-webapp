@@ -54,6 +54,18 @@ public class ApplyAction extends SecurityActionSupport {
     }
   }
 
+  public String submit() {
+    AssessApply apply = (AssessApply) getEntity();
+    if (editable(apply.getState())) {
+      apply.setState(AssessState.Submit);
+      apply.setUpdatedAt(new Date());
+      entityDao.saveOrUpdate(apply);
+      return redirect("info", "info.save.success", "&session.id=" + apply.getSession().getId());
+    } else {
+      return redirect("info", "不能修该状态的申请", "&session.id=" + apply.getSession().getId());
+    }
+  }
+
   /**
    * 查看信息
    */
