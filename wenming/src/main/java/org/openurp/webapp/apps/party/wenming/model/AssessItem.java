@@ -12,76 +12,75 @@ import org.beangle.commons.entity.pojo.IntegerIdObject;
  * 
  */
 public class AssessItem extends IntegerIdObject {
-  private static final long serialVersionUID = 9065392523456371155L;
 	/** 测评指标分类 **/
-	private AssessItemGroup group;
-	/** 指标内容 **/
-	private String content;
-	/** 评分单位 **/
-	private List<AssessItemDepartment> departs = CollectUtils.newArrayList();
-	/** 是否为互评指标 **/
-	private boolean mutual;
-	/** 是否督察组测评指标 **/
-	private boolean forSupervisor;
-	/** 指标分值 **/
-	private float score;
-	/** 排列顺序 **/
-	private int orderNumber;
+  private AssessItemGroup group;
+  /** 指标内容 **/
+  private String content;
+  /** 指标分值 **/
+  private Float score;
+  /** 排列顺序 **/
+  private Integer orderNumber;
+  /** 是否为互评指标 **/
+  private Boolean mutual = false;
+  /** 是否督察组测评指标 **/
+  private Boolean forSupervisor = false;
+  /** 评分单位 **/
+  private List<AssessItemDepartment> departs = CollectUtils.newArrayList();
 
-	public AssessItemGroup getGroup() {
-		return group;
-	}
+  public AssessItemGroup getGroup() {
+    return group;
+  }
 
-	public void setGroup(AssessItemGroup category) {
-		this.group = category;
-	}
+  public void setGroup(AssessItemGroup category) {
+    this.group = category;
+  }
 
-	public String getContent() {
-		return content;
-	}
+  public String getContent() {
+    return content;
+  }
 
-	public void setContent(String content) {
-		this.content = content;
-	}
+  public void setContent(String content) {
+    this.content = content;
+  }
 
-	public List<AssessItemDepartment> getDeparts() {
-		return departs;
-	}
+  public List<AssessItemDepartment> getDeparts() {
+    return departs;
+  }
 
-	public void setDeparts(List<AssessItemDepartment> departs) {
-		this.departs = departs;
-	}
+  public void setDeparts(List<AssessItemDepartment> departs) {
+    this.departs = departs;
+  }
 
-	public boolean isMutual() {
-		return mutual;
-	}
+  public Float getScore() {
+    return score;
+  }
 
-	public void setMutual(boolean mutual) {
-		this.mutual = mutual;
-	}
+  public void setScore(Float score) {
+    this.score = score;
+  }
 
-	public boolean isForSupervisor() {
-		return forSupervisor;
-	}
+  public Integer getOrderNumber() {
+    return orderNumber;
+  }
 
-	public void setForSupervisor(boolean forSupervisor) {
-		this.forSupervisor = forSupervisor;
-	}
+  public void setOrderNumber(Integer orderNumber) {
+    this.orderNumber = orderNumber;
+  }
 
-	public float getScore() {
-		return score;
-	}
+  public Boolean getMutual() {
+    return mutual;
+  }
 
-	public void setScore(float score) {
-		this.score = score;
-	}
+  public void setMutual(Boolean mutual) {
+    this.mutual = mutual;
+  }
 
-	public int getOrderNumber() {
-		return orderNumber;
-	}
+  public Boolean getForSupervisor() {
+    return forSupervisor;
+  }
 
-	public void setOrderNumber(int orderNumber) {
-		this.orderNumber = orderNumber;
-	}
+  public void setForSupervisor(Boolean forSupervisor) {
+    this.forSupervisor = forSupervisor;
+  }
 
 }

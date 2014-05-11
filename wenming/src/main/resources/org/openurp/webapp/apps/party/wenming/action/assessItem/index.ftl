@@ -5,10 +5,11 @@
     <td class="index_view">
     [@b.form name="assessItemSearchForm"  action="!search" target="assessItemlist" title="ui.searchForm" theme="search"]
       [@b.textfields names="assessItem.name;指标名称"/]
-      [@b.select name="schema.id" label="方案" items=schemas empty="..."/]
+      <input type="hidden" name="assessItem.group.id" value="${assessItemGroupId}"/>
+      <input type="hidden" name="orderBy" value="orderNumber"/>
     [/@]
     </td>
-    <td class="index_content">[@b.div id="assessItemlist" href="!search?orderBy=id desc" /]</td>
+    <td class="index_content">[@b.div id="assessItemlist" href="!search?orderBy=orderNumber&assessItem.group.id=${assessItemGroupId}" /]</td>
   </tr>
 </table>
 [@b.foot/]

@@ -4,6 +4,7 @@ import org.beangle.commons.inject.bind.AbstractBindModule;
 import org.openurp.webapp.apps.party.wenming.action.ApplyAction;
 import org.openurp.webapp.apps.party.wenming.action.ApplyAuditAction;
 import org.openurp.webapp.apps.party.wenming.action.ApplyManageAction;
+import org.openurp.webapp.apps.party.wenming.action.AssessItemAction;
 import org.openurp.webapp.apps.party.wenming.action.AssessBonusTypeAction;
 import org.openurp.webapp.apps.party.wenming.action.AssessItemGroupAction;
 import org.openurp.webapp.apps.party.wenming.action.AssessSchemaAction;
@@ -20,7 +21,7 @@ public class ActionModule extends AbstractBindModule {
 
   @Override
   protected void doBinding() {
-    bind(AssessSessionAction.class, AssessItemGroupAction.class);
+    bind(AssessSessionAction.class, AssessItemGroupAction.class, AssessItemAction.class);
     bind(AssessSchemaAction.class);
     bind(SupervisorAction.class, SupervisorAssessAction.class, SelfAssessAction.class,
         SelfAssessAuditAction.class, MutualAssessAction.class, MutualAssessAuditAction.class,
