@@ -4,14 +4,14 @@ import org.beangle.commons.entity.pojo.IntegerIdObject;
 import org.openurp.kernel.base.unit.model.Department;
 
 /**
- * 评价指标
+ * 测评指标
  * 
  * @author chaostone
  * 
  */
 public class AssessItemDepartment extends IntegerIdObject {
   private static final long serialVersionUID = 1L;
-  /** 评价指标 **/
+	/** 测评指标 **/
 	private AssessItem item;
 	/** 评分单位 **/
 	private Department department;

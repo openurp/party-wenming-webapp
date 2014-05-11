@@ -11,5 +11,6 @@
         <property name="content" length="600" not-null="true" />
         <property name="method" length="50" not-null="true" />
         <many-to-one name="schema" column="schema_id"/>
+        <many-to-one name="bonusType" column="bonus_type_id" not-null="true"/>
     </class>
 </hibernate-mapping>

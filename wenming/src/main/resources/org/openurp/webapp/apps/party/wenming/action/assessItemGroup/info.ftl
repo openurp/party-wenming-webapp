@@ -1,6 +1,6 @@
 [#ftl]
 [@b.head/]
-[@b.toolbar title='评价指标分类信息']
+[@b.toolbar title='测评指标分类信息']
 bar.addBack("${b.text("action.back")}");
 [/@]
 [#include "/org/openurp/webapp/apps/party/wenming/comm.ftl"/]

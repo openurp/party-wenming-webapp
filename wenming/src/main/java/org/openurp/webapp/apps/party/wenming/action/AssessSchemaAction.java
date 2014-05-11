@@ -9,7 +9,7 @@ import org.openurp.kernel.base.unit.model.Department;
 import org.openurp.webapp.apps.party.wenming.model.AssessSchema;
 
 /**
- * 评价方案控制器
+ * 测评方案控制器
  * 
  * @author xinzhou
  * **/

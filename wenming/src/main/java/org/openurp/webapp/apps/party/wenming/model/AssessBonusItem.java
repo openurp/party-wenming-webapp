@@ -20,12 +20,22 @@ public class AssessBonusItem extends IntegerIdObject {
 
   /** 加分方法 */
   private String method;
+	
+  private AssessBonusType bonusType;
 
   public String getName() {
     return name;
   }
 
-  public void setName(String name) {
+  public AssessBonusType getBonusType() {
+	return bonusType;
+}
+
+public void setBonusType(AssessBonusType bonusType) {
+	this.bonusType = bonusType;
+}
+
+public void setName(String name) {
     this.name = name;
   }
 

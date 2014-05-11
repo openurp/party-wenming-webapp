@@ -31,7 +31,7 @@ public class AssessSession extends IntegerIdObject {
 	private Date updatedAt;
 	/** 创建时间 **/
 	private Date createdAt;
-	/** 评价方案 */
+	/** 测评方案 */
 	private List<AssessSchema> schemas;
 
 	public String getName() {

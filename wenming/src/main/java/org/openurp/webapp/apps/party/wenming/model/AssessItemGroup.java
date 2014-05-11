@@ -6,7 +6,7 @@ import org.beangle.commons.collection.CollectUtils;
 import org.beangle.commons.entity.pojo.NumberIdHierarchyObject;
 
 /**
- * 评价指标分类
+ * 测评指标分类
  * 
  * @author chaostone
  * 

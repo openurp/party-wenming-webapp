@@ -7,7 +7,7 @@ import org.beangle.commons.entity.pojo.NumberIdTimeObject;
 import org.openurp.kernel.base.unit.model.Department;
 
 /**
- * 评价方案
+ * 测评方案
  * 
  * @author chaostone
  */

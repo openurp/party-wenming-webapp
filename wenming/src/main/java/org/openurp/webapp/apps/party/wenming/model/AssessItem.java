@@ -6,14 +6,14 @@ import org.beangle.commons.collection.CollectUtils;
 import org.beangle.commons.entity.pojo.IntegerIdObject;
 
 /**
- * 评价指标
+ * 测评指标
  * 
  * @author chaostone
  * 
  */
 public class AssessItem extends IntegerIdObject {
   private static final long serialVersionUID = 9065392523456371155L;
-  /** 评价指标分类 **/
+	/** 测评指标分类 **/
 	private AssessItemGroup group;
 	/** 指标内容 **/
 	private String content;

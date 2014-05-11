@@ -6,7 +6,7 @@ import org.openurp.webapp.apps.party.wenming.model.AssessItemGroup;
 import org.openurp.webapp.apps.party.wenming.service.AssessItemGroupService;
 
 /**
- * 评价指标分类管理
+ * 测评指标分类管理
  * 
  * @author chii
  * 

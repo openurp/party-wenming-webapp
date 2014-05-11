@@ -3,7 +3,7 @@ package org.openurp.webapp.apps.party.wenming.model;
 import org.beangle.commons.entity.pojo.BaseCode;
 
 /**
- * 加分项类型
+ * 加分项目类型
  * 
  * @author chaostone
  */
