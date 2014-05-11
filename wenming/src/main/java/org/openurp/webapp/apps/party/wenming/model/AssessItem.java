@@ -19,6 +19,14 @@ public class AssessItem extends IntegerIdObject {
 	private String content;
 	/** 评分单位 **/
 	private List<AssessItemDepartment> departs = CollectUtils.newArrayList();
+	/** 是否为互评指标 **/
+	private boolean mutual;
+	/** 是否督察组测评指标 **/
+	private boolean forSupervisor;
+	/** 指标分值 **/
+	private float score;
+	/** 排列顺序 **/
+	private int orderNumber;
 
 	public AssessItemGroup getGroup() {
 		return group;
@@ -42,6 +50,38 @@ public class AssessItem extends IntegerIdObject {
 
 	public void setDeparts(List<AssessItemDepartment> departs) {
 		this.departs = departs;
+	}
+
+	public boolean isMutual() {
+		return mutual;
+	}
+
+	public void setMutual(boolean mutual) {
+		this.mutual = mutual;
+	}
+
+	public boolean isForSupervisor() {
+		return forSupervisor;
+	}
+
+	public void setForSupervisor(boolean forSupervisor) {
+		this.forSupervisor = forSupervisor;
+	}
+
+	public float getScore() {
+		return score;
+	}
+
+	public void setScore(float score) {
+		this.score = score;
+	}
+
+	public int getOrderNumber() {
+		return orderNumber;
+	}
+
+	public void setOrderNumber(int orderNumber) {
+		this.orderNumber = orderNumber;
 	}
 
 }

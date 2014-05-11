@@ -1,14 +1,17 @@
 package org.openurp.webapp.apps.party.wenming.action;
 
-import org.beangle.commons.dao.query.builder.OqlBuilder;
 import org.beangle.ems.web.action.SecurityActionSupport;
+import org.openurp.webapp.apps.party.wenming.service.WenMingService;
 
 public class WenMingAction extends SecurityActionSupport {
 	
-	public void addorder(OqlBuilder<?> query) {
-		if (get("orderBy") != null && !get("orderBy").equals("")) {
-			query.orderBy(get("orderBy"));
-		}
-		query.limit(getPageLimit());
+	protected WenMingService wenMingService;
+	
+	public void setWenMingService(WenMingService wenMingService) {
+		this.wenMingService = wenMingService;
+	}
+	
+	protected void putSchemas(){
+		put("schemas", wenMingService.findSchema());
 	}
 }

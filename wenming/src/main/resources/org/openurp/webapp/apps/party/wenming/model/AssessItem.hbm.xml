@@ -3,16 +3,22 @@
     "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
     "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
 <hibernate-mapping package="org.openurp.webapp.apps.party.wenming.model">
-    <class name="AssessItem">
-        <id name="id" type="integer">
-            <generator class="org.beangle.orm.hibernate.TableSeqGenerator" />
-        </id>
-        <many-to-one name="group" column="group_id" class="org.openurp.webapp.apps.party.wenming.model.AssessItemGroup" not-null="true"/>
-        <property name="content" length="300" not-null="true" />
-        <bag name="departs" inverse="true" cascade="all">
-          <key column="item_id"></key>
-            <one-to-many
-                class="org.openurp.webapp.apps.party.wenming.model.AssessItemDepartment" />
-        </bag>
-    </class>
+ <class name="AssessItem">
+  <id name="id" type="integer">
+   <generator class="org.beangle.orm.hibernate.TableSeqGenerator" />
+  </id>
+  <many-to-one name="group" column="group_id"
+   class="org.openurp.webapp.apps.party.wenming.model.AssessItemGroup"
+   not-null="true" />
+  <property name="content" length="300" not-null="true" />
+  <property name="mutual" not-null="true" />
+  <property name="forSupervisor" not-null="true" />
+  <property name="score" not-null="true" />
+  <property name="orderNumber" not-null="true" />
+  <bag name="departs" inverse="true" cascade="all">
+   <key column="item_id"></key>
+   <one-to-many
+    class="org.openurp.webapp.apps.party.wenming.model.AssessItemDepartment" />
+  </bag>
+ </class>
 </hibernate-mapping>

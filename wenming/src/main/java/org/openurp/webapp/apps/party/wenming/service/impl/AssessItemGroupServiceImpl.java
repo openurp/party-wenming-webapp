@@ -25,4 +25,10 @@ public class AssessItemGroupServiceImpl extends AbstractHierarchyService<AssessI
 		return topNodes;
 	}
 
+	@Override
+	public List<AssessItemGroup> findBySchema(Integer schemaId) {
+		List<AssessItemGroup> list = entityDao.get(AssessItemGroup.class, "schema.id", schemaId);
+		return list;
+	}
+
 }
