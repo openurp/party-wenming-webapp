@@ -10,7 +10,7 @@ public enum AssessState {
 
   SchoolApproved("文明办审核通过"),
 
-  SchoolUnpassed("文明办审核通过");
+  SchoolUnpassed("文明办审核不通过");
   
   private String description;
 

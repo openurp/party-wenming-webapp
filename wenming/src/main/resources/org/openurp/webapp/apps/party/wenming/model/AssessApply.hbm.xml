@@ -11,6 +11,8 @@
         <many-to-one name="session" column="session_id" not-null="true"/>
         <property name="state" type="assessState" not-null="true" />
         <many-to-one name="submitBy" column="submit_by_id" not-null="true"/>
+        <property name="createdAt"  not-null="true"/>
+        <property name="updatedAt"  not-null="true"/>
         <property name="activitySummary" length="2000"/>
         <property name="wenmingSummary" length="2000"/>
         <property name="detail" length="4000"/>

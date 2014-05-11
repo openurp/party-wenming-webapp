@@ -9,6 +9,7 @@ import org.beangle.commons.entity.Component;
  */
 public class Attachment implements Component {
 
+  public static final String DIR_CONF_NAME="attachment_dir";
   /**
    * 附件名称
    */

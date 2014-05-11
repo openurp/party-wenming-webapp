@@ -6,7 +6,7 @@
 <hibernate-configuration>
   <session-factory>
     <mapping resource="org/openurp/kernel/base/unit/model/Department.hbm.xml"/>
-    
+    <mapping class="org.openurp.kernel.base.unit.model.UrpUserBean"/>
     <mapping resource="org/openurp/webapp/apps/party/wenming/model/AssessItem.hbm.xml"/>
     <mapping resource="org/openurp/webapp/apps/party/wenming/model/AssessItemDepartment.hbm.xml"/>
     <mapping resource="org/openurp/webapp/apps/party/wenming/model/AssessItemGroup.hbm.xml"/>

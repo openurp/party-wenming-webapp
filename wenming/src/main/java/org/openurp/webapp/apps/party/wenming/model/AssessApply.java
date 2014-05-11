@@ -3,7 +3,7 @@ package org.openurp.webapp.apps.party.wenming.model;
 import java.util.List;
 
 import org.beangle.commons.collection.CollectUtils;
-import org.beangle.commons.entity.pojo.LongIdObject;
+import org.beangle.commons.entity.pojo.NumberIdTimeObject;
 import org.beangle.security.blueprint.User;
 import org.openurp.kernel.base.unit.model.Department;
 
@@ -12,7 +12,7 @@ import org.openurp.kernel.base.unit.model.Department;
  * 
  * @author chaostone
  */
-public class AssessApply extends LongIdObject {
+public class AssessApply extends NumberIdTimeObject<Long> {
 
   private static final long serialVersionUID = -203639712300833579L;
 
@@ -23,7 +23,8 @@ public class AssessApply extends LongIdObject {
   private AssessSession session;
 
   /** 状态 */
-  private AssessState state;
+  private AssessState state=AssessState.Draft;
+  
   /** 申报人员 **/
   private User submitBy;
 
