@@ -2,17 +2,20 @@
 [@b.head/]
 [@b.messages slash="3"/]
 [#if assessApply??]
-[@b.toolbar title='文明单位申报']
-    
-    bar.addBack("${b.text("action.back")}");
+[@b.toolbar title='基本信息']
+    function edit(){document.getElementById("apply_edit").click();}
+    function submit_apply(){ if(confirm("提交后不能修改，确认提交？")) document.getElementById("apply_submit").click(); }
     [#if editable]
-    bar.addItem("修改","!edit?assessApply.id=${assessApply.id}" class="ui-button ui-widget ui-state-default ui-corner-all ui-button-text"]);
+    bar.addItem("${b.text("action.edit")}",edit);
     [/#if]
     [#if submitable]
-    bar.addItem("提交",[@b.a href="!submit?assessApply.id=${assessApply.id}" class="ui-button ui-widget ui-state-default ui-corner-all ui-button-text"]&nbsp&nbsp&nbsp提交&nbsp&nbsp&nbsp[/@]
+    bar.addItem("${b.text("action.submit")}",submit_apply);
     [/#if]
-    
 [/@]
+<div>
+  [@b.a id="apply_edit" style="display:none" href="!edit?assessApply.id=${assessApply.id}"]修改[/@]
+  [@b.a id="apply_submit" style="display:none" href="!submit?assessApply.id=${assessApply.id}"]提交[/@]
+</div>
 <table class="infoTable">
   <tr>
    <td class="title">状态:</td>
@@ -38,10 +41,25 @@
    <td class="title" >支撑材料:</td>
    <td class="content" colspan="5">[#if assessApply.attachment??][@b.a target="_blank" href="attachment?path=${assessApply.attachment.filePath}&name=${assessApply.attachment.name?url('utf-8')}"]${assessApply.attachment.name}[/@][/#if]</td>
   </tr>
-  <tr>
-</table>
+ </table>
+[@b.toolbar title='加分材料'/]
+[@b.grid  items=assessApply.bonuses var="bonus"]
+  [@b.gridbar]
+   [#if editable]
+    bar.addItem("${b.text("action.new")}",action.add());
+    bar.addItem("${b.text("action.modify")}",action.edit());
+    bar.addItem("${b.text("action.delete")}",action.remove("确认删除?"));
+    [/#if]
+  [/@]
+  [@b.row]
+    [#if editable][@b.boxcol width="5%"/]  [/#if]
+    [@b.col property="item.bonusType.name" width="20%" title="加分类型"/]
+    [@b.col property="item.name" width="40%" title="加分内容"/]
+    [@b.col property="score" width="10%" title="分值"/]
+    [@b.col width="25%" title="附件"/]
+  [/@]
+[/@]
 
-[@b.a href="!editBonus?assessApply.id=${assessApply.id}" class="ui-button ui-widget ui-state-default ui-corner-all ui-button-text"]&nbsp&nbsp&nbsp修改加分材料&nbsp&nbsp&nbsp[/@]
 [#else]
 <p>
     [@b.a href="!edit?assessApply.session.id=${Parameters['session.id']}" ]还没有进行申报，现在申报[/@]
