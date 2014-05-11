@@ -14,7 +14,7 @@ bar.addBack("${b.text("action.back")}");
    <td><b>所在部门:</b>${user.department.name}</td>
    <td>
     [@b.form name="applyForm"  action="!index" target="assessItemlist" title="ui.searchForm" ]
-    <b>批次:</b> [@b.select name="session.id" label="测评批次" items=sessions value=assessSession onchange="bg.submit(this.form)"][/@]
+    <b>批次:</b> [@b.select name="session.id" label="测评批次" items=sessions value=assessSession onchange="bg.form.submit(this.form)"][/@]
     [/@]
    </td>
    <td><b>申报时间:</b>${assessSession.beginOn?string("yyyy-MM-dd HH:mm")}~${assessSession.endOn?string("yyyy-MM-dd HH:mm")}</td>

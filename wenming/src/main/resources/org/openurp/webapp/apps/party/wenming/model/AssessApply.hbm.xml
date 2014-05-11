@@ -22,7 +22,7 @@
             <property name="name" column="attach_name"/>
             <property name="filePath" column="attach_file_path"/>
         </component>
-        <bag name="bonuses" inverse="true" cascade="all">
+        <bag name="bonuses" inverse="true" cascade="all-delete-orphan">
           <key column="apply_id"></key>
           <one-to-many class="org.openurp.webapp.apps.party.wenming.model.AssessBonus" />
         </bag>

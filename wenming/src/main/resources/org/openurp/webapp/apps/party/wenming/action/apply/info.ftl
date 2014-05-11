@@ -42,24 +42,18 @@
    <td class="content" colspan="5">[#if assessApply.attachment??][@b.a target="_blank" href="attachment?path=${assessApply.attachment.filePath}&name=${assessApply.attachment.name?url('utf-8')}"]${assessApply.attachment.name}[/@][/#if]</td>
   </tr>
  </table>
-[@b.toolbar title='加分材料'/]
-[@b.grid  items=assessApply.bonuses var="bonus"]
-  [@b.gridbar]
-   [#if editable]
-    bar.addItem("${b.text("action.new")}",action.add());
-    bar.addItem("${b.text("action.modify")}",action.edit());
-    bar.addItem("${b.text("action.delete")}",action.remove("确认删除?"));
-    [/#if]
-  [/@]
-  [@b.row]
-    [#if editable][@b.boxcol width="5%"/]  [/#if]
-    [@b.col property="item.bonusType.name" width="20%" title="加分类型"/]
-    [@b.col property="item.name" width="40%" title="加分内容"/]
-    [@b.col property="score" width="10%" title="分值"/]
-    [@b.col width="25%" title="附件"/]
-  [/@]
-[/@]
-
+ [@b.div id="bonus_panel"]
+    [#assign score=0/]
+    [#list assessApply.bonuses as b]
+    [#assign score=b.score/]
+    [/#list]
+   [@b.toolbar title='加分材料---共计${score}分']
+     function edit_attachment(){document.getElementById("apply_edit_bonus").click();}
+     [#if editable]bar.addItem("修改",edit_attachment);[/#if]
+   [/@]
+  [@b.a id="apply_edit_bonus" style="display:none" href="assess-bonus!search?assessBonus.apply.id=${assessApply.id}"]修改[/@]
+  [@b.div href="assess-bonus!info?assessBonus.apply.id=${assessApply.id}"/]
+ [/@]
 [#else]
 <p>
     [@b.a href="!edit?assessApply.session.id=${Parameters['session.id']}" ]还没有进行申报，现在申报[/@]

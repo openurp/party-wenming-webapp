@@ -16,7 +16,7 @@ public class AssessBonus extends LongIdObject {
   private AssessApply apply;
 
   /** 加分分值 **/
-  private float score;
+  private int score;
 
   /** 加分项 */
   private AssessBonusItem item;
@@ -31,11 +31,11 @@ public class AssessBonus extends LongIdObject {
     this.apply = apply;
   }
 
-  public float getScore() {
+  public int getScore() {
     return score;
   }
 
-  public void setScore(float score) {
+  public void setScore(int score) {
     this.score = score;
   }
 

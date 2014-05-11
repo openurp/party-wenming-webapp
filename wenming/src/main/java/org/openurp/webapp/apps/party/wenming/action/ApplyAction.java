@@ -91,7 +91,10 @@ public class ApplyAction extends SecurityActionSupport {
         attach.setName(fileNames[0]);
         attach.setFilePath("/apply/attachment/" + apply.getDepartment().getId() + "."
             + Strings.substringAfterLast(fileNames[0], "."));
-        FileUtils.moveFile((File) files[0], new File(attachRoot + attach.getFilePath()));
+        if (null != apply.getAttachment() && null != apply.getAttachment().getFilePath()) {
+          new File(attachRoot + apply.getAttachment().getFilePath()).delete();
+        }
+        FileUtils.copyFile((File) files[0], new File(attachRoot + attach.getFilePath()));
         apply.setAttachment(attach);
       }
       try {
