@@ -8,7 +8,7 @@
       [@b.select2 label="包含部门" name1st="departmentId" name2nd="departId" 
         items1st=departments items2nd= assessSchema.departs?sort_by("code") 
         option="id,name"/]
-       [@b.formfoot]
+      [@b.formfoot]
         <input type="hidden" name="assessSchema.id" value="${assessSchema.id!}" />
         [@b.reset/]&nbsp;&nbsp;[@b.submit value="action.submit"/]
       [/@]

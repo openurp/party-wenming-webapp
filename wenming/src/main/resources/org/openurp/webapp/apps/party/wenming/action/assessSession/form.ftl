@@ -11,9 +11,9 @@
       [@b.startend label="投票开始结束时间" 
         name="assessSession.voteBeginOn,assessSession.voteEndOn" required="false,false" 
         start=assessSession.voteBeginOn end=assessSession.voteEndOn format="datetime"/]
-      [#--
-      [@b.radios label="测评开关状态"  name="assessSession.opened" value=assessSession.opened items="1:开,0:关"/]
-      --]
+      [@b.select2 label="关联方案" name1st="assessSchemaId" name2nd="schemaId" 
+        items1st=schemas items2nd= assessSession.schemas 
+        option="id,name"/]
       [@b.radios label="是否有效"  name="assessSession.enabled" value=assessSession.enabled items="1:common.yes,0:common.no"/]
       [@b.formfoot]
         <input type="hidden" name="assessSession.id" value="${assessSession.id!}" />

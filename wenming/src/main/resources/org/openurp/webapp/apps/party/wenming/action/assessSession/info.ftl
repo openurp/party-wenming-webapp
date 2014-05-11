@@ -23,5 +23,8 @@ bar.addBack("${b.text("action.back")}");
    <td class="title" >投票结束时间:</td>
    <td class="content">${assessSession.voteEndOn?datetime}</td>
   </tr>
+  <td class="title" width="10%">关联方案:</td>
+   <td class="content" width="40%">[#list assessSession.schemas as schemas]${schemas.name}&nbsp;[/#list]</td>
+  </tr>
 </table>
 [@b.foot/]

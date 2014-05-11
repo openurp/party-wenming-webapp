@@ -3,7 +3,9 @@ package org.openurp.webapp.apps.party.wenming.model;
 import java.util.Date;
 import java.util.List;
 
+import org.beangle.commons.collection.CollectUtils;
 import org.beangle.commons.entity.pojo.IntegerIdObject;
+import org.openurp.kernel.base.unit.model.Department;
 
 /**
  * 评估批次
@@ -32,9 +34,9 @@ public class AssessSession extends IntegerIdObject {
 	/** 创建时间 **/
 	private Date createdAt;
 	/** 测评方案 */
-	private List<AssessSchema> schemas;
-
-	public String getName() {
+	private List<AssessSchema> schemas=CollectUtils.newArrayList();
+  
+  public String getName() {
 		return name;
 	}
 
