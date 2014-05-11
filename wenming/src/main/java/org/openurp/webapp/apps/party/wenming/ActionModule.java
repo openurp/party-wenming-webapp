@@ -7,6 +7,7 @@ import org.openurp.webapp.apps.party.wenming.action.ApplyManageAction;
 import org.openurp.webapp.apps.party.wenming.action.AssessBonusAction;
 import org.openurp.webapp.apps.party.wenming.action.AssessBonusItemAction;
 import org.openurp.webapp.apps.party.wenming.action.AssessBonusTypeAction;
+import org.openurp.webapp.apps.party.wenming.action.AssessItemAction;
 import org.openurp.webapp.apps.party.wenming.action.AssessItemGroupAction;
 import org.openurp.webapp.apps.party.wenming.action.AssessSchemaAction;
 import org.openurp.webapp.apps.party.wenming.action.AssessSessionAction;
@@ -23,7 +24,7 @@ public class ActionModule extends AbstractBindModule {
 
   @Override
   protected void doBinding() {
-    bind(AssessSessionAction.class, AssessItemGroupAction.class);
+    bind(AssessSessionAction.class, AssessItemGroupAction.class, AssessItemAction.class);
     bind(AssessSchemaAction.class);
     bind(SupervisorAction.class, SupervisorAssessAction.class, SelfAssessAction.class,
         SelfAssessAuditAction.class, MutualAssessAction.class, MutualAssessAuditAction.class,

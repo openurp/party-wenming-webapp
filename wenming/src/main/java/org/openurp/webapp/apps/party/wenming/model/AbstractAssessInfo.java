@@ -1,6 +1,6 @@
 package org.openurp.webapp.apps.party.wenming.model;
 
-import java.sql.Date;
+import java.util.Date;
 
 import org.beangle.commons.entity.pojo.LongIdObject;
 import org.openurp.kernel.base.unit.model.Department;

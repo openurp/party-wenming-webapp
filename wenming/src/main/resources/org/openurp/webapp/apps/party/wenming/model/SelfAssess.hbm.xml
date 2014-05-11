@@ -15,7 +15,7 @@
         
         <many-to-one name="assessBy" column="assess_by_id" not-null="true"/>
         <property name="state" not-null="true"  type="assessState"/>
-        <bag name="items" inverse="true" cascade="all">
+        <bag name="items" inverse="true" cascade="all-delete-orphan">
           <key column="assess_id"></key>
           <one-to-many class="org.openurp.webapp.apps.party.wenming.model.SelfAssessItem" />
         </bag>

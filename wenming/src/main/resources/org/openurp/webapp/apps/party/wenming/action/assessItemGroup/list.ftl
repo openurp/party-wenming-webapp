@@ -10,7 +10,6 @@
     bar.addItem("${b.text("action.new")}",action.add());
     bar.addItem("${b.text("action.modify")}",action.edit());
     bar.addItem("${b.text("action.delete")}",action.remove("删除时，会级联删除对应的所有子分类和指标，确认删除?"));
-    bar.addItem("指标管理",action.edit());
   [/@]
   [@b.row]
     [@b.boxcol /]

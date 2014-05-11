@@ -11,7 +11,7 @@ import org.beangle.commons.entity.pojo.IntegerIdObject;
  * @author chaostone
  * 
  */
-public class AssessItem extends IntegerIdObject {
+public class AssessItem extends IntegerIdObject implements Comparable<AssessItem>{
 	/** 测评指标分类 **/
   private AssessItemGroup group;
   /** 指标内容 **/
@@ -81,6 +81,11 @@ public class AssessItem extends IntegerIdObject {
 
   public void setForSupervisor(Boolean forSupervisor) {
     this.forSupervisor = forSupervisor;
+  }
+
+  @Override
+  public int compareTo(AssessItem o) {
+    return orderNumber.compareTo(o.getOrderNumber());
   }
 
 }

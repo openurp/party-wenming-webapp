@@ -8,7 +8,7 @@ public abstract class AbstractAssessItemInfo  extends LongIdObject{
 
   private AssessItem item;
 
-  private float score;
+  private Float score;
 
   public AssessItem getItem() {
     return item;
@@ -18,12 +18,12 @@ public abstract class AbstractAssessItemInfo  extends LongIdObject{
     this.item = item;
   }
 
-  public float getScore() {
+  public Float getScore() {
     return score;
   }
 
-  public void setScore(float score) {
+  public void setScore(Float score) {
     this.score = score;
   }
-  
+
 }

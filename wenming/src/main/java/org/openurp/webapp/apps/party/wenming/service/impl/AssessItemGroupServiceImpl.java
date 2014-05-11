@@ -4,6 +4,7 @@ import java.util.List;
 
 import org.beangle.commons.collection.CollectUtils;
 import org.beangle.commons.dao.impl.AbstractHierarchyService;
+import org.beangle.commons.dao.query.builder.OqlBuilder;
 import org.openurp.webapp.apps.party.wenming.model.AssessItemGroup;
 import org.openurp.webapp.apps.party.wenming.service.AssessItemGroupService;
 
@@ -27,8 +28,10 @@ public class AssessItemGroupServiceImpl extends AbstractHierarchyService<AssessI
 
 	@Override
 	public List<AssessItemGroup> findBySchema(Integer schemaId) {
-		List<AssessItemGroup> list = entityDao.get(AssessItemGroup.class, "schema.id", schemaId);
-		return list;
+	  OqlBuilder<AssessItemGroup> query = OqlBuilder.from(AssessItemGroup.class, "o");
+	  query.where("schema.id = :schemaid", schemaId);
+	  query.orderBy("indexno");
+		return entityDao.search(query);
 	}
 
 }
