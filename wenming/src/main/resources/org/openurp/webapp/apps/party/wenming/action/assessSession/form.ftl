@@ -6,7 +6,7 @@
     [@b.form action="!save" title="基本信息" theme="list"]
       [@b.textfield name="assessSession.name" label="批次名称" value="${assessSession.name!}" required="true" maxlength="50"/]
       [@b.startend label="测评开始结束时间" 
-        name="assessSession.beginOn,assessSession.endOn" required="false,false" 
+        name="assessSession.beginOn,assessSession.endOn" required="true,false" 
         start=assessSession.beginOn end=assessSession.endOn format="datetime"/]
       [@b.startend label="投票开始结束时间" 
         name="assessSession.voteBeginOn,assessSession.voteEndOn" required="false,false" 

@@ -13,15 +13,15 @@ bar.addBack("${b.text("action.back")}");
   </tr>
   <tr>
    <td class="title" >测评开始时间:</td>
-   <td class="content">${assessSession.beginOn?datetime}</td>
+   <td class="content">${(assessSession.beginOn?datetime)!}</td>
    <td class="title" >测评结束时间:</td>
-   <td class="content">${assessSession.endOn?datetime}</td>
+   <td class="content">${(assessSession.endOn?datetime)!}</td>
   </tr>
   <tr>
    <td class="title" >投票开始时间:</td>
-   <td class="content">${assessSession.voteBeginOn?datetime}</td>
+   <td class="content">${(assessSession.voteBeginOn?datetime)!}</td>
    <td class="title" >投票结束时间:</td>
-   <td class="content">${assessSession.voteEndOn?datetime}</td>
+   <td class="content">${(assessSession.voteEndOn?datetime)!}</td>
   </tr>
   <td class="title" width="10%">关联方案:</td>
    <td class="content" width="40%">[#list assessSession.schemas as schemas]${schemas.name}&nbsp;[/#list]</td>
