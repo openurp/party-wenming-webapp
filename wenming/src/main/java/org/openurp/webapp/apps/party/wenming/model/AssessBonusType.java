@@ -10,7 +10,6 @@ import org.beangle.commons.entity.pojo.BaseCode;
 public class AssessBonusType extends BaseCode<Integer> {
 
   private static final long serialVersionUID = 6001068807525077703L;
-  private String name;
 
   public String getName() {
     return name;
