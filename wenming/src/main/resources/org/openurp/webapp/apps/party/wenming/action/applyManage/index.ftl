@@ -12,7 +12,9 @@
       [#--[@b.select items=states name="assessApply.state" label="状态"/]--]
     [/@]
     </td>
-    <td class="index_content">[@b.div id="assessApplyList" href="!search" /]</td>
+    [#if sessions?size>0]
+    <td class="index_content">[@b.div id="assessApplyList" href="!search?assessApply.session.id=${sessions?first.id}" /]</td>
+    [/#if]
   </tr>
 </table>
 [@b.foot/]

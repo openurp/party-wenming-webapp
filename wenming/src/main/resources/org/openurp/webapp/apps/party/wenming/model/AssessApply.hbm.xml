@@ -19,7 +19,6 @@
         <property name="wenmingSummary" length="2000"/>
         <property name="detail" length="4000"/>
         <property name="bonus"/>
-        <property name="confirmBonus"/>
         <component name="attachment">
             <property name="name" column="attach_name"/>
             <property name="filePath" column="attach_file_path"/>

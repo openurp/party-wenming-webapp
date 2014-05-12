@@ -6,6 +6,7 @@ import java.util.List;
 
 import org.apache.commons.io.FileUtils;
 import org.beangle.commons.collection.CollectUtils;
+import org.beangle.commons.dao.Operation;
 import org.beangle.commons.entity.Entity;
 import org.beangle.commons.lang.Strings;
 import org.beangle.ems.web.action.SecurityActionSupport;
@@ -63,6 +64,7 @@ public class AssessBonusAction extends SecurityActionSupport {
       }
     } else if (bonus.isTransient()) { return forward(new Action(this, "edit"), "请上传材料"); }
     apply.setUpdatedAt(new Date());
+    calcBonusScore(apply);
     try {
       entityDao.saveOrUpdate(apply, bonus);
       return redirect("search", "info.save.success", "&assessBonus.apply.id=" + apply.getId());
@@ -80,7 +82,9 @@ public class AssessBonusAction extends SecurityActionSupport {
       for (Attachment attach : bonus.getAttachments())
         new File(attachRoot + attach.getFilePath()).delete();
     }
-    entityDao.remove(entities);
+    AssessApply apply = entities.get(0).getApply();
+    calcBonusScore(apply);
+    entityDao.execute(Operation.remove(entities).saveOrUpdate(apply));
     return redirect("search", "info.remove.success");
   }
 
@@ -90,5 +94,14 @@ public class AssessBonusAction extends SecurityActionSupport {
     AssessApply apply = entityDao.get(AssessApply.class, applyId);
     put("assessBonuses", apply.getBonuses());
     return forward();
+  }
+
+  private int calcBonusScore(AssessApply apply) {
+    int sum = 0;
+    for (AssessBonus bonus : apply.getBonuses()) {
+      sum += bonus.getScore();
+    }
+    apply.setBonus(sum);
+    return sum;
   }
 }

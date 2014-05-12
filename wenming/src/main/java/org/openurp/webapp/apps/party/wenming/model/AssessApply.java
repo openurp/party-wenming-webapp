@@ -46,10 +46,7 @@ public class AssessApply extends NumberIdTimeObject<Long> {
   private String detail;
 
   /** 加分项申报加分分值 **/
-  private float bonus;
-
-  /** 最终加分分值 **/
-  private float confirmBonus;
+  private int bonus;
 
   /** 加分项 */
   private List<AssessBonus> bonuses = CollectUtils.newArrayList();
@@ -113,20 +110,12 @@ public class AssessApply extends NumberIdTimeObject<Long> {
     this.detail = detail;
   }
 
-  public float getBonus() {
+  public int getBonus() {
     return bonus;
   }
 
-  public void setBonus(float bonus) {
+  public void setBonus(int bonus) {
     this.bonus = bonus;
-  }
-
-  public float getConfirmBonus() {
-    return confirmBonus;
-  }
-
-  public void setConfirmBonus(float confirmBonus) {
-    this.confirmBonus = confirmBonus;
   }
 
   public List<AssessBonus> getBonuses() {
