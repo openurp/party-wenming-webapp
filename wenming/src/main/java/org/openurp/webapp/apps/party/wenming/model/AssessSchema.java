@@ -23,6 +23,8 @@ public class AssessSchema extends NumberIdTimeObject<Integer> {
 
   private List<AssessBonusItem> bonusItems = CollectUtils.newArrayList();
 
+  private boolean forTeaching;
+
   public String getName() {
     return name;
   }
@@ -53,6 +55,14 @@ public class AssessSchema extends NumberIdTimeObject<Integer> {
 
   public void setBonusItems(List<AssessBonusItem> bonusItems) {
     this.bonusItems = bonusItems;
+  }
+
+  public boolean isForTeaching() {
+    return forTeaching;
+  }
+
+  public void setForTeaching(boolean forTeaching) {
+    this.forTeaching = forTeaching;
   }
 
 }

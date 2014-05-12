@@ -21,6 +21,7 @@
           <many-to-many column="item_id" class="org.openurp.webapp.apps.party.wenming.model.AssessBonusItem" />
         </bag>
         <property name="updatedAt"/>
-    <property name="createdAt"/>
+        <property name="createdAt"/>
+        <property name="forTeaching" not-null="true"/>
     </class>
 </hibernate-mapping>

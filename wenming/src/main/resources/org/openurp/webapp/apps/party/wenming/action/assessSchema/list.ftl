@@ -5,7 +5,7 @@
 
 [@b.grid  items=assessSchemas var="assessSchema" sortable="false"]
   [@b.gridbar]
-    bar.addItem("${b.text("action.new")}",action.add());
+    bar.addItem("${b.text("action.add")}",action.add());
     bar.addItem("${b.text("action.modify")}",action.edit());
     bar.addItem("${b.text("action.delete")}",action.remove("删除时，会级联删除对应的所有子角色，确认删除?"));
   [/@]
