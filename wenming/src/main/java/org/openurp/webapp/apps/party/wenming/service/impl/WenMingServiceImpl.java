@@ -63,4 +63,12 @@ public class WenMingServiceImpl extends BaseServiceImpl implements WenMingServic
     return matched;
   }
 
+  @Override
+  public List<AssessSession> findSessions() {
+    OqlBuilder<AssessSession> query = OqlBuilder.from(AssessSession.class, "o");
+    query.where("o.enabled=true");
+    query.orderBy("o.beginOn desc");
+    return entityDao.search(query);
+  }
+
 }

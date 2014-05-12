@@ -18,4 +18,5 @@ public interface WenMingService {
 
   List<AssessSession> findSessions(Department department);
 
+  List<AssessSession> findSessions();
 }

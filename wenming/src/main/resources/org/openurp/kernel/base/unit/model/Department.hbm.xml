@@ -11,5 +11,6 @@
     <property name="name" length="100" not-null="true"/>
     <property name="beginOn" />
     <property name="endOn"/>
+    <property name="teaching"/>
   </class>
 </hibernate-mapping>

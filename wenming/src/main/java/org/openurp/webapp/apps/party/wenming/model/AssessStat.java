@@ -1,7 +1,9 @@
 package org.openurp.webapp.apps.party.wenming.model;
 
 import java.util.Date;
+import java.util.List;
 
+import org.beangle.commons.collection.CollectUtils;
 import org.beangle.commons.entity.pojo.LongIdObject;
 import org.openurp.kernel.base.unit.model.Department;
 
@@ -29,6 +31,8 @@ public class AssessStat extends LongIdObject {
   private float score;
 
   private Date statAt;
+
+  private List<AssessStatItem> items = CollectUtils.newArrayList();
 
   public AssessSession getSession() {
     return session;
@@ -92,6 +96,14 @@ public class AssessStat extends LongIdObject {
 
   public void setStatAt(Date statAt) {
     this.statAt = statAt;
+  }
+
+  public List<AssessStatItem> getItems() {
+    return items;
+  }
+
+  public void setItems(List<AssessStatItem> items) {
+    this.items = items;
   }
 
 }

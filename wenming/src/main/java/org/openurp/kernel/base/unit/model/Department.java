@@ -6,44 +6,59 @@ import org.beangle.commons.entity.pojo.IntegerIdObject;
 
 public class Department extends IntegerIdObject {
 
-	private String code;
+  private static final long serialVersionUID = -8261982977565690446L;
 
-	private String name;
+  private String code;
 
-	private Date beginOn;
+  private String name;
 
-	private Date endOn;
+  private Date beginOn;
 
-	public String getName() {
-		return name;
-	}
+  private Date endOn;
 
-	public void setName(String name) {
-		this.name = name;
-	}
+  /**
+   * 是否为教学部门
+   */
+  private boolean teaching;
 
-	public Date getBeginOn() {
-		return beginOn;
-	}
+  public String getName() {
+    return name;
+  }
 
-	public void setBeginOn(Date beginOn) {
-		this.beginOn = beginOn;
-	}
+  public void setName(String name) {
+    this.name = name;
+  }
 
-	public Date getEndOn() {
-		return endOn;
-	}
+  public Date getBeginOn() {
+    return beginOn;
+  }
 
-	public void setEndOn(Date endOn) {
-		this.endOn = endOn;
-	}
+  public void setBeginOn(Date beginOn) {
+    this.beginOn = beginOn;
+  }
 
-	public String getCode() {
-		return code;
-	}
+  public Date getEndOn() {
+    return endOn;
+  }
 
-	public void setCode(String code) {
-		this.code = code;
-	}
+  public void setEndOn(Date endOn) {
+    this.endOn = endOn;
+  }
+
+  public String getCode() {
+    return code;
+  }
+
+  public void setCode(String code) {
+    this.code = code;
+  }
+
+  public boolean isTeaching() {
+    return teaching;
+  }
+
+  public void setTeaching(boolean teaching) {
+    this.teaching = teaching;
+  }
 
 }

@@ -15,5 +15,10 @@
         <property name="supervisorScore" not-null="true"/>
         <property name="score" not-null="true"/>
         <property name="statAt" not-null="true"/>
+        
+        <bag name="items" inverse="true" cascade="all">
+          <key column="stat_id"></key>
+          <one-to-many class="org.openurp.webapp.apps.party.wenming.model.AssessStatItem" />
+        </bag>
     </class>
 </hibernate-mapping>
