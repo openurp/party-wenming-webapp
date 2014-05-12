@@ -11,11 +11,15 @@ public enum AssessState {
   SchoolApproved("文明办审核通过"),
 
   SchoolUnpassed("文明办审核不通过");
-  
+
   private String description;
 
   private AssessState(String description) {
     this.description = description;
+  }
+
+  public String getId() {
+    return this.name();
   }
 
   public String getDescription() {

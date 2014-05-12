@@ -29,5 +29,7 @@
     <mapping resource="org/openurp/webapp/apps/party/wenming/model/AssessApply.hbm.xml"/>
     <mapping resource="org/openurp/webapp/apps/party/wenming/model/Supervisor.hbm.xml"/>
     <mapping resource="org/openurp/webapp/apps/party/wenming/model/AssessBonus.hbm.xml"/>
+    
+    <mapping resource="org/openurp/webapp/apps/party/wenming/model/AssessVote.hbm.xml"/>
   </session-factory>
 </hibernate-configuration>
