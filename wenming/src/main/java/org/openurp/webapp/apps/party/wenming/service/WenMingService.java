@@ -8,14 +8,14 @@ import org.openurp.webapp.apps.party.wenming.model.AssessSession;
 
 public interface WenMingService {
 
-	List<AssessSchema> findSchema();
+  List<AssessSchema> findSchema();
 
-	List<Department> findDepartment();
+  List<Department> findDepartment();
 
   AssessSession getAssessSession();
 
   AssessSchema getSchema(Department department);
-  
-  List<AssessSession> findSession();
+
+  List<AssessSession> findSessions(Department department);
 
 }

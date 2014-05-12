@@ -22,11 +22,19 @@ public class AssessApply extends NumberIdTimeObject<Long> {
   /** 测评批次 */
   private AssessSession session;
 
+  /**
+   * 使用方案
+   */
+  private AssessSchema schema;
+
   /** 状态 */
-  private AssessState state=AssessState.Draft;
-  
+  private AssessState state = AssessState.Draft;
+
   /** 申报人员 **/
   private User submitBy;
+
+  /** 审核人员 **/
+  private User auditBy;
 
   /** 创建活动及其效果概要 **/
   private String activitySummary;
@@ -135,6 +143,22 @@ public class AssessApply extends NumberIdTimeObject<Long> {
 
   public void setAttachment(Attachment attachment) {
     this.attachment = attachment;
+  }
+
+  public User getAuditBy() {
+    return auditBy;
+  }
+
+  public void setAuditBy(User auditBy) {
+    this.auditBy = auditBy;
+  }
+
+  public AssessSchema getSchema() {
+    return schema;
+  }
+
+  public void setSchema(AssessSchema schema) {
+    this.schema = schema;
   }
 
 }

@@ -9,8 +9,10 @@
         </id>
         <many-to-one name="department" column="department_id" not-null="true"/>
         <many-to-one name="session" column="session_id" not-null="true"/>
+        <many-to-one name="schema" column="schema_id" not-null="true"/>
         <property name="state" type="assessState" not-null="true" />
         <many-to-one name="submitBy" column="submit_by_id" not-null="true"/>
+        <many-to-one name="auditBy" column="audit_by_id"/>
         <property name="createdAt"  not-null="true"/>
         <property name="updatedAt"  not-null="true"/>
         <property name="activitySummary" length="2000"/>

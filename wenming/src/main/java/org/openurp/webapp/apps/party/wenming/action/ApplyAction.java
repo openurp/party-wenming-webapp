@@ -8,10 +8,10 @@ import java.util.Objects;
 import org.apache.commons.io.FileUtils;
 import org.beangle.commons.dao.query.builder.OqlBuilder;
 import org.beangle.commons.lang.Strings;
-import org.beangle.ems.web.action.SecurityActionSupport;
 import org.beangle.security.blueprint.User;
 import org.openurp.kernel.base.unit.model.UrpUserBean;
 import org.openurp.webapp.apps.party.wenming.model.AssessApply;
+import org.openurp.webapp.apps.party.wenming.model.AssessSchema;
 import org.openurp.webapp.apps.party.wenming.model.AssessSession;
 import org.openurp.webapp.apps.party.wenming.model.AssessState;
 import org.openurp.webapp.apps.party.wenming.model.Attachment;
@@ -21,21 +21,16 @@ import org.openurp.webapp.apps.party.wenming.model.Attachment;
  * 
  * @author chaostone
  */
-public class ApplyAction extends SecurityActionSupport {
+public class ApplyAction extends AbstractApplyAction {
 
   @Override
   protected void indexSetting() {
-    OqlBuilder<AssessSession> builder = OqlBuilder.from(AssessSession.class, "ss");
-    builder.where("ss.enabled=true").orderBy("ss.beginOn desc");
+    UrpUserBean user = (UrpUserBean) entityDao.get(User.class, getUserId());
+    List<AssessSession> sessions = wenMingService.findSessions(user.getDepartment());
     Integer sessionId = getInt("session.id");
     if (null != sessionId) put("assessSession", entityDao.get(AssessSession.class, sessionId));
-    UrpUserBean user = (UrpUserBean) entityDao.get(User.class, getUserId());
     put("user", user);
-    put("sessions", entityDao.search(builder));
-  }
-
-  protected String getEntityName() {
-    return AssessApply.class.getName();
+    put("sessions", sessions);
   }
 
   private boolean editable(AssessState state) {
@@ -46,6 +41,8 @@ public class ApplyAction extends SecurityActionSupport {
   @Override
   public String edit() {
     AssessApply apply = (AssessApply) getEntity();
+    AssessSession session = entityDao.get(AssessSession.class, apply.getSession().getId());
+    if (!session.isOpened()) return redirect("info", "不在申请时间段", "&session.id=" + apply.getSession().getId());
     if (editable(apply.getState())) {
       put(getShortName(), apply);
       return forward();
@@ -56,6 +53,8 @@ public class ApplyAction extends SecurityActionSupport {
 
   public String submit() {
     AssessApply apply = (AssessApply) getEntity();
+    AssessSession session = entityDao.get(AssessSession.class, apply.getSession().getId());
+    if (!session.isOpened()) return redirect("info", "不在申请时间段", "&session.id=" + apply.getSession().getId());
     if (editable(apply.getState())) {
       apply.setState(AssessState.Submit);
       apply.setUpdatedAt(new Date());
@@ -73,15 +72,19 @@ public class ApplyAction extends SecurityActionSupport {
     Integer sessionId = getInt("session.id");
     UrpUserBean user = (UrpUserBean) entityDao.get(User.class, getUserId());
     if (null != sessionId) {
+      AssessSession session = entityDao.get(AssessSession.class, sessionId);
       OqlBuilder<AssessApply> builder = OqlBuilder.from(AssessApply.class, "aa");
-      builder.where("aa.session.id=:sessionid", sessionId);
+      builder.where("aa.session=:session", session);
       builder.where("aa.department=:department", user.getDepartment());
       List<AssessApply> applies = entityDao.search(builder);
       if (applies.size() == 1) {
         put("assessApply", applies.get(0));
         put("editable", editable(applies.get(0).getState()));
-        put("submitable", Objects.equals(applies.get(0).getState(), AssessState.Draft));
+        put("submitable",
+            Objects.equals(applies.get(0).getState(), AssessState.Draft)
+                || Objects.equals(applies.get(0).getState(), AssessState.DepartUnpassed));
       }
+      put("assessSession", session);
     }
     return forward();
   }
@@ -89,8 +92,10 @@ public class ApplyAction extends SecurityActionSupport {
   @Override
   public String save() throws Exception {
     AssessApply apply = (AssessApply) populateEntity();
+    AssessSession session = entityDao.get(AssessSession.class, apply.getSession().getId());
+    if (!session.isOpened()) return redirect("info", "不在申请时间段", "&session.id=" + apply.getSession().getId());
+    UrpUserBean user = (UrpUserBean) entityDao.get(User.class, getUserId());
     if (editable(apply.getState())) {
-      UrpUserBean user = (UrpUserBean) entityDao.get(User.class, getUserId());
       if (apply.isTransient()) apply.setDepartment(user.getDepartment());
       apply.setSubmitBy(user);
       if (!apply.isPersisted()) apply.setCreatedAt(new Date());
@@ -110,6 +115,14 @@ public class ApplyAction extends SecurityActionSupport {
         apply.setAttachment(attach);
       }
       try {
+        if (apply.isTransient()) {
+          for (AssessSchema schema : session.getSchemas()) {
+            if (schema.getDeparts().contains(user.getDepartment())) {
+              apply.setSchema(schema);
+              break;
+            }
+          }
+        }
         saveOrUpdate(apply);
         return redirect("info", "info.save.success", "&session.id=" + apply.getSession().getId());
       } catch (Exception e) {

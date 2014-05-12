@@ -17,7 +17,7 @@ bar.addBack("${b.text("action.back")}");
     <b>批次:</b> [@b.select name="session.id" label="测评批次" items=sessions value=assessSession onchange="bg.form.submit(this.form)"][/@]
     [/@]
    </td>
-   <td><b>申报时间:</b><span [#if !assessSession.opened] style="color:red" title="不在申报时间内"[/#if]>${assessSession.beginOn?string("yyyy-MM-dd HH:mm")}~${assessSession.endOn?string("yyyy-MM-dd HH:mm")}</span></td>
+   <td><b>申报时间:</b><span [#if !assessSession.opened] color="red"[/#if]>${assessSession.beginOn?string("yyyy-MM-dd HH:mm")}~${assessSession.endOn?string("yyyy-MM-dd HH:mm")}</span></td>
   <tr>
 </table>
 <table>

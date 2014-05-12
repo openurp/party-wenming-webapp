@@ -9,7 +9,6 @@
         </id>
         <property name="name" length="100" not-null="true" />
         <property name="enabled"/>
-        <property name="opened"/>
         <property name="beginOn"/>
         <property name="endOn"/>
         <property name="voteBeginOn"/>
