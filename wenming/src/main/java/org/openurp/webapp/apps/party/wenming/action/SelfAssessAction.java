@@ -20,11 +20,12 @@ import org.openurp.webapp.apps.party.wenming.service.AssessItemGroupService;
  * 自评
  * 
  * @author chaostone
+ * 
  */
 public class SelfAssessAction extends WenMingAction {
-
+  
   private AssessItemGroupService assessItemGroupService;
-
+  
   public void setAssessItemGroupService(AssessItemGroupService assessItemGroupService) {
     this.assessItemGroupService = assessItemGroupService;
   }
@@ -41,7 +42,7 @@ public class SelfAssessAction extends WenMingAction {
     put("sessions", wenMingService.findSessions(user.getDepartment()));
     super.indexSetting();
   }
-
+  
   @Override
   public String info() throws Exception {
     Integer sessionId = getInt("session.id");
@@ -49,10 +50,10 @@ public class SelfAssessAction extends WenMingAction {
     SelfAssess selfAssess = getSelfAssess(sessionId);
     put("selfAssess", selfAssess);
     put("assessSession", assessSession);
-
+    
     UrpUserBean user = entityDao.get(UrpUserBean.class, getUserId());
-    AssessSession session = wenMingService.getAssessSession();
-    AssessSchema schema = wenMingService.getSchema(user.getDepartment());
+    AssessSession session = wenMingService.getAssessSessionByAssessTime();
+    AssessSchema schema = wenMingService.getSchema(session, user.getDepartment());
     if (schema != null && session != null && session.equals(assessSession)) {
       if (selfAssess == null) {
         // 判断是否可添加自评
@@ -64,7 +65,7 @@ public class SelfAssessAction extends WenMingAction {
     }
     return forward();
   }
-
+  
   @Override
   public String search() {
     return super.search();
@@ -77,11 +78,10 @@ public class SelfAssessAction extends WenMingAction {
    * @return
    */
   private boolean modifyable(SelfAssess selfAssess) {
-    if (selfAssess == null) { return false; }
-    AssessState status = selfAssess.getState();
-    if (AssessState.Draft.equals(status) || AssessState.DepartUnpassed.equals(status)
-        || AssessState.SchoolUnpassed.equals(status)) { return true; }
-    return false;
+    if (selfAssess == null) {
+      return false;
+    }
+    return editable(selfAssess.getState());
   }
 
   /**
@@ -112,18 +112,20 @@ public class SelfAssessAction extends WenMingAction {
 
   @Override
   public String edit() {
-    AssessSession session = wenMingService.getAssessSession();
-    if (session == null) { return redirect("list", "现在还不能自评"); }
+    AssessSession session = wenMingService.getAssessSessionByAssessTime();
+    if (session == null) {
+      return redirect("list", "现在还不能自评");
+    }
     SelfAssess selfAssess = getSelfAssess(session.getId());
     if (selfAssess == null) {
       selfAssess = new SelfAssess();
       UrpUserBean user = entityDao.get(UrpUserBean.class, getUserId());
-      AssessSchema schema = wenMingService.getSchema(user.getDepartment());
+      AssessSchema schema = wenMingService.getSchema(session, user.getDepartment());
       selfAssess.setSchema(schema);
       List<AssessItemGroup> groups = assessItemGroupService.findBySchema(selfAssess.getSchema().getId());
-      for (AssessItemGroup group : groups) {
+      for(AssessItemGroup group : groups){
         Collections.sort(group.getItems());
-        for (AssessItem item : group.getItems()) {
+        for(AssessItem item : group.getItems()){
           SelfAssessItem sai = new SelfAssessItem();
           sai.setItem(item);
           selfAssess.getItems().add(sai);
@@ -138,26 +140,26 @@ public class SelfAssessAction extends WenMingAction {
   protected String saveAndForward(Entity<?> entity) {
     SelfAssess selfAssess = (SelfAssess) entity;
     selfAssess.setDepartment(getDepartment());
-    selfAssess.setSession(wenMingService.getAssessSession());
-    selfAssess.setSchema(wenMingService.getSchema(selfAssess.getDepartment()));
+    selfAssess.setSession(wenMingService.getAssessSessionByAssessTime());
+    selfAssess.setSchema(wenMingService.getSchema(selfAssess.getSession(), selfAssess.getDepartment()));
     selfAssess.setAssessAt(new Date());
     selfAssess.setAssessBy(getUrpUser());
     selfAssess.getItems().clear();
     String[] indexes = getAll("index", String.class);
     float totalScore = 0;
-    for (String index : indexes) {
+    for(String index : indexes){
       SelfAssessItem sai = populate(SelfAssessItem.class, index);
       sai.setAssess(selfAssess);
       totalScore += sai.getScore();
       selfAssess.getItems().add(sai);
     }
     selfAssess.setTotalScore(totalScore);
-    if (getBool("save")) {
+    if(getBool("save")){
       selfAssess.setState(AssessState.Draft);
-    } else {
+    }else{
       selfAssess.setState(AssessState.Submit);
     }
-    // return super.saveAndForward(entity);
+//    return super.saveAndForward(entity);
     entityDao.saveOrUpdate(selfAssess);
     return redirect("info", "操作成功", "session.id=" + selfAssess.getSession().getId());
   }

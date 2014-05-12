@@ -7,8 +7,10 @@ import org.beangle.commons.collection.CollectUtils;
 import org.beangle.commons.dao.impl.BaseServiceImpl;
 import org.beangle.commons.dao.query.builder.OqlBuilder;
 import org.openurp.kernel.base.unit.model.Department;
+import org.openurp.webapp.apps.party.wenming.model.AssessItem;
 import org.openurp.webapp.apps.party.wenming.model.AssessSchema;
 import org.openurp.webapp.apps.party.wenming.model.AssessSession;
+import org.openurp.webapp.apps.party.wenming.service.QueryInvoker;
 import org.openurp.webapp.apps.party.wenming.service.WenMingService;
 
 public class WenMingServiceImpl extends BaseServiceImpl implements WenMingService {
@@ -28,7 +30,7 @@ public class WenMingServiceImpl extends BaseServiceImpl implements WenMingServic
   }
 
   @Override
-  public AssessSession getAssessSession() {
+  public AssessSession getAssessSessionByAssessTime() {
     OqlBuilder<AssessSession> query = OqlBuilder.from(AssessSession.class, "o");
     query.where("beginOn <= :now and endOn >= :now", new Date());
     query.where("enabled = true");
@@ -37,12 +39,19 @@ public class WenMingServiceImpl extends BaseServiceImpl implements WenMingServic
   }
 
   @Override
-  public AssessSchema getSchema(Department department) {
-    OqlBuilder<AssessSchema> query = OqlBuilder.from(AssessSchema.class, "o");
-    query.join("o.departs", "d");
-    query.where("d = :d", department);
-    List<AssessSchema> list = entityDao.search(query);
-    return list.isEmpty() ? null : list.get(0);
+  public AssessSchema getSchema(AssessSession session, Department department) {
+    // OqlBuilder<AssessSchema> query = OqlBuilder.from(AssessSchema.class,
+    // "o");
+    // query.join("o.departs", "d");
+    // query.where("d = :d", department);
+    // List<AssessSchema> list = entityDao.search(query);
+    // return list.isEmpty() ? null : list.get(0);
+    for (AssessSchema schema : session.getSchemas()) {
+      if (schema.getDeparts().contains(department)) {
+        return schema;
+      }
+    }
+    return null;
   }
 
   @Override
@@ -71,4 +80,31 @@ public class WenMingServiceImpl extends BaseServiceImpl implements WenMingServic
     return entityDao.search(query);
   }
 
+  @Override
+  public List<AssessItem> findAssessItemByMutual(AssessSchema schema) {
+    return findAssessItem(schema, new QueryInvoker() {
+      @Override
+      public void doth(OqlBuilder<?> query) {
+        query.where("o.mutual = true");
+      }
+    });
+  }
+
+  private List<AssessItem> findAssessItem(AssessSchema schema, QueryInvoker invoker) {
+    OqlBuilder<AssessItem> query = OqlBuilder.from(AssessItem.class, "o");
+    query.where("o.group.schema = :schema", schema);
+    query.orderBy("o.group.indexno, o.orderNumber");
+    invoker.doth(query);
+    return entityDao.search(query);
+  }
+
+  @Override
+  public List<AssessItem> findAssessItemBySupervisor(AssessSchema schema) {
+    return findAssessItem(schema, new QueryInvoker() {
+      @Override
+      public void doth(OqlBuilder<?> query) {
+        query.where("o.forSupervisor = true");
+      }
+    });
+  }
 }
