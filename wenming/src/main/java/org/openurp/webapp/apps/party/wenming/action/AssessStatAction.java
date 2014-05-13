@@ -1,12 +1,21 @@
 package org.openurp.webapp.apps.party.wenming.action;
 
 import java.util.List;
+import java.util.Set;
 
+import org.beangle.commons.collection.CollectUtils;
+import org.beangle.commons.dao.query.builder.OqlBuilder;
 import org.beangle.ems.web.action.SecurityActionSupport;
 import org.beangle.security.blueprint.User;
+import org.openurp.kernel.base.unit.model.Department;
 import org.openurp.kernel.base.unit.model.UrpUserBean;
+import org.openurp.webapp.apps.party.wenming.model.AssessApply;
+import org.openurp.webapp.apps.party.wenming.model.AssessSchema;
 import org.openurp.webapp.apps.party.wenming.model.AssessSession;
 import org.openurp.webapp.apps.party.wenming.model.AssessStat;
+import org.openurp.webapp.apps.party.wenming.model.FuncDepartAssess;
+import org.openurp.webapp.apps.party.wenming.model.MutualAssess;
+import org.openurp.webapp.apps.party.wenming.model.SelfAssess;
 import org.openurp.webapp.apps.party.wenming.service.WenMingService;
 
 /**
@@ -44,10 +53,34 @@ public class AssessStatAction extends SecurityActionSupport {
   /**
    * 统计指定的批次
    */
-  public String result() {
+  public String progress() {
     Integer sessionId = getInt("session.id");
-    return forward();
+    AssessSession session = entityDao.get(AssessSession.class, sessionId);
+    Set<Department> departs = CollectUtils.newHashSet();
+    for (AssessSchema schema : session.getSchemas()) {
+      departs.addAll(schema.getDeparts());
+    }
+    put("departCount", departs.size());
+    OqlBuilder<AssessApply> builder = OqlBuilder.from(AssessApply.class, "apply");
+    builder.where("apply.session.id=:sessionId", sessionId);
+    builder.groupBy("apply.state").select("apply.state,count(*)");
+    put("applyStat", entityDao.search(builder));
 
+    OqlBuilder<SelfAssess> sabuilder = OqlBuilder.from(SelfAssess.class, "assess");
+    sabuilder.where("assess.session.id=:sessionId", sessionId);
+    sabuilder.groupBy("assess.state").select("assess.state,count(*)");
+    put("selfAssessStat", entityDao.search(sabuilder));
+
+    OqlBuilder<MutualAssess> mabuilder = OqlBuilder.from(MutualAssess.class, "assess");
+    mabuilder.where("assess.session.id=:sessionId", sessionId);
+    mabuilder.groupBy("assess.state").select("assess.state,count(*)");
+    put("mutualAssessStat", entityDao.search(mabuilder));
+
+    OqlBuilder<FuncDepartAssess> fabuilder = OqlBuilder.from(FuncDepartAssess.class, "assess");
+    fabuilder.where("assess.session.id=:sessionId", sessionId);
+    fabuilder.groupBy("assess.state").select("assess.state,count(*)");
+    put("funcDepartAssessStat", entityDao.search(fabuilder));
+    return forward();
   }
 
   public void setWenMingService(WenMingService wenMingService) {
