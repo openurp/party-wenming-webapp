@@ -16,8 +16,8 @@ public class MutualAssessItem extends AbstractAssessItemInfo {
     return assess;
   }
 
-  public void setAssess(MutualAssess assess) {
-    this.assess = assess;
+  public void setAssess(AbstractAssessInfo assess) {
+    this.assess = (MutualAssess) assess;
   }
 
 }

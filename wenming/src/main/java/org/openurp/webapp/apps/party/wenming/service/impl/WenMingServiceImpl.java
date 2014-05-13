@@ -109,17 +109,4 @@ public class WenMingServiceImpl extends BaseServiceImpl implements WenMingServic
       }
     });
   }
-
-  @Override
-  public List<AssessSchema> findSessions(AssessSession assessSession) {
-    List<AssessSchema> list = new ArrayList<AssessSchema>();
-    if(assessSession != null){
-      for(AssessSchema schema : assessSession.getSchemas()){
-        if(schema.isForTeaching()){
-          list.add(schema);
-        }
-      }
-    }
-    return list;
-  }
 }

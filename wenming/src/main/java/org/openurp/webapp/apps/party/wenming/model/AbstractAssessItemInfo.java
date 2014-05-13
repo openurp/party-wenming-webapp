@@ -25,5 +25,7 @@ public abstract class AbstractAssessItemInfo  extends LongIdObject{
   public void setScore(Float score) {
     this.score = score;
   }
+  
+  abstract public void setAssess(AbstractAssessInfo assess);
 
 }

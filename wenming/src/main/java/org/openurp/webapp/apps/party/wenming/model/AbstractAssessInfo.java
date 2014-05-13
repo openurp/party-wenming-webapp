@@ -1,6 +1,7 @@
 package org.openurp.webapp.apps.party.wenming.model;
 
 import java.util.Date;
+import java.util.List;
 
 import org.beangle.commons.entity.pojo.LongIdObject;
 import org.beangle.security.blueprint.User;
@@ -83,5 +84,7 @@ public abstract class AbstractAssessInfo extends LongIdObject {
   public void setAssessBy(User assessBy) {
     this.assessBy = assessBy;
   }
+  
+  abstract public List<? extends AbstractAssessItemInfo> getItems();
 
 }

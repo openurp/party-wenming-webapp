@@ -10,8 +10,8 @@ public class SupervisorAssessItem extends AbstractAssessItemInfo {
     return assess;
   }
 
-  public void setAssess(SupervisorAssess assess) {
-    this.assess = assess;
+  public void setAssess(AbstractAssessInfo assess) {
+    this.assess = (SupervisorAssess) assess;
   }
 
 }

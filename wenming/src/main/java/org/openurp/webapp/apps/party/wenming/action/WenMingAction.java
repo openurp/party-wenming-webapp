@@ -1,12 +1,18 @@
 package org.openurp.webapp.apps.party.wenming.action;
 
 import java.util.ArrayList;
+import java.util.Collection;
+import java.util.Date;
 import java.util.List;
 
 import org.beangle.ems.web.action.SecurityActionSupport;
 import org.openurp.kernel.base.unit.model.Department;
 import org.openurp.kernel.base.unit.model.UrpUserBean;
+import org.openurp.webapp.apps.party.wenming.model.AbstractAssessInfo;
+import org.openurp.webapp.apps.party.wenming.model.AbstractAssessItemInfo;
+import org.openurp.webapp.apps.party.wenming.model.AssessSession;
 import org.openurp.webapp.apps.party.wenming.model.AssessState;
+import org.openurp.webapp.apps.party.wenming.model.MutualAssess;
 import org.openurp.webapp.apps.party.wenming.model.MutualAssessItem;
 import org.openurp.webapp.apps.party.wenming.service.WenMingService;
 
@@ -55,6 +61,37 @@ public class WenMingAction extends SecurityActionSupport {
       e.printStackTrace();
     }
     return null;
+  }
+  
+	protected <T extends AbstractAssessInfo,I extends AbstractAssessItemInfo> List<T> getAllAssess(Class<T> assessClass, Class<I> itemClass) {
+    UrpUserBean assessBy = getUrpUser();
+    @SuppressWarnings("unchecked")
+    List<T> malist = (List<T>) getAll();
+    AssessSession session = wenMingService.getAssessSessionByAssessTime();
+    boolean save = getBool("save");
+    for (T assess : malist) {
+      assess.setAssessBy(assessBy);
+      @SuppressWarnings("unchecked")
+      List<I> items = (List<I>) getAll(itemClass, "item"
+          + assess.getDepartment().getId());
 
+      assess.getItems().clear();
+      assess.getItems().addAll((List) items);
+      
+      assess.setSession(session);
+      assess.setAssessAt(new Date());
+      float totalScore = 0;
+      for (I item : items) {
+        item.setAssess(assess);
+        totalScore += item.getScore();
+      }
+      assess.setTotalScore(totalScore);
+      if (save) {
+        assess.setState(AssessState.Draft);
+      } else {
+        assess.setState(AssessState.Submit);
+      }
+    }
+    return malist;
   }
 }

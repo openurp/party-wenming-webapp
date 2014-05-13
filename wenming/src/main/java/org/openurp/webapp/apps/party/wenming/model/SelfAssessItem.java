@@ -15,8 +15,8 @@ public class SelfAssessItem extends AbstractAssessItemInfo {
     return assess;
   }
 
-  public void setAssess(SelfAssess assess) {
-    this.assess = assess;
+  public void setAssess(AbstractAssessInfo assess) {
+    this.assess = (SelfAssess) assess;
   }
 
   public static long getSerialversionuid() {
