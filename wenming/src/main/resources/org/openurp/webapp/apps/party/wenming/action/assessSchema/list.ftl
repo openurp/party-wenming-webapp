@@ -9,6 +9,7 @@
     bar.addItem("${b.text("action.modify")}",action.edit());
     bar.addItem("指标维护",action.single("item"));
     bar.addItem("加分项维护",action.single("bonus"));
+    bar.addItem("复制",action.single("copy"));
     bar.addItem("${b.text("action.delete")}",action.remove("删除时，会级联删除对应的所有子角色，确认删除?"));
   [/@]
   [@b.row]
