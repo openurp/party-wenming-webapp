@@ -1,6 +1,7 @@
 [#ftl]
 
 [#macro assessTable assessList]
+[@b.toolbar title='评测内容'][/@]
   <style>
     .score{width:60px;}
     .footdiv input{margin-right:200px;}
@@ -11,6 +12,8 @@
     .assessTable th{background-color:#c7dbff; padding: 10px;}
     .assessTable td{padding:10px 5px}
     .assessTable tr:hover{background-color:#eee;}
+    .ui-slider-handle { border-color: #729fcf; }
+    .ui-slider-range { background: #729fcf; }
   </style>
   <table id="assessTable" class="gridtable assessTable">
     <thead>

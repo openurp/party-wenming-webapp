@@ -1,8 +1,6 @@
 [#ftl]
 [@b.head/]
-[@b.toolbar title='单位互评信息']
-bar.addBack("${b.text("action.back")}");
-[/@]
+[@b.toolbar title='评测内容'][/@]
 [@b.form action="!edit"]
   <style>
     .score{width:60px;}
@@ -11,7 +9,11 @@ bar.addBack("${b.text("action.back")}");
     .error .scoreSpan{color:#fff;}
     .scoreSpan{float:left;}
     .scoreDiv{margin-left:24px;}
-    .assessTable td{padding:5px 15px 3px 5px;}
+    .assessTable th{background-color:#c7dbff; padding: 10px;}
+    .assessTable td{padding:10px 5px}
+    .ui-widget-header{background-color:blue!important;}
+    .ui-slider-handle { border-color: #729fcf; }
+    .ui-slider-range { background: #729fcf; }
   </style>
   <table id="assessTable" class="gridtable assessTable">
     <thead>
