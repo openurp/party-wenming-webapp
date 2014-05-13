@@ -8,7 +8,7 @@
             <generator class="org.beangle.orm.hibernate.TableSeqGenerator" />
         </id>
         <property name="name" length="100" not-null="true" />
-        <bag name="groups" inverse="true" cascade="all">
+        <bag name="groups" inverse="true" cascade="all-delete-orphan">
           <key column="schema_id"></key>
           <one-to-many class="org.openurp.webapp.apps.party.wenming.model.AssessItemGroup" />
         </bag>
@@ -16,7 +16,7 @@
             <key column="schema_id" not-null="true" />
             <many-to-many column="department_id"    class="org.openurp.kernel.base.unit.model.Department" />
         </bag>
-        <bag name="bonusItems"  inverse="true" cascade="all">
+        <bag name="bonusItems"  inverse="true" cascade="all-delete-orphan">
           <key column="schema_id"></key>
           <one-to-many class="org.openurp.webapp.apps.party.wenming.model.AssessBonusItem" />
         </bag>
