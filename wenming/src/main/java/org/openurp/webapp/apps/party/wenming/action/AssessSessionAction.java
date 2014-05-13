@@ -23,7 +23,10 @@ public class AssessSessionAction extends WenMingAction {
 
   @Override
   protected void editSetting(Entity<?> entity) {
-    putSchemas();
+    AssessSession assessSession = (AssessSession) entity;
+    List<AssessSchema> schemas = wenMingService.findSchema();
+    schemas.removeAll(assessSession.getSchemas());
+    put("schemas", schemas);
   }
 
   @Override
@@ -36,7 +39,26 @@ public class AssessSessionAction extends WenMingAction {
     if (session.getCreatedAt() == null) {
       session.setCreatedAt(new Date());
     }
-    return super.saveAndForward(entity);
+    List<String> repeatDepartmentList = getRepeatDepartment(session);
+    if(repeatDepartmentList.size() > 0){
+      editSetting(entity);
+      put("repeatDepartmentList", repeatDepartmentList);
+      put("assessSession", entity);
+      return forward("form");
+    }else{
+      return super.saveAndForward(entity);
+    }
+  }
+
+  private List<String> getRepeatDepartment(AssessSession session) {
+    OqlBuilder<?> query = OqlBuilder.from(AssessSchema.class, "o");
+    query.where("o in (:schemas)", session.getSchemas());
+    query.join("o.departs", "d");
+    query.groupBy("d.id, d.name");
+    query.select("d.name");
+    query.having("count(*) > 1"); 
+    List<String> list = (List<String>) entityDao.search(query);
+    return list;
   }
 
 }

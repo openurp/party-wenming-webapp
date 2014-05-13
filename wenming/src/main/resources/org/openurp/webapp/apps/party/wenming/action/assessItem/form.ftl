@@ -27,16 +27,14 @@ form.listform li.foot {padding-left: 160px;}
   [@b.field label="指标分类"]${group.name}[/@]
   [@b.textarea label="指标内容"  name="assessItem.content" required="true"
     maxlength="300" value=assessItem.content! rows="3" cols="80"/]
-  [@b.textfield name="assessItem.score" label="指标分值" value="${assessItem.orderNumber!0}" id="scoreIpt"
+  [@b.textfield name="assessItem.score" label="指标分值" value="${assessItem.score!0}" id="scoreIpt"
     required="true" maxlength="10" check="match('integer')"/]
   [@b.textfield name="orderNumber" label="排序" value="${assessItem.orderNumber!}"
     required="true" maxlength="10" check="match('integer')"/]
-  [@b.radios label="是否为互评指标"  name="assessItem.mutual" 
-    value=assessItem.mutual items="1:common.yes,0:common.no"/]
-  [@b.radios label="是否督察组测评指标"  name="assessItem.forSupervisor" 
-    value=assessItem.forSupervisor items="1:common.yes,0:common.no"/]
-  [@b.field label="评分单位列表"]
-    <div style="padding-left:150px;">
+  [@b.radios label="是否督察组测评指标"  name="assessItem.forSupervisor"    value=assessItem.forSupervisor items="1:common.yes,0:common.no"/]
+  [@b.radios label="是否为互评指标"  name="assessItem.mutual"     value=assessItem.mutual items="1:common.yes,0:common.no"/]
+  [@b.field label="测评职能部门"]
+    <div style="padding-left:150px;" id="department_panel">
       <table class="gridtable" style="width:500px">
         <thead>
           <tr>
@@ -65,6 +63,7 @@ form.listform li.foot {padding-left: 160px;}
 </table>
 <script>
   function ionsubmit(){
+    if(jQuery("form :radio[name='assessItem.mutual']:checked").val()=="1") return true;
     var hasEmtpy = false;
     $("#itbody select").each(function (){
       if(this.value == ""){
@@ -89,10 +88,7 @@ form.listform li.foot {padding-left: 160px;}
       alert("评分分值格式错误！");
       return false;
     }
-    if($("#scoreIpt").val()*1 < sum){
-      alert("评分单位的总分值不能超过指标分值！");
-      return false;
-    }
+    $("#scoreIpt").val(sum);
     return true;
   }
   $(function (){
@@ -105,5 +101,21 @@ form.listform li.foot {padding-left: 160px;}
   function deltr(btn){
     $(btn).closest("tr").remove();
   }
+
+  function toggleDepartPanel(enabled){
+    jQuery("#department_panel").parent().css("display",enabled?"block":"none")
+    jQuery("#department_panel").css("display",enabled?"block":"none")
+    jQuery("#department_panel input").attr("disabled",!enabled);
+    jQuery("#department_panel select").attr("disabled",!enabled);
+  }
+
+  [#if assessItem.mutual]toggleDepartPanel(false);[#else]toggleDepartPanel(true)[/#if]
+  jQuery("form :radio[name='assessItem.mutual']").bind("click",function(e){
+    if(e.target.value=="1"){
+      toggleDepartPanel(false);
+    }else{
+      toggleDepartPanel(true);
+    }
+  });
 </script>
 [@b.foot/]

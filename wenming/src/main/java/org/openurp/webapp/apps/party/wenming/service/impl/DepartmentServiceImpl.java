@@ -18,4 +18,12 @@ public class DepartmentServiceImpl extends BaseServiceImpl implements Department
     return entityDao.search(builder);
   }
 
+  @Override
+  public List<Department> getActives(boolean isTeaching) {
+    OqlBuilder<Department> builder = OqlBuilder.from(Department.class, "depart");
+    builder.where("depart.endOn is null or depart.endOn>=:now", new Date(System.currentTimeMillis()));
+    builder.orderBy("depart.code").where("depart.teaching=:teaching", isTeaching);
+    return entityDao.search(builder);
+  }
+
 }

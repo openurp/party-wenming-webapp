@@ -5,6 +5,7 @@ import java.util.List;
 
 import org.beangle.commons.collection.CollectUtils;
 import org.beangle.commons.entity.Entity;
+import org.beangle.struts2.convention.route.Action;
 import org.openurp.kernel.base.unit.model.Department;
 import org.openurp.webapp.apps.party.wenming.model.AssessSchema;
 import org.openurp.webapp.apps.party.wenming.service.DepartmentService;
@@ -30,6 +31,16 @@ public class AssessSchemaAction extends WenMingAction {
     put("allDepartments", CollectUtils.newArrayList(departments));
     departments.removeAll(schema.getDeparts());
     put("departments", departments);
+  }
+
+  /**
+   * 维护指标
+   * 
+   * @return
+   */
+  public String item() {
+    return redirect(new Action(AssessItemGroupAction.class, "search", "&assessItemGroup.schema.id="
+        + getInt("assessSchema.id")), null);
   }
 
   @Override

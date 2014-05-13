@@ -4,6 +4,15 @@
 [@b.tabs]
   [@b.tab label="考核批次信息"]
     [@b.form action="!save" title="基本信息" theme="list"]
+      [#if repeatDepartmentList??]
+      [@b.field label="部门重复"]
+        <div style="padding-left:110px; color:red;">
+          [#list repeatDepartmentList as v]
+        [#if v_index gt 0]、[/#if]${v}
+        [/#list]
+        </div>
+      [/@]
+      [/#if]
       [@b.textfield name="assessSession.name" label="批次名称" value="${assessSession.name!}" required="true" maxlength="50"/]
       [@b.startend label="测评开始结束时间" 
         name="assessSession.beginOn,assessSession.endOn" required="true,false" 

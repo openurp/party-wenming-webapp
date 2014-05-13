@@ -21,22 +21,23 @@
     [#list allDepartments as d]
     departs['${d.id}']={name:"${d.name}",teaching:${d.teaching?string("true","false")}}
     [/#list]
-    function removeFuncDepart(){
+    function removeDepart(isTeaching){
        jQuery("#schema_form select option").each(function(idx,obj){
-          if(!departs[obj.value].teaching) obj.remove();
+          if(isTeaching == departs[obj.value].teaching) obj.remove();
        })
+       jQuery("#schema_form select[name='departmentId'] option").remove();
+       for( k in departs){
+          if(departs[k].teaching!=isTeaching){
+             jQuery("#schema_form select[name='departmentId']").append("<option value='" + k + "'>" +departs[k].name + "</option>");
+          } 
+       }
     }
-    function removeTeaching(){
-       jQuery("#schema_form select option").each(function(idx,obj){
-          if(departs[obj.value].teaching) obj.remove();
-       })
-    }
-    [#if assessSchema.forTeaching]removeFuncDepart();[#else]removeTeaching()[/#if]
+    [#if assessSchema.forTeaching]removeDepart(false);[#else]removeDepart(true)[/#if]
      jQuery("#schema_form :radio").bind("click",function(e){
         if(e.target.value=="1"){
-         removeFuncDepart();
+         removeDepart(false);
         }else{
-         removeTeaching();
+         removeDepart(true);
         }
      });
 </script>

@@ -8,7 +8,10 @@ public interface DepartmentService {
 
   /**
    * 查询当前活跃的部门
+   * 
    * @return
    */
   List<Department> getActives();
+
+  List<Department> getActives(boolean isTeaching);
 }

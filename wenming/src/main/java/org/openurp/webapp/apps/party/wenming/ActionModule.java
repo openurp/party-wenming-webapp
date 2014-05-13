@@ -33,5 +33,6 @@ public class ActionModule extends AbstractBindModule {
     bind(AssessBonusItemAction.class);
     bind(AttachmentAction.class, AssessBonusAction.class);
     bind(SupervisorAction.class);
+    bind(SupervisorAssessAction.class);
   }
 }

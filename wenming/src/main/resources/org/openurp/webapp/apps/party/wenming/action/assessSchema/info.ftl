@@ -17,13 +17,17 @@ bar.addBack("${b.text("action.back")}");
 
 <p>指标内容</p>
 [#macro displayGroup group]
-  <tr><td colspan="3"><B>${group.indexno} ${group.name}</B></tr>
+  <tr>
+    <td align="center"><B>${group.indexno}</B></td>
+    <td colspan="3"><B>${group.name}</B>
+  </tr>
   [#list group.items as item]
   <tr>
-   <td class="title" width="10%">${item_index+1}</td>
-   <td class="content" width="70%">${item.content}</td>
-   <td class="content" width="20%">[#list item.departs?sort_by(["department","code"]) as idepart]${idepart.department.name}(${idepart.score})&nbsp;[/#list]</td>
-  </tr>>
+   <td align="center">${item_index+1}</td>
+   <td>${item.content}</td>
+   <td align="center">${item.score}</td>
+   <td align="center">[#if item.mutual]互评[#else][#list item.departs?sort_by(["department","code"]) as idepart]${idepart.department.name}(${idepart.score})&nbsp;[/#list][/#if]</td>
+  </tr>
   [/#list]
   [#list group.children as child] 
     [@displayGroup child/]
@@ -31,6 +35,12 @@ bar.addBack("${b.text("action.back")}");
 [/#macro]
 
 <table class="infoTable">
+  <thead>
+    <th width="7%">序号</th>
+    <th width="70%">评分内容及标准</th>
+    <th width="8%">分值</th>
+    <th width="15%">备注</th>
+  </thead>
   [#list assessSchema.groups?sort_by("indexno") as group]
     [@displayGroup group/]
   [/#list]
