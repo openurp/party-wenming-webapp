@@ -64,7 +64,7 @@ public class MutualAssessAction extends WenMingAction {
   public String editIndex() {
     AssessSession assessSession = wenMingService.getAssessSessionByAssessTime();
     put("assessSession", assessSession);
-//    put("schemas", assessSession.getSchemas());
+    put("schemas", wenMingService.findSessions(assessSession));
     return forward();
   }
 
@@ -117,7 +117,7 @@ public class MutualAssessAction extends WenMingAction {
       assess.setAssessBy(assessBy);
       assess.setAssessDepartment(assessDepartment);
       @SuppressWarnings("unchecked")
-      List<MutualAssessItem> items = (List<MutualAssessItem>) getAll(MutualAssessItem.class, "mai"
+      List<MutualAssessItem> items = (List<MutualAssessItem>) getAll(MutualAssessItem.class, "item"
           + assess.getDepartment().getId());
       assess.getItems().clear();
       assess.getItems().addAll(items);

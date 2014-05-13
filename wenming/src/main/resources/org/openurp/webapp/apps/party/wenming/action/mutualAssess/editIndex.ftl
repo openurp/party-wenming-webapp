@@ -2,8 +2,7 @@
 [@b.head/]
 [@b.toolbar title='文明单位互评'][/@]
 <div style="padding:10px;">
-  [#if assessSession??]
-  [#assign schemas = assessSession.schemas/]
+  [#if assessSession?? && schemas?size gt 0]
   <div>
     [@b.form action="!edit" target="mutualAssessEdit"]
     请选择方案：

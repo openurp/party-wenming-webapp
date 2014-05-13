@@ -1,5 +1,6 @@
 package org.openurp.webapp.apps.party.wenming.service.impl;
 
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
@@ -106,5 +107,18 @@ public class WenMingServiceImpl extends BaseServiceImpl implements WenMingServic
         query.where("o.forSupervisor = true");
       }
     });
+  }
+
+  @Override
+  public List<AssessSchema> findSessions(AssessSession assessSession) {
+    List<AssessSchema> list = new ArrayList<AssessSchema>();
+    if(assessSession != null){
+      for(AssessSchema schema : assessSession.getSchemas()){
+        if(schema.isForTeaching()){
+          list.add(schema);
+        }
+      }
+    }
+    return list;
   }
 }
