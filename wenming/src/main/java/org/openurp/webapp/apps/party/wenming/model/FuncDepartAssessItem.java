@@ -5,18 +5,17 @@ package org.openurp.webapp.apps.party.wenming.model;
  * 
  * @author chaostone
  */
-public class SelfAssessItem extends AbstractAssessItemInfo {
+public class FuncDepartAssessItem extends AbstractAssessItemInfo {
 
   private static final long serialVersionUID = -1848383446708874473L;
 
-  private SelfAssess assess;
+  private FuncDepartAssess assess;
 
-  public SelfAssess getAssess() {
+  public FuncDepartAssess getAssess() {
     return assess;
   }
 
   public void setAssess(AbstractAssessInfo assess) {
-    this.assess = (SelfAssess) assess;
+    this.assess = (FuncDepartAssess) assess;
   }
-
 }

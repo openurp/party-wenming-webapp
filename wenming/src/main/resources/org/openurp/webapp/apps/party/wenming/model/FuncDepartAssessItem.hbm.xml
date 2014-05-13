@@ -3,11 +3,11 @@
     "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
     "http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
 <hibernate-mapping package="org.openurp.webapp.apps.party.wenming.model">
-    <class name="SupervisorAssessItem">
+    <class name="FuncDepartAssessItem">
         <id name="id" type="long">
             <generator class="org.beangle.orm.hibernate.TableSeqGenerator" />
         </id>
-        <many-to-one name="assess" column="assess_id" not-null="true" class="org.openurp.webapp.apps.party.wenming.model.SupervisorAssess"/>
+        <many-to-one name="assess" column="assess_id" not-null="true" class="org.openurp.webapp.apps.party.wenming.model.FuncDepartAssess"/>
         <many-to-one name="item" column="item_id" not-null="true"/>
         <property name="score" not-null="true"/>
     </class>

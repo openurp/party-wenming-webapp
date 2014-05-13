@@ -22,7 +22,9 @@
     <mapping resource="org/openurp/webapp/apps/party/wenming/model/SupervisorAssessItem.hbm.xml"/>
     <mapping resource="org/openurp/webapp/apps/party/wenming/model/MutualAssess.hbm.xml"/>
     <mapping resource="org/openurp/webapp/apps/party/wenming/model/MutualAssessItem.hbm.xml"/>
-    
+    <mapping resource="org/openurp/webapp/apps/party/wenming/model/FuncDepartAssess.hbm.xml"/>
+    <mapping resource="org/openurp/webapp/apps/party/wenming/model/FuncDepartAssessItem.hbm.xml"/>
+
     <mapping resource="org/openurp/webapp/apps/party/wenming/model/AssessStat.hbm.xml"/>
     <mapping resource="org/openurp/webapp/apps/party/wenming/model/AssessStatItem.hbm.xml"/>
     

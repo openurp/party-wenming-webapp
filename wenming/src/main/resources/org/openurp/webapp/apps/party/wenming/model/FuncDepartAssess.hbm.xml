@@ -3,7 +3,7 @@
     "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
     "http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
 <hibernate-mapping package="org.openurp.webapp.apps.party.wenming.model">
-    <class name="SelfAssess">
+    <class name="FuncDepartAssess">
         <id name="id" type="long">
             <generator class="org.beangle.orm.hibernate.TableSeqGenerator" />
         </id>
@@ -18,7 +18,7 @@
         <property name="state" not-null="true"  type="assessState"/>
         <bag name="items" inverse="true" cascade="all-delete-orphan">
           <key column="assess_id"></key>
-          <one-to-many class="org.openurp.webapp.apps.party.wenming.model.SelfAssessItem" />
+          <one-to-many class="org.openurp.webapp.apps.party.wenming.model.FuncDepartAssessItem" />
         </bag>
     </class>
 </hibernate-mapping>

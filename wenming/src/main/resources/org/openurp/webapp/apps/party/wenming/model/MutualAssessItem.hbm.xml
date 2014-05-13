@@ -7,7 +7,7 @@
         <id name="id" type="long">
             <generator class="org.beangle.orm.hibernate.TableSeqGenerator" />
         </id>
-        <many-to-one name="assess" column="assess_id" not-null="true"/>
+        <many-to-one name="assess" column="assess_id" not-null="true" class="org.openurp.webapp.apps.party.wenming.model.MutualAssess"/>
         <many-to-one name="item" column="item_id" not-null="true"/>
         <property name="score" not-null="true"/>
     </class>
