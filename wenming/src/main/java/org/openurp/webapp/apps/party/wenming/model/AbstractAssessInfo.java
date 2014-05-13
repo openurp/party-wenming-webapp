@@ -28,6 +28,9 @@ public abstract class AbstractAssessInfo extends LongIdObject {
 
   /** 测评人员 **/
   private User assessBy;
+
+  /** 测评单位 **/
+  private Department assessDepartment;
   
   public AssessSession getSession() {
     return session;
@@ -83,6 +86,14 @@ public abstract class AbstractAssessInfo extends LongIdObject {
 
   public void setAssessBy(User assessBy) {
     this.assessBy = assessBy;
+  }
+
+  public Department getAssessDepartment() {
+    return assessDepartment;
+  }
+
+  public void setAssessDepartment(Department assessDepartment) {
+    this.assessDepartment = assessDepartment;
   }
   
   abstract public List<? extends AbstractAssessItemInfo> getItems();

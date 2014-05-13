@@ -122,10 +122,6 @@ public class MutualAssessAction extends WenMingAction {
     @SuppressWarnings("unchecked")
     List<MutualAssess> malist = getAllAssess(MutualAssess.class, MutualAssessItem.class);
     if (editable(malist.get(0).getState())) {
-      Department assessDepartment = getDepartment();
-      for (MutualAssess assess : malist) {
-        assess.setAssessDepartment(assessDepartment);
-      }
       saveOrUpdate(malist);
     }
     return redirect("info", null, "schema.id=" + malist.get(0).getSchema().getId() + "&session.id="

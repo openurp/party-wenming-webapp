@@ -69,7 +69,9 @@ public class WenMingAction extends SecurityActionSupport {
     List<T> malist = (List<T>) getAll();
     AssessSession session = wenMingService.getAssessSessionByAssessTime();
     boolean save = getBool("save");
+    Department assessDepartment = getDepartment();
     for (T assess : malist) {
+      assess.setAssessDepartment(assessDepartment);
       assess.setAssessBy(assessBy);
       @SuppressWarnings("unchecked")
       List<I> items = (List<I>) getAll(itemClass, "item"
