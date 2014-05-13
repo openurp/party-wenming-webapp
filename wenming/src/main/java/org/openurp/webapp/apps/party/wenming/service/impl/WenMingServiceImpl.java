@@ -11,6 +11,7 @@ import org.openurp.kernel.base.unit.model.Department;
 import org.openurp.webapp.apps.party.wenming.model.AssessItem;
 import org.openurp.webapp.apps.party.wenming.model.AssessSchema;
 import org.openurp.webapp.apps.party.wenming.model.AssessSession;
+import org.openurp.webapp.apps.party.wenming.model.AssessType;
 import org.openurp.webapp.apps.party.wenming.service.QueryInvoker;
 import org.openurp.webapp.apps.party.wenming.service.WenMingService;
 
@@ -86,7 +87,7 @@ public class WenMingServiceImpl extends BaseServiceImpl implements WenMingServic
     return findAssessItem(schema, new QueryInvoker() {
       @Override
       public void doth(OqlBuilder<?> query) {
-        query.where("o.mutual = true");
+        query.where("o.assessType = :assessType", AssessType.MUTUAL);
       }
     });
   }
@@ -104,7 +105,7 @@ public class WenMingServiceImpl extends BaseServiceImpl implements WenMingServic
     return findAssessItem(schema, new QueryInvoker() {
       @Override
       public void doth(OqlBuilder<?> query) {
-        query.where("o.forSupervisor = true");
+        query.where("o.assessType = :assessType", AssessType.SUPERVISOR);
       }
     });
   }

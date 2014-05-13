@@ -31,7 +31,7 @@ public class WenMingAction extends SecurityActionSupport {
   }
 
 	protected boolean editable(AssessState state) {
-    if(AssessState.Draft.equals(state) || AssessState.DepartUnpassed.equals(state) || AssessState.SchoolUnpassed.equals(state)){
+    if(state == null || AssessState.Draft.equals(state) || AssessState.DepartUnpassed.equals(state) || AssessState.SchoolUnpassed.equals(state)){
       return true;
     }
     return false;

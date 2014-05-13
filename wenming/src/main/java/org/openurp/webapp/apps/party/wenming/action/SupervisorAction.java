@@ -15,10 +15,4 @@ public class SupervisorAction extends SecurityActionSupport {
   protected String getEntityName() {
     return Supervisor.class.getName();
   }
-  
-  @Override
-  protected String saveAndForward(Entity<?> entity) {
-    Supervisor supervisor = (Supervisor) entity;
-    return super.saveAndForward(entity);
-  }
 }

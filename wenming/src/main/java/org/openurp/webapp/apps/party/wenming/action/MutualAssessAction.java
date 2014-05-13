@@ -73,7 +73,6 @@ public class MutualAssessAction extends WenMingAction {
     AssessSchema schema = entityDao.get(AssessSchema.class, getInt("schema.id"));
     AssessSession assessSession = wenMingService.getAssessSessionByAssessTime();
     List<MutualAssess> malist = findMuaualAssess(assessSession.getId(), schema.getId());
-    Department assessDepartment = getDepartment();
     List<AssessItem> items = wenMingService.findAssessItemByMutual(schema);
     if (malist.isEmpty()) {
       malist = new ArrayList<MutualAssess>();
@@ -110,32 +109,34 @@ public class MutualAssessAction extends WenMingAction {
     UrpUserBean assessBy = getUrpUser();
     @SuppressWarnings("unchecked")
     List<MutualAssess> malist = (List<MutualAssess>) getAll();
-    AssessSession session = wenMingService.getAssessSessionByAssessTime();
-    Department assessDepartment = getDepartment();
-    boolean save = getBool("save");
-    for (MutualAssess assess : malist) {
-      assess.setAssessBy(assessBy);
-      assess.setAssessDepartment(assessDepartment);
-      @SuppressWarnings("unchecked")
-      List<MutualAssessItem> items = (List<MutualAssessItem>) getAll(MutualAssessItem.class, "item"
-          + assess.getDepartment().getId());
-      assess.getItems().clear();
-      assess.getItems().addAll(items);
-      assess.setSession(session);
-      assess.setAssessAt(new Date());
-      float totalScore = 0;
-      for (MutualAssessItem item : items) {
-        item.setAssess(assess);
-        totalScore += item.getScore();
+    if(editable(malist.get(0).getState())){
+      AssessSession session = wenMingService.getAssessSessionByAssessTime();
+      Department assessDepartment = getDepartment();
+      boolean save = getBool("save");
+      for (MutualAssess assess : malist) {
+        assess.setAssessBy(assessBy);
+        assess.setAssessDepartment(assessDepartment);
+        @SuppressWarnings("unchecked")
+        List<MutualAssessItem> items = (List<MutualAssessItem>) getAll(MutualAssessItem.class, "item"
+            + assess.getDepartment().getId());
+        assess.getItems().clear();
+        assess.getItems().addAll(items);
+        assess.setSession(session);
+        assess.setAssessAt(new Date());
+        float totalScore = 0;
+        for (MutualAssessItem item : items) {
+          item.setAssess(assess);
+          totalScore += item.getScore();
+        }
+        assess.setTotalScore(totalScore);
+        if (save) {
+          assess.setState(AssessState.Draft);
+        } else {
+          assess.setState(AssessState.Submit);
+        }
       }
-      assess.setTotalScore(totalScore);
-      if (save) {
-        assess.setState(AssessState.Draft);
-      } else {
-        assess.setState(AssessState.Submit);
-      }
+      saveOrUpdate(malist);
     }
-    saveOrUpdate(malist);
     return redirect("info", null, "schema.id=" + malist.get(0).getSchema().getId() + "&session.id=" + malist.get(0).getSession().getId());
   }
   

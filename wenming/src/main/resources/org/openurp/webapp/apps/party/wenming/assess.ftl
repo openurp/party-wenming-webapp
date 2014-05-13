@@ -8,7 +8,9 @@
     .error .scoreSpan{color:#fff;}
     .scoreSpan{float:left;}
     .scoreDiv{margin-left:24px;}
-    .assessTable td{padding:5px 15px 3px 5px;}
+    .assessTable th{background-color:#c7dbff; padding: 10px;}
+    .assessTable td{padding:10px 5px}
+    .assessTable tr:hover{background-color:#eee;}
   </style>
   <table id="assessTable" class="gridtable assessTable">
     <thead>
