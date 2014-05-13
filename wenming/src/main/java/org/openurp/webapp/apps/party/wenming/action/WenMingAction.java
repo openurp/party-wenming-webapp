@@ -55,5 +55,6 @@ public class WenMingAction extends SecurityActionSupport {
       e.printStackTrace();
     }
     return null;
+
   }
 }

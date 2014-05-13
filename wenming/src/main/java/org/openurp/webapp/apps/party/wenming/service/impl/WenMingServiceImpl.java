@@ -23,6 +23,13 @@ public class WenMingServiceImpl extends BaseServiceImpl implements WenMingServic
   }
 
   @Override
+  public List<Department> findDepartment() {
+    OqlBuilder<Department> query = OqlBuilder.from(Department.class);
+    query.orderBy("name");
+    return entityDao.search(query);
+  }
+
+  @Override
   public AssessSession getAssessSessionByAssessTime() {
     OqlBuilder<AssessSession> query = OqlBuilder.from(AssessSession.class, "o");
     query.where("beginOn <= :now and endOn >= :now", new Date());

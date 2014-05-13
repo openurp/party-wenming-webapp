@@ -22,5 +22,6 @@ public interface WenMingService {
   List<AssessItem> findAssessItemByMutual(AssessSchema schema);
 
   List<AssessItem> findAssessItemBySupervisor(AssessSchema schema);
+  List<Department> findDepartment();
 
 }
