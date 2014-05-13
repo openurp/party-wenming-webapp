@@ -11,8 +11,6 @@ public interface WenMingService {
 
   List<AssessSchema> findSchema();
 
-  List<Department> findDepartment();
-
   AssessSession getAssessSessionByAssessTime();
 
   AssessSchema getSchema(AssessSession session, Department department);

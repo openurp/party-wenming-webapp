@@ -7,14 +7,16 @@ import org.beangle.commons.entity.Entity;
 import org.openurp.webapp.apps.party.wenming.model.AssessItem;
 import org.openurp.webapp.apps.party.wenming.model.AssessItemDepartment;
 import org.openurp.webapp.apps.party.wenming.model.AssessItemGroup;
+import org.openurp.webapp.apps.party.wenming.service.DepartmentService;
 
 /**
  * 评价指标管理
  * 
  * @author chii
- * 
  */
 public class AssessItemAction extends WenMingAction {
+
+  private DepartmentService departmentService;
 
   @Override
   protected String getEntityName() {
@@ -30,7 +32,7 @@ public class AssessItemAction extends WenMingAction {
   @Override
   protected void editSetting(Entity<?> entity) {
     AssessItemGroup group = entityDao.get(AssessItemGroup.class.getName(), getInt("assessItem.group.id"));
-    put("departments", wenMingService.findDepartment());
+    put("departments", departmentService.getActives(false));
     put("group", group);
     super.editSetting(entity);
   }
@@ -53,9 +55,7 @@ public class AssessItemAction extends WenMingAction {
 
   private void setOrderNumber(AssessItem item) {
     Integer orderNumber = getInt("orderNumber");
-    if (item.getOrderNumber() != null && orderNumber.equals(item.getOrderNumber())) {
-      return;
-    }
+    if (item.getOrderNumber() != null && orderNumber.equals(item.getOrderNumber())) { return; }
     item.setOrderNumber(orderNumber);
     Integer beginIndex = Math.min(orderNumber, item.getOrderNumber());
     OqlBuilder<AssessItem> query = OqlBuilder.from(AssessItem.class, "o");
@@ -75,4 +75,9 @@ public class AssessItemAction extends WenMingAction {
     }
     entityDao.saveOrUpdate(list);
   }
+
+  public void setDepartmentService(DepartmentService departmentService) {
+    this.departmentService = departmentService;
+  }
+
 }
