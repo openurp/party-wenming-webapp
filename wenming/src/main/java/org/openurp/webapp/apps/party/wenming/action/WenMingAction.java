@@ -36,7 +36,14 @@ public class WenMingAction extends SecurityActionSupport {
     return entityDao.get(UrpUserBean.class, getUserId());
   }
 
-	protected boolean editable(AssessState state) {
+	protected boolean saveable(AssessState state) {
+    if(AssessState.Draft.equals(state) || AssessState.Submit.equals(state)){
+      return true;
+    }
+    return false;
+  }
+
+  protected boolean editable(AssessState state) {
     if(state == null || AssessState.Draft.equals(state) || AssessState.DepartUnpassed.equals(state) || AssessState.SchoolUnpassed.equals(state)){
       return true;
     }
@@ -71,27 +78,31 @@ public class WenMingAction extends SecurityActionSupport {
     boolean save = getBool("save");
     Department assessDepartment = getDepartment();
     for (T assess : malist) {
-      assess.setAssessDepartment(assessDepartment);
-      assess.setAssessBy(assessBy);
-      @SuppressWarnings("unchecked")
-      List<I> items = (List<I>) getAll(itemClass, "item"
-          + assess.getDepartment().getId());
-
-      assess.getItems().clear();
-      assess.getItems().addAll((List) items);
-      
-      assess.setSession(session);
-      assess.setAssessAt(new Date());
-      float totalScore = 0;
-      for (I item : items) {
-        item.setAssess(assess);
-        totalScore += item.getScore();
-      }
-      assess.setTotalScore(totalScore);
-      if (save) {
-        assess.setState(AssessState.Draft);
-      } else {
-        assess.setState(AssessState.Submit);
+      if(editable(assess.getState())){
+        assess.setAssessDepartment(assessDepartment);
+        assess.setAssessBy(assessBy);
+        @SuppressWarnings("unchecked")
+        List<I> items = (List<I>) getAll(itemClass, "item"
+            + assess.getDepartment().getId());
+        
+        assess.getItems().clear();
+        assess.getItems().addAll((List) items);
+        
+        assess.setSession(session);
+        assess.setAssessAt(new Date());
+        float totalScore = 0;
+        for (I item : items) {
+          item.setAssess(assess);
+          totalScore += item.getScore();
+        }
+        assess.setTotalScore(totalScore);
+        if (save) {
+          assess.setState(AssessState.Draft);
+        } else {
+          assess.setState(AssessState.Submit);
+        }
+      }else{
+        return null;
       }
     }
     return malist;

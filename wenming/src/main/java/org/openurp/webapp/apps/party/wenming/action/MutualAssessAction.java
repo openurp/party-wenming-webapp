@@ -121,7 +121,7 @@ public class MutualAssessAction extends WenMingAction {
   public String save() throws Exception {
     @SuppressWarnings("unchecked")
     List<MutualAssess> malist = getAllAssess(MutualAssess.class, MutualAssessItem.class);
-    if (editable(malist.get(0).getState())) {
+    if (saveable(malist.get(0).getState())) {
       saveOrUpdate(malist);
     }
     return redirect("info", null, "schema.id=" + malist.get(0).getSchema().getId() + "&session.id="
