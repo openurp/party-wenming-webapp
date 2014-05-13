@@ -16,9 +16,9 @@
             <key column="schema_id" not-null="true" />
             <many-to-many column="department_id"    class="org.openurp.kernel.base.unit.model.Department" />
         </bag>
-        <bag name="bonusItems">
+        <bag name="bonusItems"  inverse="true" cascade="all">
           <key column="schema_id"></key>
-          <many-to-many column="item_id" class="org.openurp.webapp.apps.party.wenming.model.AssessBonusItem" />
+          <one-to-many class="org.openurp.webapp.apps.party.wenming.model.AssessBonusItem" />
         </bag>
         <property name="updatedAt"/>
         <property name="createdAt"/>

@@ -15,7 +15,7 @@ bar.addBack("${b.text("action.back")}");
   </tr>
 </table>
 
-<p>指标内容</p>
+<h3>一、 指标内容</h3>
 [#macro displayGroup group]
   <tr>
     <td align="center"><B>${group.indexno}</B></td>
@@ -46,4 +46,21 @@ bar.addBack("${b.text("action.back")}");
   [/#list]
 </table>
 
+<h3>二、 加分项${assessSchema.bonusItems?size}</h3>
+<table class="infoTable">
+  <thead>
+    <th width="10%">序号</th>
+    <th width="70%">内容及标准</th>
+    <th width="20%">加分方法</th>
+    
+  </thead>
+  [#list assessSchema.bonusItems as item]
+    <tr>
+     <td align="center">${item_index+1}</td>
+     <td>${item.name}</td>
+     <td align="center">${item.method}</td>
+  </tr>
+  [/#list]
+</table>
+<br/>
 [@b.foot/]

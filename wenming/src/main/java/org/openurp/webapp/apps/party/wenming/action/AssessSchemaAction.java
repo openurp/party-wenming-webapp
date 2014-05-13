@@ -43,6 +43,16 @@ public class AssessSchemaAction extends WenMingAction {
         + getInt("assessSchema.id")), null);
   }
 
+  /**
+   * 加分
+   * 
+   * @return
+   */
+  public String bonus() {
+    return redirect(new Action(AssessBonusItemAction.class, "search", "&assessBonusItem.schema.id="
+        + getInt("assessSchema.id")), null);
+  }
+
   @Override
   protected String saveAndForward(Entity<?> entity) {
     AssessSchema schema = (AssessSchema) entity;
