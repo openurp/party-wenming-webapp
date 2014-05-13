@@ -101,6 +101,8 @@ public class WenMingAction extends SecurityActionSupport {
         } else {
           assess.setState(AssessState.Submit);
         }
+      }else{
+        return null;
       }
     }
     return malist;
