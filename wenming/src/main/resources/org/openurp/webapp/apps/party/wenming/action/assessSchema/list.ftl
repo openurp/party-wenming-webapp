@@ -7,6 +7,7 @@
   [@b.gridbar]
     bar.addItem("${b.text("action.add")}",action.add());
     bar.addItem("${b.text("action.modify")}",action.edit());
+    bar.addItem("维护指标",action.single("item"));
     bar.addItem("${b.text("action.delete")}",action.remove("删除时，会级联删除对应的所有子角色，确认删除?"));
   [/@]
   [@b.row]
