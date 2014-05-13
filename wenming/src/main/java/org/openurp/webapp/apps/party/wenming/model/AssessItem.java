@@ -9,10 +9,11 @@ import org.beangle.commons.entity.pojo.IntegerIdObject;
  * 测评指标
  * 
  * @author chaostone
- * 
  */
-public class AssessItem extends IntegerIdObject implements Comparable<AssessItem>{
-	/** 测评指标分类 **/
+public class AssessItem extends IntegerIdObject implements Comparable<AssessItem> {
+  
+  private static final long serialVersionUID = 981858295086278562L;
+  /** 测评指标分类 **/
   private AssessItemGroup group;
   /** 指标内容 **/
   private String content;
@@ -20,10 +21,8 @@ public class AssessItem extends IntegerIdObject implements Comparable<AssessItem
   private Float score;
   /** 排列顺序 **/
   private Integer orderNumber;
-  /** 是否为互评指标 **/
-  private Boolean mutual = false;
-  /** 是否督察组测评指标 **/
-  private Boolean forSupervisor = false;
+  /** 测评类型 **/
+  private AssessType assessType = AssessType.FUNC_DEPART;
   /** 评分单位 **/
   private List<AssessItemDepartment> departs = CollectUtils.newArrayList();
 
@@ -67,20 +66,12 @@ public class AssessItem extends IntegerIdObject implements Comparable<AssessItem
     this.orderNumber = orderNumber;
   }
 
-  public Boolean getMutual() {
-    return mutual;
+  public AssessType getAssessType() {
+    return assessType;
   }
 
-  public void setMutual(Boolean mutual) {
-    this.mutual = mutual;
-  }
-
-  public Boolean getForSupervisor() {
-    return forSupervisor;
-  }
-
-  public void setForSupervisor(Boolean forSupervisor) {
-    this.forSupervisor = forSupervisor;
+  public void setAssessType(AssessType assessType) {
+    this.assessType = assessType;
   }
 
   @Override

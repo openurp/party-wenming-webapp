@@ -12,7 +12,7 @@ public enum AssessState {
 
   SchoolUnpassed("文明办审核不通过");
 
-  private String description;
+  private final String description;
 
   private AssessState(String description) {
     this.description = description;
@@ -24,10 +24,6 @@ public enum AssessState {
 
   public String getDescription() {
     return description;
-  }
-
-  public void setDescription(String description) {
-    this.description = description;
   }
 
 }

@@ -3,6 +3,7 @@ package org.openurp.webapp.apps.party.wenming.model;
 import java.util.Date;
 
 import org.beangle.commons.entity.pojo.LongIdObject;
+import org.beangle.security.blueprint.User;
 import org.openurp.kernel.base.unit.model.Department;
 
 public abstract class AbstractAssessInfo extends LongIdObject {
@@ -23,6 +24,9 @@ public abstract class AbstractAssessInfo extends LongIdObject {
   
   /** 状态 **/
   private AssessState state=AssessState.Draft;
+
+  /** 测评人员 **/
+  private User assessBy;
   
   public AssessSession getSession() {
     return session;
@@ -70,6 +74,14 @@ public abstract class AbstractAssessInfo extends LongIdObject {
 
   public void setState(AssessState state) {
     this.state = state;
+  }
+
+  public User getAssessBy() {
+    return assessBy;
+  }
+
+  public void setAssessBy(User assessBy) {
+    this.assessBy = assessBy;
   }
 
 }

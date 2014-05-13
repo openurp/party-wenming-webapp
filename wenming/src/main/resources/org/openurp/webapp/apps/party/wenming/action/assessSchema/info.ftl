@@ -26,7 +26,7 @@ bar.addBack("${b.text("action.back")}");
    <td align="center">${item_index+1}</td>
    <td>${item.content}</td>
    <td align="center">${item.score}</td>
-   <td align="center">[#if item.mutual]互评[#else][#list item.departs?sort_by(["department","code"]) as idepart]${idepart.department.name}(${idepart.score})&nbsp;[/#list][/#if]</td>
+   <td align="center">[#if item.assessType.id!="FUNC_DEPART"]${item.assessType.description}[#else][#list item.departs?sort_by(["department","code"]) as idepart]${idepart.department.name}&nbsp;[/#list][/#if]</td>
   </tr>
   [/#list]
   [#list group.children as child] 

@@ -7,18 +7,14 @@
   <id name="id" type="integer">
    <generator class="org.beangle.orm.hibernate.TableSeqGenerator" />
   </id>
-  <many-to-one name="group" column="group_id"
-   class="org.openurp.webapp.apps.party.wenming.model.AssessItemGroup"
-   not-null="true" />
+  <many-to-one name="group" column="group_id"  not-null="true" />
   <property name="content" length="300" not-null="true" />
-  <property name="mutual" not-null="true" />
-  <property name="forSupervisor" not-null="true" />
+  <property name="assessType" type="assessType" not-null="true" />
   <property name="score" not-null="true" />
   <property name="orderNumber" not-null="true" />
   <bag name="departs" inverse="true" cascade="all-delete-orphan">
    <key column="item_id"></key>
-   <one-to-many
-    class="org.openurp.webapp.apps.party.wenming.model.AssessItemDepartment" />
+   <one-to-many  class="org.openurp.webapp.apps.party.wenming.model.AssessItemDepartment" />
   </bag>
  </class>
 </hibernate-mapping>

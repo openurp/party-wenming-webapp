@@ -6,4 +6,7 @@
     <typedef name="assessState" class="org.hibernate.type.EnumType">
       <param name="enumClass">org.openurp.webapp.apps.party.wenming.model.AssessState</param>
     </typedef>
+    <typedef name="assessType" class="org.hibernate.type.EnumType">
+      <param name="enumClass">org.openurp.webapp.apps.party.wenming.model.AssessType</param>
+    </typedef>
 </hibernate-mapping>

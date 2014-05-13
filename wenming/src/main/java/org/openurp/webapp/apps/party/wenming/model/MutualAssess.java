@@ -3,7 +3,6 @@ package org.openurp.webapp.apps.party.wenming.model;
 import java.util.List;
 
 import org.beangle.commons.collection.CollectUtils;
-import org.beangle.security.blueprint.User;
 import org.openurp.kernel.base.unit.model.Department;
 
 /**
@@ -14,9 +13,6 @@ import org.openurp.kernel.base.unit.model.Department;
 public class MutualAssess extends AbstractAssessInfo {
 
   private static final long serialVersionUID = -2755520695535451658L;
-
-  /** 测评人员 **/
-  private User assessBy;
 
   /** 测评单位 **/
   private Department assessDepartment;
@@ -31,14 +27,6 @@ public class MutualAssess extends AbstractAssessInfo {
 
   public void setItems(List<MutualAssessItem> items) {
     this.items = items;
-  }
-
-  public User getAssessBy() {
-    return assessBy;
-  }
-
-  public void setAssessBy(User assessBy) {
-    this.assessBy = assessBy;
   }
 
   public Department getAssessDepartment() {

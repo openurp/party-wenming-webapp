@@ -23,16 +23,13 @@
 form.listform label.title{width:150px;}
 form.listform li.foot {padding-left: 160px;}
 </style>
+[#assign assessTypeNames={'MUTUAL':'互评','FUNC_DEPART':'职能部门测评','SUPERVISOR':'督察组测评'}/]
 [@b.form action="!save" title="基本信息" theme="list"]
   [@b.field label="指标分类"]${group.name}[/@]
-  [@b.textarea label="指标内容"  name="assessItem.content" required="true"
-    maxlength="300" value=assessItem.content! rows="3" cols="80"/]
-  [@b.textfield name="assessItem.score" label="指标分值" value="${assessItem.score!0}" id="scoreIpt"
-    required="true" maxlength="10" check="match('integer')"/]
-  [@b.textfield name="orderNumber" label="排序" value="${assessItem.orderNumber!}"
-    required="true" maxlength="10" check="match('integer')"/]
-  [@b.radios label="是否督察组测评指标"  name="assessItem.forSupervisor"    value=assessItem.forSupervisor items="1:common.yes,0:common.no"/]
-  [@b.radios label="是否为互评指标"  name="assessItem.mutual"     value=assessItem.mutual items="1:common.yes,0:common.no"/]
+  [@b.textarea label="指标内容"  name="assessItem.content" required="true"   maxlength="300" value=assessItem.content! rows="3" cols="80"/]
+  [@b.textfield name="orderNumber" label="排序" value="${assessItem.orderNumber!}"   required="true" maxlength="10" check="match('integer')"/]
+  [@b.textfield name="assessItem.score" label="指标分值" value="${assessItem.score!0}" id="scoreIpt"   required="true" maxlength="10" check="match('integer')"/]
+  [@b.radios label="测评类型" name="assessItem.assessType" items=assessTypeNames value=assessItem.assessType.id/]
   [@b.field label="测评职能部门"]
     <div style="padding-left:150px;" id="department_panel">
       <table class="gridtable" style="width:500px">
@@ -63,7 +60,7 @@ form.listform li.foot {padding-left: 160px;}
 </table>
 <script>
   function ionsubmit(){
-    if(jQuery("form :radio[name='assessItem.mutual']:checked").val()=="1") return true;
+    if(jQuery("form :radio[name='assessItem.assessType']:checked").val()!="FUNC_DEPART") return true;
     var hasEmtpy = false;
     $("#itbody select").each(function (){
       if(this.value == ""){
@@ -109,9 +106,9 @@ form.listform li.foot {padding-left: 160px;}
     jQuery("#department_panel select").attr("disabled",!enabled);
   }
 
-  [#if assessItem.mutual]toggleDepartPanel(false);[#else]toggleDepartPanel(true)[/#if]
-  jQuery("form :radio[name='assessItem.mutual']").bind("click",function(e){
-    if(e.target.value=="1"){
+  [#if assessItem.assessType.id!="FUNC_DEPART"]toggleDepartPanel(false);[#else]toggleDepartPanel(true)[/#if]
+  jQuery("form :radio[name='assessItem.assessType']").bind("click",function(e){
+    if(e.target.value!="FUNC_DEPART"){
       toggleDepartPanel(false);
     }else{
       toggleDepartPanel(true);

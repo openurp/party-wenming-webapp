@@ -3,6 +3,7 @@ package org.openurp.webapp.apps.party.wenming.model;
 import java.util.List;
 
 import org.beangle.commons.collection.CollectUtils;
+import org.openurp.kernel.base.unit.model.Department;
 
 /**
  * 督察组测评
@@ -11,14 +12,13 @@ import org.beangle.commons.collection.CollectUtils;
  */
 public class SupervisorAssess extends AbstractAssessInfo {
   private static final long serialVersionUID = -2681554073051364406L;
-
+  
+  /** 测评单位 **/
+  private Department assessDepartment;
   /**
    * 测评明细
    */
   private List<SupervisorAssessItem> items = CollectUtils.newArrayList();
-
-  /** 督察组人员账户 **/
-  private String assessBy;
 
   public List<SupervisorAssessItem> getItems() {
     return items;
@@ -28,12 +28,12 @@ public class SupervisorAssess extends AbstractAssessInfo {
     this.items = items;
   }
 
-  public String getAssessBy() {
-    return assessBy;
+  public Department getAssessDepartment() {
+    return assessDepartment;
   }
 
-  public void setAssessBy(String assessBy) {
-    this.assessBy = assessBy;
+  public void setAssessDepartment(Department assessDepartment) {
+    this.assessDepartment = assessDepartment;
   }
 
 }
