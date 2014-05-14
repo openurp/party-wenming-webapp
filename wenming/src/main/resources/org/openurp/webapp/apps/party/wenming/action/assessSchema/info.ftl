@@ -19,7 +19,9 @@ bar.addBack("${b.text("action.back")}");
 [#macro displayGroup group]
   <tr>
     <td align="center"><B>${group.indexno}</B></td>
-    <td colspan="3"><B>${group.name}</B>
+    <td><B>${group.name}</B></td>
+    <td align="center"><B>[#assign sumscore=0][#list group.items as item][#assign sumscore=sumscore + item.score/][/#list]${sumscore}</B></td>
+    <td></td>
   </tr>
   [#list group.items as item]
   <tr>
