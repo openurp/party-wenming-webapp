@@ -28,7 +28,13 @@
        jQuery("#schema_form select[name='departmentId'] option").remove();
        for( k in departs){
           if(departs[k].teaching!=isTeaching){
-             jQuery("#schema_form select[name='departmentId']").append("<option value='" + k + "'>" +departs[k].name + "</option>");
+             var finded=false;
+             jQuery("#schema_form select[name='departId'] option").each(function (idx,e){
+                if(!finded){
+                  if(e.value==k) finded=true;
+                }
+             });
+             if(!finded)jQuery("#schema_form select[name='departmentId']").append("<option value='" + k + "'>" +departs[k].name + "</option>");
           } 
        }
     }
