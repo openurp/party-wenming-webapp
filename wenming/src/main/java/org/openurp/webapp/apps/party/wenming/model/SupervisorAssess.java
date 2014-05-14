@@ -12,9 +12,6 @@ import org.openurp.kernel.base.unit.model.Department;
  */
 public class SupervisorAssess extends AbstractAssessInfo {
   private static final long serialVersionUID = -2681554073051364406L;
-  
-  /** 测评单位 **/
-  private Department assessDepartment;
   /**
    * 测评明细
    */
@@ -26,14 +23,6 @@ public class SupervisorAssess extends AbstractAssessInfo {
 
   public void setItems(List<SupervisorAssessItem> items) {
     this.items = items;
-  }
-
-  public Department getAssessDepartment() {
-    return assessDepartment;
-  }
-
-  public void setAssessDepartment(Department assessDepartment) {
-    this.assessDepartment = assessDepartment;
   }
 
 }
