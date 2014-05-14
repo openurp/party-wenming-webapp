@@ -5,12 +5,9 @@ import java.util.List;
 import org.beangle.commons.dao.query.builder.OqlBuilder;
 import org.beangle.security.blueprint.User;
 import org.openurp.webapp.apps.party.wenming.model.AbstractAssessInfo;
-import org.openurp.webapp.apps.party.wenming.model.AbstractAssessItemInfo;
 import org.openurp.webapp.apps.party.wenming.model.AssessItem;
 import org.openurp.webapp.apps.party.wenming.model.AssessSchema;
 import org.openurp.webapp.apps.party.wenming.model.AssessSession;
-import org.openurp.webapp.apps.party.wenming.model.MutualAssess;
-import org.openurp.webapp.apps.party.wenming.model.MutualAssessItem;
 import org.openurp.webapp.apps.party.wenming.model.SelfAssess;
 import org.openurp.webapp.apps.party.wenming.model.SelfAssessItem;
 
@@ -19,15 +16,15 @@ import org.openurp.webapp.apps.party.wenming.model.SelfAssessItem;
  * 
  * @author chaostone
  */
-public class SelfAssessAuditAction extends AssessDepartAuditAction {
+public class SelfAssessAuditAction extends AssessDepartAuditAction<SelfAssess, SelfAssessItem> {
   
   @Override
-  protected Class<? extends AbstractAssessInfo> getAssessClass() {
+  protected Class<SelfAssess> getAssessClass() {
     return SelfAssess.class;
   }
 
   @Override
-  protected Class<? extends AbstractAssessItemInfo> getItemClass() {
+  protected Class<SelfAssessItem> getItemClass() {
     return SelfAssessItem.class;
   }
 

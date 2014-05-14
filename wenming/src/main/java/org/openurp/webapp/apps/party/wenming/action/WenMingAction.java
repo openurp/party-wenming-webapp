@@ -49,7 +49,7 @@ public class WenMingAction extends SecurityActionSupport {
     if(indexes != null){
       for (String i : indexes) {
         Object ma;
-        ma = populate(clazz, i);
+        ma = populateEntity(clazz, i);
         list.add(ma);
       }
     }

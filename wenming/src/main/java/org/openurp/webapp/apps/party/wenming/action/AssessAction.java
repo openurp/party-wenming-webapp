@@ -15,17 +15,15 @@ import org.openurp.webapp.apps.party.wenming.model.AssessSession;
 import org.openurp.webapp.apps.party.wenming.model.AssessState;
 import org.openurp.webapp.apps.party.wenming.model.MutualAssess;
 import org.openurp.webapp.apps.party.wenming.model.MutualAssessItem;
-import org.openurp.webapp.apps.party.wenming.model.SelfAssess;
-import org.openurp.webapp.apps.party.wenming.model.SelfAssessItem;
 
-public abstract class AssessAction <T extends AbstractAssessInfo, I extends AbstractAssessItemInfo>  extends WenMingAction {
+public abstract class AssessAction<T extends AbstractAssessInfo, I extends AbstractAssessItemInfo> extends
+    WenMingAction {
 
   abstract protected Class<T> getAssessClass();
 
   abstract protected Class<I> getItemClass();
 
-  abstract protected List<AssessItem> findAssessItem(AssessSession assessSession, AssessSchema schema);
-
+  abstract List<AssessItem> findAssessItem(AssessSession assessSession, AssessSchema schema);
 
   @Override
   protected String getEntityName() {
@@ -61,9 +59,9 @@ public abstract class AssessAction <T extends AbstractAssessInfo, I extends Abst
     AssessSchema schema = entityDao.get(AssessSchema.class, schemaId);
     AssessSession assessSession = wenMingService.getAssessSessionByAssessTime();
     List<AbstractAssessInfo> malist = findAssess(assessSession.getId(), schema.getId());
-    List<AssessItem> items = findAssessItem(assessSession, schema);
     if (malist.isEmpty() && editCreateAble()) {
       malist = new ArrayList<AbstractAssessInfo>();
+      List<AssessItem> items = findAssessItem(assessSession, schema);
       for (Department d : schema.getDeparts()) {
         MutualAssess ma = new MutualAssess();
         ma.setSchema(schema);
@@ -79,7 +77,6 @@ public abstract class AssessAction <T extends AbstractAssessInfo, I extends Abst
       return redirectInfo(malist.get(0));
     }
     put("malist", malist);
-    put("items", items);
     put("schema", schema);
     return forward();
   }
@@ -90,8 +87,8 @@ public abstract class AssessAction <T extends AbstractAssessInfo, I extends Abst
   }
 
   /**
-   * 编辑的时候是否创建记录
-   * 当审核的时候不需要创建记录
+   * 编辑的时候是否创建记录 当审核的时候不需要创建记录
+   * 
    * @return
    */
   protected boolean editCreateAble() {
@@ -121,21 +118,24 @@ public abstract class AssessAction <T extends AbstractAssessInfo, I extends Abst
     if (malist != null) {
       saveOrUpdate(malist);
     }
-    return redirectInfo(malist.get(0));
+    return redirectSave(malist.get(0));
+  }
+
+  protected String redirectSave(AbstractAssessInfo assess) {
+    return redirectInfo(assess);
   }
 
   @SuppressWarnings({ "unchecked", "rawtypes" })
-  protected List<T> getAllAssess(Class<T> assessClass,
-      Class<I> itemClass) {
+  protected List<T> getAllAssess(Class<T> assessClass, Class<I> itemClass) {
     List<T> malist = null;
     Integer id = getInt(getShortName() + ".id");
-    if(id != null){
+    if (id != null) {
       T assess = (T) getEntity();
       assess.getItems().clear();
       String[] indexes = getAll("index", String.class);
       float totalScore = 0;
       List list = assess.getItems();
-      for(String index : indexes){
+      for (String index : indexes) {
         I sai = populate(getItemClass(), index);
         sai.setAssess(assess);
         totalScore += sai.getScore();
@@ -145,22 +145,23 @@ public abstract class AssessAction <T extends AbstractAssessInfo, I extends Abst
       setState(assess);
       malist = new ArrayList();
       malist.add(assess);
-    }else{
+    } else {
       UrpUserBean assessBy = getUrpUser();
       malist = (List<T>) getAll();
       AssessSession session = wenMingService.getAssessSessionByAssessTime();
       Department assessDepartment = getDepartment();
+      Date now = new Date();
       for (T assess : malist) {
         if (editable(assess.getState())) {
-          assess.setAssessDepartment(assessDepartment);
-          assess.setAssessBy(assessBy);
+          if (assess.getId() == null) {
+            assess.setAssessAt(now);
+            assess.setAssessDepartment(assessDepartment);
+            assess.setAssessBy(assessBy);
+            assess.setSession(session);
+          }
           List<I> items = (List<I>) getAll(itemClass, "item" + assess.getDepartment().getId());
-          
           assess.getItems().clear();
           assess.getItems().addAll((List) items);
-          
-          assess.setSession(session);
-          assess.setAssessAt(new Date());
           float totalScore = 0;
           for (I item : items) {
             item.setAssess(assess);
@@ -189,8 +190,11 @@ public abstract class AssessAction <T extends AbstractAssessInfo, I extends Abst
   public String info() throws Exception {
     List<AbstractAssessInfo> malist = findAssess(getInt("session.id"), getInt("schema.id"));
     put("malist", malist);
-    if (editable(malist.get(0).getState())) {
-      put("editable", true);
+    if (malist != null && malist.size() > 0) {
+      if (editable(malist.get(0).getState())) {
+        put("editable", true);
+      }
+      put("schema", malist.get(0).getSchema());
     }
     return super.info();
   }

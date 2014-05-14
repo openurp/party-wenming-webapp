@@ -3,24 +3,19 @@
 <div id="mutualAssessIndex" class="ajax_container">
   <div style="padding:10px;">
     [@b.toolbar title='文明单位互评'][/@]
-    <div class="div_bar inline">
+    <div class="div_bar">
       <div class="inline_forms">
-        [@b.form action="!index" target="mutualAssessIndex"]
-          <label>批次：</label>
-          <b>批次:</b> [@b.select name="session.id" label="测评批次" items=assessSessions value=assessSession onchange="bg.form.submit(this.form)"][/@]
-        [/@]
-        [@b.form action="!edit" target="mutualAssessEdit"]
+        [@b.form action="!search" target="mutualAssessList"]
           <input type="hidden" name="session.id" value="${assessSession.id}"/>
-          <label>方案：</label>
+          <label>状态：</label>
           <div class="radiodiv">
-            [#list schemas as v]
-              <input type="radio" id="schema${v.id}" name="schema.id" value="${v.id}"/><label for="schema${v.id}">${v.name}</label>
-            [/#list]
+              <input type="radio" id="state1" name="forAudit" value="1" checked="checked"/><label for="state1">待审核</label>
+              <input type="radio" id="state2" name="forAudit" value="0"/><label for="state2">其它</label>
           </div>
         [/@]
       </div>
     </div>
-    <div id="mutualAssessEdit" class="ajax_container"></div>
+    [@b.div id="mutualAssessList" href="!search?forAudit=1"/]
   </div>
   <script>
     jQuery.struts2_jquery.require("/js/base/jquery-ui.js",null,bg.getContextPath() + "/static");

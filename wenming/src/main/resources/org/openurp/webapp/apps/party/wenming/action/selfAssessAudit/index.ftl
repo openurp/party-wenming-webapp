@@ -4,24 +4,18 @@
   <div style="padding:10px;">
     [@b.toolbar title='文明单位互评'][/@]
     <div class="div_bar">
-      <div>
+      <div class="inline_forms">
         [@b.form action="!index" target="selfAssessIndex"]
-          <label class="title">批次：</label>
-          <div class="radiodiv">
-            [#list assessSessions as v]
-              <input type="radio" id="session${v.id}" name="session.id" value="${v.id}" [#if v.id == assessSession.id]checked="checked"[/#if]/><label for="session${v.id}">${v.name}</label>
-            [/#list]
-          </div>
+          <label>批次：</label>
+          <b>批次:</b> [@b.select name="session.id" label="测评批次" items=assessSessions value=assessSession onchange="bg.form.submit(this.form)"][/@]
         [/@]
-      </div>
-      <div style="margin:10px 0;">
         [@b.form action="!edit" target="selfAssessEdit"]
           <input type="hidden" name="session.id" value="${assessSession.id}"/>
           <input type="hidden" name="schema.id" value="${schema.id}"/>
-          <label class="title">自评人员：</label>
+          <label>自评人员：</label>
           <div class="radiodiv">
             [#list users as v]
-              <input type="radio" id="assessBy${v.id}" name="assessBy.id" value="${v.id}"/><label for="assessBy${v.id}">${v.name}(${v.fullname})</label>
+              <input type="radio" id="assessBy${v.id}" name="assessBy.id" value="${v.id}"/><label for="assessBy${v.id}">${v.fullname}(${v.name})</label>
             [/#list]
           </div>
         [/@]

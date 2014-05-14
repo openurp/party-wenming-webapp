@@ -3,12 +3,13 @@
 .radiodiv {
 	display: inline;
 }
-
+.div_bar{margin: 6px 0 10px 0;}
 .div_bar .title{
 	width: 100px;
 	text-align: right;
 	display: inline-block;
 }
+.inline_forms form{display: inline-block;}
 
 .assessTable th{background-color:#c7dbff; padding: 10px;}
 .assessTable td{padding:10px 5px}
