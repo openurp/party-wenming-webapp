@@ -57,10 +57,15 @@ public class AssessStatAction extends SecurityActionSupport {
     Integer sessionId = getInt("session.id");
     AssessSession session = entityDao.get(AssessSession.class, sessionId);
     Set<Department> departs = CollectUtils.newHashSet();
+    int funcDepartCount = 0;
     for (AssessSchema schema : session.getSchemas()) {
       departs.addAll(schema.getDeparts());
     }
+    for (Department depart : departs) {
+      if (!depart.isTeaching()) funcDepartCount += 1;
+    }
     put("departCount", departs.size());
+    put("funcDepartCount",funcDepartCount);
     OqlBuilder<AssessApply> builder = OqlBuilder.from(AssessApply.class, "apply");
     builder.where("apply.session.id=:sessionId", sessionId);
     builder.groupBy("apply.state").select("apply.state,count(*)");
@@ -73,12 +78,12 @@ public class AssessStatAction extends SecurityActionSupport {
 
     OqlBuilder<MutualAssess> mabuilder = OqlBuilder.from(MutualAssess.class, "assess");
     mabuilder.where("assess.session.id=:sessionId", sessionId);
-    mabuilder.groupBy("assess.state").select("assess.state,count(*)");
+    mabuilder.groupBy("assess.state").select("assess.state,count(distinct assess.assessDepartment.id)");
     put("mutualAssessStat", entityDao.search(mabuilder));
 
     OqlBuilder<FuncDepartAssess> fabuilder = OqlBuilder.from(FuncDepartAssess.class, "assess");
     fabuilder.where("assess.session.id=:sessionId", sessionId);
-    fabuilder.groupBy("assess.state").select("assess.state,count(*)");
+    fabuilder.groupBy("assess.state").select("assess.state,count(distinct assess.assessDepartment.id)");
     put("funcDepartAssessStat", entityDao.search(fabuilder));
     return forward();
   }
