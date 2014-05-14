@@ -2,45 +2,11 @@
 [@b.head/]
 [@b.toolbar title="单位自评"]bar.addBack();[/@]
 [@b.form action="!save" title="自评内容" theme="list"]
-  <style>
-    .footdiv input{margin-right:200px;}
-  </style>
-  <table id="selfAssessTable" class="gridtable">
-    <thead class="gridhead">
-      <tr style="height:30px; font-size:16px;">
-        <th width="80">指标编号</th>
-        <th>指标内容</th>
-        <th width="80">指标分值</th>
-        <th width="100">自评分值</th>
-      </tr>
-    </thead>
-    <tbody>
-      [#list selfAssess.items as v]
-        [#if !group?? || v.item.group.id != group.id]
-          [#assign group = v.item.group/]
-          <tr style="font-size:14px; color:red;">
-            <td>${group.indexno}</td>
-            <td>${group.name}</td>
-            <td>&nbsp;</td>
-            <td>&nbsp;</td>
-          </tr>
-        [/#if]
-        <tr>
-          [#assign name="sai${v_index}"/]
-          <input type="hidden" name="index" value="${name}"/>
-          <input type="hidden" name="${name}.item.id" value="${v.item.id}"/>
-          <td>${group.indexno}-${v.item.orderNumber}</td>
-          <td>${v.item.content}</td>
-          <td>${v.item.score}</td>
-          <td align="center"><input name="${name}.score" style="width:80px;" class="score" maxlength="6" value="${v.score!}"/></td>
-        </tr>
-      [/#list]
-    </tbody>
-  </table>
+  [#if !selfAssess??][#assign selfAssess=malist[0]/][/#if]
+  [#include "/org/openurp/webapp/apps/party/wenming/action/selfAssess/selfAssessTable.ftl"/]
   <div style="text-align:center; padding:30px;" class="footdiv">
     <input type="hidden" name="selfAssess.id" value="${selfAssess.id!}" />
     <input type="hidden" name="save" value="0" id="saveIpt"/>
-    [@b.reset/]
     [@b.submit value="action.save" onsubmit="saveSelfAssess"/]
     [@b.submit value="action.submit" onsubmit="submitSelfAssess"/]
   </div>

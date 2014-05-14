@@ -1,0 +1,24 @@
+@CHARSET "UTF-8";
+
+.radiodiv {
+	display: inline;
+}
+
+.div_bar .title{
+	width: 100px;
+	text-align: right;
+	display: inline-block;
+}
+
+.assessTable th{background-color:#c7dbff; padding: 10px;}
+.assessTable td{padding:10px 5px}
+.assessTable tr:hover{background-color:#eee;}
+.assessTable td.error{background-color:#F9CCCC}
+.assessTable td.error .scoreSpan{color:#fff;}
+.assessTable .scoreSpan{float:left;}
+.assessTable .scoreDiv{margin:0 24px;}
+.assessTable .scoreMaxSpan{float:right;}
+.ui-slider-handle { border-color: #729fcf; }
+.ui-slider-range { background: #729fcf; }
+
+.footdiv input{margin-right:200px;}

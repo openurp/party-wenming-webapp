@@ -85,7 +85,9 @@ public class WenMingServiceImpl extends BaseServiceImpl implements WenMingServic
     OqlBuilder<AssessItem> query = OqlBuilder.from(AssessItem.class, "o");
     query.where("o.group.schema = :schema", schema);
     query.orderBy("o.group.indexno, o.orderNumber");
-    invoker.doth(query);
+    if(invoker != null){
+      invoker.doth(query);
+    }
     return entityDao.search(query);
   }
 
@@ -97,5 +99,10 @@ public class WenMingServiceImpl extends BaseServiceImpl implements WenMingServic
         query.where("o.assessType = :assessType", AssessType.SUPERVISOR);
       }
     });
+  }
+  
+  @Override
+  public List<AssessItem> findAssessItem(AssessSchema schema) {
+    return findAssessItem(schema, null);
   }
 }

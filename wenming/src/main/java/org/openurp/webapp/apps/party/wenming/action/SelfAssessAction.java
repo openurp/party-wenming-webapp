@@ -140,6 +140,7 @@ public class SelfAssessAction extends WenMingAction {
   protected String saveAndForward(Entity<?> entity) {
     SelfAssess selfAssess = (SelfAssess) entity;
     selfAssess.setDepartment(getDepartment());
+    selfAssess.setAssessDepartment(selfAssess.getDepartment());
     selfAssess.setSession(wenMingService.getAssessSessionByAssessTime());
     selfAssess.setSchema(wenMingService.getSchema(selfAssess.getSession(), selfAssess.getDepartment()));
     selfAssess.setAssessAt(new Date());

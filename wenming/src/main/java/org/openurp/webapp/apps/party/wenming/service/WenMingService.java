@@ -23,7 +23,10 @@ public interface WenMingService {
   
   List<AssessItem> findAssessItem(AssessSchema schema, QueryInvoker invoker);
   
+  List<AssessItem> findAssessItem(AssessSchema schema);
+  
   List<Department> findDepartment();
+
 
 
 }
