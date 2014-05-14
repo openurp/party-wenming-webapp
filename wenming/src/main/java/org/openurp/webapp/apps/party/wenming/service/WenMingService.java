@@ -19,10 +19,11 @@ public interface WenMingService {
 
   List<AssessSession> findSessions();
 
-  List<AssessItem> findAssessItemByMutual(AssessSchema schema);
-
   List<AssessItem> findAssessItemBySupervisor(AssessSchema schema);
   
+  List<AssessItem> findAssessItem(AssessSchema schema, QueryInvoker invoker);
+  
   List<Department> findDepartment();
+
 
 }

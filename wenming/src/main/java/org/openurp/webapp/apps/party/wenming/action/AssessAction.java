@@ -17,6 +17,7 @@ public abstract class AssessAction extends WenMingAction {
   
   abstract protected Class<? extends AbstractAssessInfo> getAssessClass();
   abstract protected Class<? extends AbstractAssessItemInfo> getItemClass();
+  abstract protected List<AssessItem> findAssessItem(AssessSession assessSession, AssessSchema schema);
   
   @Override
   public String index() throws Exception {
@@ -47,7 +48,7 @@ public abstract class AssessAction extends WenMingAction {
     AssessSchema schema = entityDao.get(AssessSchema.class, schemaId);
     AssessSession assessSession = wenMingService.getAssessSessionByAssessTime();
     List<AbstractAssessInfo> malist = findAssess(assessSession.getId(), schema.getId());
-    List<AssessItem> items = wenMingService.findAssessItemByMutual(schema);
+    List<AssessItem> items = findAssessItem(assessSession, schema);
     if (malist.isEmpty()) {
       malist = new ArrayList<AbstractAssessInfo>();
       for (Department d : schema.getDeparts()) {

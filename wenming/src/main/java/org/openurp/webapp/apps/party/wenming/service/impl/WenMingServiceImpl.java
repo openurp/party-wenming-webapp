@@ -1,6 +1,5 @@
 package org.openurp.webapp.apps.party.wenming.service.impl;
 
-import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
@@ -82,17 +81,7 @@ public class WenMingServiceImpl extends BaseServiceImpl implements WenMingServic
     return entityDao.search(query);
   }
 
-  @Override
-  public List<AssessItem> findAssessItemByMutual(AssessSchema schema) {
-    return findAssessItem(schema, new QueryInvoker() {
-      @Override
-      public void doth(OqlBuilder<?> query) {
-        query.where("o.assessType = :assessType", AssessType.MUTUAL);
-      }
-    });
-  }
-
-  private List<AssessItem> findAssessItem(AssessSchema schema, QueryInvoker invoker) {
+  public List<AssessItem> findAssessItem(AssessSchema schema, QueryInvoker invoker) {
     OqlBuilder<AssessItem> query = OqlBuilder.from(AssessItem.class, "o");
     query.where("o.group.schema = :schema", schema);
     query.orderBy("o.group.indexno, o.orderNumber");
