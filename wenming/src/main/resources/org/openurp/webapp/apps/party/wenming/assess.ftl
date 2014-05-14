@@ -2,19 +2,6 @@
 
 [#macro assessTable assessList]
 [@b.toolbar title='评测内容'][/@]
-  <style>
-    .score{width:60px;}
-    .footdiv input{margin-right:200px;}
-    .error{background-color:#F9CCCC}
-    .error .scoreSpan{color:#fff;}
-    .scoreSpan{float:left;}
-    .scoreDiv{margin-left:24px;}
-    .assessTable th{background-color:#c7dbff; padding: 10px;}
-    .assessTable td{padding:10px 5px}
-    .assessTable tr:hover{background-color:#eee;}
-    .ui-slider-handle { border-color: #729fcf; }
-    .ui-slider-range { background: #729fcf; }
-  </style>
   <table id="assessTable" class="gridtable assessTable">
     <thead>
       <tr>
@@ -41,6 +28,7 @@
             <input type="hidden" name="${itemName}.item.id" value="${item.item.id}"/>
             <input type="hidden" name="${itemName}.score" value="${item.score!}" class="score"/>
             <span class="scoreSpan">${item.score!0}</span>
+            <span class="scoreMaxSpan">${item.item.score!0}</span>
             <div class="scoreDiv" max="${item.item.score}" score="${item.score!(item.item.score/2)}"></div>
           </td>
           [/#list]
@@ -50,6 +38,7 @@
   </table>
   <script>
     jQuery.struts2_jquery.require("/js/base/jquery-ui.js",null,bg.getContextPath() + "/static");
+    jQuery.struts2_jquery.requireCss("/css/party/main.css",bg.getContextPath() + "/static");
     function isallselected(){
       var haserror = false;
       $("#assessTable .score").parent().removeClass("error").end().each(function (){

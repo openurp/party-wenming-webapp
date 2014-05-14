@@ -1,11 +1,11 @@
 [#ftl]
 [@b.head/]
-<div id="mutualAssessIndex" class="ajax_container">
+<div id="selfAssessIndex" class="ajax_container">
   <div style="padding:10px;">
     [@b.toolbar title='文明单位互评'][/@]
     <div class="div_bar">
       <div>
-        [@b.form action="!index" target="mutualAssessIndex"]
+        [@b.form action="!index" target="selfAssessIndex"]
           <label class="title">批次：</label>
           <div class="radiodiv">
             [#list assessSessions as v]
@@ -15,18 +15,19 @@
         [/@]
       </div>
       <div style="margin:10px 0;">
-        [@b.form action="!edit" target="mutualAssessEdit"]
+        [@b.form action="!edit" target="selfAssessEdit"]
           <input type="hidden" name="session.id" value="${assessSession.id}"/>
-          <label class="title">方案：</label>
+          <input type="hidden" name="schema.id" value="${schema.id}"/>
+          <label class="title">自评人员：</label>
           <div class="radiodiv">
-            [#list schemas as v]
-              <input type="radio" id="schema${v.id}" name="schema.id" value="${v.id}"/><label for="schema${v.id}">${v.name}</label>
+            [#list users as v]
+              <input type="radio" id="assessBy${v.id}" name="assessBy.id" value="${v.id}"/><label for="assessBy${v.id}">${v.name}(${v.fullname})</label>
             [/#list]
           </div>
         [/@]
       </div>
     </div>
-    <div id="mutualAssessEdit" class="ajax_container"></div>
+    <div id="selfAssessEdit" class="ajax_container"></div>
   </div>
   <script>
     jQuery.struts2_jquery.require("/js/base/jquery-ui.js",null,bg.getContextPath() + "/static");

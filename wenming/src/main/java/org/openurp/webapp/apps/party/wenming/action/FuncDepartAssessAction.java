@@ -23,11 +23,6 @@ import org.openurp.webapp.apps.party.wenming.service.QueryInvoker;
 public class FuncDepartAssessAction extends AssessAction {
 
   @Override
-  protected String getEntityName() {
-    return FuncDepartAssess.class.getName();
-  }
-
-  @Override
   protected Class<? extends AbstractAssessInfo> getAssessClass() {
     return FuncDepartAssess.class;
   }

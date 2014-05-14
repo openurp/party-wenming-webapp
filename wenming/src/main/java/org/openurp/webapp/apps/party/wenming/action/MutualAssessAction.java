@@ -24,11 +24,6 @@ import org.openurp.webapp.apps.party.wenming.service.QueryInvoker;
 public class MutualAssessAction extends AssessAction {
 
   @Override
-  protected String getEntityName() {
-    return MutualAssess.class.getName();
-  }
-
-  @Override
   protected Class<? extends AbstractAssessInfo> getAssessClass() {
     return MutualAssess.class;
   }

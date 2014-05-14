@@ -2,19 +2,6 @@
 [@b.head/]
 [@b.toolbar title='评测内容'][/@]
 [@b.form action="!edit"]
-  <style>
-    .score{width:60px;}
-    .footdiv input{margin-right:200px;}
-    .error{background-color:red}
-    .error .scoreSpan{color:#fff;}
-    .scoreSpan{float:left;}
-    .scoreDiv{margin-left:24px;}
-    .assessTable th{background-color:#c7dbff; padding: 10px;}
-    .assessTable td{padding:10px 5px}
-    .ui-widget-header{background-color:blue!important;}
-    .ui-slider-handle { border-color: #729fcf; }
-    .ui-slider-range { background: #729fcf; }
-  </style>
   <table id="assessTable" class="gridtable assessTable">
     <thead>
       <tr>
@@ -31,6 +18,7 @@
           [#list ma.items?sort_by(["item", "id"]) as item]
           <td>
             <span class="scoreSpan">${item.score}</span>
+            <span class="scoreMaxSpan">${item.item.score}</span>
             <div class="scoreDiv" max="${item.item.score}" score="${item.score}"></div>
           </td>
           [/#list]
@@ -47,6 +35,7 @@
 [/@]
 <script>
   jQuery.struts2_jquery.require("/js/base/jquery-ui.js",null,bg.getContextPath() + "/static");
+  jQuery.struts2_jquery.requireCss("/css/party/main.css",bg.getContextPath() + "/static");
   $(function (){
     $(".scoreDiv").each(function (){
       var div = $(this);
