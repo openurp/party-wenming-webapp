@@ -17,51 +17,50 @@ import org.openurp.webapp.apps.party.wenming.model.MutualAssessItem;
 import org.openurp.webapp.apps.party.wenming.service.WenMingService;
 
 public class WenMingAction extends SecurityActionSupport {
-	
-	protected WenMingService wenMingService;
-	
-	public void setWenMingService(WenMingService wenMingService) {
-		this.wenMingService = wenMingService;
-	}
-	
-	protected void putSchemas(){
-		put("schemas", wenMingService.findSchema());
-	}
 
-	protected Department getDepartment() {
+  protected WenMingService wenMingService;
+
+  public void setWenMingService(WenMingService wenMingService) {
+    this.wenMingService = wenMingService;
+  }
+
+  protected void putSchemas() {
+    put("schemas", wenMingService.findSchema());
+  }
+
+  protected Department getDepartment() {
     return getUrpUser().getDepartment();
   }
 
-	protected UrpUserBean getUrpUser() {
+  protected UrpUserBean getUrpUser() {
     return entityDao.get(UrpUserBean.class, getUserId());
   }
 
-	protected boolean saveable(AssessState state) {
-    if(AssessState.Draft.equals(state) || AssessState.Submit.equals(state)){
-      return true;
-    }
+  protected boolean saveable(AssessState state) {
+    if (AssessState.Draft.equals(state) || AssessState.Submit.equals(state)) { return true; }
     return false;
   }
 
   protected boolean editable(AssessState state) {
-    if(state == null || AssessState.Draft.equals(state) || AssessState.DepartUnpassed.equals(state) || AssessState.SchoolUnpassed.equals(state)){
-      return true;
-    }
+    if (state == null || AssessState.Draft.equals(state) || AssessState.DepartUnpassed.equals(state)
+        || AssessState.SchoolUnpassed.equals(state)) { return true; }
     return false;
   }
 
-	protected List<?> getAll(Class clazz, String index) {
+  protected List<?> getAll(Class clazz, String index) {
     String[] indexes = getAll(index, String.class);
     List<Object> list = new ArrayList<Object>();
-    for (String i : indexes) {
-      Object ma;
-      ma = populate(clazz, i);
-      list.add(ma);
+    if (indexes != null) {
+      for (String i : indexes) {
+        Object ma;
+        ma = populate(clazz, i);
+        list.add(ma);
+      }
     }
     return list;
   }
 
-	protected List<?> getAll() {
+  protected List<?> getAll() {
     try {
       return getAll(Class.forName(getEntityName()), "index");
     } catch (ClassNotFoundException e) {
@@ -69,8 +68,9 @@ public class WenMingAction extends SecurityActionSupport {
     }
     return null;
   }
-  
-	protected <T extends AbstractAssessInfo,I extends AbstractAssessItemInfo> List<T> getAllAssess(Class<T> assessClass, Class<I> itemClass) {
+
+  protected <T extends AbstractAssessInfo, I extends AbstractAssessItemInfo> List<T> getAllAssess(
+      Class<T> assessClass, Class<I> itemClass) {
     UrpUserBean assessBy = getUrpUser();
     @SuppressWarnings("unchecked")
     List<T> malist = (List<T>) getAll();
@@ -78,16 +78,15 @@ public class WenMingAction extends SecurityActionSupport {
     boolean save = getBool("save");
     Department assessDepartment = getDepartment();
     for (T assess : malist) {
-      if(editable(assess.getState())){
+      if (editable(assess.getState())) {
         assess.setAssessDepartment(assessDepartment);
         assess.setAssessBy(assessBy);
         @SuppressWarnings("unchecked")
-        List<I> items = (List<I>) getAll(itemClass, "item"
-            + assess.getDepartment().getId());
-        
+        List<I> items = (List<I>) getAll(itemClass, "item" + assess.getDepartment().getId());
+
         assess.getItems().clear();
         assess.getItems().addAll((List) items);
-        
+
         assess.setSession(session);
         assess.setAssessAt(new Date());
         float totalScore = 0;
@@ -101,7 +100,7 @@ public class WenMingAction extends SecurityActionSupport {
         } else {
           assess.setState(AssessState.Submit);
         }
-      }else{
+      } else {
         return null;
       }
     }
