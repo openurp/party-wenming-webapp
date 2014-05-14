@@ -37,6 +37,9 @@ public class AssessSchemaAction extends WenMingAction {
     AssessSchema schema = (AssessSchema) entity;
     put("allDepartments", CollectUtils.newArrayList(departments));
     departments.removeAll(schema.getDeparts());
+    for(Department depart:departments){
+      System.out.println(depart.getName());
+    }
     put("departments", departments);
   }
 
