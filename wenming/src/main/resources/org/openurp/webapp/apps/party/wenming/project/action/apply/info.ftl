@@ -6,7 +6,7 @@
   [@b.field label="申请人"]${goodProject.submitBy.fullname!"&nbsp;"}(${goodProject.submitBy.name!"&nbsp;"})[/@]
   [@b.field label="申请时间"]${goodProject.submitAt?date}[/@]
   [@b.field label="项目名称"]${goodProject.name!"&nbsp;"}[/@]
-  [@b.field label="投票开始结束时间"]${goodProject.beginOn?date}~${goodProject.endOn?date}[/@]
+  [@b.field label="开始结束时间"]${goodProject.beginOn?date}~${goodProject.endOn?date}[/@]
   [@b.field label="申报理由"]${(goodProject.statements)!"&nbsp;"}[/@]
   [@b.field label="项目方案"]${(goodProject.plan)!!"&nbsp;"}[/@]
   [@b.field label="特色与创新点"]${(goodProject.features)!!"&nbsp;"}[/@]
