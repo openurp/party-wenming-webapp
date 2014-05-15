@@ -1,6 +1,6 @@
 [#ftl]
 [@b.textfield name="goodPerson.name" label="项目名称" value="${goodPerson.name!}" required="true" maxlength="200"/]
-[@b.startend label="投票开始结束时间" 
+[@b.startend label="开始结束时间" 
   name="goodPerson.beginOn,goodPerson.endOn" required="true,true"
   start=goodPerson.beginOn end=goodPerson.endOn format="date"/]
 [@b.textarea label="申报理由" cols="50" rows="4" name="goodPerson.statements" value=(goodPerson.statements)! maxlength="1000" required="true"/]
