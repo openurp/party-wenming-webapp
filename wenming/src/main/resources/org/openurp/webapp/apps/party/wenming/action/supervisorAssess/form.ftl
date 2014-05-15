@@ -1,6 +1,7 @@
 [#ftl]
 [@b.head/]
   [@b.form action="!save"]
+    [#assign partMode=true/]
     [#include "/org/openurp/webapp/apps/party/wenming/assess.ftl"/]
     [@assessTable malist/]
     <div style="text-align:center; padding:30px;" class="footdiv">
