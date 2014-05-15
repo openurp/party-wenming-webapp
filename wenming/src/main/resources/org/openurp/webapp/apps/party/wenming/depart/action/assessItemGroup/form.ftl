@@ -1,7 +1,7 @@
 [#ftl]
 [@b.head/]
 [@b.toolbar title="测评指标分类编辑"]bar.addBack();[/@]
-[@b.form action="!save" title="基本信息" theme="list"]
+[@b.form action="!save" theme="list"]
   [@b.textfield name="assessItemGroup.name" label="名称" value="${assessItemGroup.name!}" required="true" maxlength="50"/]
   [@b.textfield name="indexno" label="排序" value="${assessItemGroup.index!}" required="true" maxlength="50"/]
   [@b.select label="相关方案" name="assessItemGroup.schema.id" value=(assessItemGroup.schema.id)! 

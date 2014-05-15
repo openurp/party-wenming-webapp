@@ -2,8 +2,7 @@
 [@b.head/]
 [@b.toolbar title="加分项目编辑"]bar.addBack();[/@]
 [@b.tabs]
-  [@b.tab label="加分项目信息"]
-    [@b.form action="!save" title="基本信息" theme="list"]
+    [@b.form action="!save" theme="list"]
       [@b.textfield name="assessBonusItem.name" label="加分项目名称" value="${assessBonusItem.name!}" 
         style="width:400px;" required="true" maxlength="50"/]
       [@b.select name="assessBonusItem.bonusType.id" label="加分项目类型" value="${assessBonusItem.bonusType!}"
@@ -20,5 +19,4 @@
       [/@]
     [/@]
   [/@]
-[/@]
 [@b.foot/]

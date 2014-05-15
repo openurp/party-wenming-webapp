@@ -15,9 +15,9 @@ public class WenmingSession extends NumberIdTimeObject<Integer> {
   private static final long serialVersionUID = -4231206102431453473L;
   /** 名称 */
   private String name;
-  /** 测评开始时间 **/
+  /** 开始时间 **/
   private Date beginOn;
-  /** 测评结束时间 **/
+  /** 结束时间 **/
   private Date endOn;
   /** 投票开始时间 **/
   private Date voteBeginOn;
