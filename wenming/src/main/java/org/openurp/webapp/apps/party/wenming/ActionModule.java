@@ -21,6 +21,7 @@ import org.openurp.webapp.apps.party.wenming.action.SelfAssessAction;
 import org.openurp.webapp.apps.party.wenming.action.SelfAssessAuditAction;
 import org.openurp.webapp.apps.party.wenming.action.SupervisorAction;
 import org.openurp.webapp.apps.party.wenming.action.SupervisorAssessAction;
+import org.openurp.webapp.apps.party.wenming.action.WenmingSessionAction;
 
 public class ActionModule extends AbstractBindModule {
 
@@ -38,5 +39,6 @@ public class ActionModule extends AbstractBindModule {
     bind(SupervisorAssessAction.class);
     bind(FuncDepartAssessAction.class);
     bind(FuncDepartAssessAuditAction.class);
+    bind(WenmingSessionAction.class);
   }
 }

@@ -5,4 +5,7 @@
 
   <bean class="org.openurp.webapp.apps.party.wenming.ActionModule"/>
   <bean class="org.openurp.webapp.apps.party.wenming.ServiceModule"/>
+  <bean class="org.openurp.webapp.apps.party.wenming.person.DefaultModule"/>
+  <bean class="org.openurp.webapp.apps.party.wenming.project.DefaultModule"/>
+  <bean class="org.openurp.webapp.apps.party.wenming.post.DefaultModule"/>
 </beans>

@@ -1,0 +1,29 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC
+    "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+    "http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+<hibernate-mapping package="org.openurp.webapp.apps.party.wenming.post.model">
+    <class name="GoodPost">
+        <id name="id" type="long">
+            <generator class="org.beangle.orm.hibernate.TableSeqGenerator" />
+        </id>
+        <many-to-one name="department" column="department_id" not-null="true"/>
+        <many-to-one name="session" column="session_id" not-null="true"/>
+        <property name="state" type="assessState" not-null="true" />
+        <many-to-one name="submitBy" column="submit_by_id" not-null="true"/>
+        <many-to-one name="auditBy" column="audit_by_id"/>
+        <property name="createdAt"  not-null="true"/>
+        <property name="updatedAt"  not-null="true"/>
+        <property name="submitAt"  />
+        <property name="auditAt"  />
+        <property name="statements" length="1000" not-null="true"/>
+        <property name="plan" length="3000" not-null="true"/>
+        <property name="features" length="1000" not-null="true"/>
+        <property name="contactPerson" length="100" not-null="true"/>
+        <property name="contactPhone" length="30" not-null="true"/>
+        <component name="attachment">
+            <property name="name" length="200" column="attach_name"/>
+            <property name="filePath"  length="100" column="attach_file_path"/>
+        </component>
+    </class>
+</hibernate-mapping>

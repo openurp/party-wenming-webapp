@@ -1,4 +1,6 @@
-package org.openurp.webapp.apps.party.wenming.model;
+package org.openurp.webapp.apps.party.wenming.person.model;
+
+import org.openurp.webapp.apps.party.wenming.model.AbstractWenmingObject;
 
 
 /**

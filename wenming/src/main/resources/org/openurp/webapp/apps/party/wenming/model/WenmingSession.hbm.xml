@@ -1,0 +1,22 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC
+    "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+    "http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+<hibernate-mapping package="org.openurp.webapp.apps.party.wenming.model">
+    <class name="WenmingSession">
+        <id name="id" type="integer">
+            <generator class="org.beangle.orm.hibernate.TableSeqGenerator" />
+        </id>
+        <property name="name" length="100" not-null="true" />
+        <property name="beginOn"/>
+        <property name="endOn"/>
+        <property name="voteBeginOn"/>
+        <property name="voteEndOn"/>
+        <property name="updatedAt"/>
+        <property name="createdAt"/>
+        <bag name="types">
+            <key column="session_id" not-null="true" />
+            <element column="wenming_type" type="wenmingType"/>
+        </bag>
+    </class>
+</hibernate-mapping>
