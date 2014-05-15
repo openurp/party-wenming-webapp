@@ -5,13 +5,14 @@ import java.util.List;
 import org.beangle.commons.collection.CollectUtils;
 import org.beangle.commons.entity.pojo.LongIdObject;
 import org.openurp.webapp.apps.party.wenming.model.Attachment;
+import org.openurp.webapp.apps.party.wenming.model.AttachmentsHolder;
 
 /**
  * 部门测评加分项和材料
  * 
  * @author chaostone
  */
-public class AssessBonus extends LongIdObject {
+public class AssessBonus extends LongIdObject implements AttachmentsHolder {
   private static final long serialVersionUID = 7084016781165137870L;
 
   private AssessApply apply;

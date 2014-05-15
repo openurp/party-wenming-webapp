@@ -13,9 +13,19 @@ import org.openurp.webapp.apps.party.wenming.depart.model.AssessState;
 import org.openurp.webapp.apps.party.wenming.model.WenmingSession;
 import org.openurp.webapp.apps.party.wenming.office.model.GoodOffice;
 
+/**
+ * 文明科室申报
+ * 
+ * @author chaostone
+ */
 public class ApplyAction extends SecurityActionSupport {
 
   private AttachmentHelper attachmentHelper;
+
+  @Override
+  protected String getEntityName() {
+    return GoodOffice.class.getName();
+  }
 
   @Override
   protected void indexSetting() {
@@ -51,6 +61,7 @@ public class ApplyAction extends SecurityActionSupport {
     if (!session.isOpened()) return redirect("info", "不在申请时间段", "&session.id=" + apply.getSession().getId());
     if (editable(apply.getState())) {
       apply.setState(AssessState.Submit);
+      apply.setSubmitAt(new Date());
       apply.setUpdatedAt(new Date());
       entityDao.saveOrUpdate(apply);
       return redirect("info", "info.save.success", "&session.id=" + apply.getSession().getId());
@@ -72,7 +83,7 @@ public class ApplyAction extends SecurityActionSupport {
       builder.where("aa.department=:department", user.getDepartment());
       List<GoodOffice> applies = entityDao.search(builder);
       if (applies.size() == 1) {
-        put("assessApply", applies.get(0));
+        put("goodOffice", applies.get(0));
         put("editable", editable(applies.get(0).getState()));
         put("submitable",
             Objects.equals(applies.get(0).getState(), AssessState.Draft)

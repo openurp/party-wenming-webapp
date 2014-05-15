@@ -4,14 +4,18 @@
 [#if goodOffice??]
 [@b.toolbar title='基本信息']
     function edit(){document.getElementById("apply_edit").click();}
-    function submit_apply(){ if(confirm("提交后不能修改，确认提交？")) document.getElementById("apply_submit").click(); }
+    function approve(){ if(confirm("提交后不能修改，确认提交？")) document.getElementById("apply_approved").click(); }
+    function disApprove(){ if(confirm("确定退回修改？")) document.getElementById("apply_disapproved").click(); }
     [#if editable && wenmingSession.opened]
     bar.addItem("${b.text("action.edit")}",edit);
-    [/#if]
-    [#if submitable && wenmingSession.opened]
-    bar.addItem("${b.text("action.submit")}",submit_apply);
+    bar.addItem("审批通过",approve);
+    bar.addItem("退回修改",disApprove);
     [/#if]
 [/@]
+<div>
+  [@b.a id="apply_edit" style="display:none" href="!edit?goodOffice.id=${goodOffice.id}"]修改[/@]
+  [@b.a id="apply_approved" style="display:none" href="!approve?goodOffice.id=${goodOffice.id}"]审批通过[/@]
+  [@b.a id="apply_disapproved" style="display:none" href="!disApprove?goodOffice.id=${goodOffice.id}"]审批不通过[/@]
 <div>
   [@b.a id="apply_edit" style="display:none" href="!edit?goodOffice.id=${goodOffice.id}"]修改[/@]
   [@b.a id="apply_submit" style="display:none" href="!submit?goodOffice.id=${goodOffice.id}"]提交[/@]

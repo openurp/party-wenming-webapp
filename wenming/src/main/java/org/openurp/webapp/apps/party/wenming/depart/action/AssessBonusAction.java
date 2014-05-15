@@ -4,15 +4,14 @@ import java.io.File;
 import java.util.Date;
 import java.util.List;
 
-import org.apache.commons.io.FileUtils;
 import org.beangle.commons.collection.CollectUtils;
 import org.beangle.commons.dao.Operation;
 import org.beangle.commons.entity.Entity;
-import org.beangle.commons.lang.Strings;
 import org.beangle.ems.web.action.SecurityActionSupport;
 import org.beangle.security.blueprint.User;
 import org.beangle.struts2.convention.route.Action;
 import org.openurp.kernel.base.unit.model.UrpUserBean;
+import org.openurp.webapp.apps.party.wenming.action.AttachmentHelper;
 import org.openurp.webapp.apps.party.wenming.depart.model.AssessApply;
 import org.openurp.webapp.apps.party.wenming.depart.model.AssessBonus;
 import org.openurp.webapp.apps.party.wenming.depart.model.AssessBonusItem;
@@ -25,6 +24,8 @@ import org.openurp.webapp.apps.party.wenming.model.Attachment;
  * @author chaostone
  */
 public class AssessBonusAction extends SecurityActionSupport {
+  private AttachmentHelper attachmentHelper;
+
   protected String getEntityName() {
     return AssessBonus.class.getName();
   }
@@ -47,19 +48,9 @@ public class AssessBonusAction extends SecurityActionSupport {
   public String save() throws Exception {
     AssessBonus bonus = (AssessBonus) populateEntity();
     AssessApply apply = entityDao.get(AssessApply.class, bonus.getApply().getId());
-    Object[] files = getAll("attachment");
-    if (null != files && files.length != 0 && files[0] instanceof File) {
-      String[] fileNames = getAll("attachmentFileName", String.class);
-      for (String fileName : fileNames) {
-        Attachment attach = new Attachment();
-        String attachRoot = getConfig().get(Attachment.DIR_CONF_NAME).toString();
-        attach.setName(fileName);
-        attach.setFilePath("/apply/bonus/" + apply.getId() + "/" + bonus.getAttachments().size() + "."
-            + Strings.substringAfterLast(fileName, "."));
-        FileUtils.copyFile((File) files[0], new File(attachRoot + attach.getFilePath()));
-        bonus.getAttachments().add(attach);
-      }
-    } else if (bonus.isTransient()) { return forward(new Action(this, "edit"), "请上传材料"); }
+    attachmentHelper.addAttachments(bonus);
+    if (bonus.getAttachments().isEmpty() && bonus.isTransient()) { return forward(new Action(this, "edit"),
+        "请上传材料"); }
     apply.setUpdatedAt(new Date());
     calcBonusScore(apply);
     try {
@@ -76,8 +67,13 @@ public class AssessBonusAction extends SecurityActionSupport {
     List<AssessBonus> entities = entityDao.get(AssessBonus.class, getIds("assessBonus", Long.class));
     String attachRoot = getConfig().get(Attachment.DIR_CONF_NAME).toString();
     for (AssessBonus bonus : entities) {
-      for (Attachment attach : bonus.getAttachments())
-        new File(attachRoot + attach.getFilePath()).delete();
+      bonus.getApply().getBonuses().remove(bonus);
+      for (Attachment attach : bonus.getAttachments()) {
+        try {
+          new File(attachRoot + attach.getFilePath()).delete();
+        } catch (Exception e) {
+        }
+      }
     }
     AssessApply apply = entities.get(0).getApply();
     calcBonusScore(apply);
@@ -100,5 +96,9 @@ public class AssessBonusAction extends SecurityActionSupport {
     }
     apply.setBonus(sum);
     return sum;
+  }
+
+  public void setAttachmentHelper(AttachmentHelper attachmentHelper) {
+    this.attachmentHelper = attachmentHelper;
   }
 }

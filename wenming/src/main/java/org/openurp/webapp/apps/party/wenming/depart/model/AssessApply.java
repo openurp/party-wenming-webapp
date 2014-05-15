@@ -7,13 +7,14 @@ import org.beangle.commons.entity.pojo.NumberIdTimeObject;
 import org.beangle.security.blueprint.User;
 import org.openurp.kernel.base.unit.model.Department;
 import org.openurp.webapp.apps.party.wenming.model.Attachment;
+import org.openurp.webapp.apps.party.wenming.model.AttachmentObject;
 
 /**
  * 文明单位申报
  * 
  * @author chaostone
  */
-public class AssessApply extends NumberIdTimeObject<Long> {
+public class AssessApply extends NumberIdTimeObject<Long> implements AttachmentObject {
 
   private static final long serialVersionUID = -203639712300833579L;
 

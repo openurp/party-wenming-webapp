@@ -15,8 +15,8 @@ import org.openurp.webapp.apps.party.wenming.model.WenmingSession;
  * 
  * @author chaostone
  */
-public class GoodOffice extends NumberIdTimeObject<Long>  implements AttachmentObject{
-  
+public class GoodOffice extends NumberIdTimeObject<Long> implements AttachmentObject {
+
   private static final long serialVersionUID = -1812694005152660808L;
 
   /** 申报批次 */
@@ -41,7 +41,7 @@ public class GoodOffice extends NumberIdTimeObject<Long>  implements AttachmentO
   private Date auditAt;
 
   /** 最终状态 */
-  private AssessState state;
+  private AssessState state = AssessState.Draft;
 
   /** 相关支撑材料 */
   private Attachment attachment;
