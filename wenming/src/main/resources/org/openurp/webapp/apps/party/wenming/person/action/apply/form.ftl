@@ -1,10 +1,10 @@
 [#ftl]
 [@b.head/]
-[@b.toolbar title="优秀项目编辑"]bar.addBack();[/@]
+[@b.toolbar title="好人好事编辑"]bar.addBack();[/@]
 [@b.form action="!save" theme="list"]
   [#include "editField.ftl"/] 
   [@b.formfoot]
-    <input type="hidden" name="goodProject.id" value="${goodProject.id!}" />
+    <input type="hidden" name="goodPerson.id" value="${goodPerson.id!}" />
     <input type="hidden" name="save" value="0" id="saveIpt"/>
     [@b.reset/]
     [@b.submit value="action.save" onsubmit="saveForm"/]
