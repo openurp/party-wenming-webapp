@@ -40,9 +40,6 @@ public class AssessBonusAction extends SecurityActionSupport {
         items.addAll(schema.getBonusItems());
       }
     }
-    if (items.isEmpty()) {
-      items = entityDao.getAll(AssessBonusItem.class);
-    }
     put("bonusItems", items);
   }
 

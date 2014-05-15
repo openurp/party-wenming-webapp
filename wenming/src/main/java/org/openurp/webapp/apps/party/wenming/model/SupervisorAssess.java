@@ -3,7 +3,6 @@ package org.openurp.webapp.apps.party.wenming.model;
 import java.util.List;
 
 import org.beangle.commons.collection.CollectUtils;
-import org.openurp.kernel.base.unit.model.Department;
 
 /**
  * 督察组测评
