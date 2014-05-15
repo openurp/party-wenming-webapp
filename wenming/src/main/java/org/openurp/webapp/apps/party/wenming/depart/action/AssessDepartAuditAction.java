@@ -42,6 +42,7 @@ public abstract class AssessDepartAuditAction <T extends AbstractAssessInfo, I e
     }else{
       query.where("o.state <> :state", AssessState.Submit);
     }
+    query.where("o.assessDepartment = :assessDepartment", getDepartment());
     String groupBy = "o.session.id, o.session.name, o.schema.id, o.schema.name, o.assessBy.id, o.assessBy.name, o.assessBy.fullname, o.assessAt, o.state";
     query.groupBy(groupBy);
     query.select(groupBy);
