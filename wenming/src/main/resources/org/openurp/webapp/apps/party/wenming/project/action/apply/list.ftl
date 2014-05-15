@@ -1,0 +1,20 @@
+[#ftl]
+[#include "/org/openurp/webapp/apps/party/wenming/comm.ftl"/]
+[@b.head/]
+[@b.grid  items=goodProjects var="goodProject" sortable="false"]
+  [@b.gridbar]
+    [#if editable]
+    bar.addItem("${b.text("action.new")}",action.add());
+    [/#if]
+    bar.addItem("${b.text("action.modify")}",action.edit());
+    bar.addItem("${b.text("action.delete")}",action.remove("确认删除?"));
+  [/@]
+  [@b.row]
+    [@b.boxcol /]
+    [@b.col width="50%" property="name" title="项目名称"][@b.a href="!info?id=${goodProject.id}"]${goodProject.name}[/@][/@]
+    [@b.col width="20%" property="department.name" title="选送单位"][/@]
+    [@b.col width="15%" property="attachment" title="详细材料"][/@]
+    [@b.col width="15%" property="state.description" title="审核情况"][/@]
+  [/@]
+[/@]
+[@b.foot/]

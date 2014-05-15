@@ -1,13 +1,22 @@
 package org.openurp.webapp.apps.party.wenming.depart.action;
 
+import java.io.File;
+import java.io.IOException;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
+import java.util.UUID;
 
+import org.apache.commons.io.FileUtils;
+import org.beangle.commons.lang.Strings;
 import org.beangle.ems.web.action.SecurityActionSupport;
 import org.openurp.kernel.base.unit.model.Department;
 import org.openurp.kernel.base.unit.model.UrpUserBean;
 import org.openurp.webapp.apps.party.wenming.depart.model.AssessState;
 import org.openurp.webapp.apps.party.wenming.depart.service.WenMingService;
+import org.openurp.webapp.apps.party.wenming.model.Attachment;
+import org.openurp.webapp.apps.party.wenming.model.AttachmentObject;
 
 public class WenMingAction extends SecurityActionSupport {
 	
@@ -63,5 +72,27 @@ public class WenMingAction extends SecurityActionSupport {
       e.printStackTrace();
     }
     return null;
+  }
+	
+	protected void setAttachment(AttachmentObject obj) {
+	  Object[] files = getAll("attachment");
+    if (null != files && files.length == 1 && files[0] instanceof File) {
+      String[] fileNames = getAll("attachmentFileName", String.class);
+      Attachment attach = new Attachment();
+      String attachRoot = getConfig().get(Attachment.DIR_CONF_NAME).toString();
+      attach.setName(fileNames[0]);
+      attach.setFilePath("/WenMing/"+getShortName()+"/" + new SimpleDateFormat("yyyyMM").format(new Date()) + "/"
+          + UUID.randomUUID()
+          + Strings.substringAfterLast(fileNames[0], "."));
+      if (null != obj.getAttachment() && null != obj.getAttachment().getFilePath()) {
+        new File(attachRoot + obj.getAttachment().getFilePath()).delete();
+      }
+      try {
+        FileUtils.copyFile((File) files[0], new File(attachRoot + attach.getFilePath()));
+      } catch (IOException e) {
+        e.printStackTrace();
+      }
+      obj.setAttachment(attach);
+    }
   }
 }
