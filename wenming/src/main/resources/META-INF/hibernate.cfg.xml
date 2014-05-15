@@ -39,5 +39,6 @@
     <mapping resource="org/openurp/webapp/apps/party/wenming/project/model/GoodProject.hbm.xml"/>
     <mapping resource="org/openurp/webapp/apps/party/wenming/person/model/GoodPerson.hbm.xml"/>
     <mapping resource="org/openurp/webapp/apps/party/wenming/post/model/GoodPost.hbm.xml"/>
+    <mapping resource="org/openurp/webapp/apps/party/wenming/office/model/GoodOffice.hbm.xml"/>
   </session-factory>
 </hibernate-configuration>

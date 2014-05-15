@@ -23,6 +23,9 @@ public class MutualAssessAction extends AssessAction<MutualAssess, MutualAssessI
     this.mutualAssessService = mutualAssessService;
   }
 
+  public static void main(String[] args){
+    System.out.println(MutualAssessAction.class.getGenericSuperclass());
+  }
   @Override
   protected Class<MutualAssess> getAssessClass() {
     return MutualAssess.class;

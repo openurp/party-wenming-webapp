@@ -10,4 +10,5 @@
   <bean class="org.openurp.webapp.apps.party.wenming.person.DefaultModule"/>
   <bean class="org.openurp.webapp.apps.party.wenming.project.DefaultModule"/>
   <bean class="org.openurp.webapp.apps.party.wenming.post.DefaultModule"/>
+  <bean class="org.openurp.webapp.apps.party.wenming.office.DefaultModule"/>
 </beans>
