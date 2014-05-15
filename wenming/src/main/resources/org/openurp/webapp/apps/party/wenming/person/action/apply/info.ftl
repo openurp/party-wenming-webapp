@@ -12,7 +12,10 @@
   [@b.field label="联系人"]${(goodPerson.contactPerson)!!"&nbsp;"}[/@]
   [@b.field label="联系电话"]${(goodPerson.contactPhone)!!"&nbsp;"}[/@]
   [@b.field label="相关支撑材料"]
-    [@b.a target="_blank" href="../attachment?path=${goodPerson.attachment.filePath}&name=${goodPerson.attachment.name?url('utf-8')}"]${(goodPerson.attachment.name)!}[/@]
+    &nbsp;
+    [#if goodPerson.attachment??]
+    [@b.a target="_blank" href="../attachment?path=${goodPost.attachment.filePath}&name=${goodPost.attachment.name?url('utf-8')}"]${(goodPost.attachment.name)!}[/@]</p>
+    [/#if]
   [/@]
 [/@]
 [@b.foot/]
