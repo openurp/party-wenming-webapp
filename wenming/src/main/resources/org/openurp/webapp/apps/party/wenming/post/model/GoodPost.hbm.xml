@@ -8,6 +8,8 @@
             <generator class="org.beangle.orm.hibernate.TableSeqGenerator" />
         </id>
         <property name="name" length="200" not-null="true" />
+        <property name="beginOn"/>
+        <property name="endOn"/>
         <many-to-one name="department" column="department_id" not-null="true"/>
         <many-to-one name="session" column="session_id" not-null="true"/>
         <property name="state" type="assessState" not-null="true" />
