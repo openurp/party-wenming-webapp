@@ -5,6 +5,7 @@ import java.util.Date;
 import org.beangle.commons.entity.pojo.NumberIdTimeObject;
 import org.beangle.security.blueprint.User;
 import org.openurp.kernel.base.unit.model.Department;
+import org.openurp.webapp.apps.party.wenming.depart.model.AssessState;
 
 /**
  * 优秀项目，好人好事，文明示范岗的基类

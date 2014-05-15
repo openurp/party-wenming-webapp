@@ -7,32 +7,32 @@
   <session-factory>
     <mapping resource="org/openurp/kernel/base/unit/model/Department.hbm.xml"/>
     <mapping class="org.openurp.kernel.base.unit.model.UrpUserBean"/>
-    <mapping resource="org/openurp/webapp/apps/party/wenming/model/AssessItem.hbm.xml"/>
-    <mapping resource="org/openurp/webapp/apps/party/wenming/model/AssessItemDepartment.hbm.xml"/>
-    <mapping resource="org/openurp/webapp/apps/party/wenming/model/AssessItemGroup.hbm.xml"/>
-    <mapping resource="org/openurp/webapp/apps/party/wenming/model/AssessSchema.hbm.xml"/>
-    <mapping resource="org/openurp/webapp/apps/party/wenming/model/AssessSession.hbm.xml"/>
-    <mapping resource="org/openurp/webapp/apps/party/wenming/model/AssessBonusType.hbm.xml"/>
-    <mapping resource="org/openurp/webapp/apps/party/wenming/model/AssessBonusItem.hbm.xml"/>
+    <mapping resource="org/openurp/webapp/apps/party/wenming/depart/model/AssessItem.hbm.xml"/>
+    <mapping resource="org/openurp/webapp/apps/party/wenming/depart/model/AssessItemDepartment.hbm.xml"/>
+    <mapping resource="org/openurp/webapp/apps/party/wenming/depart/model/AssessItemGroup.hbm.xml"/>
+    <mapping resource="org/openurp/webapp/apps/party/wenming/depart/model/AssessSchema.hbm.xml"/>
+    <mapping resource="org/openurp/webapp/apps/party/wenming/depart/model/AssessSession.hbm.xml"/>
+    <mapping resource="org/openurp/webapp/apps/party/wenming/depart/model/AssessBonusType.hbm.xml"/>
+    <mapping resource="org/openurp/webapp/apps/party/wenming/depart/model/AssessBonusItem.hbm.xml"/>
     
-    <mapping resource="org/openurp/webapp/apps/party/wenming/model/AssessState.hbm.xml"/>
-    <mapping resource="org/openurp/webapp/apps/party/wenming/model/SelfAssess.hbm.xml"/>
-    <mapping resource="org/openurp/webapp/apps/party/wenming/model/SelfAssessItem.hbm.xml"/>
-    <mapping resource="org/openurp/webapp/apps/party/wenming/model/SupervisorAssess.hbm.xml"/>
-    <mapping resource="org/openurp/webapp/apps/party/wenming/model/SupervisorAssessItem.hbm.xml"/>
-    <mapping resource="org/openurp/webapp/apps/party/wenming/model/MutualAssess.hbm.xml"/>
-    <mapping resource="org/openurp/webapp/apps/party/wenming/model/MutualAssessItem.hbm.xml"/>
-    <mapping resource="org/openurp/webapp/apps/party/wenming/model/FuncDepartAssess.hbm.xml"/>
-    <mapping resource="org/openurp/webapp/apps/party/wenming/model/FuncDepartAssessItem.hbm.xml"/>
+    <mapping resource="org/openurp/webapp/apps/party/wenming/depart/model/AssessState.hbm.xml"/>
+    <mapping resource="org/openurp/webapp/apps/party/wenming/depart/model/SelfAssess.hbm.xml"/>
+    <mapping resource="org/openurp/webapp/apps/party/wenming/depart/model/SelfAssessItem.hbm.xml"/>
+    <mapping resource="org/openurp/webapp/apps/party/wenming/depart/model/SupervisorAssess.hbm.xml"/>
+    <mapping resource="org/openurp/webapp/apps/party/wenming/depart/model/SupervisorAssessItem.hbm.xml"/>
+    <mapping resource="org/openurp/webapp/apps/party/wenming/depart/model/MutualAssess.hbm.xml"/>
+    <mapping resource="org/openurp/webapp/apps/party/wenming/depart/model/MutualAssessItem.hbm.xml"/>
+    <mapping resource="org/openurp/webapp/apps/party/wenming/depart/model/FuncDepartAssess.hbm.xml"/>
+    <mapping resource="org/openurp/webapp/apps/party/wenming/depart/model/FuncDepartAssessItem.hbm.xml"/>
 
-    <mapping resource="org/openurp/webapp/apps/party/wenming/model/AssessStat.hbm.xml"/>
-    <mapping resource="org/openurp/webapp/apps/party/wenming/model/AssessStatItem.hbm.xml"/>
+    <mapping resource="org/openurp/webapp/apps/party/wenming/depart/model/AssessStat.hbm.xml"/>
+    <mapping resource="org/openurp/webapp/apps/party/wenming/depart/model/AssessStatItem.hbm.xml"/>
     
-    <mapping resource="org/openurp/webapp/apps/party/wenming/model/AssessApply.hbm.xml"/>
-    <mapping resource="org/openurp/webapp/apps/party/wenming/model/Supervisor.hbm.xml"/>
-    <mapping resource="org/openurp/webapp/apps/party/wenming/model/AssessBonus.hbm.xml"/>
+    <mapping resource="org/openurp/webapp/apps/party/wenming/depart/model/AssessApply.hbm.xml"/>
+    <mapping resource="org/openurp/webapp/apps/party/wenming/depart/model/Supervisor.hbm.xml"/>
+    <mapping resource="org/openurp/webapp/apps/party/wenming/depart/model/AssessBonus.hbm.xml"/>
     
-    <mapping resource="org/openurp/webapp/apps/party/wenming/model/AssessVote.hbm.xml"/>
+    <mapping resource="org/openurp/webapp/apps/party/wenming/depart/model/AssessVote.hbm.xml"/>
     
     <mapping resource="org/openurp/webapp/apps/party/wenming/model/WenmingType.hbm.xml"/>
     <mapping resource="org/openurp/webapp/apps/party/wenming/model/WenmingSession.hbm.xml"/>

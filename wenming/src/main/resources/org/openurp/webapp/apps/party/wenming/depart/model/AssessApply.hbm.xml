@@ -1,0 +1,31 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC
+    "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+    "http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+<hibernate-mapping package="org.openurp.webapp.apps.party.wenming.depart.model">
+    <class name="AssessApply">
+        <id name="id" type="long">
+            <generator class="org.beangle.orm.hibernate.TableSeqGenerator" />
+        </id>
+        <many-to-one name="department" column="department_id" not-null="true"/>
+        <many-to-one name="session" column="session_id" not-null="true"/>
+        <many-to-one name="schema" column="schema_id" not-null="true"/>
+        <property name="state" type="assessState" not-null="true" />
+        <many-to-one name="submitBy" column="submit_by_id" not-null="true"/>
+        <many-to-one name="auditBy" column="audit_by_id"/>
+        <property name="createdAt"  not-null="true"/>
+        <property name="updatedAt"  not-null="true"/>
+        <property name="activitySummary" length="2000"/>
+        <property name="wenmingSummary" length="2000"/>
+        <property name="detail" length="4000"/>
+        <property name="bonus"/>
+        <component name="attachment">
+            <property name="name" column="attach_name"/>
+            <property name="filePath" column="attach_file_path"/>
+        </component>
+        <bag name="bonuses" inverse="true" cascade="all-delete-orphan">
+          <key column="apply_id"></key>
+          <one-to-many class="org.openurp.webapp.apps.party.wenming.depart.model.AssessBonus" />
+        </bag>
+    </class>
+</hibernate-mapping>
