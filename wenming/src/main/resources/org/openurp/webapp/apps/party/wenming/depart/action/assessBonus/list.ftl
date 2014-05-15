@@ -22,7 +22,7 @@
     [@b.col property="score" width="10%" title="分值"/]
     [@b.col width="25%" title="附件"]
     [#list assessBonus.attachments as attach]
-     [@b.a target="_blank" href="attachment?path=${attach.filePath}&name=${attach.name?url('utf-8')}"]${attach.name}[/@][#if attach_has_next]<br/>[/#if]
+     [@b.a target="_blank" href="../attachment?path=${attach.filePath}&name=${attach.name?url('utf-8')}"]${attach.name}[/@][#if attach_has_next]<br/>[/#if]
      [/#list]
     [/@]
   [/@]

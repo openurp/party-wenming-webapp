@@ -74,4 +74,8 @@ public class WenmingSession extends NumberIdTimeObject<Integer> {
     this.types = types;
   }
 
+  public boolean isOpened() {
+    return null != beginOn && null != endOn && beginOn.getTime() <= System.currentTimeMillis()
+        && System.currentTimeMillis() <= endOn.getTime();
+  }
 }

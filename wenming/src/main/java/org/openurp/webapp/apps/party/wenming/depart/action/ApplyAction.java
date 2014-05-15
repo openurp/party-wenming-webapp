@@ -1,20 +1,17 @@
 package org.openurp.webapp.apps.party.wenming.depart.action;
 
-import java.io.File;
 import java.util.Date;
 import java.util.List;
 import java.util.Objects;
 
-import org.apache.commons.io.FileUtils;
 import org.beangle.commons.dao.query.builder.OqlBuilder;
-import org.beangle.commons.lang.Strings;
 import org.beangle.security.blueprint.User;
 import org.openurp.kernel.base.unit.model.UrpUserBean;
+import org.openurp.webapp.apps.party.wenming.action.AttachmentHelper;
 import org.openurp.webapp.apps.party.wenming.depart.model.AssessApply;
 import org.openurp.webapp.apps.party.wenming.depart.model.AssessSchema;
 import org.openurp.webapp.apps.party.wenming.depart.model.AssessSession;
 import org.openurp.webapp.apps.party.wenming.depart.model.AssessState;
-import org.openurp.webapp.apps.party.wenming.model.Attachment;
 
 /**
  * 文明单位申请
@@ -22,6 +19,8 @@ import org.openurp.webapp.apps.party.wenming.model.Attachment;
  * @author chaostone
  */
 public class ApplyAction extends AbstractApplyAction {
+
+  private AttachmentHelper attachmentHelper;
 
   @Override
   protected void indexSetting() {
@@ -100,20 +99,7 @@ public class ApplyAction extends AbstractApplyAction {
       apply.setSubmitBy(user);
       if (!apply.isPersisted()) apply.setCreatedAt(new Date());
       apply.setUpdatedAt(new Date());
-      Object[] files = getAll("attachment");
-      if (null != files && files.length != 0 && files[0] instanceof File) {
-        String[] fileNames = getAll("attachmentFileName", String.class);
-        Attachment attach = new Attachment();
-        String attachRoot = getConfig().get(Attachment.DIR_CONF_NAME).toString();
-        attach.setName(fileNames[0]);
-        attach.setFilePath("/apply/attachment/" + apply.getDepartment().getId() + "."
-            + Strings.substringAfterLast(fileNames[0], "."));
-        if (null != apply.getAttachment() && null != apply.getAttachment().getFilePath()) {
-          new File(attachRoot + apply.getAttachment().getFilePath()).delete();
-        }
-        FileUtils.copyFile((File) files[0], new File(attachRoot + attach.getFilePath()));
-        apply.setAttachment(attach);
-      }
+      attachmentHelper.setAttachment(apply);
       try {
         if (apply.isTransient()) {
           for (AssessSchema schema : session.getSchemas()) {
@@ -133,4 +119,9 @@ public class ApplyAction extends AbstractApplyAction {
       return redirect("info", "不能修该状态的申请", "&session.id=" + apply.getSession().getId());
     }
   }
+
+  public void setAttachmentHelper(AttachmentHelper attachmentHelper) {
+    this.attachmentHelper = attachmentHelper;
+  }
+
 }

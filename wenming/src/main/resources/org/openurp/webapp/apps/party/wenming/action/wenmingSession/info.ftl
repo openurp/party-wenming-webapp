@@ -21,5 +21,9 @@ bar.addBack("${b.text("action.back")}");
    <td class="title" >投票结束时间:</td>
    <td class="content">${(wenmingSession.voteEndOn?datetime)!}</td>
   </tr>
+  <tr>
+   <td class="title" >文明项目:</td>
+   <td class="content" colspan="3">[#list  wenmingSession.types as t]${t.description}&nbsp;[/#list]</td>
+  </tr>
 </table>
 [@b.foot/]
