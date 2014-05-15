@@ -2,20 +2,12 @@
 [@b.head/]
 <div id="supervisorAssessIndex" class="ajax_container">
   <div style="padding:10px;">
-    <style>.div_bar a{margin-right:10px;}.div_bar a.active{back}.radiodiv{display:inline;}</style>
-    [@b.toolbar title='督察组测评'][/@]
-    <div class="div_bar">
-      <div>
+    <div class="div_bar inline">
+      <div class="inline_forms">
         [@b.form action="!index" target="supervisorAssessIndex"]
           <label>批次：</label>
-          <div class="radiodiv">
-            [#list assessSessions as v]
-              <input type="radio" id="session${v.id}" name="session.id" value="${v.id}" [#if v.id == assessSession.id]checked="checked"[/#if]/><label for="session${v.id}">${v.name}</label>
-            [/#list]
-          </div>
+          [@b.select name="session.id" label="测评批次" items=assessSessions value=assessSession onchange="bg.form.submit(this.form)"][/@]
         [/@]
-      </div>
-      <div style="margin:10px 0;">
         [@b.form action="!edit" target="supervisorAssessEdit"]
           <input type="hidden" name="session.id" value="${assessSession.id}"/>
           <label>方案：</label>
@@ -31,6 +23,7 @@
   </div>
   <script>
     jQuery.struts2_jquery.require("/js/base/jquery-ui.js",null,bg.getContextPath() + "/static");
+    jQuery.struts2_jquery.requireCss("/css/party/main.css",bg.getContextPath() + "/static");
     $(function (){
       $(".radiodiv").buttonset();
       $(".radiodiv input").click(function (event){

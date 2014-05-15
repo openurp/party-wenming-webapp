@@ -23,19 +23,6 @@ public class MutualAssessAction extends AssessAction<MutualAssess, MutualAssessI
     this.mutualAssessService = mutualAssessService;
   }
 
-  public static void main(String[] args){
-    System.out.println(MutualAssessAction.class.getGenericSuperclass());
-  }
-  @Override
-  protected Class<MutualAssess> getAssessClass() {
-    return MutualAssess.class;
-  }
-
-  @Override
-  protected Class<MutualAssessItem> getItemClass() {
-    return MutualAssessItem.class;
-  }
-
   protected void indexSetting(AssessSession assessSession) {
     put("schemas", mutualAssessService.getSchemas(assessSession, getDepartment()));
   }

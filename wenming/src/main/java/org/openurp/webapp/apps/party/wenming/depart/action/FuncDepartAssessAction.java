@@ -3,8 +3,6 @@ package org.openurp.webapp.apps.party.wenming.depart.action;
 import java.util.List;
 
 import org.beangle.commons.dao.query.builder.OqlBuilder;
-import org.openurp.webapp.apps.party.wenming.depart.model.AbstractAssessInfo;
-import org.openurp.webapp.apps.party.wenming.depart.model.AbstractAssessItemInfo;
 import org.openurp.webapp.apps.party.wenming.depart.model.AssessItem;
 import org.openurp.webapp.apps.party.wenming.depart.model.AssessSchema;
 import org.openurp.webapp.apps.party.wenming.depart.model.AssessSession;
@@ -20,17 +18,7 @@ import org.openurp.webapp.apps.party.wenming.depart.service.QueryInvoker;
  * @author chaostone
  * 
  */
-public class FuncDepartAssessAction extends AssessAction {
-
-  @Override
-  protected Class<? extends AbstractAssessInfo> getAssessClass() {
-    return FuncDepartAssess.class;
-  }
-
-  @Override
-  protected Class<? extends AbstractAssessItemInfo> getItemClass() {
-    return FuncDepartAssessItem.class;
-  }
+public class FuncDepartAssessAction extends AssessAction<FuncDepartAssess, FuncDepartAssessItem> {
 
   @Override
   protected List<AssessItem> findAssessItem(AssessSession assessSession, AssessSchema schema) {
