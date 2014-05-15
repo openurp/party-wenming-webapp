@@ -2,8 +2,7 @@
 [@b.head/]
 [@b.toolbar title="督察组成员编辑"]bar.addBack();[/@]
 [@b.tabs]
-  [@b.tab label="督察组成员信息"]
-    [@b.form action="!save" title="基本信息" theme="list"]
+    [@b.form action="!save" theme="list"]
       [@b.textfield name="supervisor.name" label="系统登录名称" value="${supervisor.name!}" 
         required="true" maxlength="50"/]
       [@b.textfield name="supervisor.fullname" label="真实姓名" value="${supervisor.fullname!}" 
@@ -20,5 +19,4 @@
       [/@]
     [/@]
   [/@]
-[/@]
 [@b.foot/]

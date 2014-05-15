@@ -2,8 +2,7 @@
 [@b.head/]
 [@b.toolbar title="考核批次编辑"]bar.addBack();[/@]
 [@b.tabs]
-  [@b.tab label="考核批次信息"]
-    [@b.form action="!save" title="基本信息" theme="list"]
+    [@b.form action="!save" theme="list"]
       [#if repeatDepartmentList??]
       [@b.field label="部门重复"]
         <div style="padding-left:110px; color:red;">
@@ -30,5 +29,4 @@
       [/@]
     [/@]
   [/@]
-[/@]
 [@b.foot/]
