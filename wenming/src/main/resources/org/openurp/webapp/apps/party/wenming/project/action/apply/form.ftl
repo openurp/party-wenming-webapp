@@ -16,9 +16,22 @@
       [@b.field label="相关支撑材料"]<input name="attachment" type="file"/>（上传文件请控制在10M以内，如果有多份附件请打成压缩包上传）[/@]
       [@b.formfoot]
         <input type="hidden" name="goodProject.id" value="${goodProject.id!}" />
-        [@b.reset/]&nbsp;&nbsp;[@b.submit value="action.submit"/]
+        <input type="hidden" name="save" value="0" id="saveIpt"/>
+        [@b.reset/]
+        [@b.submit value="action.save" onsubmit="saveForm"/]
+        [@b.submit value="action.submit" onsubmit="submitForm"/]
       [/@]
     [/@]
   [/@]
 [/@]
+<script>
+  function saveForm(){
+    $("#saveIpt").val("1");
+    return true;
+  }
+  
+  function submitForm(){
+    return confirm("提交后不能修改，是否确定提交？")
+  }
+</script>
 [@b.foot/]

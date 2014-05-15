@@ -1,5 +1,8 @@
 [#ftl]
 [@b.head/]
+<script>
+  jQuery.struts2_jquery.requireCss("/css/party/main.css",bg.getContextPath() + "/static");
+</script>
 <table  class="indexpanel">
   <tr>
     <td class="index_view">

@@ -49,7 +49,7 @@
         <td align="center">
             <span class="scoreSpan">${v.score!0}</span>
             <span class="scoreMaxSpan">${v.item.score}</span>
-            <div class="scoreDiv" max="${v.item.score}" score="${v.score!(v.item.score/2)}"></div>
+            <div class="scoreDiv" max="${v.item.score}" score="${v.score!0}"></div>
         </td>
       </tr>
     [/#list]

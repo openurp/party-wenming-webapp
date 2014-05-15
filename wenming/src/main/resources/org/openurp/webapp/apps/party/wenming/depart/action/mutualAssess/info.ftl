@@ -35,7 +35,7 @@
           <td>
             <span class="scoreSpan">${item.score}</span>
             <span class="scoreMaxSpan">${item.item.score}</span>
-            <div class="scoreDiv" max="${item.item.score}" score="${item.score}"></div>
+            <div class="scoreDiv" max="${item.item.score}" score="${item.score!0}"></div>
           </td>
           [/#list]
           <td align="center">${ma.totalScore!0}</td>
