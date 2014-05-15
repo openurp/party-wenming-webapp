@@ -1,26 +1,29 @@
 package org.openurp.webapp.apps.party.wenming.depart.action;
 
-import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import org.beangle.commons.dao.query.builder.OqlBuilder;
 import org.openurp.kernel.base.unit.model.Department;
 import org.openurp.webapp.apps.party.wenming.depart.model.AbstractAssessInfo;
-import org.openurp.webapp.apps.party.wenming.depart.model.AbstractAssessItemInfo;
 import org.openurp.webapp.apps.party.wenming.depart.model.AssessItem;
 import org.openurp.webapp.apps.party.wenming.depart.model.AssessSchema;
 import org.openurp.webapp.apps.party.wenming.depart.model.AssessSession;
 import org.openurp.webapp.apps.party.wenming.depart.model.AssessType;
+import org.openurp.webapp.apps.party.wenming.depart.model.MutualAssess;
+import org.openurp.webapp.apps.party.wenming.depart.model.MutualAssessItem;
 import org.openurp.webapp.apps.party.wenming.depart.model.SupervisorAssess;
 import org.openurp.webapp.apps.party.wenming.depart.model.SupervisorAssessItem;
 import org.openurp.webapp.apps.party.wenming.depart.service.QueryInvoker;
+
 
 /**
  * 督察组测评
  * 
  * @author chaostone
  */
-public class SupervisorAssessAction extends AssessAction {
+public class SupervisorAssessAction extends AssessAction<SupervisorAssess, SupervisorAssessItem> {
 
   @Override
   protected String getEntityName() {
@@ -28,12 +31,12 @@ public class SupervisorAssessAction extends AssessAction {
   }
 
   @Override
-  protected Class<? extends AbstractAssessInfo> getAssessClass() {
+  protected Class<SupervisorAssess> getAssessClass() {
     return SupervisorAssess.class;
   }
 
   @Override
-  protected Class<? extends AbstractAssessItemInfo> getItemClass() {
+  protected Class<SupervisorAssessItem> getItemClass() {
     return SupervisorAssessItem.class;
   }
 
@@ -46,5 +49,46 @@ public class SupervisorAssessAction extends AssessAction {
       }
     });
   }
+
+  protected void editSetting(AssessSession assessSession, AssessSchema schema, List<AbstractAssessInfo> malist) {
+    if (malist.get(0).getId() != null) {
+      List<AssessItem> items = findAssessItem(assessSession, schema);
+      for (Department d : schema.getDeparts()) {
+        boolean hasDepartment = false;
+        for (AbstractAssessInfo assess : malist) {
+          if (assess.getDepartment().equals(d)) {
+            hasDepartment = true;
+          }
+        }
+        if (!hasDepartment) {
+          MutualAssess ma = new MutualAssess();
+          ma.setSchema(schema);
+          ma.setDepartment(d);
+          for (AssessItem item : items) {
+            MutualAssessItem mai = new MutualAssessItem();
+            mai.setItem(item);
+            ma.getItems().add(mai);
+          }
+          malist.add(ma);
+        }
+      }
+    }
+  }
+
+  protected void saveAndForward(List<AbstractAssessInfo> malist) {
+    Long[] ids = new Long[malist.size()];
+    for (int i = 0; i < malist.size(); i++) {
+      ids[i] = malist.get(i).getId();
+    }
+    OqlBuilder<SupervisorAssess> query = OqlBuilder.from(SupervisorAssess.class, "o");
+    query.where("o.id not in (:ids)", ids);
+    query.where("o.session.id = :sessionid", malist.get(0).getSession().getId());
+    query.where("o.schema.id = :schemaid", malist.get(0).getSchema().getId());
+    query.where("o.assessBy.id = :assessbyid", getUserId());
+    @SuppressWarnings("unchecked")
+    List<SupervisorAssess> removeList = search(query);
+    remove(removeList);
+  }
+  
 
 }

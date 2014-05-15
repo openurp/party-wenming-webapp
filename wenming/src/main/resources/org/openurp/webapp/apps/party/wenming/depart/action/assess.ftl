@@ -47,7 +47,8 @@
     [#if partMode??]
       $("#assessTable tr").not(function (){
         return $(this).find(".score").val() != ""
-      }).addClass("ignore");
+      }).addClass("ignore").find("input").not(".partIpt").attr("disabled", "disabled");
+      $("#assessTable tr").not(".ignore").find(".partIpt").attr("checked", "checked");
     [/#if]
     $(".partIpt").click(function (){
       var tr = $(this).closest("tr");

@@ -76,9 +76,14 @@ public abstract class AssessAction<T extends AbstractAssessInfo, I extends Abstr
     } else if (!malist.isEmpty() && !editable(malist.get(0).getState())) {
       return redirectInfo(malist.get(0));
     }
+    editSetting(assessSession, schema, malist);
     put("malist", malist);
     put("schema", schema);
     return forward();
+  }
+
+  protected void editSetting(AssessSession assessSession, AssessSchema schema, List<AbstractAssessInfo> malist) {
+    
   }
 
   protected String redirectInfo(AbstractAssessInfo assess) {
@@ -118,7 +123,12 @@ public abstract class AssessAction<T extends AbstractAssessInfo, I extends Abstr
     if (malist != null) {
       saveOrUpdate(malist);
     }
+    saveAndForward(malist);
     return redirectSave(malist.get(0));
+  }
+
+  protected void saveAndForward(List<AbstractAssessInfo> malist) {
+    
   }
 
   protected String redirectSave(AbstractAssessInfo assess) {
