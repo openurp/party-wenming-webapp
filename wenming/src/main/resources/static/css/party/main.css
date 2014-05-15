@@ -11,15 +11,16 @@
 }
 .inline_forms form{display: inline-block;}
 
-.assessTable th{background-color:#c7dbff; padding: 10px;}
-.assessTable td{padding:10px 5px}
+.assessTable th, .gridtable th{background-color:#c7dbff; padding: 10px;}
+.assessTable td, .gridtable td{padding:10px 5px}
 .assessTable tr:hover{background-color:#eee;}
 .assessTable td.error{background-color:#F9CCCC}
 .assessTable td.error .scoreSpan{color:#fff;}
 .assessTable .scoreSpan{float:left;}
-.assessTable .scoreDiv{margin:0 24px;}
+.assessTable .scoreDiv{margin:0 30px;}
 .assessTable .scoreMaxSpan{float:right;}
 .ui-slider-handle { border-color: #729fcf; }
 .ui-slider-range { background: #729fcf; }
 
+.footdiv{text-align: center;}
 .footdiv input{margin-right:200px;}

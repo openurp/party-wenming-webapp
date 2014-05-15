@@ -19,7 +19,7 @@ import org.openurp.webapp.apps.party.wenming.model.SelfAssess;
 import org.openurp.webapp.apps.party.wenming.service.WenMingService;
 
 /**
- * 评测统计
+ * 测评统计
  * 
  * @author chaostone
  */

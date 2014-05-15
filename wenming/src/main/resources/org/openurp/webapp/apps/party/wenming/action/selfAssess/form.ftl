@@ -1,7 +1,6 @@
 [#ftl]
 [@b.head/]
-[@b.toolbar title="单位自评"]bar.addBack();[/@]
-[@b.form action="!save" title="自评内容" theme="list"]
+[@b.form action="!save" theme="list"]
   [#if !selfAssess??][#assign selfAssess=malist[0]/][/#if]
   [#include "/org/openurp/webapp/apps/party/wenming/action/selfAssess/selfAssessTable.ftl"/]
   <div style="text-align:center; padding:30px;" class="footdiv">

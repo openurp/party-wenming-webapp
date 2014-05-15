@@ -2,7 +2,6 @@
 [@b.head/]
 <div id="mutualAssessIndex" class="ajax_container">
   <div style="padding:10px;">
-    [@b.toolbar title='文明单位互评'][/@]
     <div class="div_bar inline">
       <div class="inline_forms">
         [@b.form action="!index" target="mutualAssessIndex"]

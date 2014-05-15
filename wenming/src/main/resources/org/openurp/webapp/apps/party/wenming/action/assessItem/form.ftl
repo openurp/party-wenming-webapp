@@ -18,7 +18,7 @@
 [/#macro]
 
 [@b.head/]
-[@b.toolbar title="评测指标编辑"]bar.addBack();[/@]
+[@b.toolbar title="测评指标编辑"]bar.addBack();[/@]
 <style>
 form.listform label.title{width:150px;}
 form.listform li.foot {padding-left: 160px;}

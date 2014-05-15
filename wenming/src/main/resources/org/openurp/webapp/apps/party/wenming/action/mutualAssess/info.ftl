@@ -1,14 +1,30 @@
 [#ftl]
 [@b.head/]
-[@b.toolbar title='评测内容'][/@]
+[#assign assess = malist[0]/]
+<table class="infoTable">
+  <tr>
+   <td class="title">所属批次:</td>
+   <td class="content"> ${assess.session.name}</td>
+   <td class="title">测评单位名称:</td>
+   <td class="content">${assess.assessDepartment.name}</td>
+  </tr>
+  <tr>
+   <td class="title">测评时间:</td>
+   <td class="content">${assess.assessAt?string("YYYY-MM-dd HH:mm")}</td>
+   <td class="title">审核状态:</td>
+   <td class="content" style="color:red; font-weight:bold;">${assess.state.description}</td>
+  </tr>
+</table>
+[@b.toolbar title='测评内容'][/@]
 [@b.form action="!edit"]
   <table id="assessTable" class="gridtable assessTable">
     <thead>
       <tr>
-        <th>被评分单位/指标</th>
+        <th width="220">被评分单位/指标</th>
         [#list malist[0].items?sort_by(["item", "id"]) as v]
         <th>${v.item.content!}</th>
         [/#list]
+        <th width="40">总分</th>
       </tr>
     </thead>
     <tbody>
@@ -22,6 +38,7 @@
             <div class="scoreDiv" max="${item.item.score}" score="${item.score}"></div>
           </td>
           [/#list]
+          <td align="center">${ma.totalScore!0}</td>
         </tr>
       [/#list]
     </tbody>

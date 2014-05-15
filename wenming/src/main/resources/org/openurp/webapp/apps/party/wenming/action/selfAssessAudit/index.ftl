@@ -2,13 +2,13 @@
 [@b.head/]
 <div id="selfAssessIndex" class="ajax_container">
   <div style="padding:10px;">
-    [@b.toolbar title='文明单位互评'][/@]
     <div class="div_bar">
       <div class="inline_forms">
         [@b.form action="!index" target="selfAssessIndex"]
           <label>批次：</label>
           <b>批次:</b> [@b.select name="session.id" label="测评批次" items=assessSessions value=assessSession onchange="bg.form.submit(this.form)"][/@]
         [/@]
+        [#--
         [@b.form action="!edit" target="selfAssessEdit"]
           <input type="hidden" name="session.id" value="${assessSession.id}"/>
           <input type="hidden" name="schema.id" value="${schema.id}"/>
@@ -19,9 +19,10 @@
             [/#list]
           </div>
         [/@]
+        --]
       </div>
     </div>
-    <div id="selfAssessEdit" class="ajax_container"></div>
+    [@b.div id="selfAssessEdit" href="!info?schema.id=${schema.id}&session.id=${assessSession.id}"/]
   </div>
   <script>
     jQuery.struts2_jquery.require("/js/base/jquery-ui.js",null,bg.getContextPath() + "/static");

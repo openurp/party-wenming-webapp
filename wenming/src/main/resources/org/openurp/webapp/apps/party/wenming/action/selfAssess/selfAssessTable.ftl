@@ -1,13 +1,6 @@
 [#ftl]
 [#if !selfAssess??][#assign selfAssess=malist[0]/][/#if]
-<table class="infoTable">
-  <tr>
-    <td class="title">自评时间:</td>
-    <td class="content">${selfAssess.assessAt?string("YYYY-MM-dd HH:mm")}</td>
-    <td class="title">状态:</td>
-    <td class="content">${selfAssess.state.description}</td>
-  </tr>
-</table>
+[@b.toolbar title='测评内容'][/@]
 <table id="assessTable" class="gridtable assessTable">
   <thead class="gridhead">
     <tr style="height:30px; font-size:16px;">

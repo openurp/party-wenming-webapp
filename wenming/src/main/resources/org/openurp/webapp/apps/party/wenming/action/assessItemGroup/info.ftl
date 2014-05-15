@@ -29,7 +29,7 @@ bar.addBack("${b.text("action.back")}");
   [/#if]
   [#if assessItemGroup.items?size gt 0]
   <tr>
-   <td class="title" >评测指标:</td>
+   <td class="title" >测评指标:</td>
    <td class="content">
      <ol>
        [#list assessItemGroup.items as v]

@@ -22,7 +22,11 @@ public abstract class AssessDepartAuditAction <T extends AbstractAssessInfo, I e
 
   protected List<AbstractAssessInfo> findAssess(Integer assessSessionId, Integer schemaId) {
     OqlBuilder<AbstractAssessInfo> query = getQueryBuilder(assessSessionId, schemaId);
-    query.where("o.assessBy.id = :assessById", getLong("assessBy.id"));
+    query.where("o.assessDepartment = :department", getDepartment());
+    Long assessById = getLong("assessBy.id");
+    if(assessById != null){
+      query.where("o.assessBy.id = :assessById", assessById);
+    }
     @SuppressWarnings("unchecked")
     List<AbstractAssessInfo> malist = search(query);
     return malist;

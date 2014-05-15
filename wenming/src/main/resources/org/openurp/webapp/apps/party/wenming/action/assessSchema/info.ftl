@@ -15,6 +15,7 @@ bar.addBack("${b.text("action.back")}");
   </tr>
 </table>
 
+[#assign total=0]
 <h3>一、 指标内容</h3>
 [#macro displayGroup group]
   <tr>
@@ -22,6 +23,7 @@ bar.addBack("${b.text("action.back")}");
     <td><B>${group.name}</B></td>
     <td align="center"><B>[#assign sumscore=0][#list group.items as item][#assign sumscore=sumscore + item.score/][/#list]${sumscore}</B></td>
     <td></td>
+    [#assign total=sumscore+total]
   </tr>
   [#list group.items as item]
   <tr>
@@ -46,6 +48,11 @@ bar.addBack("${b.text("action.back")}");
   [#list assessSchema.groups?sort_by("indexno") as group]
     [@displayGroup group/]
   [/#list]
+  <tr>
+   <td align="center" colspan="2"><B>合计</B></td>
+   <td align="center"><B>${total}</B></td>
+   <td></td>
+  </tr>
 </table>
 
 <h3>二、 加分项${assessSchema.bonusItems?size}</h3>

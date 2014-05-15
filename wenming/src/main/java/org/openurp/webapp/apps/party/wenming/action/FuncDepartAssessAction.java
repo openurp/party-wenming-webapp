@@ -38,7 +38,7 @@ public class FuncDepartAssessAction extends AssessAction {
       @Override
       public void doth(OqlBuilder<?> query) {
         query.join("o.departs", "d");
-        query.where("d = :department", getDepartment());
+        query.where("d.department = :department", getDepartment());
         query.where("o.assessType = :assessType", AssessType.FUNC_DEPART);
       }
     });

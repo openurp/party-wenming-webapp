@@ -81,7 +81,7 @@ public abstract class AssessAction<T extends AbstractAssessInfo, I extends Abstr
     return forward();
   }
 
-  private String redirectInfo(AbstractAssessInfo assess) {
+  protected String redirectInfo(AbstractAssessInfo assess) {
     return redirect("info", getBool("save") ? "保存成功" : "提交成功", "schema.id=" + assess.getSchema().getId()
         + "&session.id=" + assess.getSession().getId() + "&assessBy.id=" + assess.getAssessBy().getId());
   }

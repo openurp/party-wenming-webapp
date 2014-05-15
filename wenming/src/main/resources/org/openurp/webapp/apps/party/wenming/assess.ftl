@@ -1,7 +1,6 @@
 [#ftl]
-
 [#macro assessTable assessList]
-[@b.toolbar title='评测内容'][/@]
+[@b.toolbar title='测评内容'][/@]
   <table id="assessTable" class="gridtable assessTable">
     <thead>
       <tr>
@@ -12,7 +11,7 @@
       </tr>
     </thead>
     <tbody>
-      [#list assessList as assess]
+      [#list assessList?sort_by(["department","code"]) as assess]
         <tr>
           [#assign name="assess${assess_index}"/]
           <input type="hidden" name="index" value="${name}"/>
@@ -29,7 +28,7 @@
             <input type="hidden" name="${itemName}.score" value="${item.score!}" class="score"/>
             <span class="scoreSpan">${item.score!0}</span>
             <span class="scoreMaxSpan">${item.item.score!0}</span>
-            <div class="scoreDiv" max="${item.item.score}" score="${item.score!(item.item.score/2)}"></div>
+            <div class="scoreDiv" max="${item.item.score}" score="${item.score!0}"></div>
           </td>
           [/#list]
         </tr>

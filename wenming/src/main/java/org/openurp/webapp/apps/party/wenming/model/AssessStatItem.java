@@ -3,7 +3,7 @@ package org.openurp.webapp.apps.party.wenming.model;
 import org.beangle.commons.entity.pojo.LongIdObject;
 
 /**
- * 评测指标得分
+ * 测评指标得分
  * 
  * @author chaostone
  */
