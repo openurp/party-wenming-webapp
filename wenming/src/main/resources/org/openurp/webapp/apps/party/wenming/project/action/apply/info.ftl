@@ -1,30 +1,19 @@
 [#ftl]
-[@b.head/]
-[@b.toolbar title='考核批次信息']
-bar.addBack("${b.text("action.back")}");
-[/@]
 [#include "/org/openurp/webapp/apps/party/wenming/comm.ftl"/]
-<table class="infoTable">
-  <tr>
-   <td class="title" width="10%">批次名称:</td>
-   <td class="content" width="40%"> ${goodProject.name}</td>
-   <td class="title" width="10%">是否有效:</td>
-   <td class="content" width="40%">[@c.enabled goodProject.enabled/]</td>
-  </tr>
-  <tr>
-   <td class="title" >测评开始时间:</td>
-   <td class="content">${(goodProject.beginOn?datetime)!}</td>
-   <td class="title" >测评结束时间:</td>
-   <td class="content">${(goodProject.endOn?datetime)!}</td>
-  </tr>
-  <tr>
-   <td class="title" >投票开始时间:</td>
-   <td class="content">${(goodProject.voteBeginOn?datetime)!}</td>
-   <td class="title" >投票结束时间:</td>
-   <td class="content">${(goodProject.voteEndOn?datetime)!}</td>
-  </tr>
-  <td class="title" width="10%">关联方案:</td>
-   <td class="content" width="40%">[#list goodProject.schemas as schemas]${schemas.name}&nbsp;[/#list]</td>
-  </tr>
-</table>
+[@b.head/]
+[@b.toolbar title="优秀项目信息"]bar.addBack();[/@]
+[@b.form action="!save" theme="list"]
+  [@b.field label="申请人"]${goodProject.submitBy.fullname!"&nbsp;"}(${goodProject.submitBy.name!"&nbsp;"})[/@]
+  [@b.field label="申请时间"]${goodProject.submitAt?date}[/@]
+  [@b.field label="项目名称"]${goodProject.name!"&nbsp;"}[/@]
+  [@b.field label="投票开始结束时间"]${goodProject.beginOn?date}~${goodProject.endOn?date}[/@]
+  [@b.field label="申报理由"]${(goodProject.statements)!"&nbsp;"}[/@]
+  [@b.field label="项目方案"]${(goodProject.plan)!!"&nbsp;"}[/@]
+  [@b.field label="特色与创新点"]${(goodProject.features)!!"&nbsp;"}[/@]
+  [@b.field label="联系人"]${(goodProject.contactPerson)!!"&nbsp;"}[/@]
+  [@b.field label="联系电话"]${(goodProject.contactPhone)!!"&nbsp;"}[/@]
+  [@b.field label="相关支撑材料"]
+    [@b.a target="_blank" href="../attachment?path=${goodProject.attachment.filePath}&name=${goodProject.attachment.name?url('utf-8')}"]${(goodProject.attachment.name)!}[/@]
+  [/@]
+[/@]
 [@b.foot/]

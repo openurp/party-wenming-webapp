@@ -4,6 +4,7 @@ import java.util.Collection;
 import java.util.Date;
 import java.util.Iterator;
 
+import org.apache.commons.lang.StringUtils;
 import org.beangle.commons.dao.query.builder.OqlBuilder;
 import org.beangle.commons.entity.Entity;
 import org.openurp.webapp.apps.party.wenming.depart.action.WenMingAction;
@@ -11,6 +12,7 @@ import org.openurp.webapp.apps.party.wenming.depart.model.AssessState;
 import org.openurp.webapp.apps.party.wenming.model.AbstractWenmingObject;
 import org.openurp.webapp.apps.party.wenming.model.WenmingSession;
 import org.openurp.webapp.apps.party.wenming.model.WenmingType;
+import org.openurp.webapp.apps.party.wenming.project.model.GoodProject;
 import org.openurp.webapp.apps.party.wenming.service.WenMingSessionService;
 
 public abstract class WenMingProjectAction extends WenMingAction {
@@ -45,6 +47,12 @@ public abstract class WenMingProjectAction extends WenMingAction {
     Entity<?> entity = getEntity();
     WenmingSession session = wenMingSessionService.getSession(getWenmingType());
     AbstractWenmingObject obj = (AbstractWenmingObject) entity;
+    obj.setStatements(StringUtils.replace(obj.getStatements(), "<br>", "\n"));
+    obj.setFeatures(StringUtils.replace(obj.getFeatures(), "<br>", "\n"));
+    if(obj instanceof GoodProject){
+      GoodProject gp = (GoodProject) entity;
+      gp.setPlan(StringUtils.replace(gp.getPlan(), "<br>", "\n"));
+    }
     if (session != null && (obj.getSession() == null || session.equals(obj.getSession())) && editable(obj.getState())) {
       put(getShortName(), entity);
       editSetting(entity);
@@ -67,18 +75,28 @@ public abstract class WenMingProjectAction extends WenMingAction {
       obj.setUpdatedAt(new Date());
       obj.setSubmitBy(getUrpUser());
       obj.setSubmitAt(new Date());
-      setAttachment(obj);
-      if (getBool("save")) {
-        obj.setState(AssessState.Draft);
-      } else {
-        obj.setState(AssessState.Submit);
+      obj.setStatements(StringUtils.replace(obj.getStatements(), "\n", "<br>"));
+      obj.setFeatures(StringUtils.replace(obj.getFeatures(), "\n", "<br>"));
+      if(obj instanceof GoodProject){
+        GoodProject gp = (GoodProject) entity;
+        gp.setPlan(StringUtils.replace(gp.getPlan(), "\n", "<br>"));
       }
+      setAttachment(obj);
+      setState(obj);
       return super.saveAndForward(entity);
     } else {
       return redirect("search", "无法修改", getShortName() + ".id=" + obj.getId());
     }
   }
   
+  protected void setState(AbstractWenmingObject obj) {
+    if (getBool("save")) {
+      obj.setState(AssessState.Draft);
+    } else {
+      obj.setState(AssessState.Submit);
+    }
+  }
+
   @Override
   protected String removeAndForward(Collection<?> entities) {
     for(@SuppressWarnings("unchecked")
