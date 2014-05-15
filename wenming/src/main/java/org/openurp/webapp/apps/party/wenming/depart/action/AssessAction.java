@@ -177,11 +177,11 @@ public abstract class AssessAction<T extends AbstractAssessInfo, I extends Abstr
       for (T assess : malist) {
         if (editable(assess.getState())) {
           if (assess.getId() == null) {
-            assess.setAssessAt(now);
             assess.setAssessDepartment(assessDepartment);
             assess.setAssessBy(assessBy);
             assess.setSession(session);
           }
+          assess.setAssessAt(now);
           List<I> items = (List<I>) getAll(itemClass, "item" + assess.getDepartment().getId());
           assess.getItems().clear();
           assess.getItems().addAll((List) items);
