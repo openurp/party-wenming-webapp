@@ -1,5 +1,7 @@
 package org.openurp.webapp.apps.party.wenming.depart.action;
 
+import java.lang.reflect.ParameterizedType;
+import java.lang.reflect.Type;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
@@ -19,9 +21,20 @@ import org.openurp.webapp.apps.party.wenming.depart.model.MutualAssessItem;
 public abstract class AssessAction<T extends AbstractAssessInfo, I extends AbstractAssessItemInfo> extends
     WenMingAction {
 
-  abstract protected Class<T> getAssessClass();
+  @SuppressWarnings("unchecked")
+  protected Class<T> getAssessClass() {
+    Type a = this.getClass().getGenericSuperclass();
+    ParameterizedType pt = (ParameterizedType) a;
+    return (Class<T>) pt.getActualTypeArguments()[0];
+  }
 
-  abstract protected Class<I> getItemClass();
+  @SuppressWarnings("unchecked")
+  protected Class<I> getItemClass(){
+    Type a = this.getClass().getGenericSuperclass();
+    ParameterizedType pt = (ParameterizedType) a;
+    return (Class<I>) pt.getActualTypeArguments()[1];
+  }
+
 
   abstract List<AssessItem> findAssessItem(AssessSession assessSession, AssessSchema schema);
 
@@ -83,7 +96,7 @@ public abstract class AssessAction<T extends AbstractAssessInfo, I extends Abstr
   }
 
   protected void editSetting(AssessSession assessSession, AssessSchema schema, List<AbstractAssessInfo> malist) {
-    
+
   }
 
   protected String redirectInfo(AbstractAssessInfo assess) {
@@ -128,7 +141,7 @@ public abstract class AssessAction<T extends AbstractAssessInfo, I extends Abstr
   }
 
   protected void saveAndForward(List<AbstractAssessInfo> malist) {
-    
+
   }
 
   protected String redirectSave(AbstractAssessInfo assess) {

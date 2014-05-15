@@ -6,7 +6,7 @@
       <div class="inline_forms">
         [@b.form action="!index" target="selfAssessIndex"]
           <label>批次：</label>
-          <b>批次:</b> [@b.select name="session.id" label="测评批次" items=assessSessions value=assessSession onchange="bg.form.submit(this.form)"][/@]
+          [@b.select name="session.id" label="测评批次" items=assessSessions value=assessSession onchange="bg.form.submit(this.form)"][/@]
         [/@]
         [#--
         [@b.form action="!edit" target="selfAssessEdit"]

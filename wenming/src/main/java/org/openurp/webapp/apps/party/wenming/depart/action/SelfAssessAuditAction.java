@@ -17,16 +17,6 @@ import org.openurp.webapp.apps.party.wenming.depart.model.SelfAssessItem;
 public class SelfAssessAuditAction extends AssessDepartAuditAction<SelfAssess, SelfAssessItem> {
   
   @Override
-  protected Class<SelfAssess> getAssessClass() {
-    return SelfAssess.class;
-  }
-
-  @Override
-  protected Class<SelfAssessItem> getItemClass() {
-    return SelfAssessItem.class;
-  }
-
-  @Override
   protected List<AssessItem> findAssessItem(AssessSession assessSession, AssessSchema schema) {
     return wenMingService.findAssessItem(schema);
   }
