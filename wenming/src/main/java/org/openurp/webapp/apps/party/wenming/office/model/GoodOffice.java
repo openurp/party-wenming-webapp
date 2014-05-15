@@ -7,6 +7,7 @@ import org.beangle.security.blueprint.User;
 import org.openurp.kernel.base.unit.model.Department;
 import org.openurp.webapp.apps.party.wenming.depart.model.AssessState;
 import org.openurp.webapp.apps.party.wenming.model.Attachment;
+import org.openurp.webapp.apps.party.wenming.model.AttachmentObject;
 import org.openurp.webapp.apps.party.wenming.model.WenmingSession;
 
 /**
@@ -14,7 +15,7 @@ import org.openurp.webapp.apps.party.wenming.model.WenmingSession;
  * 
  * @author chaostone
  */
-public class GoodOffice extends NumberIdTimeObject<Long> {
+public class GoodOffice extends NumberIdTimeObject<Long>  implements AttachmentObject{
   
   private static final long serialVersionUID = -1812694005152660808L;
 

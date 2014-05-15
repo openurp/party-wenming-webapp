@@ -1,5 +1,6 @@
 [#ftl]
 [@b.head/]
+[@b.toolbar title="文明项目申请批次"/]
 <table  class="indexpanel">
   <tr>
     <td class="index_view">
