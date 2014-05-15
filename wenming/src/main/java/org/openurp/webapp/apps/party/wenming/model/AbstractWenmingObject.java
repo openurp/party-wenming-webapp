@@ -12,7 +12,7 @@ import org.openurp.webapp.apps.party.wenming.depart.model.AssessState;
  * 
  * @author chaostone
  */
-public abstract class AbstractWenmingObject extends NumberIdTimeObject<Long> {
+public abstract class AbstractWenmingObject extends NumberIdTimeObject<Long> implements AttachmentObject {
 
   private static final long serialVersionUID = -8349323778250029726L;
 
