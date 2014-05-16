@@ -64,9 +64,11 @@ public class ApplyAuditAction extends AbstractApplyAction {
     AssessApply apply = (AssessApply) getEntity();
     if (!apply.getSession().isOpened()) return redirect("info", "不在申请时间段", "&session.id="
         + apply.getSession().getId());
+    UrpUserBean auditBy = (UrpUserBean) entityDao.get(User.class, getUserId());
     if (editable(apply.getState())) {
       apply.setState(AssessState.DepartApproved);
       apply.setUpdatedAt(new Date());
+      apply.setAuditBy(auditBy);
       entityDao.saveOrUpdate(apply);
       return redirect("info", "info.save.success", "&session.id=" + apply.getSession().getId());
     } else {
@@ -83,8 +85,10 @@ public class ApplyAuditAction extends AbstractApplyAction {
     AssessApply apply = (AssessApply) getEntity();
     if (!apply.getSession().isOpened()) return redirect("info", "不在申请时间段", "&session.id="
         + apply.getSession().getId());
+    UrpUserBean auditBy = (UrpUserBean) entityDao.get(User.class, getUserId());
     if (editable(apply.getState())) {
       apply.setState(AssessState.DepartUnpassed);
+      apply.setAuditBy(auditBy);
       apply.setUpdatedAt(new Date());
       entityDao.saveOrUpdate(apply);
       return redirect("info", "info.save.success", "&session.id=" + apply.getSession().getId());
