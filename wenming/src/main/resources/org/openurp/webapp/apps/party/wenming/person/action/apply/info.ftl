@@ -8,6 +8,7 @@
   [@b.field label="名称"]${goodPerson.name!"&nbsp;"}[/@]
   [@b.field label="时间"]${goodPerson.beginOn?date}~${goodPerson.endOn?date}[/@]
   [@b.field label="事迹"]${(goodPerson.statements)!"&nbsp;"}[/@]
+  [@b.field label="特色与创新点"]${(goodPerson.features)!"&nbsp;"}[/@]
   [@b.field label="联系人"]${(goodPerson.contactPerson)!!"&nbsp;"}[/@]
   [@b.field label="联系电话"]${(goodPerson.contactPhone)!!"&nbsp;"}[/@]
   [@b.field label="相关支撑材料"]
