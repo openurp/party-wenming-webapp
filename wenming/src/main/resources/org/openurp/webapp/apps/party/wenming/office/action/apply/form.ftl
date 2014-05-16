@@ -1,6 +1,6 @@
 [#ftl]
 [@b.head/]
-[@b.form action="!save" title="申报基本信息" theme="list"]
+[@b.form action="!save" title="申报基本信息" theme="list" enctype="multipart/form-data"]
   [@b.textarea name="goodOffice.offices" label="文明科室" value="${goodOffice.offices!}" required="true"  cols="100" rows="5" maxlength="500" comment="300字以内"/]
   [@b.field label="评比办法及支撑材料"]<input name="attachment" type="file"/>（大小控制在20M以内）[/@]
   [@b.formfoot]

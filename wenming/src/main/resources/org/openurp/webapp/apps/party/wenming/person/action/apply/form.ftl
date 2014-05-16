@@ -1,7 +1,7 @@
 [#ftl]
 [@b.head/]
 [@b.toolbar title="好人好事编辑"]bar.addBack();[/@]
-[@b.form action="!save" theme="list"]
+[@b.form action="!save" theme="list" enctype="multipart/form-data"]
   [#include "editField.ftl"/] 
   [@b.formfoot]
     <input type="hidden" name="goodPerson.id" value="${goodPerson.id!}" />
