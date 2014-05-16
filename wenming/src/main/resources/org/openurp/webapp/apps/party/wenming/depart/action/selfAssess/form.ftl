@@ -12,7 +12,7 @@
 [/@]
 <script>
   function saveSelfAssess(){
-    if(isallnumebr()){
+    if(isallselected()){
       $("#saveIpt").val("1");
       return true;
     }
@@ -20,31 +20,10 @@
   }
   
   function submitSelfAssess(){
-    if(isallnumebr()){
+    if(isallselected()){
       return confirm("提交后不能修改，是否确定提交？")
     }
     return false;
-  }
-
-  function isallnumebr(){
-    var haserror = false;
-    var toobig = false;
-    $("#selfAssessTable .score").each(function (){
-      if(!this.value.match(/^\d+(\.\d+)?$/)){
-        this.focus();
-        haserror = true;
-      }else{
-        var max = $(this).parent().prev().html() * 1;
-        if(this.value * 1 > max){
-          this.focus();
-          toobig = true;
-        }
-      }
-    });
-    if(haserror || toobig){
-      alert("请输入正确的分值");
-    }
-    return !(haserror || toobig);
   }
 </script>
 [@b.foot/]
