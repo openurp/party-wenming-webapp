@@ -84,6 +84,12 @@ public abstract class AssessAction<T extends AbstractAssessInfo, I extends Abstr
           mai.setItem(item);
           ma.getItems().add(mai);
         }
+        ma.setSchema(schema);
+        ma.setState(AssessState.Draft);
+        ma.setAssessAt(new Date());
+        ma.setAssessDepartment(getDepartment());
+        ma.setSession(assessSession);
+        ma.setAssessBy(getUrpUser());
         malist.add(ma);
       }
     } else if (!malist.isEmpty() && !editable(malist.get(0).getState())) {

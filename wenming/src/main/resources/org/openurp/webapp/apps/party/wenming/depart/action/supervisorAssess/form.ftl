@@ -1,5 +1,6 @@
 [#ftl]
 [@b.head/]
+  [#include "../mutualAssess/state.ftl"/]
   [@b.form action="!save"]
     [#assign partMode=true/]
     [#include "../assess.ftl"/]

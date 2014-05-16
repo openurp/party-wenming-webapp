@@ -119,6 +119,11 @@ public class SelfAssessAction extends WenMingAction {
       UrpUserBean user = entityDao.get(UrpUserBean.class, getUserId());
       AssessSchema schema = wenMingService.getSchema(session, user.getDepartment());
       selfAssess.setSchema(schema);
+      selfAssess.setState(AssessState.Draft);
+      selfAssess.setAssessAt(new Date());
+      selfAssess.setAssessDepartment(getDepartment());
+      selfAssess.setSession(session);
+      selfAssess.setAssessBy(getUrpUser());
       List<AssessItemGroup> groups = schema.getGroups();
       for (AssessItemGroup group : groups) {
         for (AssessItem item : group.getItems()) {

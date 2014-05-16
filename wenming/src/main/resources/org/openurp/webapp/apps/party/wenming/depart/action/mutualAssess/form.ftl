@@ -1,5 +1,6 @@
 [#ftl]
 [@b.head/]
+  [#include "../mutualAssess/state.ftl"/]
   [@b.form action="!save"]
     [#include "../assess.ftl"/]
     [@assessTable malist/]

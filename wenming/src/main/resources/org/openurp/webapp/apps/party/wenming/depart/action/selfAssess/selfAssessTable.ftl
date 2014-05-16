@@ -1,5 +1,6 @@
 [#ftl]
 [#if !selfAssess??][#assign selfAssess=malist[0]/][/#if]
+[#include "state.ftl"/]
 [@b.toolbar title='测评内容'][/@]
 <table id="assessTable" class="gridtable assessTable">
   <thead class="gridhead">
