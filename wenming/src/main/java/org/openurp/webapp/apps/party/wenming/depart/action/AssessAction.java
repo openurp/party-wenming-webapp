@@ -29,12 +29,11 @@ public abstract class AssessAction<T extends AbstractAssessInfo, I extends Abstr
   }
 
   @SuppressWarnings("unchecked")
-  protected Class<I> getItemClass(){
+  protected Class<I> getItemClass() {
     Type a = this.getClass().getGenericSuperclass();
     ParameterizedType pt = (ParameterizedType) a;
     return (Class<I>) pt.getActualTypeArguments()[1];
   }
-
 
   abstract List<AssessItem> findAssessItem(AssessSession assessSession, AssessSchema schema);
 
@@ -69,36 +68,40 @@ public abstract class AssessAction<T extends AbstractAssessInfo, I extends Abstr
     if (schemaId == null) {
       return null;
     }
-    AssessSchema schema = entityDao.get(AssessSchema.class, schemaId);
     AssessSession assessSession = wenMingService.getAssessSessionByAssessTime();
-    List<AbstractAssessInfo> malist = findAssess(assessSession.getId(), schema.getId());
-    if (malist.isEmpty() && editCreateAble()) {
-      malist = new ArrayList<AbstractAssessInfo>();
-      List<AssessItem> items = findAssessItem(assessSession, schema);
-      for (Department d : schema.getDeparts()) {
-        MutualAssess ma = new MutualAssess();
-        ma.setSchema(schema);
-        ma.setDepartment(d);
-        for (AssessItem item : items) {
-          MutualAssessItem mai = new MutualAssessItem();
-          mai.setItem(item);
-          ma.getItems().add(mai);
+    if (assessSession != null) {
+      AssessSchema schema = entityDao.get(AssessSchema.class, schemaId);
+      List<AbstractAssessInfo> malist = findAssess(assessSession.getId(), schema.getId());
+      if (malist.isEmpty() && editCreateAble()) {
+        malist = new ArrayList<AbstractAssessInfo>();
+        List<AssessItem> items = findAssessItem(assessSession, schema);
+        for (Department d : schema.getDeparts()) {
+          MutualAssess ma = new MutualAssess();
+          ma.setSchema(schema);
+          ma.setDepartment(d);
+          for (AssessItem item : items) {
+            MutualAssessItem mai = new MutualAssessItem();
+            mai.setItem(item);
+            ma.getItems().add(mai);
+          }
+          ma.setSchema(schema);
+          ma.setState(AssessState.Draft);
+          ma.setAssessAt(new Date());
+          ma.setAssessDepartment(getDepartment());
+          ma.setSession(assessSession);
+          ma.setAssessBy(getUrpUser());
+          malist.add(ma);
         }
-        ma.setSchema(schema);
-        ma.setState(AssessState.Draft);
-        ma.setAssessAt(new Date());
-        ma.setAssessDepartment(getDepartment());
-        ma.setSession(assessSession);
-        ma.setAssessBy(getUrpUser());
-        malist.add(ma);
+      } else if (!malist.isEmpty() && !editable(malist.get(0).getState())) {
+        return redirectInfo(malist.get(0));
       }
-    } else if (!malist.isEmpty() && !editable(malist.get(0).getState())) {
-      return redirectInfo(malist.get(0));
+      editSetting(assessSession, schema, malist);
+      put("malist", malist);
+      put("schema", schema);
+      return forward();
+    }else{
+      return redirectInfo(getInt("session.id"), schemaId);
     }
-    editSetting(assessSession, schema, malist);
-    put("malist", malist);
-    put("schema", schema);
-    return forward();
   }
 
   protected void editSetting(AssessSession assessSession, AssessSchema schema, List<AbstractAssessInfo> malist) {
@@ -108,6 +111,11 @@ public abstract class AssessAction<T extends AbstractAssessInfo, I extends Abstr
   protected String redirectInfo(AbstractAssessInfo assess) {
     return redirect("info", getBool("save") ? "保存成功" : "提交成功", "schema.id=" + assess.getSchema().getId()
         + "&session.id=" + assess.getSession().getId() + "&assessBy.id=" + assess.getAssessBy().getId());
+  }
+
+  protected String redirectInfo(Integer assessid, Integer schemaId) { 
+    return redirect("info", getBool("save") ? "保存成功" : "提交成功", "schema.id=" + schemaId
+      + "&session.id=" + assessid + "&assessBy.id=" + getUserId());
   }
 
   /**
@@ -220,11 +228,15 @@ public abstract class AssessAction<T extends AbstractAssessInfo, I extends Abstr
     List<AbstractAssessInfo> malist = findAssess(getInt("session.id"), getInt("schema.id"));
     put("malist", malist);
     if (malist != null && malist.size() > 0) {
-      if (editable(malist.get(0).getState())) {
-        put("editable", true);
-      }
       put("schema", malist.get(0).getSchema());
     }
+    if(editable()){
+      put("editable", true);
+    }
     return super.info();
+  }
+
+  private boolean editable() {
+    return wenMingService.getAssessSessionByAssessTime() != null;
   }
 }

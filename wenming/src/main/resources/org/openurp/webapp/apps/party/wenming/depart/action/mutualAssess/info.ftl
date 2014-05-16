@@ -2,6 +2,7 @@
 [@b.head/]
 [#include "state.ftl"/]
 [@b.toolbar title='测评内容'][/@]
+[#if malist?? && malist?size gt 0]
 [@b.form action="!edit"]
   <table id="assessTable" class="gridtable assessTable">
     <thead>
@@ -36,6 +37,9 @@
     </div>
   [/#if]
 [/@]
+[#else]
+没有测评内容
+[/#if]
 <script>
   jQuery.struts2_jquery.require("/js/base/jquery-ui.js",null,bg.getContextPath() + "/static");
   jQuery.struts2_jquery.requireCss("/css/party/main.css",bg.getContextPath() + "/static");

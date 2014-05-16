@@ -47,9 +47,11 @@ public class WenMingServiceImpl extends BaseServiceImpl implements WenMingServic
     // query.where("d = :d", department);
     // List<AssessSchema> list = entityDao.search(query);
     // return list.isEmpty() ? null : list.get(0);
-    for (AssessSchema schema : session.getSchemas()) {
-      if (schema.getDeparts().contains(department)) {
-        return schema;
+    if(session != null){
+      for (AssessSchema schema : session.getSchemas()) {
+        if (schema.getDeparts().contains(department)) {
+          return schema;
+        }
       }
     }
     return null;
