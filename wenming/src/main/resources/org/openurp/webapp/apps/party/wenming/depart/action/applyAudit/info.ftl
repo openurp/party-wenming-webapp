@@ -24,7 +24,7 @@
    <td class="title">提交人:</td>
    <td class="content"> ${assessApply.submitBy.name}(${assessApply.submitBy.fullname})</td>
    <td class="title">部门审核人:</td>
-   <td class="content">[#if !editable]${assessApply.auditBy.name}(${assessApply.auditBy.fullname})[/#if]</td>
+   <td class="content">[#if !editable && assessApply.auditBy??]${assessApply.auditBy.name}(${assessApply.auditBy.fullname})[/#if]</td>
    <td class="title">更新时间:</td>
    <td class="content">${assessApply.updatedAt?string("YYYY-MM-dd HH:mm")}</td>
   </tr>
