@@ -230,13 +230,10 @@ public abstract class AssessAction<T extends AbstractAssessInfo, I extends Abstr
     if (malist != null && malist.size() > 0) {
       put("schema", malist.get(0).getSchema());
     }
-    if(editable()){
+    if(malist.size() > 0 && editable(malist.get(0).getState())){
       put("editable", true);
     }
     return super.info();
   }
 
-  private boolean editable() {
-    return wenMingService.getAssessSessionByAssessTime() != null;
-  }
 }

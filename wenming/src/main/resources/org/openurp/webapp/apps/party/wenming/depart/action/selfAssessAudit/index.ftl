@@ -1,11 +1,11 @@
 [#ftl]
 [@b.head/]
 <div id="selfAssessIndex" class="ajax_container">
-  <div style="padding:10px;">
+  <div style="padding:0 10px;">
     <div class="div_bar">
       <div class="inline_forms">
         [@b.form action="!index" target="selfAssessIndex"]
-          <label>批次：</label>
+          <b>批次:</b>
           [@b.select name="session.id" label="测评批次" items=assessSessions value=assessSession onchange="bg.form.submit(this.form)"][/@]
         [/@]
         [#--

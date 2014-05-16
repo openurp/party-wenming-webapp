@@ -1,7 +1,7 @@
 [#ftl]
 [@b.head/]
 [@b.messages slash="3"/]
-<div style="padding:5px 10px;">
+<div>
   [#if !selfAssess??]
     <div style="margin-left:10px;">
       没有自评内容

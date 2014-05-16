@@ -3,7 +3,6 @@ package org.openurp.webapp.apps.party.wenming.depart.service.impl;
 import java.util.Date;
 import java.util.List;
 
-import org.beangle.commons.collection.CollectUtils;
 import org.beangle.commons.dao.impl.BaseServiceImpl;
 import org.beangle.commons.dao.query.builder.OqlBuilder;
 import org.openurp.kernel.base.unit.model.Department;
@@ -62,17 +61,11 @@ public class WenMingServiceImpl extends BaseServiceImpl implements WenMingServic
     OqlBuilder<AssessSession> query = OqlBuilder.from(AssessSession.class, "o");
     query.where("o.enabled=true");
     query.orderBy("o.beginOn desc");
-    List<AssessSession> sessions = entityDao.search(query);
-    List<AssessSession> matched = CollectUtils.newArrayList();
-    for (AssessSession session : sessions) {
-      for (AssessSchema schema : session.getSchemas()) {
-        if (schema.getDeparts().contains(department)) {
-          matched.add(session);
-          break;
-        }
-      }
-    }
-    return matched;
+    query.join("o.schemas", "s");
+    query.join("s.departs", "d");
+    query.where("d = :d", department);
+    query.select("distinct o");
+    return entityDao.search(query);
   }
 
   @Override

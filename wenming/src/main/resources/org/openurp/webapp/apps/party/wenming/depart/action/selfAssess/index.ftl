@@ -14,15 +14,26 @@
 </table>
 --]
 [#assign assessSession = sessions?first/]
-<table>
- <tr>
-   <td><b>所在部门:</b>${user.department.name}</td>
-   <td>
-    [@b.form action="!info" target="selfSessionInfo" title="ui.searchForm" ]
-    <b>批次:</b> [@b.select name="session.id" label="测评批次" items=sessions value=assessSession onchange="bg.form.submit(this.form)"][/@]
-    [/@]
-   </td>
-  <tr>
-</table>
-[@b.div id="selfSessionInfo" href="!info?session.id=${assessSession.id}" /]
+<div id="selfAssessIndex" class="ajax_container">
+  <div style="padding:0 10px;">
+    <div class="div_bar">
+      <div class="inline_forms">
+        [@b.form action="!info" target="selfSessionInfo" title="ui.searchForm" ]
+        <b>批次:</b> [@b.select name="session.id" label="测评批次" items=sessions value=assessSession onchange="bg.form.submit(this.form)"][/@]
+        [/@]
+      </div>
+    </div>
+    [@b.div id="selfSessionInfo" href="!info?session.id=${assessSession.id}" /]
+  </div>
+  <script>
+    jQuery.struts2_jquery.require("/js/base/jquery-ui.js",null,bg.getContextPath() + "/static");
+    jQuery.struts2_jquery.requireCss("/css/party/main.css",bg.getContextPath() + "/static");
+    $(function (){
+      $(".radiodiv").buttonset();
+      $(".radiodiv input").click(function (event){
+        bg.form.submit($(this).closest("form").get(0));
+      });
+    });
+  </script>
+</div>
 [@b.foot/]

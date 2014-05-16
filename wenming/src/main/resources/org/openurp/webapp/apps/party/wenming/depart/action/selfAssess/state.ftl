@@ -1,5 +1,5 @@
 [#ftl]
-<div style="margin-left:10px;">
+<div>
   <b>申报时间:</b>${(selfAssess.session.beginOn?string("yyyy-MM-dd HH:mm"))!}~${(selfAssess.session.endOn?string("yyyy-MM-dd HH:mm"))!}
 </div>
 <table class="infoTable">
