@@ -3,6 +3,8 @@ package org.openurp.webapp.apps.party.wenming.depart.action;
 import java.util.ArrayList;
 import java.util.List;
 
+import org.beangle.commons.entity.util.EntityUtils;
+import org.beangle.commons.lang.Strings;
 import org.beangle.ems.web.action.SecurityActionSupport;
 import org.openurp.kernel.base.unit.model.Department;
 import org.openurp.kernel.base.unit.model.UrpUserBean;
@@ -72,6 +74,12 @@ public class WenMingAction extends SecurityActionSupport {
 
   public void setAttachmentHelper(AttachmentHelper attachmentHelper) {
     this.attachmentHelper = attachmentHelper;
+  }
+  
+  protected String getShortName(Class<?> cls) {
+    String name = cls.getName();
+    if (Strings.isNotEmpty(name)) return EntityUtils.getCommandName(name);
+    else return null;
   }
 
 }
