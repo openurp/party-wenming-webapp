@@ -60,6 +60,10 @@ public abstract class AbstractWenmingObject extends NumberIdTimeObject<Long> imp
 
   /** 相关支撑材料 */
   private Attachment attachment;
+  /**
+   * 审核结论
+   */
+  private String auditOpinion;
 
   public WenmingSession getSession() {
     return session;
@@ -180,4 +184,13 @@ public abstract class AbstractWenmingObject extends NumberIdTimeObject<Long> imp
   public void setAttachment(Attachment attachment) {
     this.attachment = attachment;
   }
+
+  public String getAuditOpinion() {
+    return auditOpinion;
+  }
+
+  public void setAuditOpinion(String auditOpinion) {
+    this.auditOpinion = auditOpinion;
+  }
+
 }

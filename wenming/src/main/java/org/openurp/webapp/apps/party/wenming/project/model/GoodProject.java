@@ -2,13 +2,12 @@ package org.openurp.webapp.apps.party.wenming.project.model;
 
 import org.openurp.webapp.apps.party.wenming.model.AbstractWenmingObject;
 
-
 /**
  * 优秀项目
+ * 
  * @author chaostone
- *
  */
-public class GoodProject extends AbstractWenmingObject{
+public class GoodProject extends AbstractWenmingObject {
 
   private static final long serialVersionUID = 661863669638885448L;
 
@@ -24,6 +23,5 @@ public class GoodProject extends AbstractWenmingObject{
   public void setPlan(String plan) {
     this.plan = plan;
   }
-  
-  
+
 }

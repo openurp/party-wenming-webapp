@@ -1,7 +1,7 @@
 [#ftl]
 [@b.head/]
 [@b.toolbar title="优秀项目审核"]bar.addBack();[/@]
-[@b.form action="!save" theme="list"]
+[@b.form action="!save" theme="list" enctype="multipart/form-data"]
   [#include "../apply/editField.ftl"/] 
   [@b.formfoot]
     <input type="hidden" name="goodProject.id" value="${goodProject.id!}" />

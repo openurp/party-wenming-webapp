@@ -1,7 +1,7 @@
 [#ftl]
 [@b.head/]
 [@b.toolbar title="文明示范岗审核"]bar.addBack();[/@]
-[@b.form action="!save" theme="list"]
+[@b.form action="!save" theme="list" enctype="multipart/form-data"]
   [#include "../apply/editField.ftl"/] 
   [@b.formfoot]
     <input type="hidden" name="goodPost.id" value="${goodPost.id!}" />

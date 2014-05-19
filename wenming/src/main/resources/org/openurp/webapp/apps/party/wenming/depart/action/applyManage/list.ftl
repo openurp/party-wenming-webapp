@@ -9,7 +9,7 @@
     [@b.col width="15%" property="department.name" title="部门名称"/]
     [@b.col width="20%" property="schema.name" title="适用方案"/]
     [@b.col width="15%" property="submitBy.name" title="申请人"]${assessApply.submitBy.name} ${assessApply.submitBy.fullname} [/@]
-    [@b.col width="15%" property="auditBy.name" title="部门审核人"]${assessApply.auditBy.name} ${assessApply.auditBy.fullname} [/@]
+    [@b.col width="15%" property="auditBy.name" title="部门审核人"][#if assessApply.auditBy??]${assessApply.auditBy.name} ${assessApply.auditBy.fullname}[/#if][/@]
     [@b.col width="7%" property="bonus" title="申请加分"][/@]
     [@b.col width="15%" property="state" title="状态"]${assessApply.state.description}[/@]
     [@b.col width="13%" property="updatedAt" title="更新时间"]${assessApply.updatedAt?string("MM-dd HH:mm")}[/@]

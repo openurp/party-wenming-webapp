@@ -1,6 +1,6 @@
 [#ftl]
 [@b.head/]
-[@b.form action="!save" title="申报基本信息" theme="list"]
+[@b.form action="!save" title="申报基本信息" theme="list" enctype="multipart/form-data"]
   [@b.textarea name="assessApply.activitySummary" label="创建活动及其效果概要" value="${assessApply.activitySummary!}" required="true"  cols="100" rows="5" maxlength="500" comment="300字以内"/]
   [@b.textarea name="assessApply.wenmingSummary" label="文明创建特色工作概要" value="${assessApply.wenmingSummary!}" required="true"  cols="100" rows="5" maxlength="500" comment="300字以内"/]
   [@b.textarea name="assessApply.detail" label="详实材料" value="${assessApply.detail!}" required="true"  cols="100" rows="15" maxlength="2000" comment="1800字以内"/]
