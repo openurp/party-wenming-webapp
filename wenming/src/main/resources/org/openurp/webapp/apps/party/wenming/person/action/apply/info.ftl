@@ -14,7 +14,7 @@
   [@b.field label="相关支撑材料"]
     &nbsp;
     [#if goodPerson.attachment??]
-    [@b.a target="_blank" href="../attachment?path=${goodPost.attachment.filePath}&name=${goodPost.attachment.name?url('utf-8')}"]${(goodPost.attachment.name)!}[/@]</p>
+    [@b.a target="_blank" href="../attachment?path=${goodPerson.attachment.filePath}&name=${goodPerson.attachment.name?url('utf-8')}"]${(goodPerson.attachment.name)!}[/@]</p>
     [/#if]
   [/@]
 [/@]

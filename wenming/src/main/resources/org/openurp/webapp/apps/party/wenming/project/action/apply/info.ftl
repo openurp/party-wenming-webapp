@@ -15,7 +15,7 @@
   [@b.field label="相关支撑材料"]
     &nbsp;
     [#if goodProject.attachment??]
-    [@b.a target="_blank" href="../attachment?path=${goodPost.attachment.filePath}&name=${goodPost.attachment.name?url('utf-8')}"]${(goodPost.attachment.name)!}[/@]</p>
+    [@b.a target="_blank" href="../attachment?path=${goodProject.attachment.filePath}&name=${goodProject.attachment.name?url('utf-8')}"]${(goodProject.attachment.name)!}[/@]</p>
     [/#if]
   [/@]
 [/@]
