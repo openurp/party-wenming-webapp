@@ -85,6 +85,10 @@ form.listform li.foot {padding-left: 160px;}
       alert("评分分值格式错误！");
       return false;
     }
+    if(hasMultiPart()){
+      alert("存在重复部门！");
+      return false;
+    }
     $("#scoreIpt").val(sum);
     return true;
   }
@@ -97,6 +101,20 @@ form.listform li.foot {padding-left: 160px;}
   });
   function deltr(btn){
     $(btn).closest("tr").remove();
+  }
+  
+  function hasMultiPart(){
+    var ss = $("#department_panel select");
+    var result = false;
+    ss.each(function (){
+      var v = this;
+      ss.each(function (){
+        if(ss.index(v) != ss.index(this) && v.value == this.value){
+          result = true;
+        }
+      });
+    });
+    return result;
   }
 
   function toggleDepartPanel(enabled){
