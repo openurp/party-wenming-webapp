@@ -41,7 +41,7 @@ public abstract class WenMingProjectAction extends WenMingAction {
     query.where("submitBy.id = :submitByid", getUserId());
     return query;
   }
-  
+
   @Override
   public String edit() {
     Entity<?> entity = getEntity();
@@ -49,24 +49,32 @@ public abstract class WenMingProjectAction extends WenMingAction {
     AbstractWenmingObject obj = (AbstractWenmingObject) entity;
     obj.setStatements(StringUtils.replace(obj.getStatements(), "<br>", "\n"));
     obj.setFeatures(StringUtils.replace(obj.getFeatures(), "<br>", "\n"));
-    if(obj instanceof GoodProject){
+    put("alterable", alterable(obj));
+    put("ifApplyAudit", ifApplyAudit(obj));
+    if (obj instanceof GoodProject) {
       GoodProject gp = (GoodProject) entity;
+      put("ifMiddleSummary", ifMiddleSummary(gp));
+      put("ifFinalSummary", ifFinalSummary(gp));
       gp.setPlan(StringUtils.replace(gp.getPlan(), "<br>", "\n"));
     }
-    if (session != null && (obj.getSession() == null || session.equals(obj.getSession())) && editable(obj.getState())) {
+    if (session != null && (obj.getSession() == null || session.equals(obj.getSession())) && editable(obj)) {
       put(getShortName(), entity);
       editSetting(entity);
       return forward();
     } else {
-      return redirect("search", "无法修改", getShortName() + ".id=" + obj.getId());
+      return redirect("search", "无法修改");
     }
+  }
+
+  protected boolean editable(AbstractWenmingObject obj) {
+    return editable(obj.getState());
   }
 
   @Override
   protected String saveAndForward(Entity<?> entity) {
     AbstractWenmingObject obj = (AbstractWenmingObject) entity;
     WenmingSession session = wenMingSessionService.getSession(getWenmingType());
-    if (session != null && editable(obj.getState())) {
+    if (session != null && editable(obj)) {
       if (obj.getId() == null) {
         obj.setSession(wenMingSessionService.getSession(getWenmingType()));
         obj.setDepartment(getDepartment());
@@ -77,7 +85,7 @@ public abstract class WenMingProjectAction extends WenMingAction {
       obj.setSubmitAt(new Date());
       obj.setStatements(StringUtils.replace(obj.getStatements(), "\n", "<br>"));
       obj.setFeatures(StringUtils.replace(obj.getFeatures(), "\n", "<br>"));
-      if(obj instanceof GoodProject){
+      if (obj instanceof GoodProject) {
         GoodProject gp = (GoodProject) entity;
         gp.setPlan(StringUtils.replace(gp.getPlan(), "\n", "<br>"));
       }
@@ -85,10 +93,10 @@ public abstract class WenMingProjectAction extends WenMingAction {
       setState(obj);
       return super.saveAndForward(entity);
     } else {
-      return redirect("search", "无法修改", getShortName() + ".id=" + obj.getId());
+      return redirect("search", "无法修改");
     }
   }
-  
+
   protected void setState(AbstractWenmingObject obj) {
     if (getBool("save")) {
       obj.setState(AssessState.Draft);
@@ -99,14 +107,35 @@ public abstract class WenMingProjectAction extends WenMingAction {
 
   @Override
   protected String removeAndForward(Collection<?> entities) {
-    for(@SuppressWarnings("unchecked")
-    Iterator<AbstractWenmingObject> itor = (Iterator<AbstractWenmingObject>) entities.iterator(); itor.hasNext();){
+    int reserved = 0;
+    for (@SuppressWarnings("unchecked")
+    Iterator<AbstractWenmingObject> itor = (Iterator<AbstractWenmingObject>) entities.iterator(); itor
+        .hasNext();) {
       AbstractWenmingObject obj = itor.next();
-      if(!editable(obj.getState())){
+      if (!editable(obj.getState())) {
         itor.remove();
+        reserved += 1;
       }
     }
-    return super.removeAndForward(entities);
+    if (reserved > 0) return redirect("search", "无法删除" + reserved + "个申请");
+    else return super.removeAndForward(entities);
   }
 
+  protected boolean alterable(AbstractWenmingObject obj) {
+    return AssessState.Submit.equals(obj.getState());
+  }
+
+  protected boolean ifApplyAudit(AbstractWenmingObject obj) {
+    return AssessState.DepartApproved.equals(obj.getState());
+  }
+
+  protected boolean ifMiddleSummary(GoodProject obj) {
+    return (obj.getMiddleSummary() != null && obj.getMiddleSummary().getAttachment() != null && obj
+        .getFinalSummary() == null);
+  }
+
+  protected boolean ifFinalSummary(GoodProject obj) {
+    return (obj.getMiddleSummary() != null && obj.getMiddleSummary().getAttachment() != null
+        && obj.getFinalSummary() != null && obj.getFinalSummary().getAttachment() != null);
+  }
 }

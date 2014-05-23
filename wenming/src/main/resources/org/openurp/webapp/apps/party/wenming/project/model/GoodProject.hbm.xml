@@ -24,6 +24,8 @@
         <property name="features" length="1000" not-null="true"/>
         <property name="contactPerson" length="100" not-null="true"/>
         <property name="contactPhone" length="30" not-null="true"/>
+        <many-to-one name="middleSummary" column="middle_summary_id" />
+        <many-to-one name="finalSummary" column="final_summary_id" />
         <component name="attachment">
             <property name="name" length="200" column="attach_name"/>
             <property name="filePath"  length="100" column="attach_file_path"/>

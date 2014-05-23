@@ -8,5 +8,3 @@
 [@b.textarea label="特色与创新点" cols="50" rows="4" name="goodProject.features" value=(goodProject.features)! maxlength="1000" required="true"/]
 [@b.textfield name="goodProject.contactPerson" label="联系人" value="${goodProject.contactPerson!}" required="true" maxlength="100"/]
 [@b.textfield name="goodProject.contactPhone" label="联系电话" value="${goodProject.contactPhone!}" required="true" maxlength="30"/]
-[@b.field label="相关支撑材料"]<input name="attachment" type="file"/>（上传文件请控制在10M以内，如果有多份附件请打成压缩包上传）[/@]
- 

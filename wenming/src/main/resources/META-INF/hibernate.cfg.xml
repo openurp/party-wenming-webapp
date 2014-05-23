@@ -34,8 +34,9 @@
     
     <mapping resource="org/openurp/webapp/apps/party/wenming/depart/model/AssessVote.hbm.xml"/>
     
-    <mapping resource="org/openurp/webapp/apps/party/wenming/model/WenmingType.hbm.xml"/>
+    <mapping resource="org/openurp/webapp/apps/party/wenming/model/AbstractWenmingSummaryObject.hbm.xml"/>
     <mapping resource="org/openurp/webapp/apps/party/wenming/model/WenmingSession.hbm.xml"/>
+    <mapping resource="org/openurp/webapp/apps/party/wenming/model/WenmingType.hbm.xml"/>
     <mapping resource="org/openurp/webapp/apps/party/wenming/project/model/GoodProject.hbm.xml"/>
     <mapping resource="org/openurp/webapp/apps/party/wenming/person/model/GoodPerson.hbm.xml"/>
     <mapping resource="org/openurp/webapp/apps/party/wenming/post/model/GoodPost.hbm.xml"/>

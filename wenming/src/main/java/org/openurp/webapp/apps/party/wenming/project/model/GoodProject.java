@@ -7,7 +7,7 @@ import org.openurp.webapp.apps.party.wenming.model.AbstractWenmingObject;
  * 
  * @author chaostone
  */
-public class GoodProject extends AbstractWenmingObject {
+public class GoodProject extends AbstractWenmingObject<GoodProjectMiddleSummary, GoodProjectFinalSummary> {
 
   private static final long serialVersionUID = 661863669638885448L;
 
@@ -15,6 +15,26 @@ public class GoodProject extends AbstractWenmingObject {
    * 方案和目标
    */
   private String plan;
+  
+  private GoodProjectMiddleSummary middleSummary;
+  
+  private GoodProjectFinalSummary finalSummary;
+  
+  public GoodProjectMiddleSummary getMiddleSummary() {
+    return middleSummary;
+  }
+
+  public void setMiddleSummary(GoodProjectMiddleSummary middleSummary) {
+    this.middleSummary = middleSummary;
+  }
+
+  public GoodProjectFinalSummary getFinalSummary() {
+    return finalSummary;
+  }
+
+  public void setFinalSummary(GoodProjectFinalSummary finalSummary) {
+    this.finalSummary = finalSummary;
+  }
 
   public String getPlan() {
     return plan;

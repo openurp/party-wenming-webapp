@@ -2,6 +2,11 @@
 [#include "/org/openurp/webapp/apps/party/wenming/comm.ftl"/]
 [@b.head/]
 [@b.toolbar title="优秀项目信息"]bar.addBack();[/@]
+<style>
+form.listform label.title {
+width: 130px;
+}
+</style>
 [@b.form action="!save" theme="list"]
   [@b.field label="申请人"]${goodProject.submitBy.fullname!"&nbsp;"}(${goodProject.submitBy.name!"&nbsp;"})[/@]
   [@b.field label="申请时间"]${goodProject.submitAt?date}[/@]
@@ -13,10 +18,22 @@
   [@b.field label="联系人"]${(goodProject.contactPerson)!!"&nbsp;"}[/@]
   [@b.field label="联系电话"]${(goodProject.contactPhone)!!"&nbsp;"}[/@]
   [@b.field label="相关支撑材料"]
-    &nbsp;
     [#if goodProject.attachment??]
-    [@b.a target="_blank" href="../attachment?path=${goodProject.attachment.filePath}&name=${goodProject.attachment.name?url('utf-8')}"]${(goodProject.attachment.name)!}[/@]</p>
+    [@b.a target="_blank" href="../attachment?path=${goodProject.attachment.filePath}&name=${goodProject.attachment.name?url('utf-8')}"]${(goodProject.attachment.name)!}下载[/@]
     [/#if]
+    &nbsp;
   [/@]
+    [#if (goodProject.middleSummary.attachment)??]
+      [@b.field label="中期审核材料"]
+      [@b.a target="_blank" href="../attachment?path=${goodProject.middleSummary.attachment.filePath}&name=${goodProject.middleSummary.attachment.name?url('utf-8')}"]${(goodProject.middleSummary.attachment.name)!}下载[/@]
+      [/@]
+    [/#if]
+    [#if (goodProject.finalSummary.attachment)??]
+      [@b.field label="项目内容及成效"]${(goodProject.finalSummary.content)!!"&nbsp;"}[/@]
+      [@b.field label="是否参加学年末评选"]${(goodProject.finalSummary.forAssess?string("是","否"))!!"&nbsp;"}[/@]
+      [@b.field label="终期审核材料"]
+      [@b.a target="_blank" href="../attachment?path=${goodProject.finalSummary.attachment.filePath}&name=${goodProject.finalSummary.attachment.name?url('utf-8')}"]${(goodProject.finalSummary.attachment.name)!}下载[/@]
+      [/@]
+    [/#if]
 [/@]
 [@b.foot/]

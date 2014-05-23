@@ -12,7 +12,7 @@ import org.openurp.webapp.apps.party.wenming.depart.model.AssessState;
  * 
  * @author chaostone
  */
-public abstract class AbstractWenmingObject extends NumberIdTimeObject<Long> implements AttachmentObject {
+public abstract class AbstractWenmingObject <M extends AbstractWenmingSummaryObject<?>,F extends AbstractWenmingSummaryObject<?>> extends NumberIdTimeObject<Long> implements AttachmentObject {
 
   private static final long serialVersionUID = -8349323778250029726L;
 
@@ -192,5 +192,7 @@ public abstract class AbstractWenmingObject extends NumberIdTimeObject<Long> imp
   public void setAuditOpinion(String auditOpinion) {
     this.auditOpinion = auditOpinion;
   }
+
+  
 
 }
