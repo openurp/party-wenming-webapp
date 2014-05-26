@@ -3,7 +3,7 @@
 <script type="text/javascript" src="${base}/static/scripts/raphael/g.raphael-min.js"></script>
 <script type="text/javascript" src="${base}/static/scripts/raphael/g.line-min.js"></script>
 <script type="text/javascript" src="${base}/static/scripts/raphael/g.pie-min.js"></script>
-<div id="holder" style="width:850px;height:800px"></div>
+<div id="holder" style="width:850px;height:400px;"></div>
 <script>
 
  var hoverA = function () {
@@ -56,3 +56,30 @@
  r.text(450, 220, "职能部门提交进度图").attr(txtattr);
  funcAssessPie.hover(hoverA, hoverB);
 </script>
+<p> <B>各部门详细进度</B></p>
+
+  <table class="gridtable" style="width:900px;" >
+    <thead class="gridhead">
+      <th width="10%">序号</th>
+      <th width="30%">部门</th>
+      <th width="15%">提交申报材料</th>
+      <th width="15%">提交自评</th>
+      <th width="15%">提交互评</th>
+      <th width="15%">提交职能部门测评</th>
+    </thead>
+    [#list departs?sort_by("code") as depart]
+    <tr align="center">
+      <td>${depart_index+1}</td>
+      <td>${depart.name}</td>
+      <td>[#if appliedDepartIds?seq_contains(depart.id)]<span class="toolbar-icon action-activate"></span>[#else]<span class="toolbar-icon action-close"></span>[/#if]</td>
+      <td>[#if selfAssessDepartIds?seq_contains(depart.id)]<span class="toolbar-icon action-activate"></span>[#else]<span class="toolbar-icon action-close"></span>[/#if]</td>
+      <td>[#if mutualAssessDepartIds?seq_contains(depart.id)]<span class="toolbar-icon action-activate"></span>[#else]<span class="toolbar-icon action-close"></span>[/#if]</td>
+      <td>
+      [#if !depart.teaching]
+        [#if funcDepartAssessDepartIds?seq_contains(depart.id)]<span class="toolbar-icon action-activate"></span>[#else]<span class="toolbar-icon action-close"></span>[/#if]
+      [/#if]
+      </td>
+    </tr>
+    [/#list]
+  </table>
+  <br>
