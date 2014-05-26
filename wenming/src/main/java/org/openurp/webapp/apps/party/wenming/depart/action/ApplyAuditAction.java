@@ -5,11 +5,13 @@ import java.util.List;
 
 import org.beangle.commons.dao.query.builder.OqlBuilder;
 import org.beangle.security.blueprint.User;
+import org.openurp.kernel.base.unit.model.Department;
 import org.openurp.kernel.base.unit.model.UrpUserBean;
 import org.openurp.webapp.apps.party.wenming.action.AttachmentHelper;
 import org.openurp.webapp.apps.party.wenming.depart.model.AssessApply;
 import org.openurp.webapp.apps.party.wenming.depart.model.AssessSession;
 import org.openurp.webapp.apps.party.wenming.depart.model.AssessState;
+import org.openurp.webapp.apps.party.wenming.depart.model.SelfAssess;
 
 /**
  * 文明单位申请审批
@@ -51,6 +53,13 @@ public class ApplyAuditAction extends AbstractApplyAction {
         put("editable", editable(applies.get(0).getState()));
       }
       put("assessSession", session);
+      OqlBuilder<SelfAssess>builder2 = OqlBuilder.from(SelfAssess.class, "bb");
+      builder2.where("bb.session=:session",session);
+      builder2.where("bb.department=:department",user.getDepartment());
+      List<SelfAssess> selfAssesses = entityDao.search(builder2);
+      if (selfAssesses.size() == 1){
+        put("selfAssess", selfAssesses.get(0));
+      }
     }
     return forward();
   }

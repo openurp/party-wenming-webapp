@@ -22,7 +22,7 @@
    <td class="title">提交人:</td>
    <td class="content"> ${assessApply.submitBy.name}(${assessApply.submitBy.fullname})</td>
    <td class="title">部门审核人:</td>
-   <td class="content">[#if !editable && assessApply.auditBy??]${assessApply.auditBy.name}(${assessApply.auditBy.fullname})[/#if]</td>
+   <td class="content">[#if assessApply.auditBy??]${assessApply.auditBy.name}(${assessApply.auditBy.fullname})[/#if]</td>
    <td class="title">更新时间:</td>
    <td class="content">${assessApply.updatedAt?string("YYYY-MM-dd HH:mm")}</td>
   </tr>
@@ -40,7 +40,11 @@
   </tr>
   <tr>
    <td class="title" >支撑材料:</td>
-   <td class="content" colspan="7">[#if assessApply.attachment??][@b.a target="_blank" href="attachment?path=${assessApply.attachment.filePath}&name=${assessApply.attachment.name?url('utf-8')}"]${assessApply.attachment.name}[/@][/#if]</td>
+   <td class="content" colspan="7">[#if assessApply.attachment??][@b.a target="_blank" href="../attachment?path=${assessApply.attachment.filePath}&name=${assessApply.attachment.name?url('utf-8')}"]${assessApply.attachment.name}[/@][/#if]</td>
+  </tr>
+  <tr>
+   <td class="title" >自评总分:</td>
+   <td class="content">${selfAssess.totalScore}</td>
   </tr>
  </table>
  [@b.div id="bonus_panel"]

@@ -1,11 +1,15 @@
 package org.openurp.webapp.apps.party.wenming.depart.action;
 
 import java.util.Date;
+import java.util.List;
 
 import org.beangle.commons.dao.query.builder.OqlBuilder;
+import org.beangle.security.blueprint.User;
+import org.openurp.kernel.base.unit.model.UrpUserBean;
 import org.openurp.webapp.apps.party.wenming.depart.model.AssessApply;
 import org.openurp.webapp.apps.party.wenming.depart.model.AssessSession;
 import org.openurp.webapp.apps.party.wenming.depart.model.AssessState;
+import org.openurp.webapp.apps.party.wenming.depart.model.SelfAssess;
 
 /**
  * 文明办管理申请
@@ -34,6 +38,14 @@ public class ApplyManageAction extends AbstractApplyAction {
       AssessApply apply = entityDao.get(AssessApply.class, entityId);
       put("editable", editable(apply.getState()));
       put(getShortName(), apply);
+
+      OqlBuilder<SelfAssess> builder = OqlBuilder.from(SelfAssess.class, "bb");
+      builder.where("bb.session=:session", apply.getSession());
+      builder.where("bb.department=:department", apply.getDepartment());
+      List<SelfAssess> selfAssesses = entityDao.search(builder);
+      if (selfAssesses.size() == 1) {
+        put("selfAssess", selfAssesses.get(0));
+      }
     }
     return forward();
   }

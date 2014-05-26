@@ -32,7 +32,6 @@ public class AssessBonusAction extends SecurityActionSupport {
 
   @Override
   protected void editSetting(Entity<?> entity) {
-    AssessBonus bonus = (AssessBonus)entity;
     Long applyId = getLong("assessBonus.apply.id");
     UrpUserBean user = (UrpUserBean) entityDao.get(User.class, getUserId());
     AssessApply apply = entityDao.get(AssessApply.class, applyId);
@@ -41,9 +40,6 @@ public class AssessBonusAction extends SecurityActionSupport {
       if (schema.getDeparts().contains(user.getDepartment())) {
         items.addAll(schema.getBonusItems());
       }
-    }
-    if(bonus.getItem() != null){
-      items.add(bonus.getItem());
     }
     put("bonusItems", items);
   }

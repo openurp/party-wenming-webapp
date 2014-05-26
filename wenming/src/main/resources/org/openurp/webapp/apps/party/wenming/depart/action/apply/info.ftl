@@ -41,6 +41,10 @@
    <td class="title" >支撑材料:</td>
    <td class="content" colspan="5">[#if assessApply.attachment??][@b.a target="_blank" href="../attachment?path=${assessApply.attachment.filePath}&name=${assessApply.attachment.name?url('utf-8')}"]${assessApply.attachment.name}[/@][/#if]</td>
   </tr>
+  <tr>
+   <td class="title" >自评总分:</td>
+   <td class="content">${selfAssess.totalScore}</td>
+  </tr>
  </table>
  [@b.div id="bonus_panel"]
     [#assign score=0/]

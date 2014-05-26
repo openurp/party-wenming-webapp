@@ -3,8 +3,9 @@
 [@b.toolbar title='加分材料']
   bar.addBack();
 [/@]
+
 [@b.form action="!save" title="加分项目及其材料" theme="list"]
-  [@b.select name="assessBonus.item.id" id="assessBonusSelect" label="加分项目" items=bonusItems value=assessBonus.item required="true" style="width:500px" option=r"${item.name}(${item.method})"/]
+  [@b.select name="assessBonus.item.id" id="assessBonusSelect" label="加分项目" items=bonusItems value=assessBonus.item required="true" style="width:500px" option=r"${(item.name)!}(${(item.method)!})"/]
   [@b.textfield name="assessBonus.score" label="分数" value=assessBonus.score! required="true" check="match('integer').range(1,100)"/]
   [@b.field label="相关支撑材料"]
   <div style="margin-left:120px">

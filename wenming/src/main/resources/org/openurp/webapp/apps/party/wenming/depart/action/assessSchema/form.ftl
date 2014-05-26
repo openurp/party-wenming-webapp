@@ -1,7 +1,6 @@
 [#ftl]
 [@b.head/]
 [@b.toolbar title="测评方案编辑"]bar.addBack();[/@]
-[@b.tabs]
     [@b.form action="!save" theme="list" name="schema_form"]
       [@b.textfield name="assessSchema.name" label="方案名称" value="${assessSchema.name!}" required="true" maxlength="50"/]
       [@b.radios name="assessSchema.forTeaching" value=assessSchema.forTeaching items={'1':'是','0':'否'} label="针对教学部门" required="true"/]
@@ -13,7 +12,6 @@
         [@b.reset/]&nbsp;&nbsp;[@b.submit value="action.submit"/]
       [/@]
     [/@]
-  [/@]
 <script>
     departs = {}
     [#list allDepartments as d]
