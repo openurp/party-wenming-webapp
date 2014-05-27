@@ -43,7 +43,7 @@
   </tr>
   <tr>
    <td class="title" >自评总分:</td>
-   <td class="content">${selfAssess.totalScore}</td>
+   <td class="content">${(selfAssess.totalScore)!}</td>
   </tr>
  </table>
  [@b.div id="bonus_panel"]
