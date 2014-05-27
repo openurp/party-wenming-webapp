@@ -50,7 +50,7 @@
  [@b.div id="bonus_panel"]
     [#assign score=0/]
     [#list assessApply.bonuses as b]
-    [#assign score=b.score/]
+    [#assign score=score + b.score/]
     [/#list]
    [@b.toolbar title='加分材料---共计${score}分'/]
    [@b.div href="assess-bonus!info?assessBonus.apply.id=${assessApply.id}"/]

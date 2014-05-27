@@ -49,7 +49,7 @@
  [@b.div id="bonus_panel"]
     [#assign score=0/]
     [#list assessApply.bonuses as b]
-    [#assign score=b.score/]
+    [#assign score=score + b.score/]
     [/#list]
    [@b.toolbar title='加分材料---共计${score}分']
      function edit_attachment(){document.getElementById("apply_edit_bonus").click();}
