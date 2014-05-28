@@ -9,11 +9,12 @@
   [@b.textfield name="assessBonus.score" label="分数" value=assessBonus.score! required="true" check="match('integer').range(1,100)"/]
   [@b.field label="相关支撑材料"]
   <div style="margin-left:120px">
-    <input name="attachment" type="file"/><br>
+    <input name="attachment" type="file"/><span>每个附件，最大50M</span><br>
     <input name="attachment" type="file"/><br>
     <input name="attachment" type="file"/><br>
     <input name="attachment" type="file"/><br>
     <input name="attachment" type="file"/>
+    
   </div>
   [/@]
   [@b.formfoot]
