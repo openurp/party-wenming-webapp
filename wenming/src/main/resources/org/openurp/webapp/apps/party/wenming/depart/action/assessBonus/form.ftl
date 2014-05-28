@@ -18,7 +18,7 @@
   [/@]
   [@b.formfoot]
     <input type="hidden" name="assessBonus.id" value="${assessBonus.id!}" />
-    [#if !(assessBonus.id??)]
+    [#if !(assessBonus.id)??]
     <input type="hidden" name="assessBonus.apply.id" value="${Parameters['assessBonus.apply.id']}" />
     [/#if]
     [@b.reset/]&nbsp;&nbsp;[@b.submit value="action.save"/]

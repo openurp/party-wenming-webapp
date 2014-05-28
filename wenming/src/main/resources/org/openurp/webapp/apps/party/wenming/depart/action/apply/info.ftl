@@ -26,11 +26,11 @@
    <td class="content">${assessApply.updatedAt?string("YYYY-MM-dd HH:mm")}</td>
   </tr>
   <tr>
-   <td class="title">创建活动及其效果概要:</td>
+   <td class="title">创建活动及其效果:</td>
    <td class="content" colspan="5" width="80%"> ${assessApply.activitySummary}</td>
   </tr>
   <tr>
-   <td class="title">文明创建特色工作概要:</td>
+   <td class="title">文明创建特色:</td>
    <td class="content" colspan="5" >${assessApply.wenmingSummary}</td>
   </tr>
   <tr>
