@@ -37,7 +37,6 @@ public class ApplyAction extends AbstractApplyAction {
     return state == AssessState.Draft || state == AssessState.DepartUnpassed
         || state == AssessState.SchoolUnpassed;
   }
-
   @Override
   public String edit() {
     AssessApply apply = (AssessApply) getEntity();
@@ -80,9 +79,6 @@ public class ApplyAction extends AbstractApplyAction {
       if (applies.size() == 1) {
         put("assessApply", applies.get(0));
         put("editable", editable(applies.get(0).getState()));
-        put("submitable",
-            Objects.equals(applies.get(0).getState(), AssessState.Draft)
-                || Objects.equals(applies.get(0).getState(), AssessState.DepartUnpassed));
       }
       put("assessSession", session);
       OqlBuilder<SelfAssess>builder2 = OqlBuilder.from(SelfAssess.class, "bb");

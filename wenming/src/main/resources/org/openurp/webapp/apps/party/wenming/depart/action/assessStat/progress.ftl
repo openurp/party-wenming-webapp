@@ -44,15 +44,15 @@
  
  [#assign sum=0/]
  var mutualAssessPie = r.piechart(100, 300, 70,
-  [[#list mutualAssessStat as ast]${ast[1]/departCount},[#assign sum = sum + ast[1]/][/#list]${(departCount-sum)/departCount}],
- { legend: [[#list mutualAssessStat as ast]"%%.%-${ast[0].description} ${ast[1]}",[/#list]"%%.%-未填写 ${departCount-sum}"], legendpos: "east"});
+  [[#list mutualAssessStat?keys as ast][#assign cnt =mutualAssessStat.get(ast)/] ${cnt/mutualCount},[#assign sum = sum + cnt/][/#list]${(mutualCount-sum)/mutualCount}],
+ { legend: [[#list mutualAssessStat?keys as ast]"%%.%-${ast.description} ${mutualAssessStat.get(ast)}",[/#list]"%%.%-未填写 ${mutualCount-sum}"], legendpos: "east"});
  r.text(120, 220, "互评提交进度图").attr(txtattr);
  mutualAssessPie.hover(hoverA, hoverB);
 
  [#assign sum=0/] 
  var funcAssessPie = r.piechart(450, 300, 70,
-  [[#list funcDepartAssessStat as ast]${ast[1]/funcDepartCount},[#assign sum = sum + ast[1]/][/#list]${(funcDepartCount-sum)/funcDepartCount}],
- { legend: [[#list funcDepartAssessStat as ast]"%%.%-${ast[0].description} ${ast[1]}",[/#list]"%%.%-未填写 ${funcDepartCount-sum}"], legendpos: "east"});
+  [[#list funcDepartAssessStat?keys as ast]${funcDepartAssessStat.get(ast)/funcDepartCount},[#assign sum = sum + funcDepartAssessStat.get(ast)/][/#list]${(funcDepartCount-sum)/funcDepartCount}],
+ { legend: [[#list funcDepartAssessStat?keys as ast]"%%.%-${ast.description} ${funcDepartAssessStat.get(ast)}",[/#list]"%%.%-未填写 ${funcDepartCount-sum}"], legendpos: "east"});
  r.text(450, 220, "职能部门提交进度图").attr(txtattr);
  funcAssessPie.hover(hoverA, hoverB);
 </script>
@@ -73,10 +73,23 @@
       <td>${depart.name}</td>
       <td>[#if appliedDepartIds?seq_contains(depart.id)]<span class="toolbar-icon action-activate"></span>[#else]<span class="toolbar-icon action-close"></span>[/#if]</td>
       <td>[#if selfAssessDepartIds?seq_contains(depart.id)]<span class="toolbar-icon action-activate"></span>[#else]<span class="toolbar-icon action-close"></span>[/#if]</td>
-      <td>[#if mutualAssessDepartIds?seq_contains(depart.id)]<span class="toolbar-icon action-activate"></span>[#else]<span class="toolbar-icon action-close"></span>[/#if]</td>
+      <td>[#assign delta = mutualCnts.get(depart.id) - mutualAssessDeparts.get(depart.id)!0]
+       [#list  1 .. mutualCnts.get(depart.id) as i]
+          [#if delta=0]<span class="toolbar-icon action-activate"></span>
+          [#else]
+          [#assign delta = delta-1]<span class="toolbar-icon action-close"></span>
+          [/#if]
+       [/#list]
+      </td>
       <td>
-      [#if !depart.teaching]
-        [#if funcDepartAssessDepartIds?seq_contains(depart.id)]<span class="toolbar-icon action-activate"></span>[#else]<span class="toolbar-icon action-close"></span>[/#if]
+      [#if funcDeparts?seq_contains(depart)]
+      [#assign delta = funcDepartCnts.get(depart.id) - funcDepartAssessDeparts.get(depart.id)!0]
+      [#list  1 .. funcDepartCnts.get(depart.id) as i]
+          [#if delta=0]<span class="toolbar-icon action-activate"></span>
+          [#else]
+          [#assign delta = delta-1]<span class="toolbar-icon action-close"></span>
+          [/#if]
+       [/#list]
       [/#if]
       </td>
     </tr>

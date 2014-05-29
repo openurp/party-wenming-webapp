@@ -7,8 +7,6 @@
     function submit_apply(){ if(confirm("提交后不能修改，确认提交？")) document.getElementById("apply_submit").click(); }
     [#if editable && assessSession.opened]
     bar.addItem("${b.text("action.edit")}",edit);
-    [/#if]
-    [#if submitable && assessSession.opened]
     bar.addItem("${b.text("action.submit")}",submit_apply);
     [/#if]
 [/@]
