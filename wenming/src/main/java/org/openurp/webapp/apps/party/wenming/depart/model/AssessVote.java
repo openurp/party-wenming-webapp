@@ -17,7 +17,7 @@ public class AssessVote extends NumberIdTimeObject<Long> {
   private AssessSession session;
 
   /** 投票人 */
-  private User voter;
+  private Supervisor voter;
 
   /** 部门 */
   private Department department;
@@ -35,11 +35,12 @@ public class AssessVote extends NumberIdTimeObject<Long> {
     this.session = session;
   }
 
-  public User getVoter() {
+
+  public Supervisor getVoter() {
     return voter;
   }
 
-  public void setVoter(User voter) {
+  public void setVoter(Supervisor voter) {
     this.voter = voter;
   }
 
