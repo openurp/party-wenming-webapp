@@ -3,7 +3,7 @@
 [@b.head/]
 [@b.grid  items=goodOffices var="goodOffice" sortable="false"]
   [@b.gridbar]
-    //bar.addItem("审核",action.edit());
+    bar.addItem("审核",action.edit());
     bar.addItem("导出",action.exportData("department.name:单位,offices:文明科室","Xls","&fileName=文明科室"));
   [/@]
   [@b.row]
