@@ -7,6 +7,7 @@ import java.util.Iterator;
 import org.apache.commons.lang.StringUtils;
 import org.beangle.commons.dao.query.builder.OqlBuilder;
 import org.beangle.commons.entity.Entity;
+import org.openurp.kernel.base.unit.model.UrpUserBean;
 import org.openurp.webapp.apps.party.wenming.depart.action.WenMingAction;
 import org.openurp.webapp.apps.party.wenming.depart.model.AssessState;
 import org.openurp.webapp.apps.party.wenming.model.AbstractWenmingObject;
@@ -38,7 +39,8 @@ public abstract class WenMingProjectAction extends WenMingAction {
   @Override
   protected <T extends Entity<?>> OqlBuilder<T> getQueryBuilder() {
     OqlBuilder<T> query = super.getQueryBuilder();
-    query.where("submitBy.id = :submitByid", getUserId());
+    UrpUserBean user = entityDao.get(UrpUserBean.class, getUserId());
+    query.where("department = :department", user.getDepartment());
     return query;
   }
 

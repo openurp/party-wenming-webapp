@@ -1,0 +1,22 @@
+[#ftl]
+[#include "/org/openurp/webapp/apps/party/wenming/comm.ftl"/]
+[@b.head/]
+[@b.grid  items=goodOffices var="goodOffice" sortable="false"]
+  [@b.gridbar]
+    //bar.addItem("审核",action.edit());
+    bar.addItem("导出",action.exportData("department.name:单位,offices:文明科室","Xls","&fileName=文明科室"));
+  [/@]
+  [@b.row]
+    [@b.boxcol /]
+    [@b.col width="15%" property="department.name" title="申报部门"][/@]
+    [@b.col width="70%" property="offices" title="文明科室"][/@]
+    [@b.col width="10%" property="attachment.name" title="详细材料"]
+      [#if goodOffice.attachment??]
+        [@b.a target="_blank" href="../attachment?path=${goodOffice.attachment.filePath}&name=${goodOffice.attachment.name?url('utf-8')}"]下载[/@]
+      [#else]未上传
+      [/#if]
+    [/@]
+    [@b.col width="15%" property="state.description" title="审核情况"][/@]
+  [/@]
+[/@]
+[@b.foot/]
