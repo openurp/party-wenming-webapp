@@ -7,6 +7,7 @@
   <tr>
     <td class="index_view">
     [@b.form name="goodPostSearchForm"  action="!search" target="goodPostlist" title="ui.searchForm" theme="search"]
+      [@b.select items=sessions name="goodPost.session.id" label="测评批次"/]
       [@b.textfields names="goodPost.name;项目名称"/]
       <input type="hidden" name="orderBy" value="updatedAt desc"/>
     [/@]

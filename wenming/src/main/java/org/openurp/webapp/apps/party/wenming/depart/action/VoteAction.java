@@ -90,7 +90,7 @@ public class VoteAction extends SupervisorCommAction {
     boolean isForTeaching = getBool("departmentType");
     List<AssessVote> assessVotes = findAssessVote(session.getId(), isForTeaching);
     
-    if (nowSession.equals(session)) {
+    if (nowSession!=null && nowSession.equals(session)) {
       if (assessVotes.isEmpty()) {
         Supervisor voter = getSupervisor();
         Date now = new Date();

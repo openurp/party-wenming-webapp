@@ -9,6 +9,7 @@ import org.beangle.commons.dao.query.builder.OqlBuilder;
 import org.beangle.commons.entity.Entity;
 import org.openurp.kernel.base.unit.model.UrpUserBean;
 import org.openurp.webapp.apps.party.wenming.depart.action.WenMingAction;
+import org.openurp.webapp.apps.party.wenming.depart.model.AssessSession;
 import org.openurp.webapp.apps.party.wenming.depart.model.AssessState;
 import org.openurp.webapp.apps.party.wenming.model.AbstractWenmingObject;
 import org.openurp.webapp.apps.party.wenming.model.WenmingSession;
@@ -30,6 +31,13 @@ public abstract class WenMingProjectAction extends WenMingAction {
 
   abstract protected WenmingType getWenmingType();
 
+  @Override
+  protected void indexSetting() {
+    OqlBuilder<WenmingSession> builder = OqlBuilder.from(WenmingSession.class, "ss");
+    builder.join("ss.types", "t");
+    builder.where("t=:t", getWenmingType()).orderBy("ss.beginOn desc");
+    put("sessions", entityDao.search(builder));
+  }
   @Override
   public String search() {
     put("editable", editable());
