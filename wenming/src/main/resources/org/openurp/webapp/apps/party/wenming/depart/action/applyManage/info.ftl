@@ -3,7 +3,15 @@
 [@b.messages slash="3"/]
 [@b.toolbar title='基本信息']
     function approve(){ if(confirm("提交后不能修改，确认提交？")) document.getElementById("apply_approved").click(); }
-    function disApprove(){ if(confirm("确定退回修改？")) document.getElementById("apply_disapproved").click(); }
+    function disApprove(){ 
+      var text=prompt("请填写审批意见");
+      if(text != null && text != ""){
+        $("#apply_advise").val(text);
+        document.getElementById("apply_disapproved").click(); 
+      }else{
+      alert("请填写审批意见");
+      }
+    }
     [#if editable]
     bar.addItem("审批通过",approve);
     bar.addItem("退回修改",disApprove);
@@ -11,6 +19,7 @@
 [/@]
 <div>
   [@b.form name="apply_manage_form"]
+  <input type="hidden" name="advise" id="apply_advise"/>
   [@b.submit id="apply_approved" style="display:none" value="审批通过" action="!approve?assessApply.id=${assessApply.id}"/]
   [@b.submit id="apply_disapproved" style="display:none" value="审批不通过" action="!disApprove?assessApply.id=${assessApply.id}"/]
   [/@]

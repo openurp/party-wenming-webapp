@@ -17,9 +17,10 @@
         <union-subclass name="org.openurp.webapp.apps.party.wenming.model.AbstractWenmingFinalSummaryObject" abstract="true">
 	        <property name="content" length="1000" not-null="true"/>
 	        <property name="forAssess" not-null="true"/>
-	        <union-subclass name="org.openurp.webapp.apps.party.wenming.project.model.GoodProjectFinalSummary">  
+	      <union-subclass name="org.openurp.webapp.apps.party.wenming.project.model.GoodProjectFinalSummary">
+          <property name="auditOpinion"  />  
 	        <many-to-one  name="good" column="good_id" not-null="true"/> 
-	        </union-subclass>  
+	      </union-subclass>  
         </union-subclass>
         <union-subclass name="org.openurp.webapp.apps.party.wenming.project.model.GoodProjectMiddleSummary">  
         <many-to-one  name="good" column="good_id" not-null="true"/> 

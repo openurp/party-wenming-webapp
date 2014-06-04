@@ -55,6 +55,17 @@ public class AssessApply extends NumberIdTimeObject<Long> implements AttachmentO
 
   /** 相关支撑材料 */
   private Attachment attachment;
+  
+  /** 审核意见 **/
+  private String advise;
+
+  public String getAdvise() {
+    return advise;
+  }
+
+  public void setAdvise(String advise) {
+    this.advise = advise;
+  }
 
   public Department getDepartment() {
     return department;

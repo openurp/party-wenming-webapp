@@ -42,6 +42,7 @@ public class ManageAction  extends SecurityActionSupport {
     if(getBool("passed")){
       goodOffice.setState(AssessState.SchoolApproved);
     }else {
+      goodOffice.setAuditOpinion(get("auditOpinion"));
       goodOffice.setState(AssessState.SchoolUnpassed);
     }
   }

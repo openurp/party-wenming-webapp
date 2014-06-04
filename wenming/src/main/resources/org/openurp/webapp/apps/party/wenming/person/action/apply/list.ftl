@@ -15,7 +15,7 @@
     [@b.col width="20%" property="department.name" title="选送单位"][/@]
     [@b.col width="15%" property="attachment.name" title="详细材料"]
       [#if goodPerson.attachment??]
-      [@b.a target="_blank" href="../attachment?path=${goodPerson.attachment.filePath}&name=${goodPerson.attachment.name?url('utf-8')}"]${(goodPerson.attachment.name)!}[/@]
+      [@b.a target="_blank" href="../attachment?path=${goodPerson.attachment.filePath}&name=${goodPerson.attachment.name?url('utf-8')}"]下载[/@]
       [/#if]
     [/@]
     [@b.col width="15%" property="state.description" title="审核情况"][/@]

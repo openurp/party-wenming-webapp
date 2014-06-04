@@ -77,6 +77,7 @@ public class ApplyManageAction extends AbstractApplyAction {
     if (editable(apply.getState())) {
       apply.setState(AssessState.SchoolUnpassed);
       apply.setUpdatedAt(new Date());
+      apply.setAdvise(get("advise"));
       entityDao.saveOrUpdate(apply);
       return redirect("search", "info.save.success", "&session.id=" + apply.getSession().getId());
     } else {

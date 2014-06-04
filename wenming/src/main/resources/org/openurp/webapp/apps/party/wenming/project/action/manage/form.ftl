@@ -43,6 +43,7 @@ width: 130px;
       [@b.reset/]
       [@b.submit value="action.save" onsubmit="saveForm"/]
     [/#if]
+    <input type="hidden" name="auditOpinion" id="auditOpinion"/>
     [@b.submit value="通过" onsubmit="passForm"/]
     [@b.submit value="不通过" onsubmit="unpassForm"/]
   [/@]
@@ -61,11 +62,14 @@ width: 130px;
     return false;
   }
   
-  function unpassForm(){
-    if(confirm("是否确定审核不通过？")){
+  function unpassForm(){ 
+    var text=prompt("请填写审批意见");
+    if(text != null && text != ""){
+      $("#auditOpinion").val(text);
       return true;
+    }else{
+    alert("请填写审批意见");
     }
-    return false;
   }
   
   [#if alterable?? && !alterable]
