@@ -6,7 +6,7 @@ form.listform label.title {
 width: 130px;
 }
 </style>
-[@b.form action="!saveFinalSummary" theme="list"]
+[@b.form action="!saveFinalSummary" theme="list" enctype="multipart/form-data"]
   [#if ifAdvise?? && ifAdvise]
     [@b.field label="文明办审核意见"]<span style="color:red; font-size:16px">${goodProjectFinalSummary.auditOpinion}</span>[/@]
   [/#if]

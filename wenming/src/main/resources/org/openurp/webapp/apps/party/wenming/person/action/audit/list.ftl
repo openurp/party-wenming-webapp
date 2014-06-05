@@ -16,7 +16,7 @@
       [@b.a target="_blank" href="../attachment?path=${goodPerson.attachment.filePath}&name=${goodPerson.attachment.name?url('utf-8')}"]下载[/@]
       [/#if]
     [/@]
-    [@b.col width="15%" property="state.description" title="审核情况"][/@]
+    [@b.col width="15%" property="state" title="审核情况"]${goodPerson.state.description}[/@]
   [/@]
 [/@]
 [@b.foot/]
