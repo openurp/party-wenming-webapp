@@ -80,6 +80,7 @@ public class ApplyAction extends AbstractApplyAction {
         put("assessApply", applies.get(0));
         put("editable", editable(applies.get(0).getState()));
       }
+      put("ifadvise", ifAdvise(applies.get(0)));
       put("assessSession", session);
       OqlBuilder<SelfAssess>builder2 = OqlBuilder.from(SelfAssess.class, "bb");
       builder2.where("bb.session=:session",session);
@@ -126,6 +127,10 @@ public class ApplyAction extends AbstractApplyAction {
 
   public void setAttachmentHelper(AttachmentHelper attachmentHelper) {
     this.attachmentHelper = attachmentHelper;
+  }
+  
+  protected boolean ifAdvise(AssessApply apply){
+    return apply.getState().equals(AssessState.SchoolUnpassed);
   }
 
 }

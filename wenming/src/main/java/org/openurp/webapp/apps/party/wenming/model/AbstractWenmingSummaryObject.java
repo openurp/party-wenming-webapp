@@ -18,7 +18,7 @@ abstract public class AbstractWenmingSummaryObject<T> extends NumberIdTimeObject
 
   /**申报人员**/
   private User user;
-
+  
   abstract public T getGood(); 
 
   abstract public void setGood(T t); 

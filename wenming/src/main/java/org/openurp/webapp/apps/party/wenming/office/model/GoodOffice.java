@@ -45,6 +45,18 @@ public class GoodOffice extends NumberIdTimeObject<Long> implements AttachmentOb
 
   /** 相关支撑材料 */
   private Attachment attachment;
+  
+  /** 审核意见 */
+  private String auditOpinion;
+
+  public String getAuditOpinion() {
+    return auditOpinion;
+  }
+
+  public void setAuditOpinion(String auditOpinion) {
+    this.auditOpinion = auditOpinion;
+  }
+
 
   public WenmingSession getSession() {
     return session;

@@ -48,11 +48,16 @@ public class ApplyAction extends SecurityActionSupport {
     WenmingSession session = entityDao.get(WenmingSession.class, apply.getSession().getId());
     if (!session.isOpened()) return redirect("info", "不在申请时间段", "&session.id=" + apply.getSession().getId());
     if (editable(apply.getState())) {
+      put("ifAdvise", ifAdvise(apply));
       put(getShortName(), apply);
       return forward();
     } else {
       return redirect("info", "不能修该状态的申请", "&session.id=" + apply.getSession().getId());
     }
+  }
+
+  private boolean ifAdvise(GoodOffice apply) {
+    return apply!=null && apply.getState()!=null && apply.getState().equals(AssessState.SchoolUnpassed);
   }
 
   public String submit() {

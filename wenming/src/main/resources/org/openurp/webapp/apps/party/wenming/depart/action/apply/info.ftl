@@ -15,6 +15,12 @@
   [@b.a id="apply_submit" style="display:none" href="!submit?assessApply.id=${assessApply.id}"]提交[/@]
 </div>
 <table class="infoTable">
+  [#if ifAdvise?? && ifAdvise]
+    <tr>
+      <td class="title">文明办审核意见</td>
+      <td class="content" style="color:red">${assessApply.advise}</td>
+    </tr>
+  [/#if]
   <tr>
    <td class="title">状态:</td>
    <td class="content">${assessApply.state.description}</td>

@@ -9,6 +9,7 @@ import org.beangle.commons.dao.query.builder.OqlBuilder;
 import org.beangle.commons.entity.Entity;
 import org.openurp.kernel.base.unit.model.UrpUserBean;
 import org.openurp.webapp.apps.party.wenming.depart.action.WenMingAction;
+import org.openurp.webapp.apps.party.wenming.depart.model.AssessApply;
 import org.openurp.webapp.apps.party.wenming.depart.model.AssessSession;
 import org.openurp.webapp.apps.party.wenming.depart.model.AssessState;
 import org.openurp.webapp.apps.party.wenming.model.AbstractWenmingObject;
@@ -59,6 +60,7 @@ public abstract class WenMingProjectAction extends WenMingAction {
     AbstractWenmingObject obj = (AbstractWenmingObject) entity;
     obj.setStatements(StringUtils.replace(obj.getStatements(), "<br>", "\n"));
     obj.setFeatures(StringUtils.replace(obj.getFeatures(), "<br>", "\n"));
+    put("ifAdvise", ifAdvise(obj));
     put("alterable", alterable(obj));
     put("ifApplyAudit", ifApplyAudit(obj));
     if (obj instanceof GoodProject) {
@@ -147,5 +149,9 @@ public abstract class WenMingProjectAction extends WenMingAction {
   protected boolean ifFinalSummary(GoodProject obj) {
     return (obj.getMiddleSummary() != null && obj.getMiddleSummary().getAttachment() != null
         && obj.getFinalSummary() != null && obj.getFinalSummary().getAttachment() != null);
+  }
+  
+  protected boolean ifAdvise(AbstractWenmingObject obj){
+    return obj !=null && obj.getState()!=null && obj.getState().equals(AssessState.SchoolUnpassed);
   }
 }

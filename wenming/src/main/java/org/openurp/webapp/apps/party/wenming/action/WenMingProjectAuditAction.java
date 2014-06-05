@@ -28,6 +28,7 @@ public abstract class WenMingProjectAuditAction extends WenMingProjectAction {
       if (getBool("passed")) {
         obj.setState(AssessState.SchoolApproved);
       } else {
+        obj.setAuditOpinion(get("auditOpinion"));
         obj.setState(AssessState.SchoolUnpassed);
       }
     } else if (AssessState.SchoolApproved.equals(obj.getState()) && obj instanceof GoodProject) {
@@ -37,6 +38,7 @@ public abstract class WenMingProjectAuditAction extends WenMingProjectAction {
         if (getBool("passed")) {
           good.getFinalSummary().setState(AssessState.SchoolApproved);
         } else {
+          good.getFinalSummary().setAuditOpinion(get("auditOpinion"));
           good.getFinalSummary().setState(AssessState.SchoolUnpassed);
         }
       }

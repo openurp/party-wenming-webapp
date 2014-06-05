@@ -1,10 +1,5 @@
 package org.openurp.webapp.apps.party.wenming.model;
 
-import java.util.Date;
-
-import org.beangle.commons.entity.pojo.NumberIdTimeObject;
-import org.beangle.security.blueprint.User;
-import org.openurp.webapp.apps.party.wenming.depart.model.AssessState;
 
 abstract public class AbstractWenmingFinalSummaryObject<T> extends AbstractWenmingSummaryObject<T>{
 

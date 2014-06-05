@@ -27,5 +27,6 @@
           <key column="apply_id"></key>
           <one-to-many class="org.openurp.webapp.apps.party.wenming.depart.model.AssessBonus" />
         </bag>
+        <property name="advise"/>
     </class>
 </hibernate-mapping>

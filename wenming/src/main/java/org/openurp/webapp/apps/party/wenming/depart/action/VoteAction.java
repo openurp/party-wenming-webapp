@@ -134,10 +134,10 @@ public class VoteAction extends SupervisorCommAction {
       } catch (Exception e){}
     }
     put("totalScoreMap",totalScoreMap);
-    put("selfAssessScore", selfAssessScore);
-    put("mutualAssessScore", mutualAssessScore);
-    put("funcDepartAssessScore", funcDepartAssessScore);
-    put("supervisorAssessScore", supervisorAssessScore);
+    //put("selfAssessScore", selfAssessScore);
+    //put("mutualAssessScore", mutualAssessScore);
+    //put("funcDepartAssessScore", funcDepartAssessScore);
+    //put("supervisorAssessScore", supervisorAssessScore);
     put("assessApplies", assessApplies);
     put("departmentType", isForTeaching);
   }

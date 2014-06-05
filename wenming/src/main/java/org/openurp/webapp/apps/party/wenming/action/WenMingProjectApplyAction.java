@@ -68,10 +68,15 @@ public abstract class WenMingProjectApplyAction extends WenMingProjectAction {
       obj.setGood(good);
       obj.setContent(StringUtils.replace(obj.getContent(), "<br>", "\n"));
       put(getShortName(getFinalSummaryClass()), obj);
+      put("ifAdvise", ifAdvise(obj));
       return forward();
     }else{
       return redirect("search", "无法操作");
     }
+  }
+
+  private boolean ifAdvise(GoodProjectFinalSummary obj) {
+    return obj!=null && obj.getState()!=null &&obj.getState().equals(AssessState.SchoolUnpassed);
   }
 
   public String saveFinalSummary() {
