@@ -15,20 +15,20 @@
     <table id="voteTable" class="gridtable assessTable">
       <thead>
         <tr>
-          <th width="10">测评单位</th>
+          <th width="4%">测评单位</th>
 [#--
           <th width="50">自评总分</th>
           <th width="50">互评总分</th>
           <th width="50">职能部门测评总分</th>
           <th width="50">督察组测评总分</th>
 --]
-          <th width="150">创建活动及其效果</th>
-          <th width="150">文明创建特色</th>
-          <th width="330">详实材料</th>
-          <th width="10">相关支撑材料</th>
-          <th width="10">加分项分值</th>
-          <th width="10">测评总分</th>
-          <th width="50">投票（投票上限：<span class="voteMaxNum" style="color:red"></span>票）</th>
+          <th width="25%">创建活动及其效果</th>
+          <th width="25%">文明创建特色</th>
+          <th width="25%">详实材料</th>
+          <th width="4%">相关支撑材料</th>
+          <th width="4%">加分项分值</th>
+          <th width="4%">测评总分</th>
+          <th width="8%">投票（投票上限：<span class="voteMaxNum" style="color:red"></span>票）</th>
         </tr>
       </thead>
       <tbody>
@@ -99,9 +99,11 @@
       [@b.submit value="action.save" onsubmit="saveAssess"/]
       [@b.submit value="action.submit" onsubmit="submitAssess"/]
     </div>
+    <div style="display:none;" id="detailDiv"></div>
   [/@]  
-    
+  
   <script>
+    jQuery.struts2_jquery.require("/js/base/jquery-ui.js",null,bg.getContextPath() + "/static");
     var needsize = Math.round($("#voteTable tbody tr").length/5);
     $(".voteMaxNum").html(needsize);
     function isallselected(){
@@ -133,9 +135,59 @@
     $(".assessTable tr").each(function (){
       $(this).find("td").not(function (i){return i == 7|| i==4;}).each(function (){
         var td = $(this);
-        td.attr("a", 11);
-        td.html(td.text());
+        var content = td.html(), text = td.text(), max = 150; 
+        td.html(text.substring(0, max));
+        if(text.length > max){
+          var a = $("<a href='#' style='margin-left:10px;'>查看更多...</a>");
+          td.append(a);
+          a.click(function (){
+            var detailDiv = $("#detailDiv");
+            detailDiv.empty().html(content);
+            detailDiv.dialog({width:"90%", modal:true});
+            return false;
+          });
+        }
       });
+    });
+    $(".assessTable th").filter(function (i){return i == 0 || i == 5 || i == 6}).each(function (i){
+      var th = $(this);
+      th.css("cursor", "pointer");
+      th.hover(function (){
+        th.css("background-color", "green").css("color", "#fff");
+      }, function (){
+        th.css("background-color", "#c7dbff").css("color", "#000");
+      });
+      th.click(function (){
+        var thindex = $(this).index();
+        var trs = new Array();
+        $(".assessTable tbody tr").each(function (){
+          trs.push($(this));
+        });
+        /*
+        for(var i = 0; i < trs.length - 1; i++){
+          for(var j = 1; j < trs.length - i; j++){
+            var tr1 = trs[j - 1], tdtext1 = tr1.find("td").eq(thindex).text();
+            var tr2 = trs[j], tdtext2 = tr2.find("td").eq(thindex).text();
+            if(tdtext1 < tdtext2){
+              trs[j - 1] = tr2;
+              trs[j] =  tr1;
+            }
+          }
+        }*/
+        trs.sort(function (x, y){
+            var tdtext1 = x.find("td").eq(thindex).text();
+            var tdtext2 = y.find("td").eq(thindex).text();
+            if(tdtext1 < tdtext2){
+              return 1;
+            }else{
+              return -1;
+            }
+        });
+        for(var i in trs){
+          var tr = trs[i];
+          tr.appendTo(".assessTable");
+        }
+       });
     });
     //$(".radio_true").attr("checked","checked");
   </script>

@@ -29,7 +29,7 @@
       [#else]未上传
       [/#if]
     [/@]
-    [@b.col width="15%" property="state.description" title="审核情况"][/@]
+    [@b.col width="15%" property="state" title="审核情况"]${goodProject.state.description}[/@]
   [/@]
 [/@]
 [@b.foot/]

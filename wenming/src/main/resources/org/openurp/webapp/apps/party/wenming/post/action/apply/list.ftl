@@ -18,7 +18,7 @@
         [@b.a target="_blank" href="../attachment?path=${goodPost.attachment.filePath}&name=${goodPost.attachment.name?url('utf-8')}"]下载[/@]
       [/#if]
     [/@]
-    [@b.col width="15%" property="state.description" title="审核情况"][/@]
+    [@b.col width="15%" property="state" title="审核情况"]${goodPost.state.description}[/@]
   [/@]
 [/@]
 [@b.foot/]

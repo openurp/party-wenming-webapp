@@ -1,7 +1,7 @@
 [#ftl]
 [#include "/org/openurp/webapp/apps/party/wenming/comm.ftl"/]
 [@b.head/]
-[@b.grid  items=goodOffices var="goodOffice" sortable="false"]
+[@b.grid  items=goodOffices var="goodOffice"]
   [@b.gridbar]
     bar.addItem("审核",action.edit());
     bar.addItem("导出",action.exportData("department.name:单位,offices:文明科室","Xls","&fileName=文明科室"));
@@ -16,7 +16,7 @@
       [#else]未上传
       [/#if]
     [/@]
-    [@b.col width="15%" property="state.description" title="审核情况"][/@]
+    [@b.col width="15%" property="state" title="审核情况"]${goodOffice.state.description}[/@]
   [/@]
 [/@]
 [@b.foot/]
