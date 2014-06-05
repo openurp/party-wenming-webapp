@@ -79,8 +79,8 @@ public class ApplyAction extends AbstractApplyAction {
       if (applies.size() == 1) {
         put("assessApply", applies.get(0));
         put("editable", editable(applies.get(0).getState()));
+        put("ifadvise", ifAdvise(applies.get(0)));
       }
-      put("ifadvise", ifAdvise(applies.get(0)));
       put("assessSession", session);
       OqlBuilder<SelfAssess>builder2 = OqlBuilder.from(SelfAssess.class, "bb");
       builder2.where("bb.session=:session",session);
