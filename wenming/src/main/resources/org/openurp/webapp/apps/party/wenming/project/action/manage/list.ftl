@@ -1,7 +1,7 @@
 [#ftl]
 [#include "/org/openurp/webapp/apps/party/wenming/comm.ftl"/]
 [@b.head/]
-[@b.grid  items=goodProjects var="goodProject" sortable="false"]
+[@b.grid  items=goodProjects var="goodProject" ]
   [@b.gridbar]
     [#if editable]
     bar.addItem("审核",action.edit());
@@ -23,13 +23,13 @@
       [#else]未上传
       [/#if]
     [/@]
-    [@b.col width="10%" property="attachment.name" title="详细材料"]
+    [@b.col width="10%" property="attachment" title="详细材料"]
       [#if goodProject.attachment??]
         [@b.a target="_blank" href="../attachment?path=${goodProject.attachment.filePath}&name=${goodProject.attachment.name?url('utf-8')}"]下载[/@]
       [#else]未上传
       [/#if]
     [/@]
-    [@b.col width="15%" property="state.description" title="审核情况"][/@]
+    [@b.col width="15%" property="state" title="审核情况"]${goodProject.state.description}[/@]
   [/@]
 [/@]
 [@b.foot/]

@@ -1,7 +1,7 @@
 [#ftl]
 [#include "/org/openurp/webapp/apps/party/wenming/comm.ftl"/]
 [@b.head/]
-[@b.grid  items=goodProjects var="goodProject" sortable="false"]
+[@b.grid  items=goodProjects var="goodProject"]
   [@b.gridbar]
     [#if editable]
     bar.addItem("${b.text("action.new")}",action.add());

@@ -1,7 +1,7 @@
 [#ftl]
 [#include "/org/openurp/webapp/apps/party/wenming/comm.ftl"/]
 [@b.head/]
-[@b.grid  items=goodPersons var="goodPerson" sortable="false"]
+[@b.grid  items=goodPersons var="goodPerson"]
   [@b.gridbar]
     [#if editable]
     bar.addItem("审核",action.edit());
