@@ -19,7 +19,6 @@ import org.openurp.webapp.apps.party.wenming.depart.model.SelfAssess;
 import org.openurp.webapp.apps.party.wenming.depart.model.Supervisor;
 import org.openurp.webapp.apps.party.wenming.depart.model.SupervisorAssess;
 
-import com.sun.tools.classfile.StackMapTable_attribute.verification_type_info;
 
 public class VoteAction extends SupervisorCommAction {
 
