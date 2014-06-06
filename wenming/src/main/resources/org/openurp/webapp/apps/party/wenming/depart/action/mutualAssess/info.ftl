@@ -33,6 +33,7 @@
   [#if editable??]
     <div style="text-align:center; padding:30px;" class="footdiv">
       <input type="hidden" name="schema.id" value="${malist[0].schema.id}"/>
+      <input type="hidden" name="session.id" value="${malist[0].session.id}"/>
       [@b.submit value="修改"/]
     </div>
   [/#if]
