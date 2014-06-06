@@ -70,7 +70,7 @@ public abstract class AssessAction<T extends AbstractAssessInfo, I extends Abstr
     }
     AssessSession nowAssessSession = wenMingService.getAssessSessionByAssessTime();
     AssessSession assessSession = entityDao.get(AssessSession.class, getInt("session.id"));
-    if (nowAssessSession.equals(assessSession)) {
+    if (nowAssessSession != null && nowAssessSession.equals(assessSession)) {
       AssessSchema schema = entityDao.get(AssessSchema.class, schemaId);
       List<AbstractAssessInfo> malist = findAssess(assessSession.getId(), schema.getId());
       if (malist.isEmpty() && editCreateAble()) {
