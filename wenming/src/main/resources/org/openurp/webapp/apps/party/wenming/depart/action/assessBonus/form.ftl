@@ -6,7 +6,7 @@
 
 [@b.form action="!save" title="加分项目及其材料" theme="list"  enctype="multipart/form-data"]
   [@b.select name="assessBonus.item.id" id="assessBonusSelect" label="加分项目" items=bonusItems value=assessBonus.item required="true" style="width:500px" option=r"${(item.name)!}(${(item.method)!})"/]
-  [@b.textfield name="assessBonus.score" label="分数" value=assessBonus.score! required="true" check="match('integer').range(1,100)"/]
+  [@b.textfield name="assessBonus.score" label="分数" value=assessBonus.score! required="true" check="match('integer').range(1,500)"/]
   [@b.field label="相关支撑材料"]
   <div style="margin-left:120px">
     <input name="attachment" type="file"/><span>每个附件，最大50M</span><br>
