@@ -49,7 +49,7 @@ public class VoteAction extends SupervisorCommAction {
   @Override
   public String index() throws Exception {
     if (getSupervisorId() == null) { return redirect("login"); }
-    List<AssessSession> assessSessions = wenMingService.findSessions();
+    List<AssessSession> assessSessions = wenMingService.findAssessSessions();
     Integer sessionId = getInt("session.id");
     AssessSession assessSession = null;
     if (sessionId != null) {

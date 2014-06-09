@@ -3,7 +3,7 @@
 [@b.form action="!save" title="申报基本信息" theme="list" enctype="multipart/form-data"]
   [@b.textarea name="assessApply.activitySummary" id="assessApply_activitySummary" label="创建活动及其效果" value="${assessApply.activitySummary!}" required="true"  cols="100" rows="5" maxlength="8000" comment="300字以内" editor="kind"/]
   [@b.textarea name="assessApply.wenmingSummary" id="assessApply_wenmingSummary" label="文明创建特色" value="${assessApply.wenmingSummary!}" required="true"  cols="100" rows="5" maxlength="8000" comment="300字以内" editor="kind"/]
-  [@b.textarea name="assessApply.detail" id="assessApply_detail" label="详实材料" value="${assessApply.detail!}" required="true"  cols="100" rows="15" maxlength="8000" comment="1800字以内" editor="kind"/]
+  [@b.textarea name="assessApply.detail" id="assessApply_detail" label="详实材料" value="${assessApply.detail!}" required="true"  cols="100" rows="15" maxlength="80000" comment="1800字以内" editor="kind"/]
   [@b.field label="相关支撑材料"]<input name="attachment" type="file"/>（可提供相关扫描件、文档、图片、表格等，如有多个文件，请放在一个文件夹里，打包成压缩包进行上传）[/@]
   [@b.formfoot]
     <input type="hidden" name="assessApply.id" value="${assessApply.id!}" />

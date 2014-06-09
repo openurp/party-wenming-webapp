@@ -12,6 +12,7 @@ import org.openurp.webapp.apps.party.wenming.depart.model.AssessSession;
 import org.openurp.webapp.apps.party.wenming.depart.model.AssessType;
 import org.openurp.webapp.apps.party.wenming.depart.service.QueryInvoker;
 import org.openurp.webapp.apps.party.wenming.depart.service.WenMingService;
+import org.openurp.webapp.apps.party.wenming.model.WenmingSession;
 
 public class WenMingServiceImpl extends BaseServiceImpl implements WenMingService {
 
@@ -69,7 +70,7 @@ public class WenMingServiceImpl extends BaseServiceImpl implements WenMingServic
   }
 
   @Override
-  public List<AssessSession> findSessions() {
+  public List<AssessSession> findAssessSessions() {
     OqlBuilder<AssessSession> query = OqlBuilder.from(AssessSession.class, "o");
     query.where("o.enabled=true");
     query.orderBy("o.beginOn desc");
@@ -100,4 +101,20 @@ public class WenMingServiceImpl extends BaseServiceImpl implements WenMingServic
   public List<AssessItem> findAssessItem(AssessSchema schema) {
     return findAssessItem(schema, null);
   }
+
+  @Override
+  public List<WenmingSession> findWenmingSessions() {
+    OqlBuilder<WenmingSession> query = OqlBuilder.from(WenmingSession.class, "o");
+    query.orderBy("o.beginOn desc");
+    return entityDao.search(query);
+  }
+  
+  @Override
+  public WenmingSession getWenmingSessionByAssessTime() {
+    OqlBuilder<WenmingSession> query = OqlBuilder.from(WenmingSession.class, "o");
+    query.where("beginOn <= :now and endOn >= :now", new Date());
+    List<WenmingSession> list = entityDao.search(query);
+    return list.isEmpty() ? null : list.get(0);
+  }
+
 }

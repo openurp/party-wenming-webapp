@@ -41,5 +41,10 @@
     <mapping resource="org/openurp/webapp/apps/party/wenming/person/model/GoodPerson.hbm.xml"/>
     <mapping resource="org/openurp/webapp/apps/party/wenming/post/model/GoodPost.hbm.xml"/>
     <mapping resource="org/openurp/webapp/apps/party/wenming/office/model/GoodOffice.hbm.xml"/>
+    
+    <mapping resource="org/openurp/webapp/apps/party/wenming/person/model/GoodPersonVote.hbm.xml"/>
+    <mapping resource="org/openurp/webapp/apps/party/wenming/post/model/GoodPostVote.hbm.xml"/>
+    <mapping resource="org/openurp/webapp/apps/party/wenming/project/model/GoodProjectVote.hbm.xml"/>
+    <mapping resource="org/openurp/webapp/apps/party/wenming/model/WenmingProjectVoter.hbm.xml"/>
   </session-factory>
 </hibernate-configuration>

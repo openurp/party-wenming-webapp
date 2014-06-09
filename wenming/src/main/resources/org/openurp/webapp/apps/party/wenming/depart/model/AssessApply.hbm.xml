@@ -17,7 +17,7 @@
         <property name="updatedAt"  not-null="true"/>
         <property name="activitySummary" length="8000"/>
         <property name="wenmingSummary" length="8000"/>
-        <property name="detail" length="8000"/>
+        <property name="detail" length="80000"/>
         <property name="bonus"/>
         <component name="attachment">
             <property name="name" column="attach_name"/>

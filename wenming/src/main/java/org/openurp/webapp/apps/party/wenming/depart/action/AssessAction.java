@@ -44,7 +44,7 @@ public abstract class AssessAction<T extends AbstractAssessInfo, I extends Abstr
 
   @Override
   public String index() throws Exception {
-    List<AssessSession> assessSessions = wenMingService.findSessions();
+    List<AssessSession> assessSessions = wenMingService.findAssessSessions();
     Integer sessionId = getInt("session.id");
     AssessSession assessSession = null;
     if (sessionId != null) {

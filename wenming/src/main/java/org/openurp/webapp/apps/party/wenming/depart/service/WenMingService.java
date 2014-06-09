@@ -6,6 +6,7 @@ import org.openurp.kernel.base.unit.model.Department;
 import org.openurp.webapp.apps.party.wenming.depart.model.AssessItem;
 import org.openurp.webapp.apps.party.wenming.depart.model.AssessSchema;
 import org.openurp.webapp.apps.party.wenming.depart.model.AssessSession;
+import org.openurp.webapp.apps.party.wenming.model.WenmingSession;
 
 public interface WenMingService {
 
@@ -17,7 +18,7 @@ public interface WenMingService {
 
   List<AssessSession> findSessions(Department department);
 
-  List<AssessSession> findSessions();
+  List<AssessSession> findAssessSessions();
 
   List<AssessItem> findAssessItemBySupervisor(AssessSchema schema);
   
@@ -26,6 +27,10 @@ public interface WenMingService {
   List<AssessItem> findAssessItem(AssessSchema schema);
   
   List<Department> findDepartment();
+
+  List<WenmingSession> findWenmingSessions();
+  
+  WenmingSession getWenmingSessionByAssessTime();
 
 
 
