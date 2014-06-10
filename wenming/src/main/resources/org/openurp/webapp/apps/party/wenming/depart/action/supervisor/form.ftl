@@ -8,7 +8,7 @@
       [@b.textfield name="supervisor.fullname" label="真实姓名" value="${supervisor.fullname!}" 
         required="true" maxlength="50"/]
       [@b.password name="supervisor.password" label="密码" value="${supervisor.password!}" 
-        required="false" maxlength="50"/]
+        required="false" maxlength="50" comment="<span style='color:red'>（校外用户必须设置密码）</span>"/]
       [@b.textarea name="supervisor.remark" label="说明" value="${supervisor.remark!}" 
         required="false" maxlength="50"/]
       [@b.datepicker name="supervisor.expiredOn" label="过期日期" value="${(supervisor.expiredOn?string('yyyy-MM-dd'))!}"

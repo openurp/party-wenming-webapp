@@ -8,7 +8,7 @@
       [@b.textfield name="wenmingProjectVoter.fullname" label="真实姓名" value="${wenmingProjectVoter.fullname!}" 
         required="true" maxlength="50"/]
       [@b.password name="wenmingProjectVoter.password" label="密码" value="${wenmingProjectVoter.password!}" 
-        required="false" maxlength="50"/]
+        required="false" maxlength="50" comment="<span style='color:red'>（校外用户必须设置密码）</span>"/]
       [@b.textarea name="wenmingProjectVoter.remark" label="说明" value="${wenmingProjectVoter.remark!}" 
         required="false" maxlength="50"/]
       [@b.datepicker name="wenmingProjectVoter.expiredOn" label="过期日期" value="${(wenmingProjectVoter.expiredOn?string('yyyy-MM-dd'))!}"
