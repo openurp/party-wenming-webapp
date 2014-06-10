@@ -20,9 +20,7 @@ public class ApplyManageAction extends AbstractApplyAction {
 
   @Override
   protected void indexSetting() {
-    OqlBuilder<AssessSession> builder = OqlBuilder.from(AssessSession.class, "ss");
-    builder.where("ss.enabled=true").orderBy("ss.beginOn desc");
-    put("sessions", entityDao.search(builder));
+    put("sessions", wenMingService.findAssessSessions());
     put("departments", departmentService.getActives());
     put("states", AssessState.values());
   }

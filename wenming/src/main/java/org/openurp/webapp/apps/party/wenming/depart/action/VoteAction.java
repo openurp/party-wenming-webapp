@@ -72,7 +72,7 @@ public class VoteAction extends SupervisorCommAction {
     AssessSession nowSession = wenMingService.getAssessSessionByAssessTime();
     AssessSession session = entityDao.get(AssessSession.class, getInt("session.id"));
     if (assessVotes.isEmpty() && nowSession != null && nowSession.equals(session)) { return redirect("edit"); }
-    if (modifyable(assessVotes)) {
+    if (nowSession != null && modifyable(assessVotes)) {
       put("modifyable", true);
     }
     put("assessSession", session);

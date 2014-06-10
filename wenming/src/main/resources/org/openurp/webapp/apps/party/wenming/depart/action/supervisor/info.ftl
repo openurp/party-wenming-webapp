@@ -19,7 +19,7 @@ bar.addBack("${b.text("action.back")}");
   </tr>
   <tr>
    <td class="title" width="10%">过期日期:</td>
-   <td class="content" width="40%"> ${supervisor.expiredOn}</td>
+   <td class="content" width="40%"> ${supervisor.expiredOn!}</td>
   </tr>
 </table>
 [@b.foot/]

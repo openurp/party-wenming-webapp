@@ -62,7 +62,7 @@ public abstract class WenmingProjectVoteAction extends WenmingProjectVoterCommAc
     WenmingSession session = entityDao.get(WenmingSession.class, getInt("session.id"));
     if (abstractWenmingVotes.isEmpty() && nowSession != null && nowSession.equals(session)) { return redirect(
         "edit", null, "session.id=" + sessionId); }
-    if (modifyable(abstractWenmingVotes)) {
+    if (nowSession!=null && modifyable(abstractWenmingVotes)) {
       put("modifyable", true);
     }
     put("wenmingSession", session);

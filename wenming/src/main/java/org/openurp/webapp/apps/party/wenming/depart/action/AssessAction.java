@@ -226,12 +226,13 @@ public abstract class AssessAction<T extends AbstractAssessInfo, I extends Abstr
 
   @Override
   public String info() throws Exception {
+    AssessSession session = wenMingService.getAssessSessionByAssessTime();
     List<AbstractAssessInfo> malist = findAssess(getInt("session.id"), getInt("schema.id"));
     put("malist", malist);
     if (malist != null && malist.size() > 0) {
       put("schema", malist.get(0).getSchema());
     }
-    if(malist.size() > 0 && editable(malist.get(0).getState())){
+    if(session != null && malist.size() > 0 && editable(malist.get(0).getState())){
       put("editable", true);
     }
     return super.info();
