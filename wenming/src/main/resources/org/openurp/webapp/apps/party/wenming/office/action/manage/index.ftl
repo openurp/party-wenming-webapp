@@ -1,5 +1,6 @@
 [#ftl]
 [@b.head/]
+[@b.toolbar title='文明科室申报管理'/]
 <script>
   jQuery.struts2_jquery.requireCss("/css/party/main.css",bg.getContextPath() + "/static");
 </script>

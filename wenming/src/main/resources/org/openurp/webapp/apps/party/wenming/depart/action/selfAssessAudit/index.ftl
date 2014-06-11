@@ -1,5 +1,6 @@
 [#ftl]
 [@b.head/]
+[@b.toolbar title='单位自评审核' /]
 <div id="selfAssessIndex" class="ajax_container">
   <div style="padding:0 10px;">
     <div class="div_bar">

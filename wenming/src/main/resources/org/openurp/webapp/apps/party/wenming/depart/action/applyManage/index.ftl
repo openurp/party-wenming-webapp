@@ -1,5 +1,6 @@
 [#ftl]
 [@b.head/]
+[@b.toolbar title='文明办审批' /]
 <style>
 .search-item input{width:80px;}
 </style>

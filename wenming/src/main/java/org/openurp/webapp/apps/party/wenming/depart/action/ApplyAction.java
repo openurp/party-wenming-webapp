@@ -37,6 +37,11 @@ public class ApplyAction extends AbstractApplyAction {
     return state == AssessState.Draft || state == AssessState.DepartUnpassed
         || state == AssessState.SchoolUnpassed;
   }
+  
+  private boolean ifWithdraw(AssessState state) {
+    return state == AssessState.Submit;
+  }
+
   @Override
   public String edit() {
     AssessApply apply = (AssessApply) getEntity();
@@ -45,7 +50,11 @@ public class ApplyAction extends AbstractApplyAction {
     if (editable(apply.getState())) {
       put(getShortName(), apply);
       return forward();
-    } else {
+    }else if (ifWithdraw(apply.getState())) {
+      apply.setState(AssessState.Draft);
+      saveOrUpdate(apply);
+      return redirect("info", "申请已撤回", "&session.id=" + apply.getSession().getId());
+    }else {
       return redirect("info", "不能修该状态的申请", "&session.id=" + apply.getSession().getId());
     }
   }
@@ -80,6 +89,7 @@ public class ApplyAction extends AbstractApplyAction {
         put("assessApply", applies.get(0));
         put("editable", editable(applies.get(0).getState()));
         put("ifadvise", ifAdvise(applies.get(0)));
+        put("ifWithdraw", ifWithdraw(applies.get(0).getState()));
       }
       put("assessSession", session);
       OqlBuilder<SelfAssess>builder2 = OqlBuilder.from(SelfAssess.class, "bb");

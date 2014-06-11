@@ -5,9 +5,13 @@
 [@b.toolbar title='基本信息']
     function edit(){document.getElementById("apply_edit").click();}
     function submit_apply(){ if(confirm("提交后不能修改，确认提交？")) document.getElementById("apply_submit").click(); }
+    function withdraw(){ if(confirm("是否撤回申请？")) document.getElementById("apply_edit").click();}
     [#if editable && assessSession.opened]
     bar.addItem("${b.text("action.edit")}",edit);
     bar.addItem("${b.text("action.submit")}",submit_apply);
+    [/#if]
+    [#if ifWithdraw]
+    bar.addItem("${b.text("撤回")}",withdraw);
     [/#if]
 [/@]
 <div>

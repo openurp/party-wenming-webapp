@@ -1,8 +1,6 @@
 [#ftl]
 [@b.head/]
-[@b.toolbar title='文明科室申报']
-bar.addBack("${b.text("action.back")}");
-[/@]
+[@b.toolbar title='文明科室申报'/]
 [#if sessions?size==0]
   <p>还没有制定相应的批次.</p>
 [#else]

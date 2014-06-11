@@ -1,5 +1,6 @@
 [#ftl]
 [@b.head/]
+[@b.toolbar title='测评批次维护' /]
 <table  class="indexpanel">
   <tr>
     <td class="index_view">

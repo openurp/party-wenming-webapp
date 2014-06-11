@@ -1,5 +1,6 @@
 [#ftl]
 [@b.head/]
+[@b.toolbar title=title!'优秀项目申请' /]
 <script>
   jQuery.struts2_jquery.requireCss("/css/party/main.css",bg.getContextPath() + "/static");
 </script>

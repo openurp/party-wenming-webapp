@@ -1,8 +1,6 @@
 [#ftl]
 [@b.head/]
-[@b.toolbar title='文明单位申报']
-bar.addBack("${b.text("action.back")}");
-[/@]
+[@b.toolbar title='申报部门审批' /]
 [#if sessions?size==0]
   <p>还没有制定响应的测评批次.[@ems.guard res="assess-session"][@b.a href="assess-session"]制定一个新批次[/@][/@]</p>
 [#else]

@@ -1,5 +1,6 @@
 [#ftl]
 [@b.head/]
+[@b.toolbar title=title!"文明示范岗投票"/]
 <div id="voteIndex" class="ajax_container">
   <div style="padding:10px;">
     <div class="div_bar inline">

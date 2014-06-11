@@ -1,5 +1,6 @@
 [#ftl]
 [@b.head/]
+[@b.toolbar title='督察组测评' /]
 <div id="supervisorAssessIndex" class="ajax_container">
   <div style="padding:10px;">
     <div class="div_bar inline">

@@ -1,5 +1,6 @@
 [#ftl]
 [@b.head/]
+[@b.toolbar title='测评进度' /]
 <style>
 .search-item input{width:80px;}
 </style>

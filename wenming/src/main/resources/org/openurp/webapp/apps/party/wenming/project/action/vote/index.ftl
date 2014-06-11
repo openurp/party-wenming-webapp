@@ -1,5 +1,6 @@
 [#ftl]
 [@b.head/]
+[#assign title="优秀项目投票"/]
 <div id="voteIndex" class="ajax_container">
   <div style="padding:10px;">
     <div class="div_bar inline">

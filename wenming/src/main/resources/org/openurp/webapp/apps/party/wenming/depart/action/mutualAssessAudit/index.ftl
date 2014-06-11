@@ -1,5 +1,6 @@
 [#ftl]
 [@b.head/]
+[@b.toolbar title=title!'单位互评审核' /]
 <div id="mutualAssessIndex" class="ajax_container">
   <div style="padding:10px;">
     <div class="div_bar">
