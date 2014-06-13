@@ -1,0 +1,12 @@
+GoodOffice=文明科室
+GoodOffice.department=申报部门
+GoodOffice.session=申报批次
+GoodOffice.state=最终状态
+GoodOffice.submitBy=提交人
+GoodOffice.auditBy=审批人
+GoodOffice.createdAt=创建时间
+GoodOffice.updatedAt=更新时间
+GoodOffice.submitAt=提交时间
+GoodOffice.auditAt=审批时间
+GoodOffice.offices=文明科室
+GoodOffice.auditOpinion=审批意见
