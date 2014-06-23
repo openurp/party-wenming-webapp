@@ -12,4 +12,14 @@ public class GoodPerson extends AbstractWenmingObject {
 
   private static final long serialVersionUID = -3080682571590719887L;
 
+  private String remark;
+
+  public String getRemark() {
+    return remark;
+  }
+
+  public void setRemark(String remark) {
+    this.remark = remark;
+  }
+  
 }

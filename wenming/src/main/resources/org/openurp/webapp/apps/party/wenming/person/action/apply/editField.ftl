@@ -8,4 +8,4 @@
 [@b.textfield name="goodPerson.contactPerson" label="联系人" value="${goodPerson.contactPerson!}" required="true" maxlength="100"/]
 [@b.textfield name="goodPerson.contactPhone" label="联系电话" value="${goodPerson.contactPhone!}" required="true" maxlength="30"/]
 [@b.field label="相关支撑材料"]<input name="attachment" type="file"/>（上传文件请控制在10M以内，如果有多份附件请打成压缩包上传）[/@]
- 
+[@b.textfield name="goodPerson.remark" value=goodPerson.remark! label="备注" maxlength="100" style="width:200px"/]

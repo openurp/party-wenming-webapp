@@ -31,7 +31,7 @@
           <input type="hidden" name="${name}.goodPerson.id" value="${vote.goodPerson.id}"/>
           <input type="hidden" name="${name}.id" value="${vote.id!}"/>
           <td align="center">${vote.goodPerson.name}</td>
-          <td align="center">${vote.goodPerson.department.name}</td>
+          <td align="center">${vote.goodPerson.department.name}[#if vote.goodPerson.remark??]<br><span style="font-size:12px">${vote.goodPerson.remark}</span>[/#if]</td>
           <td align="center">${vote.goodPerson.statements}</td>
           <td align="center">${vote.goodPerson.features}</td>
           <td align="center">

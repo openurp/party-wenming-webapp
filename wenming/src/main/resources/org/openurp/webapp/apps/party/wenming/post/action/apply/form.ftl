@@ -3,7 +3,7 @@
 [@b.toolbar title="文明示范岗编辑"]bar.addBack();[/@]
 [@b.form action="!save" theme="list" enctype="multipart/form-data"]
   [#if ifAdvise?? && ifAdvise]
-    [@b.field label="文明办审核意见"]<span style="color:red; font-size:16px">${goodPost.auditOpinion}</span>[/@]
+    [@b.field label="文明办审核意见"]<span style="color:red; font-size:16px">${goodPost.auditOpinion!}</span>[/@]
   [/#if]
   [#include "editField.ftl"/] 
   [@b.formfoot]
