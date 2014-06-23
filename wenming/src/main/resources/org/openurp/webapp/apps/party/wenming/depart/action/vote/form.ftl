@@ -12,6 +12,17 @@
         </tr>
       </table>
     [/#if]
+    [#if !departmentType]
+        [#--这是一段死代码，要求原本是教学部门的继续教育学院排在党办后面，后期可以通过让用户设定测评群体，及其顺序的方式满足--]
+        [#assign teachingAssessVotes = []/]
+        [#assign funcAssessVotes = []/]
+        [#list assessVotes as vote]
+            [#if vote.department.code[0..0]=='1'] [#assign teachingAssessVotes = teachingAssessVotes +[vote]/]
+            [#else][#assign funcAssessVotes = funcAssessVotes + [vote]/]
+            [/#if]
+        [/#list]
+        [#assign assessVotes = funcAssessVotes?sort_by(["department","code"]) + teachingAssessVotes?sort_by(["department","code"]) /]
+    [/#if]
     <table id="voteTable" class="gridtable assessTable">
       <thead>
         <tr>
@@ -32,13 +43,13 @@
         </tr>
       </thead>
       <tbody>
-        [#list assessVotes?sort_by(["department","code"]) as vote]
+        [#list assessVotes as vote]
         <tr>
           [#assign name="vote${vote_index}"/]
           <input type="hidden" name="index" value="${name}"/>
           <input type="hidden" name="${name}.department.id" value="${vote.department.id}"/>
           <input type="hidden" name="${name}.id" value="${vote.id!}"/>
-          <td align="center">${vote.department.name}</td>
+          <td align="center">${vote_index+1}.${vote.department.name}</td>
 [#--
           <td>${selfAssessScore[vote.department.id+""]!}</td>
           <td>${mutualAssessScore[vote.department.id+""]!}</td>

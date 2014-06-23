@@ -15,11 +15,12 @@
     <table id="voteTable" class="gridtable assessTable">
       <thead>
         <tr>
+          <th width="2%">序号</th>
           <th width="10%">项目名称</th>
-          <th width="10%">选送单位</th>
-          <th width="30%">事迹</th>
-          <th width="30%">特色与创新点</th>
-          <th width="10%">相关支撑材料</th>
+          <th width="8%">选送单位</th>
+          <th width="32%">事迹</th>
+          <th width="33%">特色与创新点</th>
+          <th width="5%">支撑材料</th>
           <th width="10%">投票（投票上限：<span style="color:red">5</span>票）</th>
         </tr>
       </thead>
@@ -30,6 +31,7 @@
           <input type="hidden" name="index" value="${name}"/>
           <input type="hidden" name="${name}.goodPerson.id" value="${vote.goodPerson.id}"/>
           <input type="hidden" name="${name}.id" value="${vote.id!}"/>
+          <td align="center">${vote_index+1}</td>
           <td align="center">${vote.goodPerson.name}</td>
           <td align="center">${vote.goodPerson.department.name}[#if vote.goodPerson.remark??]<br><span style="font-size:12px">${vote.goodPerson.remark}</span>[/#if]</td>
           <td align="center">${vote.goodPerson.statements}</td>

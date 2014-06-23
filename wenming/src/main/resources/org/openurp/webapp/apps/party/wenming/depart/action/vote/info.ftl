@@ -34,7 +34,7 @@
       <tbody>
         [#list assessVotes?sort_by("ayes")?reverse as vote]
         <tr>
-          <td align="center">${vote.department.name}</td>
+          <td align="center">${vote_index+1}.${vote.department.name}</td>
 [#--
           <td>${selfAssessScore[vote.department.id+""]!}</td>
           <td>${mutualAssessScore[vote.department.id+""]!}</td>

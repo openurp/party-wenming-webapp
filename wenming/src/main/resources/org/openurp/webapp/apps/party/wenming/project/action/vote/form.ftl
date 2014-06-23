@@ -15,14 +15,13 @@
     <table id="voteTable" class="gridtable assessTable">
       <thead>
         <tr>
+          <th width="2%">序号</th>
           <th width="10%">项目名称</th>
-          <th width="10%">选送单位</th>
-          <th width="30%">项目方案</th>
-          <th width="30%">特色与创新点</th>
-          <th width="4%">相关支撑材料</th>
-          <th width="4%">中期审核材料</th>
-          <th width="4%">终期审核材料</th>
-          <th width="8%">投票（投票上限：<span style="color:red">5</span>票）</th>
+          <th width="7%">选送单位</th>
+          <th width="33%">项目方案</th>
+          <th width="34%">特色与创新点</th>
+          <th width="7%">材料</th>
+          <th width="7%">投票（投票上限：<span style="color:red">5</span>票）</th>
         </tr>
       </thead>
       <tbody>
@@ -32,6 +31,7 @@
           <input type="hidden" name="index" value="${name}"/>
           <input type="hidden" name="${name}.goodProject.id" value="${vote.goodProject.id}"/>
           <input type="hidden" name="${name}.id" value="${vote.id!}"/>
+          <td align="center">${vote_index+1}</td>
           <td align="center">${vote.goodProject.name}</td>
           <td align="center">${vote.goodProject.department.name}</td>
           <td align="center">${vote.goodProject.plan}</td>
@@ -39,21 +39,17 @@
           <td align="center">
             [#if vote.goodProject.attachment??]
               [@b.a target="_blank" href="../attachment?path=${vote.goodProject.attachment.filePath}&name=${vote.goodProject.attachment.name?url('utf-8')}"]
-              下载
+              支撑材料
               [/@]
             [/#if]
-          </td>
-          <td align="center">
             [#if vote.goodProject.middleSummary ?? && vote.goodProject.middleSummary.attachment??]
               [@b.a target="_blank" href="../attachment?path=${vote.goodProject.middleSummary.attachment.filePath}&name=${vote.goodProject.middleSummary.attachment.name?url('utf-8')}"]
-              下载
+              <br/>中期审核材料
               [/@]
             [/#if]
-          </td>
-          <td align="center">
             [#if vote.goodProject.finalSummary?? && vote.goodProject.finalSummary.attachment??]
               [@b.a target="_blank" href="../attachment?path=${vote.goodProject.finalSummary.attachment.filePath}&name=${vote.goodProject.finalSummary.attachment.name?url('utf-8')}"]
-              下载
+              <br/>终期审核材料
               [/@]
             [/#if]
           </td>
