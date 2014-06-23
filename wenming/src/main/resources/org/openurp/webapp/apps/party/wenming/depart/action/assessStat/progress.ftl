@@ -28,31 +28,39 @@
  var r = Raphael("holder")
 
  [#assign sum=0/]
+ [#list applyStat as ast][#assign sum = sum + ast[1]/][/#list]
+ [#assign last=departCount-sum/]
  var applyPie = r.piechart(100, 110, 70, 
- [[#list applyStat as ast]${ast[1]/departCount},[#assign sum = sum + ast[1]/][/#list]${(departCount-sum)/departCount}],
- { legend: [[#list applyStat as ast]"%%.%-${ast[0].description} ${ast[1]}",[/#list]"%%.%-未填写 ${departCount-sum}"], legendpos: "east"});
+ [[#list applyStat as ast]${ast[1]/departCount}[#if last>0 || ast_has_next],[/#if][/#list][#if last>0]${last/departCount}[/#if]],
+ { legend: [[#list applyStat as ast]"%%.%-${ast[0].description} ${ast[1]}"[#if last>0 || ast_has_next],[/#if][/#list][#if last>0]"%%.%-未填写 ${last}"[/#if]], legendpos: "east"});
 
  r.text(120, 20, "文明单位申报材料提交进度图").attr(txtattr);
  applyPie.hover(hoverA, hoverB);
 
  [#assign sum=0/]
+ [#list selfAssessStat as ast][#assign sum = sum + ast[1]/][/#list]
+ [#assign last=departCount-sum/]
  var selfAssessPie = r.piechart(450, 110, 70, 
- [[#list selfAssessStat as ast]${ast[1]/departCount},[#assign sum = sum + ast[1]/][/#list]${(departCount-sum)/departCount}],
- { legend: [[#list selfAssessStat as ast]"%%.%-${ast[0].description} ${ast[1]}",[/#list]"%%.%-未填写 ${departCount-sum}"], legendpos: "east"});
+ [[#list selfAssessStat as ast]${ast[1]/departCount}[#if last>0 || ast_has_next],[/#if][/#list][#if last>0]${last/departCount}[/#if]],
+ { legend: [[#list selfAssessStat as ast]"%%.%-${ast[0].description} ${ast[1]}"[#if last>0 || ast_has_next],[/#if][/#list][#if last>0]"%%.%-未填写 ${last}"[/#if]], legendpos: "east"});
  r.text(450, 20, "自评提交进度图").attr(txtattr);
  selfAssessPie.hover(hoverA, hoverB);
  
  [#assign sum=0/]
+ [#list mutualAssessStat?keys as ast][#assign sum = sum + mutualAssessStat.get(ast)/][/#list]
+ [#assign last=mutualCount-sum/]
  var mutualAssessPie = r.piechart(100, 300, 70,
-  [[#list mutualAssessStat?keys as ast][#assign cnt =mutualAssessStat.get(ast)/] ${cnt/mutualCount},[#assign sum = sum + cnt/][/#list]${(mutualCount-sum)/mutualCount}],
- { legend: [[#list mutualAssessStat?keys as ast]"%%.%-${ast.description} ${mutualAssessStat.get(ast)}",[/#list]"%%.%-未填写 ${mutualCount-sum}"], legendpos: "east"});
+  [[#list mutualAssessStat?keys as ast][#assign cnt =mutualAssessStat.get(ast)/] ${cnt/mutualCount}[#if last>0 || ast_has_next],[/#if][/#list][#if last>0]${last/mutualCount}[/#if]],
+ { legend: [[#list mutualAssessStat?keys as ast]"%%.%-${ast.description} ${mutualAssessStat.get(ast)}"[#if last>0 || ast_has_next],[/#if][/#list][#if last>0]"%%.%-未填写 ${last}"[/#if]], legendpos: "east"});
  r.text(120, 220, "互评提交进度图").attr(txtattr);
  mutualAssessPie.hover(hoverA, hoverB);
 
- [#assign sum=0/] 
+ [#assign sum=0/]
+ [#list funcDepartAssessStat?keys as ast][#assign sum = sum + funcDepartAssessStat.get(ast)/][/#list]
+  [#assign last=funcDepartCount-sum/]
  var funcAssessPie = r.piechart(450, 300, 70,
-  [[#list funcDepartAssessStat?keys as ast]${funcDepartAssessStat.get(ast)/funcDepartCount},[#assign sum = sum + funcDepartAssessStat.get(ast)/][/#list]${(funcDepartCount-sum)/funcDepartCount}],
- { legend: [[#list funcDepartAssessStat?keys as ast]"%%.%-${ast.description} ${funcDepartAssessStat.get(ast)}",[/#list]"%%.%-未填写 ${funcDepartCount-sum}"], legendpos: "east"});
+  [[#list funcDepartAssessStat?keys as ast]${funcDepartAssessStat.get(ast)/funcDepartCount}[#if last>0 || ast_has_next],[/#if][/#list][#if last>0]${last/funcDepartCount}[/#if]],
+ { legend: [[#list funcDepartAssessStat?keys as ast]"%%.%-${ast.description} ${funcDepartAssessStat.get(ast)}"[#if last>0 || ast_has_next],[/#if][/#list][#if last>0]"%%.%-未填写 ${last}"[/#if]], legendpos: "east"});
  r.text(450, 220, "职能部门提交进度图").attr(txtattr);
  funcAssessPie.hover(hoverA, hoverB);
 </script>

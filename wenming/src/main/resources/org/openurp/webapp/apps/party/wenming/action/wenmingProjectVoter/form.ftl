@@ -1,9 +1,8 @@
 [#ftl]
 [@b.head/]
 [@b.toolbar title="文明项目投票成员编辑"]bar.addBack();[/@]
-[@b.tabs]
     [@b.form action="!save" theme="list"]
-      [@b.textfield name="wenmingProjectVoter.name" label="系统登录名称" value="${wenmingProjectVoter.name!}" 
+      [@b.textfield name="wenmingProjectVoter.name" label="登录账户" value="${wenmingProjectVoter.name!}" 
         required="true" maxlength="50"/]
       [@b.textfield name="wenmingProjectVoter.fullname" label="真实姓名" value="${wenmingProjectVoter.fullname!}" 
         required="true" maxlength="50"/]
@@ -18,5 +17,4 @@
         [@b.reset/]&nbsp;&nbsp;[@b.submit value="action.submit"/]
       [/@]
     [/@]
-  [/@]
 [@b.foot/]
