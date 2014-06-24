@@ -80,10 +80,14 @@ public class SupervisorAssessAction extends AssessAction<SupervisorAssess, Super
     for (int i = 0; i < malist.size(); i++) {
       ids[i] = malist.get(i).getId();
     }
+    AssessSession session = wenMingService.getAssessSessionByAssessTime();
+    Integer schemaId = getInt("schemaId");
     OqlBuilder<SupervisorAssess> query = OqlBuilder.from(SupervisorAssess.class, "o");
-    query.where("o.id not in (:ids)", ids);
-    query.where("o.session.id = :sessionid", malist.get(0).getSession().getId());
-    query.where("o.schema.id = :schemaid", malist.get(0).getSchema().getId());
+    if(malist.size() > 0){
+      query.where("o.id not in (:ids)", ids);
+    }
+    query.where("o.session.id = :sessionid", session.getId());
+    query.where("o.schema.id = :schemaid", schemaId);
     query.where("o.assessBy.id = :assessbyid", getUserId());
     @SuppressWarnings("unchecked")
     List<SupervisorAssess> removeList = search(query);

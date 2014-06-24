@@ -50,7 +50,7 @@
             [/#if]
           </td>
           <td align="center">
-            [#if vote.ayes]是
+            [#if vote.ayes]<span class="toolbar-icon action-activate"></span>
             [#else]否  
             [/#if]
           </td>

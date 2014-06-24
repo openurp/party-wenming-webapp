@@ -110,13 +110,12 @@ public abstract class AssessAction<T extends AbstractAssessInfo, I extends Abstr
   }
 
   protected String redirectInfo(AbstractAssessInfo assess) {
-    return redirect("info", getBool("save") ? "保存成功" : "提交成功", "schema.id=" + assess.getSchema().getId()
-        + "&session.id=" + assess.getSession().getId() + "&assessBy.id=" + assess.getAssessBy().getId());
+    return redirectInfo(assess.getSession().getId(), assess.getSchema().getId());
   }
 
-  protected String redirectInfo(Integer assessid, Integer schemaId) { 
+  protected String redirectInfo(Integer sessionId, Integer schemaId) { 
     return redirect("info", getBool("save") ? "保存成功" : "提交成功", "schema.id=" + schemaId
-      + "&session.id=" + assessid + "&assessBy.id=" + getUserId());
+      + "&session.id=" + sessionId + "&assessBy.id=" + getUserId());
   }
 
   /**
@@ -152,7 +151,7 @@ public abstract class AssessAction<T extends AbstractAssessInfo, I extends Abstr
       saveOrUpdate(malist);
     }
     saveAndForward(malist);
-    return redirectSave(malist.get(0));
+    return redirectInfo(wenMingService.getAssessSessionByAssessTime().getId(), getInt("schemaId"));
   }
 
   protected void saveAndForward(List<AbstractAssessInfo> malist) {

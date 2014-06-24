@@ -1,5 +1,11 @@
 [#ftl]
 [@b.head/]
+<style>
+ .radiodiv label[yes='yes'].ui-state-active{
+  background:green;
+  color:white
+ }
+</style>
   [@b.form action="!save"]
     [#if abstractWenmingVotes?? && abstractWenmingVotes?size gt 0]
       [#assign vote = abstractWenmingVotes[0]/]
@@ -44,10 +50,12 @@
             [/#if]
           </td>
           <td align="center">
-            <input type="radio" name="${name}.ayes" value="1" id="${name}1" class="yes" [#if vote.ayes] checked="checked" [/#if] class="radio_true"/>
-            <lable for="${name}1">是</lable>
+          <div class="radiodiv">
+            <input type="radio" name="${name}.ayes" value="1" id="${name}1" class="yes" [#if vote.ayes] checked="checked" [/#if]/>
+            <label for="${name}1" yes="yes">是</label>
             <input type="radio" name="${name}.ayes" value="0" id="${name}0" class="no" [#if vote.id?? && !vote.ayes] checked="checked" [/#if]/>
-            <lable for="${name}0">否</lable>
+            <label for="${name}0">否</label>
+          </div>
           </td>
         </tr>
         [/#list]
@@ -135,6 +143,8 @@
         }
        });
     });
-    //$(".radio_true").attr("checked","checked");
+    $(function (){
+      $(".radiodiv").buttonset();
+    });
   </script>
 [@b.foot/]

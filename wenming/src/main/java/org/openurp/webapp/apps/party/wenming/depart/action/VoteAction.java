@@ -6,6 +6,7 @@ import java.util.List;
 import java.util.Map;
 
 import org.apache.commons.lang3.StringUtils;
+import org.beangle.commons.collection.CollectUtils;
 import org.beangle.commons.dao.query.builder.OqlBuilder;
 import org.beangle.commons.dao.query.builder.SqlBuilder;
 import org.openurp.kernel.base.unit.model.Department;
@@ -13,11 +14,7 @@ import org.openurp.webapp.apps.party.wenming.depart.model.AssessApply;
 import org.openurp.webapp.apps.party.wenming.depart.model.AssessSchema;
 import org.openurp.webapp.apps.party.wenming.depart.model.AssessSession;
 import org.openurp.webapp.apps.party.wenming.depart.model.AssessVote;
-import org.openurp.webapp.apps.party.wenming.depart.model.FuncDepartAssess;
-import org.openurp.webapp.apps.party.wenming.depart.model.MutualAssess;
-import org.openurp.webapp.apps.party.wenming.depart.model.SelfAssess;
 import org.openurp.webapp.apps.party.wenming.depart.model.Supervisor;
-import org.openurp.webapp.apps.party.wenming.depart.model.SupervisorAssess;
 
 
 public class VoteAction extends SupervisorCommAction {
@@ -137,7 +134,11 @@ public class VoteAction extends SupervisorCommAction {
     //put("mutualAssessScore", mutualAssessScore);
     //put("funcDepartAssessScore", funcDepartAssessScore);
     //put("supervisorAssessScore", supervisorAssessScore);
-    put("assessApplies", assessApplies);
+    Map<Number,AssessApply> assessApplyMap = CollectUtils.newHashMap();
+    for(AssessApply apply:assessApplies){
+      assessApplyMap.put(apply.getDepartment().getId(),apply);
+    }
+    put("assessApplies", assessApplyMap);
     put("departmentType", isForTeaching);
   }
   

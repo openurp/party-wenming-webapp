@@ -35,52 +35,30 @@
         [#list assessVotes?sort_by("ayes")?reverse as vote]
         <tr>
           <td align="center">${vote_index+1}.${vote.department.name}</td>
-[#--
-          <td>${selfAssessScore[vote.department.id+""]!}</td>
-          <td>${mutualAssessScore[vote.department.id+""]!}</td>
-          <td>${funcDepartAssessScore[vote.department.id+""]!}</td>
-          <td>${supervisorAssessScore[vote.department.id+""]!}</td>
---]
+            [#assign finded=assessApplies?keys?seq_contains(vote.department.id)]
+            [#if finded][#assign apply=assessApplies.get(vote.department.id)][/#if]
           <td>
-            [#list assessApplies as assessApply]
-              [#if assessApply.department.id == vote.department.id]
-                ${assessApply.activitySummary}
-              [/#if]
-            [/#list]
+           [#if finded]${apply.activitySummary}[#else]未申报[/#if]
           </td>
           <td>
-            [#list assessApplies as assessApply]
-              [#if assessApply.department.id == vote.department.id]
-                ${assessApply.wenmingSummary}
-              [/#if]
-            [/#list]
+            [#if finded]${apply.wenmingSummary}[#else]未申报[/#if]
           </td>
           <td>
-            [#list assessApplies as assessApply]
-              [#if assessApply.department.id == vote.department.id]
-                ${assessApply.detail}
-              [/#if]
-            [/#list]
+             [#if finded]${apply.detail}[#else]未申报[/#if]
           </td>
           <td align="center">
-            [#list assessApplies as assessApply]
-              [#if assessApply.department.id == vote.department.id && assessApply.attachment ??]
-                [@b.a target="_blank" href="../attachment?path=${assessApply.attachment.filePath}&name=${assessApply.attachment.name?url('utf-8')}"]
+             [#if finded && apply.attachment??]
+                [@b.a target="_blank" href="../attachment?path=${apply.attachment.filePath}&name=${apply.attachment.name?url('utf-8')}"]
                 下载
                 [/@]
               [/#if]
-            [/#list]
           </td>
           <td align="center">
-            [#list assessApplies as assessApply]
-              [#if assessApply.department.id == vote.department.id]
-              ${assessApply.bonus}
-              [/#if]
-            [/#list]
+             [#if finded]${apply.bonus}[/#if]
           </td align="center">
           <td>${totalScoreMap[vote.department.id+""]!}</td>
           <td align="center">
-            [#if vote.ayes]是
+            [#if vote.ayes]<span class="toolbar-icon action-activate"></span>
             [#else]否  
             [/#if]
           </td>

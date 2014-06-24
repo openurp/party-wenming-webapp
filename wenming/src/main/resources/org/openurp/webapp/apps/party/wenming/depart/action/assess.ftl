@@ -1,6 +1,7 @@
 [#ftl]
 [#macro assessTable assessList]
 [@b.toolbar title='测评内容'][/@]
+  <input type="hidden" name="schemaId" value="${schema.id}"/>
   <table id="assessTable" class="gridtable assessTable">
     <thead>
       <tr>
@@ -60,7 +61,8 @@
         tr.find("input").not(".partIpt").attr("disabled", "disabled");
       }
     });
-    function isallselected(){
+    function isallselected(num){
+      num = num || 1
       var haserror = false;
       var trs = $("#assessTable tr").not(".ignore");
       trs.find(".score").parent().removeClass("error").end().each(function (){
@@ -69,7 +71,7 @@
           $(this).parent().addClass("error");
         }
       });
-      if(haserror || trs.length <= 1){
+      if(haserror || num > 0 && trs.length <= 1){
         alert("请选择一个的分值");
         haserror = true;
       }

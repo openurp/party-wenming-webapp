@@ -13,7 +13,7 @@
   [/@]
   <script>
     function saveAssess(){
-      if(isallselected()){
+      if(isallselected(-1)){
         $("#saveIpt").val("1");
         return true;
       }
