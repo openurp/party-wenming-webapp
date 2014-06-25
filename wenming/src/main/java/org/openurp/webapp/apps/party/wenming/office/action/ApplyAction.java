@@ -2,7 +2,6 @@ package org.openurp.webapp.apps.party.wenming.office.action;
 
 import java.util.Date;
 import java.util.List;
-import java.util.Objects;
 
 import org.beangle.commons.dao.query.builder.OqlBuilder;
 import org.beangle.ems.web.action.SecurityActionSupport;
@@ -90,9 +89,6 @@ public class ApplyAction extends SecurityActionSupport {
       if (applies.size() == 1) {
         put("goodOffice", applies.get(0));
         put("editable", editable(applies.get(0).getState()));
-        put("submitable",
-            Objects.equals(applies.get(0).getState(), AssessState.Draft)
-                || Objects.equals(applies.get(0).getState(), AssessState.DepartUnpassed));
       }
       put("wenmingSession", session);
     }
