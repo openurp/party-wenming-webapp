@@ -8,7 +8,7 @@ width: 130px;
 </style>
 [@b.form action="!saveFinalSummary" theme="list" enctype="multipart/form-data"]
   [#if ifAdvise?? && ifAdvise]
-    [@b.field label="文明办审核意见"]<span style="color:red; font-size:16px">${goodProjectFinalSummary.auditOpinion}</span>[/@]
+    [@b.field label="文明办审核意见"]<span style="color:red; font-size:16px">${goodProjectFinalSummary.auditOpinion!}</span>[/@]
   [/#if]
   [@b.textarea label="项目内容及成效" cols="50" rows="4" name="goodProjectFinalSummary.content" value=(goodProjectFinalSummary.content)! maxlength="1000" required="true"/]
   [@b.radios label="是否参加学年末评选"  name="goodProjectFinalSummary.forAssess" value=goodProjectFinalSummary.forAssess items="1:common.yes,0:common.no"/]
