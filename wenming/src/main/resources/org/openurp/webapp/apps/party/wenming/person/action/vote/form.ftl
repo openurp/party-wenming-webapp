@@ -39,7 +39,7 @@
           <input type="hidden" name="${name}.id" value="${vote.id!}"/>
           <td align="center">${vote_index+1}</td>
           <td align="center">${vote.goodPerson.name}</td>
-          <td align="center">${vote.goodPerson.department.name}[#if vote.goodPerson.remark??]<br><span style="font-size:12px">${vote.goodPerson.remark}</span>[/#if]</td>
+          <td align="center">${vote.goodPerson.department.name}[#if vote.goodPerson.remark??]，${vote.goodPerson.remark}[/#if]</td>
           <td align="center">${vote.goodPerson.statements}</td>
           <td align="center">${vote.goodPerson.features}</td>
           <td align="center">

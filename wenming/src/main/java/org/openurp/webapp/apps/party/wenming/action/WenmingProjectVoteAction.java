@@ -4,8 +4,10 @@ import java.util.Date;
 import java.util.List;
 
 import org.apache.commons.lang3.StringUtils;
+import org.beangle.commons.collection.CollectUtils;
 import org.beangle.commons.dao.query.builder.OqlBuilder;
 import org.beangle.commons.entity.Entity;
+import org.openurp.webapp.apps.party.wenming.depart.model.AssessState;
 import org.openurp.webapp.apps.party.wenming.model.AbstractWenmingObject;
 import org.openurp.webapp.apps.party.wenming.model.AbstractWenmingVote;
 import org.openurp.webapp.apps.party.wenming.model.WenmingProjectVoter;
@@ -110,6 +112,8 @@ public abstract class WenmingProjectVoteAction extends WenmingProjectVoterCommAc
     @SuppressWarnings("rawtypes")
     OqlBuilder<AbstractWenmingObject> builder = OqlBuilder.from(getWenmingObjectClass(), "awo");
     builder.where("awo.session.id=:sessionId", sessionId);
+    //FIXME 这次评选仅仅过滤掉草稿和不通过的
+    builder.where("awo.state not in(:states)",CollectUtils.newArrayList(AssessState.SchoolUnpassed,AssessState.DepartUnpassed,AssessState.Draft));
     List<AbstractWenmingObject> objects = entityDao.search(builder);
     return objects;
   }
