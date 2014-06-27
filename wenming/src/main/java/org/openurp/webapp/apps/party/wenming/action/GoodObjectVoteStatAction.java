@@ -41,7 +41,8 @@ public class GoodObjectVoteStatAction extends SecurityActionSupport {
     String sql = "select v.fullname, person.voter_id person, project.voter_id project, post.voter_id post from wm_wenming_project_voters v "
         + " left join (select voter_id from wm_good_person_votes where session_id = :sessionId group by voter_id) person on person.voter_id = v.id"
         + " left join (select voter_id from wm_good_project_votes where session_id = :sessionId group by voter_id) project on project.voter_id = v.id"
-        + " left join (select voter_id from wm_good_post_votes where session_id = :sessionId group by voter_id) post on post.voter_id = v.id";
+        + " left join (select voter_id from wm_good_post_votes where session_id = :sessionId group by voter_id) post on post.voter_id = v.id"
+        + " order by v.name";
     SqlBuilder query = SqlBuilder.sql(sql);
     query.param("sessionId", sessionId);
     List<Object[]> datas = entityDao.search(query);

@@ -37,7 +37,8 @@ public class VoteStatAction extends SecurityActionSupport {
    */
   public String progress() {
     Integer sessionId = getInt("session.id");
-    String sql = "select s.fullname, t.voter_id from wm_supervisors s left join (select voter_id from wm_assess_votes where session_id = :sessionId group by voter_id) t on t.voter_id = s.id";
+    String sql = "select s.fullname, t.voter_id from wm_supervisors s left join (select voter_id from wm_assess_votes where session_id = :sessionId"
+        + " group by voter_id) t on t.voter_id = s.id order by s.name";
     SqlBuilder query = SqlBuilder.sql(sql);
     query.param("sessionId", sessionId);
     List<Object[]> datas = entityDao.search(query);
