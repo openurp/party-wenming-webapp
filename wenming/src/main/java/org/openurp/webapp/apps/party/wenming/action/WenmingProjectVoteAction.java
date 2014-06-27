@@ -125,6 +125,7 @@ public abstract class WenmingProjectVoteAction extends WenmingProjectVoterCommAc
   private List<AbstractWenmingVote> findAbstractWenmingVote(Integer sessionId) {
     OqlBuilder<AbstractWenmingVote> builder = OqlBuilder.from(getWenmingObjectVoteClass(), "awv");
     builder.where("awv.session.id=:sessionId", sessionId);
+    builder.where("awv.voter.id=:voterid", getWenmingProjectVoter().getId());
     List<AbstractWenmingVote> abstractWenmingVotes = entityDao.search(builder);
     return abstractWenmingVotes;
   }

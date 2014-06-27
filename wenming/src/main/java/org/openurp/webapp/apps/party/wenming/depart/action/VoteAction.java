@@ -66,7 +66,7 @@ public class VoteAction extends SupervisorCommAction {
     Integer sessionId = getInt("session.id");
     boolean isForTeaching = getBool("departmentType");
     List<AssessVote> assessVotes = findAssessVote(sessionId, isForTeaching);
-    AssessSession nowSession = wenMingService.getAssessSessionByAssessTime();
+    AssessSession nowSession = wenMingService.getAssessSessionByVoteTime();
     AssessSession session = entityDao.get(AssessSession.class, getInt("session.id"));
     if (assessVotes.isEmpty() && nowSession != null && nowSession.equals(session)) { return redirect("edit"); }
     if (nowSession != null && modifyable(assessVotes)) {
@@ -80,7 +80,7 @@ public class VoteAction extends SupervisorCommAction {
   @Override
   public String edit() {
     if (getSupervisorId() == null) { return redirect("login"); }
-    AssessSession nowSession = wenMingService.getAssessSessionByAssessTime();
+    AssessSession nowSession = wenMingService.getAssessSessionByVoteTime();
     AssessSession session = entityDao.get(AssessSession.class, getInt("session.id"));
 
     boolean isForTeaching = getBool("departmentType");
@@ -168,6 +168,7 @@ public class VoteAction extends SupervisorCommAction {
 
   private List<AssessVote> findAssessVote(Integer sessionId, boolean isForTeaching) {
     OqlBuilder<AssessVote> builder = OqlBuilder.from(AssessVote.class, "v");
+    builder.where("v.voter.id=:voterid", getSupervisorId());
     builder.where("v.session.id=:sessionId", sessionId);
     builder.where("v.department.teaching=:teaching", isForTeaching);
     List<AssessVote> assessVotes = entityDao.search(builder);
@@ -186,7 +187,7 @@ public class VoteAction extends SupervisorCommAction {
     if (getSupervisorId() == null) { return redirect("login"); }
 
     boolean departmentType = getBool("departmentType");
-    AssessSession session = wenMingService.getAssessSessionByAssessTime();
+    AssessSession session = wenMingService.getAssessSessionByVoteTime();
     List<AssessVote> list = (List<AssessVote>) getAll();
     Date now = new Date();
     Supervisor voter = getSupervisor();

@@ -40,6 +40,15 @@ public class WenMingServiceImpl extends BaseServiceImpl implements WenMingServic
   }
 
   @Override
+  public AssessSession getAssessSessionByVoteTime() {
+    OqlBuilder<AssessSession> query = OqlBuilder.from(AssessSession.class, "o");
+    query.where("voteBeginOn <= :now and voteEndOn >= :now", new Date());
+    query.where("enabled = true");
+    List<AssessSession> list = entityDao.search(query);
+    return list.isEmpty() ? null : list.get(0);
+  }
+
+  @Override
   public AssessSchema getSchema(AssessSession session, Department department) {
     // OqlBuilder<AssessSchema> query = OqlBuilder.from(AssessSchema.class,
     // "o");
