@@ -8,7 +8,7 @@
   <tr>
     <td class="index_view">
     [@b.form name="wenmingProjectVoterSearchForm"  action="!search" target="wenmingProjectVoterlist" title="ui.searchForm" theme="search"]
-      [@b.textfields names="wenmingProjectVoter.name;系统登录名称"/]
+      [@b.textfields names="wenmingProjectVoter.name;登录账户"/]
       [@b.textfields names="wenmingProjectVoter.fullname;真实姓名"/]
     [/@]
     </td>

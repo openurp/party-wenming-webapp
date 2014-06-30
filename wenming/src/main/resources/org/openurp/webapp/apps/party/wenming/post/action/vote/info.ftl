@@ -15,17 +15,19 @@
     <table id="voteTable" class="gridtable assessTable">
       <thead>
         <tr>
+          <th width="2%">序号</th>
           <th width="10%">项目名称</th>
-          <th width="10%">选送单位</th>
-          <th width="30%">项目方案</th>
-          <th width="30%">特色与创新点</th>
-          <th width="10%">相关支撑材料</th>
+          <th width="8%">选送单位</th>
+          <th width="32%">项目方案</th>
+          <th width="33%">特色与创新点</th>
+          <th width="5%">相关支撑材料</th>
           <th width="10%">投票（投票上限：<span style="color:red">5</span>票）</th>
         </tr>
       </thead>
       <tbody>
         [#list abstractWenmingVotes?sort_by("ayes")?reverse as vote]
         <tr>
+          <td align="center">${vote_index+1}</td>
           <td align="center">${vote.goodPost.name}</td>
           <td align="center">${vote.goodPost.department.name}</td>
           <td align="center">${vote.goodPost.plan}</td>
@@ -38,7 +40,7 @@
             [/#if]
           </td>
           <td align="center">
-            [#if vote.ayes]是
+            [#if vote.ayes]<span class="toolbar-icon action-activate"></span>
             [#else]否  
             [/#if]
           </td>

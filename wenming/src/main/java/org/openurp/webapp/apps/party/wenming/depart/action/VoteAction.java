@@ -6,6 +6,7 @@ import java.util.List;
 import java.util.Map;
 
 import org.apache.commons.lang3.StringUtils;
+import org.beangle.commons.collection.CollectUtils;
 import org.beangle.commons.dao.query.builder.OqlBuilder;
 import org.beangle.commons.dao.query.builder.SqlBuilder;
 import org.openurp.kernel.base.unit.model.Department;
@@ -13,11 +14,7 @@ import org.openurp.webapp.apps.party.wenming.depart.model.AssessApply;
 import org.openurp.webapp.apps.party.wenming.depart.model.AssessSchema;
 import org.openurp.webapp.apps.party.wenming.depart.model.AssessSession;
 import org.openurp.webapp.apps.party.wenming.depart.model.AssessVote;
-import org.openurp.webapp.apps.party.wenming.depart.model.FuncDepartAssess;
-import org.openurp.webapp.apps.party.wenming.depart.model.MutualAssess;
-import org.openurp.webapp.apps.party.wenming.depart.model.SelfAssess;
 import org.openurp.webapp.apps.party.wenming.depart.model.Supervisor;
-import org.openurp.webapp.apps.party.wenming.depart.model.SupervisorAssess;
 
 
 public class VoteAction extends SupervisorCommAction {
@@ -69,7 +66,7 @@ public class VoteAction extends SupervisorCommAction {
     Integer sessionId = getInt("session.id");
     boolean isForTeaching = getBool("departmentType");
     List<AssessVote> assessVotes = findAssessVote(sessionId, isForTeaching);
-    AssessSession nowSession = wenMingService.getAssessSessionByAssessTime();
+    AssessSession nowSession = wenMingService.getAssessSessionByVoteTime();
     AssessSession session = entityDao.get(AssessSession.class, getInt("session.id"));
     if (assessVotes.isEmpty() && nowSession != null && nowSession.equals(session)) { return redirect("edit"); }
     if (nowSession != null && modifyable(assessVotes)) {
@@ -83,7 +80,7 @@ public class VoteAction extends SupervisorCommAction {
   @Override
   public String edit() {
     if (getSupervisorId() == null) { return redirect("login"); }
-    AssessSession nowSession = wenMingService.getAssessSessionByAssessTime();
+    AssessSession nowSession = wenMingService.getAssessSessionByVoteTime();
     AssessSession session = entityDao.get(AssessSession.class, getInt("session.id"));
 
     boolean isForTeaching = getBool("departmentType");
@@ -137,7 +134,11 @@ public class VoteAction extends SupervisorCommAction {
     //put("mutualAssessScore", mutualAssessScore);
     //put("funcDepartAssessScore", funcDepartAssessScore);
     //put("supervisorAssessScore", supervisorAssessScore);
-    put("assessApplies", assessApplies);
+    Map<Number,AssessApply> assessApplyMap = CollectUtils.newHashMap();
+    for(AssessApply apply:assessApplies){
+      assessApplyMap.put(apply.getDepartment().getId(),apply);
+    }
+    put("assessApplies", assessApplyMap);
     put("departmentType", isForTeaching);
   }
   
@@ -167,6 +168,7 @@ public class VoteAction extends SupervisorCommAction {
 
   private List<AssessVote> findAssessVote(Integer sessionId, boolean isForTeaching) {
     OqlBuilder<AssessVote> builder = OqlBuilder.from(AssessVote.class, "v");
+    builder.where("v.voter.id=:voterid", getSupervisorId());
     builder.where("v.session.id=:sessionId", sessionId);
     builder.where("v.department.teaching=:teaching", isForTeaching);
     List<AssessVote> assessVotes = entityDao.search(builder);
@@ -185,7 +187,7 @@ public class VoteAction extends SupervisorCommAction {
     if (getSupervisorId() == null) { return redirect("login"); }
 
     boolean departmentType = getBool("departmentType");
-    AssessSession session = wenMingService.getAssessSessionByAssessTime();
+    AssessSession session = wenMingService.getAssessSessionByVoteTime();
     List<AssessVote> list = (List<AssessVote>) getAll();
     Date now = new Date();
     Supervisor voter = getSupervisor();

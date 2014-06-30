@@ -35,7 +35,7 @@ public class SupervisorManageAction extends WenMingAction{
     for(SupervisorAssess supervisorAssess : supervisorAssesses){
       Object[] oo = map.get(supervisorAssess.getAssessBy().getId());
       if(oo == null){
-        oo = new Object[]{supervisorAssess.getAssessBy(), new ArrayList<Department>()};
+        oo = new Object[]{supervisorAssess.getAssessBy(), new ArrayList<Department>(),supervisorAssess.getState(),supervisorAssess.getAssessAt()};
         map.put(supervisorAssess.getAssessBy().getId(), oo);
       }
       ((ArrayList<Department>)oo[1]).add(supervisorAssess.getDepartment());

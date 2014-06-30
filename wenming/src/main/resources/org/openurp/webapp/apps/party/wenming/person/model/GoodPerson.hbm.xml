@@ -27,6 +27,7 @@
             <property name="name" length="200" column="attach_name"/>
             <property name="filePath"  length="100" column="attach_file_path"/>
         </component>
+        <property name="remark" length="200"/>
         <property name="auditOpinion"  />
     </class>
 </hibernate-mapping>

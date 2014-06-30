@@ -2,7 +2,7 @@
 [@b.head/]
 [@b.form action="!save" title="申报基本信息" theme="list" enctype="multipart/form-data"]
   [#if ifAdvise?? && ifAdvise]
-    [@b.field label="文明办审核意见"]<span style="color:red; font-size:16px">${goodOffice.auditOpinion}</span>[/@]
+    [@b.field label="文明办审核意见"]<span style="color:red; font-size:16px">${goodOffice.auditOpinion!}</span>[/@]
   [/#if]
   [@b.textarea name="goodOffice.offices" label="文明科室" value="${goodOffice.offices!}" required="true"  cols="100" rows="5" maxlength="500" comment="300字以内"/]
   [@b.field label="评比办法及支撑材料"]<input name="attachment" type="file"/>（大小控制在20M以内）[/@]

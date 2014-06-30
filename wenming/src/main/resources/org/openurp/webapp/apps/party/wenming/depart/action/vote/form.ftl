@@ -1,5 +1,11 @@
 [#ftl]
 [@b.head/]
+<style>
+ .radiodiv label[yes='yes'].ui-state-active{
+  background:green;
+  color:white
+ }
+</style>
   [@b.form action="!save"]
     [#if assessVotes?? && assessVotes?size gt 0]
       [#assign vote = assessVotes[0]/]
@@ -12,16 +18,21 @@
         </tr>
       </table>
     [/#if]
+    [#if !departmentType]
+        [#--这是一段死代码，要求原本是教学部门的继续教育学院排在党办后面，后期可以通过让用户设定测评群体，及其顺序的方式满足--]
+        [#assign teachingAssessVotes = []/]
+        [#assign funcAssessVotes = []/]
+        [#list assessVotes as vote]
+            [#if vote.department.code[0..0]=='1'] [#assign teachingAssessVotes = teachingAssessVotes +[vote]/]
+            [#else][#assign funcAssessVotes = funcAssessVotes + [vote]/]
+            [/#if]
+        [/#list]
+        [#assign assessVotes = funcAssessVotes?sort_by(["department","code"]) + teachingAssessVotes?sort_by(["department","code"]) /]
+    [/#if]
     <table id="voteTable" class="gridtable assessTable">
       <thead>
         <tr>
           <th width="4%">测评单位</th>
-[#--
-          <th width="50">自评总分</th>
-          <th width="50">互评总分</th>
-          <th width="50">职能部门测评总分</th>
-          <th width="50">督察组测评总分</th>
---]
           <th width="25%">创建活动及其效果</th>
           <th width="25%">文明创建特色</th>
           <th width="25%">详实材料</th>
@@ -32,62 +43,42 @@
         </tr>
       </thead>
       <tbody>
-        [#list assessVotes?sort_by(["department","code"]) as vote]
+        [#list assessVotes as vote]
         <tr>
           [#assign name="vote${vote_index}"/]
           <input type="hidden" name="index" value="${name}"/>
           <input type="hidden" name="${name}.department.id" value="${vote.department.id}"/>
           <input type="hidden" name="${name}.id" value="${vote.id!}"/>
-          <td align="center">${vote.department.name}</td>
-[#--
-          <td>${selfAssessScore[vote.department.id+""]!}</td>
-          <td>${mutualAssessScore[vote.department.id+""]!}</td>
-          <td>${funcDepartAssessScore[vote.department.id+""]!}</td>
-          <td>${supervisorAssessScore[vote.department.id+""]!}</td>
---]
+          <td align="center">${vote_index+1}.${vote.department.name}</td>
+            [#assign finded=assessApplies?keys?seq_contains(vote.department.id)]
+            [#if finded][#assign apply=assessApplies.get(vote.department.id)][/#if]
           <td>
-            [#list assessApplies as assessApply]
-              [#if assessApply.department.id == vote.department.id]
-                ${assessApply.activitySummary}
-              [/#if]
-            [/#list]
+                [#if finded]${apply.activitySummary}[#else]未申报[/#if]
           </td>
           <td>
-            [#list assessApplies as assessApply]
-              [#if assessApply.department.id == vote.department.id]
-                ${assessApply.wenmingSummary}
-              [/#if]
-            [/#list]
+                [#if finded]${apply.wenmingSummary}[#else]未申报[/#if]
           </td>
           <td>
-            [#list assessApplies as assessApply]
-              [#if assessApply.department.id == vote.department.id]
-                ${assessApply.detail}
-              [/#if]
-            [/#list]
+                [#if finded]${apply.detail}[#else]未申报[/#if]
           </td>
           <td align="center">
-            [#list assessApplies as assessApply]
-              [#if assessApply.department.id == vote.department.id && assessApply.attachment ??]
-                [@b.a target="_blank" href="../attachment?path=${assessApply.attachment.filePath}&name=${assessApply.attachment.name?url('utf-8')}"]
+            [#if finded && apply.attachment??]
+                [@b.a target="_blank" href="../attachment?path=${apply.attachment.filePath}&name=${apply.attachment.name?url('utf-8')}"]
                 下载
                 [/@]
-              [/#if]
-            [/#list]
+            [/#if]
           </td>
           <td align="center">
-            [#list assessApplies as assessApply]
-              [#if assessApply.department.id == vote.department.id]
-              ${assessApply.bonus}
-              [/#if]
-            [/#list]
+              [#if finded]${apply.bonus}[/#if]
           </td>
           <td align="center">${totalScoreMap[vote.department.id+""]!}</td>
           <td align="center">
-            <input type="radio" name="${name}.ayes" value="1" id="${name}1" class="yes" [#if vote.ayes] checked="checked" [/#if] class="radio_true"/>
-            <lable for="${name}1">是</lable>
+            <div class="radiodiv">
+            <input type="radio" name="${name}.ayes" value="1" id="${name}1" class="yes" [#if vote.ayes] checked="checked" [/#if] />
+            <label for="${name}1" yes="yes">是</label>
             <input type="radio" name="${name}.ayes" value="0" id="${name}0" class="no" [#if vote.id?? && !vote.ayes] checked="checked" [/#if]/>
-            <lable for="${name}0">否</lable>
+            <label for="${name}0">否</label>
+            </div>
           </td>
         </tr>
         [/#list]
@@ -189,6 +180,8 @@
         }
        });
     });
-    //$(".radio_true").attr("checked","checked");
+    $(function (){
+      $(".radiodiv").buttonset();
+    });
   </script>
 [@b.foot/]

@@ -1,7 +1,6 @@
 [#ftl]
 [@b.head/]
 [@b.toolbar title="督察组成员编辑"]bar.addBack();[/@]
-[@b.tabs]
     [@b.form action="!save" theme="list"]
       [@b.textfield name="supervisor.name" label="系统登录名称" value="${supervisor.name!}" 
         required="true" maxlength="50"/]
@@ -18,5 +17,4 @@
         [@b.reset/]&nbsp;&nbsp;[@b.submit value="action.submit"/]
       [/@]
     [/@]
-  [/@]
 [@b.foot/]

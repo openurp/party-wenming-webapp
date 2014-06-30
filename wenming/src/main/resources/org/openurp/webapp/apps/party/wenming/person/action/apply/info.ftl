@@ -17,5 +17,6 @@
     [@b.a target="_blank" href="../attachment?path=${goodPerson.attachment.filePath}&name=${goodPerson.attachment.name?url('utf-8')}"]${(goodPerson.attachment.name)!}[/@]</p>
     [/#if]
   [/@]
+  [@b.field label="备注"]${(goodPerson.remark)!"&nbsp;"}[/@]
 [/@]
 [@b.foot/]

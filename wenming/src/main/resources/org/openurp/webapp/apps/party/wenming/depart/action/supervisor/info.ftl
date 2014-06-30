@@ -6,7 +6,7 @@ bar.addBack("${b.text("action.back")}");
 [#include "/org/openurp/webapp/apps/party/wenming/comm.ftl"/]
 <table class="infoTable">
   <tr>
-   <td class="title" width="10%">系统登录名称:</td>
+   <td class="title" width="10%">系统登录账户:</td>
    <td class="content" width="40%"> ${supervisor.name}</td>
   </tr>
   <tr>
