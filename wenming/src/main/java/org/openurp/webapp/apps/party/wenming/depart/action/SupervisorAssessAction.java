@@ -1,15 +1,18 @@
 package org.openurp.webapp.apps.party.wenming.depart.action;
 
+import java.awt.print.Printable;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
 import org.beangle.commons.dao.query.builder.OqlBuilder;
+import org.dom4j.tree.BackedList;
 import org.openurp.kernel.base.unit.model.Department;
 import org.openurp.webapp.apps.party.wenming.depart.model.AbstractAssessInfo;
 import org.openurp.webapp.apps.party.wenming.depart.model.AssessItem;
 import org.openurp.webapp.apps.party.wenming.depart.model.AssessSchema;
 import org.openurp.webapp.apps.party.wenming.depart.model.AssessSession;
+import org.openurp.webapp.apps.party.wenming.depart.model.AssessState;
 import org.openurp.webapp.apps.party.wenming.depart.model.AssessType;
 import org.openurp.webapp.apps.party.wenming.depart.model.MutualAssess;
 import org.openurp.webapp.apps.party.wenming.depart.model.MutualAssessItem;
@@ -51,6 +54,7 @@ public class SupervisorAssessAction extends AssessAction<SupervisorAssess, Super
   }
 
   protected void editSetting(AssessSession assessSession, AssessSchema schema, List<AbstractAssessInfo> malist) {
+    Integer schemaId = getInt("schema.id");
     if (malist.get(0).getId() != null) {
       List<AssessItem> items = findAssessItem(assessSession, schema);
       for (Department d : schema.getDeparts()) {
@@ -61,11 +65,11 @@ public class SupervisorAssessAction extends AssessAction<SupervisorAssess, Super
           }
         }
         if (!hasDepartment) {
-          MutualAssess ma = new MutualAssess();
+          SupervisorAssess ma = new SupervisorAssess();
           ma.setSchema(schema);
           ma.setDepartment(d);
           for (AssessItem item : items) {
-            MutualAssessItem mai = new MutualAssessItem();
+            SupervisorAssessItem mai = new SupervisorAssessItem();
             mai.setItem(item);
             ma.getItems().add(mai);
           }
@@ -73,6 +77,20 @@ public class SupervisorAssessAction extends AssessAction<SupervisorAssess, Super
         }
       }
     }
+  }
+  
+  public String back(){
+    List<AbstractAssessInfo> malist = findAssess(getInt("session.id"), getInt("schema.id"));
+    if (malist != null && malist.size() > 0) {
+      for(AbstractAssessInfo ma :malist){
+        System.out.println(ma.getState());
+        if(ma.getState().equals(AssessState.Submit)){
+          ma.setState(AssessState.Draft);
+        }
+      }
+      saveOrUpdate(malist);
+    }
+    return redirect("edit", "测评已撤回", "&session.id=" + getInt("session.id") + "&schema.id=" + getInt("schema.id"));
   }
 
   protected void saveAndForward(List<AbstractAssessInfo> malist) {
@@ -89,6 +107,5 @@ public class SupervisorAssessAction extends AssessAction<SupervisorAssess, Super
     List<SupervisorAssess> removeList = search(query);
     remove(removeList);
   }
-  
 
 }

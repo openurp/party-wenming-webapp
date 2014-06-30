@@ -8,6 +8,7 @@ import java.util.Map;
 import org.beangle.commons.dao.query.builder.OqlBuilder;
 import org.openurp.kernel.base.unit.model.Department;
 import org.openurp.webapp.apps.party.wenming.depart.model.AssessSession;
+import org.openurp.webapp.apps.party.wenming.depart.model.AssessState;
 import org.openurp.webapp.apps.party.wenming.depart.model.SupervisorAssess;
 
 public class SupervisorManageAction extends WenMingAction{
@@ -42,9 +43,11 @@ public class SupervisorManageAction extends WenMingAction{
     put("datas", map.values());
     return forward();
   }
+  
   private List<SupervisorAssess> findSupervisorAssess(Integer sessionId) {
     OqlBuilder<SupervisorAssess> builder = OqlBuilder.from(SupervisorAssess.class, "sa");
     builder.where("sa.session.id=:sessionId",sessionId);
+    builder.where("sa.state=:state",AssessState.Submit);
     List<SupervisorAssess> supervisorAssesses = entityDao.search(builder);
     return supervisorAssesses;
   }

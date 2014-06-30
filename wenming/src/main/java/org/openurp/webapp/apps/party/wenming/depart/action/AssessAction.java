@@ -231,11 +231,16 @@ public abstract class AssessAction<T extends AbstractAssessInfo, I extends Abstr
     put("malist", malist);
     if (malist != null && malist.size() > 0) {
       put("schema", malist.get(0).getSchema());
+      put("ifSubmit", ifSubmit(malist.get(0).getState()));
     }
     if(session != null && malist.size() > 0 && editable(malist.get(0).getState())){
       put("editable", true);
     }
     return super.info();
+  }  
+  
+  private boolean ifSubmit(AssessState state){
+    return state == AssessState.Submit;
   }
 
 }

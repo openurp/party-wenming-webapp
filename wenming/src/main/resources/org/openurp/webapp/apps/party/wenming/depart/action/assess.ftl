@@ -5,7 +5,7 @@
     <thead>
       <tr>
         [#if partMode??]
-          <th width="20"></th>
+          <th width="20" style="color:red">请勾选需要测评的部门</th>
         [/#if]
         <th width="220">被评分单位/指标</th>
         [#list assessList[0].items?sort_by(["item", "id"]) as v]
