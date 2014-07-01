@@ -33,6 +33,8 @@ public interface WenMingService {
   List<WenmingSession> findWenmingSessions();
   
   WenmingSession getWenmingSessionByAssessTime();
+  
+  WenmingSession getWenmingSessionByVoteTime();
 
 
 

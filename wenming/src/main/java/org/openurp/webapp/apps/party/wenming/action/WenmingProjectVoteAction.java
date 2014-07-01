@@ -79,7 +79,7 @@ public abstract class WenmingProjectVoteAction extends WenmingProjectVoterCommAc
   @Override
   public String edit() {
     if (getWenmingProjectVoterId() == null) { return redirect("login"); }
-    WenmingSession nowSession = wenMingService.getWenmingSessionByAssessTime();
+    WenmingSession nowSession = wenMingService.getWenmingSessionByVoteTime();
     WenmingSession session = entityDao.get(WenmingSession.class, getInt("session.id"));
     List<AbstractWenmingVote> abstractWenmingVotes = findAbstractWenmingVote(session.getId());
     List<AbstractWenmingObject> objects = findAbstractWenmingObject(session.getId());

@@ -126,4 +126,12 @@ public class WenMingServiceImpl extends BaseServiceImpl implements WenMingServic
     return list.isEmpty() ? null : list.get(0);
   }
 
+  @Override
+  public WenmingSession getWenmingSessionByVoteTime() {
+    OqlBuilder<WenmingSession> query = OqlBuilder.from(WenmingSession.class, "o");
+    query.where("voteBeginOn <= :now and voteEndOn >= :now", new Date());
+    List<WenmingSession> list = entityDao.search(query);
+    return list.isEmpty() ? null : list.get(0);
+  }
+
 }
