@@ -23,6 +23,7 @@ import org.openurp.webapp.apps.party.wenming.depart.action.SupervisorAction;
 import org.openurp.webapp.apps.party.wenming.depart.action.SupervisorAssessAction;
 import org.openurp.webapp.apps.party.wenming.depart.action.SupervisorManageAction;
 import org.openurp.webapp.apps.party.wenming.depart.action.VoteAction;
+import org.openurp.webapp.apps.party.wenming.depart.action.VoteManageAction;
 import org.openurp.webapp.apps.party.wenming.depart.action.VoteStatAction;
 
 public class ActionModule extends AbstractBindModule {
@@ -45,5 +46,6 @@ public class ActionModule extends AbstractBindModule {
     bind(AssessSummaryAction.class);
     bind(SupervisorManageAction.class);
     bind(VoteStatAction.class);
+    bind(VoteManageAction.class);
   }
 }

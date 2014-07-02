@@ -1,5 +1,6 @@
 [#ftl]
 [@b.head/]
+[#include "voteStatNav.ftl"/]
 [@b.toolbar title='投票进度' /]
 <div>
   [@b.form name="voteStatForm"  action="!progress" target="voteStatResult"]

@@ -1,5 +1,4 @@
 [#ftl]
-<h5>各部门详细进度</h5>
 <table class="gridtable" style="width:900px;" >
   <thead class="gridhead">
     <th width="30%">序号</th>

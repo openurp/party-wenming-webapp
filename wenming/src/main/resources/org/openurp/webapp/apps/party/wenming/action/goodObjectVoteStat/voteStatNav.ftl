@@ -1,0 +1,7 @@
+[#ftl]
+[@b.navmenu title="投票统计"]
+  [@ems.guard res="/party/wenming/good-object-vote-stat"][@b.navitem title="进度统计" href="/party/wenming/good-object-vote-stat" /][/@]
+  [@ems.guard res="/party/wenming/project/vote-manage"][@b.navitem title="优秀项目投票汇总" href="/party/wenming/project/vote-manage" /][/@]
+  [@ems.guard res="/party/wenming/post/vote-manage"][@b.navitem title="文明示范岗投票汇总" href="/party/wenming/post/vote-manage" /][/@]
+  [@ems.guard res="/party/wenming/person/vote-manage"][@b.navitem title="好人好事投票汇总" href="/party/wenming/person/vote-manage" /][/@]
+[/@]

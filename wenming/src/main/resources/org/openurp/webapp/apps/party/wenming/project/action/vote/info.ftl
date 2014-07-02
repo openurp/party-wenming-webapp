@@ -9,6 +9,10 @@
          <td class="content">${vote.voter.fullname}</td>
          <td class="title">投票修改时间:</td>
          <td class="content">${vote.updatedAt?string("YYYY-MM-dd HH:mm")}</td>
+         [#if isSubmit??]
+           <td class="title">投票状态:</td>
+           <td style="color:red">已完成投票</td>
+         [/#if]
         </tr>
       </table>
     [/#if]

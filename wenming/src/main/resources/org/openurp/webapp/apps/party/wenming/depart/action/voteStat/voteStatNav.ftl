@@ -1,0 +1,5 @@
+[#ftl]
+[@b.navmenu title="投票统计"]
+  [@ems.guard res="/party/wenming/depart/vote-stat"][@b.navitem title="进度统计" href="/party/wenming/depart/vote-stat" /][/@]
+  [@ems.guard res="/party/wenming/depart/vote-manage"][@b.navitem title="投票汇总" href="/party/wenming/depart/vote-manage" /][/@]
+[/@]

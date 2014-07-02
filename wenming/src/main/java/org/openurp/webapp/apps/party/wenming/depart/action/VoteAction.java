@@ -72,6 +72,9 @@ public class VoteAction extends SupervisorCommAction {
     if (nowSession != null && modifyable(assessVotes)) {
       put("modifyable", true);
     }
+    if (!assessVotes.isEmpty() && assessVotes.get(0).isSubmit()){
+      put("isSubmit", true);
+    }
     put("assessSession", session);
     putData(session, isForTeaching, assessVotes);
     return forward();
