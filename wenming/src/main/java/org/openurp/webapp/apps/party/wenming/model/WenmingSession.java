@@ -19,10 +19,6 @@ public class WenmingSession extends NumberIdTimeObject<Integer> {
   private Date beginOn;
   /** 结束时间 **/
   private Date endOn;
-  /** 投票开始时间 **/
-  private Date voteBeginOn;
-  /** 投票结束时间 **/
-  private Date voteEndOn;
 
   private List<WenmingType> types = CollectUtils.newArrayList();
 
@@ -40,22 +36,6 @@ public class WenmingSession extends NumberIdTimeObject<Integer> {
 
   public void setEndOn(Date endOn) {
     this.endOn = endOn;
-  }
-
-  public Date getVoteBeginOn() {
-    return voteBeginOn;
-  }
-
-  public void setVoteBeginOn(Date voteBeginOn) {
-    this.voteBeginOn = voteBeginOn;
-  }
-
-  public Date getVoteEndOn() {
-    return voteEndOn;
-  }
-
-  public void setVoteEndOn(Date voteEndOn) {
-    this.voteEndOn = voteEndOn;
   }
 
   public String getName() {

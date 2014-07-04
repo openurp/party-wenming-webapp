@@ -7,26 +7,26 @@
   <id name="id" type="long">
    <generator class="org.beangle.orm.hibernate.TableSeqGenerator" />
   </id>
-  <property name="beginOn" />
-  <property name="endOn" />
-  <property name="limit" />
+  <property name="beginOn" not-null="true"/>
+  <property name="endOn" not-null="true"/>
+  <property name="limit" column="limit_" not-null="true"/>
   <many-to-one name="session" column="session_id" not-null="true" />
   <bag name="voters" inverse="true" cascade="all-delete-orphan">
    <key column="session_id"></key>
-   <one-to-many
+   <many-to-many column="voter_id"
     class="org.openurp.webapp.apps.party.wenming.model.WenmingProjectVoter" />
   </bag>
   <bag name="projects" inverse="true" cascade="all-delete-orphan">
    <key column="session_id"></key>
-   <one-to-many class="org.openurp.webapp.apps.party.wenming.project.model.GoodProject" />
+   <many-to-many column="project_id" class="org.openurp.webapp.apps.party.wenming.project.model.GoodProject" />
   </bag>
   <bag name="persons" inverse="true" cascade="all-delete-orphan">
    <key column="session_id"></key>
-   <one-to-many class="org.openurp.webapp.apps.party.wenming.person.model.GoodPerson" />
+   <many-to-many column="person_id" class="org.openurp.webapp.apps.party.wenming.person.model.GoodPerson" />
   </bag>
   <bag name="posts" inverse="true" cascade="all-delete-orphan">
    <key column="session_id"></key>
-   <one-to-many class="org.openurp.webapp.apps.party.wenming.post.model.GoodPost" />
+   <many-to-many column="post_id" class="org.openurp.webapp.apps.party.wenming.post.model.GoodPost" />
   </bag>
  </class>
 </hibernate-mapping>
