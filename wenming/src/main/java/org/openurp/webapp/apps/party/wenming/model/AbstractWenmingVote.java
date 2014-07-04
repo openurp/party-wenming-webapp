@@ -15,7 +15,7 @@ public abstract class AbstractWenmingVote extends NumberIdTimeObject<Long> {
   private static final long serialVersionUID = 4303109503469167899L;
 
   /** 投票批次 */
-  private WenmingSession session;
+  private WenmingVoteSession session;
 
   /** 投票人 */
   private WenmingProjectVoter voter;
@@ -25,11 +25,11 @@ public abstract class AbstractWenmingVote extends NumberIdTimeObject<Long> {
 
   private boolean submit;
 
-  public WenmingSession getSession() {
+  public WenmingVoteSession getSession() {
     return session;
   }
 
-  public void setSession(WenmingSession session) {
+  public void setSession(WenmingVoteSession session) {
     this.session = session;
   }
 

@@ -11,8 +11,6 @@
         <property name="enabled"/>
         <property name="beginOn"/>
         <property name="endOn"/>
-        <property name="voteBeginOn"/>
-        <property name="voteEndOn"/>
         <property name="updatedAt"/>
         <property name="createdAt"/>
         <bag name="schemas">

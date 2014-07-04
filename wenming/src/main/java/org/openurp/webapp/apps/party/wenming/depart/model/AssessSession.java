@@ -21,10 +21,6 @@ public class AssessSession extends IntegerIdObject {
   private Date beginOn;
   /** 测评结束时间 **/
   private Date endOn;
-  /** 投票开始时间 **/
-  private Date voteBeginOn;
-  /** 投票结束时间 **/
-  private Date voteEndOn;
   /** 更新时间 **/
   private Date updatedAt;
   /** 创建时间 **/
@@ -75,22 +71,6 @@ public class AssessSession extends IntegerIdObject {
 
   public void setEndOn(Date endOn) {
     this.endOn = endOn;
-  }
-
-  public Date getVoteBeginOn() {
-    return voteBeginOn;
-  }
-
-  public void setVoteBeginOn(Date voteBeginOn) {
-    this.voteBeginOn = voteBeginOn;
-  }
-
-  public Date getVoteEndOn() {
-    return voteEndOn;
-  }
-
-  public void setVoteEndOn(Date voteEndOn) {
-    this.voteEndOn = voteEndOn;
   }
 
   public List<AssessSchema> getSchemas() {

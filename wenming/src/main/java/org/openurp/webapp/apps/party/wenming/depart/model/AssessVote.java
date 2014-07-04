@@ -14,7 +14,7 @@ public class AssessVote extends NumberIdTimeObject<Long> {
   private static final long serialVersionUID = 4303109503469167899L;
 
   /** 投票批次 */
-  private AssessSession session;
+  private VoteSession session;
 
   /** 投票人 */
   private Supervisor voter;
@@ -27,14 +27,13 @@ public class AssessVote extends NumberIdTimeObject<Long> {
 
   private boolean submit;
 
-  public AssessSession getSession() {
+  public VoteSession getSession() {
     return session;
   }
 
-  public void setSession(AssessSession session) {
+  public void setSession(VoteSession session) {
     this.session = session;
   }
-
 
   public Supervisor getVoter() {
     return voter;

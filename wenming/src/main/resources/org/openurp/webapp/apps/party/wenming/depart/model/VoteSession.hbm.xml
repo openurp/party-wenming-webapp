@@ -1,0 +1,24 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC
+    "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+    "http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+<hibernate-mapping package="org.openurp.webapp.apps.party.wenming.depart.model">
+ <class name="VoteSession">
+  <id name="id" type="long">
+   <generator class="org.beangle.orm.hibernate.TableSeqGenerator" />
+  </id>
+  <property name="beginOn" />
+  <property name="endOn" />
+  <property name="limit" />
+  <many-to-one name="session" column="session_id" not-null="true" />
+  <bag name="voters" inverse="true" cascade="all-delete-orphan">
+   <key column="session_id"></key>
+   <one-to-many
+    class="org.openurp.webapp.apps.party.wenming.depart.model.Supervisor" />
+  </bag>
+  <bag name="departments" inverse="true" cascade="all-delete-orphan">
+   <key column="session_id"></key>
+   <one-to-many class="org.openurp.kernel.base.unit.model.Department" />
+  </bag>
+ </class>
+</hibernate-mapping>

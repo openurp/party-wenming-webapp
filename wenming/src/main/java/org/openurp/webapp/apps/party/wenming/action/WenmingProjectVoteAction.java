@@ -11,7 +11,7 @@ import org.openurp.webapp.apps.party.wenming.depart.model.AssessState;
 import org.openurp.webapp.apps.party.wenming.model.AbstractWenmingObject;
 import org.openurp.webapp.apps.party.wenming.model.AbstractWenmingVote;
 import org.openurp.webapp.apps.party.wenming.model.WenmingProjectVoter;
-import org.openurp.webapp.apps.party.wenming.model.WenmingSession;
+import org.openurp.webapp.apps.party.wenming.model.WenmingVoteSession;
 
 public abstract class WenmingProjectVoteAction extends WenmingProjectVoterCommAction {
 
@@ -42,11 +42,11 @@ public abstract class WenmingProjectVoteAction extends WenmingProjectVoterCommAc
   @Override
   public String index() throws Exception {
     if (getWenmingProjectVoterId() == null) { return redirect("login"); }
-    List<WenmingSession> wenmingSessions = wenMingService.findWenmingSessions();
+    List<WenmingVoteSession> wenmingSessions = wenMingService.findWenmingVoteSession();
     Integer sessionId = getInt("session.id");
-    WenmingSession wenmingSession = null;
+    WenmingVoteSession wenmingSession = null;
     if (sessionId != null) {
-      wenmingSession = entityDao.get(WenmingSession.class, sessionId);
+      wenmingSession = entityDao.get(WenmingVoteSession.class, sessionId);
     } else if (!wenmingSessions.isEmpty()) {
       wenmingSession = wenmingSessions.get(0);
     }
@@ -60,8 +60,8 @@ public abstract class WenmingProjectVoteAction extends WenmingProjectVoterCommAc
     if (getWenmingProjectVoterId() == null) { return redirect("login"); }
     Integer sessionId = getInt("session.id");
     List<AbstractWenmingVote> abstractWenmingVotes = findAbstractWenmingVote(sessionId);
-    WenmingSession nowSession = wenMingService.getWenmingSessionByVoteTime();
-    WenmingSession session = entityDao.get(WenmingSession.class, getInt("session.id"));
+    WenmingVoteSession nowSession = wenMingService.getWenmingVoteSession();
+    WenmingVoteSession session = entityDao.get(WenmingVoteSession.class, getInt("session.id"));
     if (abstractWenmingVotes.isEmpty() && nowSession != null && nowSession.equals(session)) { return redirect(
         "edit", null, "session.id=" + sessionId); }
     if (nowSession!=null && modifyable(abstractWenmingVotes)) {
@@ -82,8 +82,8 @@ public abstract class WenmingProjectVoteAction extends WenmingProjectVoterCommAc
   @Override
   public String edit() {
     if (getWenmingProjectVoterId() == null) { return redirect("login"); }
-    WenmingSession nowSession = wenMingService.getWenmingSessionByVoteTime();
-    WenmingSession session = entityDao.get(WenmingSession.class, getInt("session.id"));
+    WenmingVoteSession nowSession = wenMingService.getWenmingVoteSession();
+    WenmingVoteSession session = entityDao.get(WenmingVoteSession.class, getInt("session.id"));
     List<AbstractWenmingVote> abstractWenmingVotes = findAbstractWenmingVote(session.getId());
     List<AbstractWenmingObject> objects = findAbstractWenmingObject(session.getId());
     if (nowSession != null && nowSession.equals(session)) {
@@ -136,7 +136,7 @@ public abstract class WenmingProjectVoteAction extends WenmingProjectVoterCommAc
   @Override
   public String save() throws Exception {
     if (getWenmingProjectVoterId() == null) { return redirect("login"); }
-    WenmingSession session = wenMingService.getWenmingSessionByVoteTime();
+    WenmingVoteSession session = wenMingService.getWenmingVoteSession();
     List<AbstractWenmingVote> list = (List<AbstractWenmingVote>) getAll(getWenmingObjectVoteClass(),"index");
     Date now = new Date();
     WenmingProjectVoter voter = getWenmingProjectVoter();

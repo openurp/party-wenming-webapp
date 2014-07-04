@@ -12,9 +12,9 @@ import org.beangle.commons.dao.query.builder.SqlBuilder;
 import org.openurp.kernel.base.unit.model.Department;
 import org.openurp.webapp.apps.party.wenming.depart.model.AssessApply;
 import org.openurp.webapp.apps.party.wenming.depart.model.AssessSchema;
-import org.openurp.webapp.apps.party.wenming.depart.model.AssessSession;
 import org.openurp.webapp.apps.party.wenming.depart.model.AssessVote;
 import org.openurp.webapp.apps.party.wenming.depart.model.Supervisor;
+import org.openurp.webapp.apps.party.wenming.depart.model.VoteSession;
 
 
 public class VoteAction extends SupervisorCommAction {
@@ -46,15 +46,15 @@ public class VoteAction extends SupervisorCommAction {
   @Override
   public String index() throws Exception {
     if (getSupervisorId() == null) { return redirect("login"); }
-    List<AssessSession> assessSessions = wenMingService.findAssessSessions();
+    List<VoteSession> assessSessions = wenMingService.findVoteSession();
     Integer sessionId = getInt("session.id");
-    AssessSession assessSession = null;
+    VoteSession assessSession = null;
     if (sessionId != null) {
-      assessSession = entityDao.get(AssessSession.class, sessionId);
+      assessSession = entityDao.get(VoteSession.class, sessionId);
     } else if (!assessSessions.isEmpty()) {
       assessSession = assessSessions.get(0);
     }
-    put("schemas", assessSession.getSchemas());
+    put("schemas", assessSession.getSession().getSchemas());
     put("assessSessions", assessSessions);
     put("assessSession", assessSession);
     return super.index();
@@ -66,8 +66,8 @@ public class VoteAction extends SupervisorCommAction {
     Integer sessionId = getInt("session.id");
     boolean isForTeaching = getBool("departmentType");
     List<AssessVote> assessVotes = findAssessVote(sessionId, isForTeaching);
-    AssessSession nowSession = wenMingService.getAssessSessionByVoteTime();
-    AssessSession session = entityDao.get(AssessSession.class, getInt("session.id"));
+    VoteSession nowSession = wenMingService.getVoteSession();
+    VoteSession session = entityDao.get(VoteSession.class, getInt("session.id"));
     if (assessVotes.isEmpty() && nowSession != null && nowSession.equals(session)) { return redirect("edit"); }
     if (nowSession != null && modifyable(assessVotes)) {
       put("modifyable", true);
@@ -83,8 +83,8 @@ public class VoteAction extends SupervisorCommAction {
   @Override
   public String edit() {
     if (getSupervisorId() == null) { return redirect("login"); }
-    AssessSession nowSession = wenMingService.getAssessSessionByVoteTime();
-    AssessSession session = entityDao.get(AssessSession.class, getInt("session.id"));
+    VoteSession nowSession = wenMingService.getVoteSession();
+    VoteSession session = entityDao.get(VoteSession.class, getInt("session.id"));
 
     boolean isForTeaching = getBool("departmentType");
     List<AssessVote> assessVotes = findAssessVote(session.getId(), isForTeaching);
@@ -93,7 +93,7 @@ public class VoteAction extends SupervisorCommAction {
       if (assessVotes.isEmpty()) {
         Supervisor voter = getSupervisor();
         Date now = new Date();
-        for (AssessSchema schema : session.getSchemas()) {
+        for (AssessSchema schema : session.getSession().getSchemas()) {
           if (schema.isForTeaching() == isForTeaching) {
             for (Department department : schema.getDeparts()) {
               AssessVote assessVote = new AssessVote();
@@ -113,7 +113,7 @@ public class VoteAction extends SupervisorCommAction {
     }
   }
 
-  private void putData(AssessSession session, boolean isForTeaching, List<AssessVote> assessVotes) {
+  private void putData(VoteSession session, boolean isForTeaching, List<AssessVote> assessVotes) {
     List<AssessApply> assessApplies = findAssessApply(session.getId());
     put("assessVotes", assessVotes);
     Map<String, Float> selfAssessScore = findAssessAvgScore(session.getId(),"wm_self_assesses", "wm_self_assess_items");
@@ -190,7 +190,7 @@ public class VoteAction extends SupervisorCommAction {
     if (getSupervisorId() == null) { return redirect("login"); }
 
     boolean departmentType = getBool("departmentType");
-    AssessSession session = wenMingService.getAssessSessionByVoteTime();
+    VoteSession session = wenMingService.getVoteSession();
     List<AssessVote> list = (List<AssessVote>) getAll();
     Date now = new Date();
     Supervisor voter = getSupervisor();

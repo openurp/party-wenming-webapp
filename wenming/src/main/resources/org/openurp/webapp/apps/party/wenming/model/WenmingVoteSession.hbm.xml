@@ -1,0 +1,32 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC
+    "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+    "http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+<hibernate-mapping package="org.openurp.webapp.apps.party.wenming.model">
+ <class name="WenmingVoteSession">
+  <id name="id" type="long">
+   <generator class="org.beangle.orm.hibernate.TableSeqGenerator" />
+  </id>
+  <property name="beginOn" />
+  <property name="endOn" />
+  <property name="limit" />
+  <many-to-one name="session" column="session_id" not-null="true" />
+  <bag name="voters" inverse="true" cascade="all-delete-orphan">
+   <key column="session_id"></key>
+   <one-to-many
+    class="org.openurp.webapp.apps.party.wenming.model.WenmingProjectVoter" />
+  </bag>
+  <bag name="projects" inverse="true" cascade="all-delete-orphan">
+   <key column="session_id"></key>
+   <one-to-many class="org.openurp.webapp.apps.party.wenming.project.model.GoodProject" />
+  </bag>
+  <bag name="persons" inverse="true" cascade="all-delete-orphan">
+   <key column="session_id"></key>
+   <one-to-many class="org.openurp.webapp.apps.party.wenming.person.model.GoodPerson" />
+  </bag>
+  <bag name="posts" inverse="true" cascade="all-delete-orphan">
+   <key column="session_id"></key>
+   <one-to-many class="org.openurp.webapp.apps.party.wenming.post.model.GoodPost" />
+  </bag>
+ </class>
+</hibernate-mapping>

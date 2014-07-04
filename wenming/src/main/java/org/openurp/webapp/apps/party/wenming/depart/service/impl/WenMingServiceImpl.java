@@ -10,9 +10,11 @@ import org.openurp.webapp.apps.party.wenming.depart.model.AssessItem;
 import org.openurp.webapp.apps.party.wenming.depart.model.AssessSchema;
 import org.openurp.webapp.apps.party.wenming.depart.model.AssessSession;
 import org.openurp.webapp.apps.party.wenming.depart.model.AssessType;
+import org.openurp.webapp.apps.party.wenming.depart.model.VoteSession;
 import org.openurp.webapp.apps.party.wenming.depart.service.QueryInvoker;
 import org.openurp.webapp.apps.party.wenming.depart.service.WenMingService;
 import org.openurp.webapp.apps.party.wenming.model.WenmingSession;
+import org.openurp.webapp.apps.party.wenming.model.WenmingVoteSession;
 
 public class WenMingServiceImpl extends BaseServiceImpl implements WenMingService {
 
@@ -34,15 +36,6 @@ public class WenMingServiceImpl extends BaseServiceImpl implements WenMingServic
   public AssessSession getAssessSessionByAssessTime() {
     OqlBuilder<AssessSession> query = OqlBuilder.from(AssessSession.class, "o");
     query.where("beginOn <= :now and endOn >= :now", new Date());
-    query.where("enabled = true");
-    List<AssessSession> list = entityDao.search(query);
-    return list.isEmpty() ? null : list.get(0);
-  }
-
-  @Override
-  public AssessSession getAssessSessionByVoteTime() {
-    OqlBuilder<AssessSession> query = OqlBuilder.from(AssessSession.class, "o");
-    query.where("voteBeginOn <= :now and voteEndOn >= :now", new Date());
     query.where("enabled = true");
     List<AssessSession> list = entityDao.search(query);
     return list.isEmpty() ? null : list.get(0);
@@ -127,11 +120,34 @@ public class WenMingServiceImpl extends BaseServiceImpl implements WenMingServic
   }
 
   @Override
-  public WenmingSession getWenmingSessionByVoteTime() {
-    OqlBuilder<WenmingSession> query = OqlBuilder.from(WenmingSession.class, "o");
-    query.where("voteBeginOn <= :now and voteEndOn >= :now", new Date());
-    List<WenmingSession> list = entityDao.search(query);
+  public VoteSession getVoteSession() {
+    OqlBuilder<VoteSession> query = OqlBuilder.from(VoteSession.class, "o");
+    query.where("beginOn <= :now and endOn >= :now", new Date());
+    List<VoteSession> list = entityDao.search(query);
     return list.isEmpty() ? null : list.get(0);
   }
+
+  @Override
+  public List<VoteSession> findVoteSession() {
+    OqlBuilder<VoteSession> query = OqlBuilder.from(VoteSession.class, "o");
+    query.orderBy("o.beginOn desc");
+    return entityDao.search(query);
+  }
+
+  @Override
+  public WenmingVoteSession getWenmingVoteSession() {
+    OqlBuilder<WenmingVoteSession> query = OqlBuilder.from(WenmingVoteSession.class, "o");
+    query.where("beginOn <= :now and endOn >= :now", new Date());
+    List<WenmingVoteSession> list = entityDao.search(query);
+    return list.isEmpty() ? null : list.get(0);
+  }
+
+  @Override
+  public List<WenmingVoteSession> findWenmingVoteSession() {
+    OqlBuilder<WenmingVoteSession> query = OqlBuilder.from(WenmingVoteSession.class, "o");
+    query.orderBy("o.beginOn desc");
+    return entityDao.search(query);
+  }
+
 
 }
