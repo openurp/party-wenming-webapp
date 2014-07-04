@@ -11,13 +11,16 @@ public class SupervisorCommAction extends WenMingAction{
 
   protected Integer getSupervisorId() {
     Integer supervisorId = (Integer) getSession().get(SUPERVISOR_ID);
-    if(supervisorId == null && getUserId() != null){
-      User user = getUrpUser();
-      List<Supervisor> list = entityDao.get(Supervisor.class, "name", user.getName());
-      if(!list.isEmpty()){
-        supervisorId = list.get(0).getId();
-        getSession().put(SUPERVISOR_ID, supervisorId);
+    try {
+      if(supervisorId == null && getUserId() != null){
+        User user = getUrpUser();
+        List<Supervisor> list = entityDao.get(Supervisor.class, "name", user.getName());
+        if(!list.isEmpty()){
+          supervisorId = list.get(0).getId();
+          getSession().put(SUPERVISOR_ID, supervisorId);
+        }
       }
+    } catch (Exception e) {
     }
     return supervisorId;
   }

@@ -95,11 +95,11 @@
   
   <script>
     jQuery.struts2_jquery.require("/js/base/jquery-ui.js",null,bg.getContextPath() + "/static");
-	var needsize = ${voteSession.limit};
-    $(".voteMaxNum").html(needsize);
+    $(".voteMaxNum").html(${limitNum});
     function isallselected(){
       var ayessize = $("#voteTable .yes:checked").length;
-      var result = (ayessize <= needsize);
+      var limitNum = ${limitNum};
+      var result = (ayessize <= limitNum);
       if(!result){
         alert("投票上限："+needsize+"\n已投票数："+ayessize);
         return false;

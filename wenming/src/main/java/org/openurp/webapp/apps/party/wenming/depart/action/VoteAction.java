@@ -11,7 +11,6 @@ import org.beangle.commons.dao.query.builder.OqlBuilder;
 import org.beangle.commons.dao.query.builder.SqlBuilder;
 import org.openurp.kernel.base.unit.model.Department;
 import org.openurp.webapp.apps.party.wenming.depart.model.AssessApply;
-import org.openurp.webapp.apps.party.wenming.depart.model.AssessSchema;
 import org.openurp.webapp.apps.party.wenming.depart.model.AssessVote;
 import org.openurp.webapp.apps.party.wenming.depart.model.Supervisor;
 import org.openurp.webapp.apps.party.wenming.depart.model.VoteSession;
@@ -71,7 +70,7 @@ public class VoteAction extends SupervisorCommAction {
     VoteSession nowSession = wenMingService.getVoteSession(getSupervisorId());
     VoteSession session = entityDao.get(VoteSession.class, getInt("session.id"));
     if (assessVotes.isEmpty() && nowSession != null && nowSession.equals(session)) { return redirect("edit"); }
-    if (nowSession != null && modifyable(assessVotes)) {
+    if (nowSession != null && nowSession.equals(session) && modifyable(assessVotes)) {
       put("modifyable", true);
     }
     if (!assessVotes.isEmpty() && assessVotes.get(0).isSubmit()){
@@ -110,6 +109,7 @@ public class VoteAction extends SupervisorCommAction {
         return redirect("info", null, "session.id=" + session.getId() + "&departmentType=" + isForTeaching);
       }
       putData(session, isForTeaching, assessVotes);
+      put("limitNum", Math.ceil(nowSession.getLimit() * 0.01 * assessVotes.size()));
       return forward();
     } else {
       return redirect("info", null, "session.id=" + session.getId() + "&departmentType=" + isForTeaching);
@@ -117,12 +117,13 @@ public class VoteAction extends SupervisorCommAction {
   }
 
   private void putData(VoteSession session, boolean isForTeaching, List<AssessVote> assessVotes) {
-    List<AssessApply> assessApplies = findAssessApply(session.getId());
+    Integer assessSessionId = session.getSession().getId();
+    List<AssessApply> assessApplies = findAssessApply(assessSessionId);
     put("assessVotes", assessVotes);
-    Map<String, Float> selfAssessScore = findAssessAvgScore(session.getId(),"wm_self_assesses", "wm_self_assess_items");
-    Map<String, Float> mutualAssessScore = findAssessAvgScore(session.getId(),"wm_mutual_assesses", "wm_mutual_assess_items");
-    Map<String, Float> funcDepartAssessScore = findAssessAvgScore(session.getId(),"wm_func_depart_assesses", "wm_func_depart_assess_items");
-    Map<String, Float> supervisorAssessScore = findAssessAvgScore(session.getId(),"wm_supervisor_assesses", "wm_supervisor_assess_items");
+    Map<String, Float> selfAssessScore = findAssessAvgScore(assessSessionId,"wm_self_assesses", "wm_self_assess_items");
+    Map<String, Float> mutualAssessScore = findAssessAvgScore(assessSessionId,"wm_mutual_assesses", "wm_mutual_assess_items");
+    Map<String, Float> funcDepartAssessScore = findAssessAvgScore(assessSessionId,"wm_func_depart_assesses", "wm_func_depart_assess_items");
+    Map<String, Float> supervisorAssessScore = findAssessAvgScore(assessSessionId,"wm_supervisor_assesses", "wm_supervisor_assess_items");
     Map<String, Float> totalScoreMap = new HashMap<String, Float>();
     for(AssessVote assessVote : assessVotes){
       try {

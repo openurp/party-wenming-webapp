@@ -133,7 +133,7 @@ public class WenMingServiceImpl extends BaseServiceImpl implements WenMingServic
   @Override
   public VoteSession getVoteSession(Integer supervisorId) {
     OqlBuilder<VoteSession> query = OqlBuilder.from(VoteSession.class, "o");
-    query.where("beginOn <= :now and endOn >= :now", new Date());
+    query.where("o.beginOn <= :now and o.endOn >= :now", new Date());
     query.join("o.voters", "v");
     query.where("v.id = :supervisorId", supervisorId);
     List<VoteSession> list = entityDao.search(query);
