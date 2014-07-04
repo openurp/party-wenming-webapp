@@ -6,7 +6,7 @@ import org.beangle.commons.dao.query.builder.SqlBuilder;
 import org.beangle.ems.web.action.SecurityActionSupport;
 import org.beangle.security.blueprint.User;
 import org.openurp.kernel.base.unit.model.UrpUserBean;
-import org.openurp.webapp.apps.party.wenming.depart.model.AssessSession;
+import org.openurp.webapp.apps.party.wenming.depart.model.VoteSession;
 import org.openurp.webapp.apps.party.wenming.depart.service.WenMingService;
 
 /**
@@ -25,9 +25,9 @@ public class VoteStatAction extends SecurityActionSupport {
   @Override
   protected void indexSetting() {
     UrpUserBean user = (UrpUserBean) entityDao.get(User.class, getUserId());
-    List<AssessSession> sessions = wenMingService.findSessions(user.getDepartment());
+    List<VoteSession> sessions = wenMingService.findVoteSession(user.getDepartment());
     Integer sessionId = getInt("session.id");
-    if (null != sessionId) put("assessSession", entityDao.get(AssessSession.class, sessionId));
+    if (null != sessionId) put("assessSession", entityDao.get(VoteSession.class, sessionId));
     put("user", user);
     put("sessions", sessions);
   }

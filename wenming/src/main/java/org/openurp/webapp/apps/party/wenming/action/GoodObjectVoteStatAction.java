@@ -8,6 +8,7 @@ import org.beangle.security.blueprint.User;
 import org.openurp.kernel.base.unit.model.UrpUserBean;
 import org.openurp.webapp.apps.party.wenming.depart.model.AssessSession;
 import org.openurp.webapp.apps.party.wenming.depart.service.WenMingService;
+import org.openurp.webapp.apps.party.wenming.model.WenmingVoteSession;
 
 /**
  * 测评统计
@@ -25,7 +26,7 @@ public class GoodObjectVoteStatAction extends SecurityActionSupport {
   @Override
   protected void indexSetting() {
     UrpUserBean user = (UrpUserBean) entityDao.get(User.class, getUserId());
-    List<AssessSession> sessions = wenMingService.findSessions(user.getDepartment());
+    List<WenmingVoteSession> sessions = wenMingService.findWenmingVoteSession();
     Integer sessionId = getInt("session.id");
     if (null != sessionId)
       put("assessSession", entityDao.get(AssessSession.class, sessionId));

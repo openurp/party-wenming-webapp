@@ -21,6 +21,8 @@ public interface WenMingService {
 
   List<AssessSession> findSessions(Department department);
 
+  List<VoteSession> findVoteSession(Department department);
+
   List<AssessSession> findAssessSessions();
 
   List<AssessItem> findAssessItemBySupervisor(AssessSchema schema);
