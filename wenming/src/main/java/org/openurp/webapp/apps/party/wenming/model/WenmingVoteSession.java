@@ -14,6 +14,8 @@ import org.openurp.webapp.apps.party.wenming.project.model.GoodProject;
  * 
  */
 public class WenmingVoteSession extends AbstractVoteSession {
+  /** 票数限制，为０的时候不限制 **/
+  private Integer limit3 = 0;
   /** 相关批次 **/
   private WenmingSession session;
   /** 评委 **/
@@ -24,6 +26,14 @@ public class WenmingVoteSession extends AbstractVoteSession {
   private List<GoodPerson> persons = CollectUtils.newArrayList();
   /** 被投票的文明示范岗 **/
   private List<GoodPost> posts = CollectUtils.newArrayList();
+
+  public Integer getLimit3() {
+    return limit3;
+  }
+
+  public void setLimit3(Integer limit3) {
+    this.limit3 = limit3;
+  }
 
   public WenmingSession getSession() {
     return session;

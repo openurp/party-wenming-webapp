@@ -11,21 +11,23 @@
   <property name="beginOn" not-null="true"/>
   <property name="endOn" not-null="true"/>
   <property name="limit" column="limit_" not-null="true"/>
+  <property name="limit2" column="limit2_" not-null="true"/>
+  <property name="limit3" column="limit3_" not-null="true"/>
   <many-to-one name="session" column="session_id" not-null="true" />
-  <bag name="voters" inverse="true" cascade="all-delete-orphan">
+  <bag name="voters">
    <key column="session_id"></key>
    <many-to-many column="voter_id"
     class="org.openurp.webapp.apps.party.wenming.model.WenmingProjectVoter" />
   </bag>
-  <bag name="projects" inverse="true" cascade="all-delete-orphan">
+  <bag name="projects">
    <key column="session_id"></key>
    <many-to-many column="project_id" class="org.openurp.webapp.apps.party.wenming.project.model.GoodProject" />
   </bag>
-  <bag name="persons" inverse="true" cascade="all-delete-orphan">
+  <bag name="persons">
    <key column="session_id"></key>
    <many-to-many column="person_id" class="org.openurp.webapp.apps.party.wenming.person.model.GoodPerson" />
   </bag>
-  <bag name="posts" inverse="true" cascade="all-delete-orphan">
+  <bag name="posts">
    <key column="session_id"></key>
    <many-to-many column="post_id" class="org.openurp.webapp.apps.party.wenming.post.model.GoodPost" />
   </bag>

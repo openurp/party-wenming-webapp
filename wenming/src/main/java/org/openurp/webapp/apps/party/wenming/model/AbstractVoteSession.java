@@ -13,11 +13,21 @@ public class AbstractVoteSession extends IntegerIdObject {
   private Date beginOn;
   /** 结束时间 **/
   private Date endOn;
-  /** 票数限制，为０的时候不限制 **/
+  /** 票数限制 **/
   private Integer limit = 0;
+  /** 票数限制，为０的时候不限制 **/
+  private Integer limit2 = 0;
 
   public String getName() {
     return name;
+  }
+
+  public Integer getLimit2() {
+    return limit2;
+  }
+
+  public void setLimit2(Integer limit2) {
+    this.limit2 = limit2;
   }
 
   public void setName(String name) {

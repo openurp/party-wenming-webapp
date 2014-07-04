@@ -13,6 +13,7 @@ import org.openurp.webapp.apps.party.wenming.model.AbstractVoteSession;
  * 
  */
 public class VoteSession extends AbstractVoteSession {
+
   /** 相关批次 **/
   private AssessSession session;
   /** 评委 **/

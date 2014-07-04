@@ -14,8 +14,6 @@
     [@b.col width="10%" property="name" title="批次名称"][@b.a href="!info?id=${assessSession.id}"]${assessSession.name}[/@][/@]
     [@b.col width="15%" property="beginOn" title="测评开始时间"]${(assessSession.beginOn?datetime)!}[/@]
     [@b.col width="15%" property="endOn" title="测评结束时间"]${(assessSession.endOn?datetime)!}[/@]
-    [@b.col width="15%" property="voteBeginOn" title="投票开始时间"]${(assessSession.voteBeginOn?datetime)!}[/@]
-    [@b.col width="15%" property="voteEndOn" title="投票结束时间"]${(assessSession.voteEndOn?datetime)!}[/@]
     [@b.col width="20%" property="schemas" title="关联方案"]
     [#list assessSession.schemas as schema]${schema.name}[#if schema_has_next]<br>[/#if][/#list]
     [/@]

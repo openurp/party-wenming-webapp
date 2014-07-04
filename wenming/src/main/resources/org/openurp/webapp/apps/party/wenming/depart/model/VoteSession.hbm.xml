@@ -11,13 +11,14 @@
   <property name="beginOn" not-null="true"/>
   <property name="endOn" not-null="true"/>
   <property name="limit" column="limit_" not-null="true"/>
+  <property name="limit2" column="limit2_" not-null="true"/>
   <many-to-one name="session" column="session_id" not-null="true" />
-  <bag name="voters" inverse="true" cascade="all-delete-orphan">
+  <bag name="voters">
    <key column="session_id"></key>
    <many-to-many column="voter_id"
     class="org.openurp.webapp.apps.party.wenming.depart.model.Supervisor" />
   </bag>
-  <bag name="departments" inverse="true" cascade="all-delete-orphan">
+  <bag name="departments">
    <key column="session_id"></key>
    <many-to-many column="department_id" class="org.openurp.kernel.base.unit.model.Department" />
   </bag>
