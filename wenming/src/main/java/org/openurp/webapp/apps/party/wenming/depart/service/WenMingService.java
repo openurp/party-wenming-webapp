@@ -37,9 +37,9 @@ public interface WenMingService {
   
   WenmingSession getWenmingSessionByAssessTime();
   
-  VoteSession getVoteSession();
+  VoteSession getVoteSession(Integer supervisorId);
 
-  List<VoteSession> findVoteSession();
+  List<VoteSession> findVoteSession(Integer supervisorId);
 
   WenmingVoteSession getWenmingVoteSession();
 

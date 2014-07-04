@@ -95,7 +95,7 @@
   
   <script>
     jQuery.struts2_jquery.require("/js/base/jquery-ui.js",null,bg.getContextPath() + "/static");
-    var needsize = Math.round($("#voteTable tbody tr").length/5);
+	var needsize = ${voteSession.limit};
     $(".voteMaxNum").html(needsize);
     function isallselected(){
       var ayessize = $("#voteTable .yes:checked").length;

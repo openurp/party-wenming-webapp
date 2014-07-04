@@ -46,7 +46,7 @@ public class VoteAction extends SupervisorCommAction {
   @Override
   public String index() throws Exception {
     if (getSupervisorId() == null) { return redirect("login"); }
-    List<VoteSession> assessSessions = wenMingService.findVoteSession();
+    List<VoteSession> assessSessions = wenMingService.findVoteSession(getSupervisorId());
     Integer sessionId = getInt("session.id");
     VoteSession assessSession = null;
     if (sessionId != null) {
@@ -54,9 +54,11 @@ public class VoteAction extends SupervisorCommAction {
     } else if (!assessSessions.isEmpty()) {
       assessSession = assessSessions.get(0);
     }
-    put("schemas", assessSession.getSession().getSchemas());
+    if(assessSession != null){
+      put("schemas", assessSession.getSession().getSchemas());
+      put("assessSession", assessSession);
+    }
     put("assessSessions", assessSessions);
-    put("assessSession", assessSession);
     return super.index();
   }
 
@@ -66,7 +68,7 @@ public class VoteAction extends SupervisorCommAction {
     Integer sessionId = getInt("session.id");
     boolean isForTeaching = getBool("departmentType");
     List<AssessVote> assessVotes = findAssessVote(sessionId, isForTeaching);
-    VoteSession nowSession = wenMingService.getVoteSession();
+    VoteSession nowSession = wenMingService.getVoteSession(getSupervisorId());
     VoteSession session = entityDao.get(VoteSession.class, getInt("session.id"));
     if (assessVotes.isEmpty() && nowSession != null && nowSession.equals(session)) { return redirect("edit"); }
     if (nowSession != null && modifyable(assessVotes)) {
@@ -82,30 +84,31 @@ public class VoteAction extends SupervisorCommAction {
 
   @Override
   public String edit() {
-    if (getSupervisorId() == null) { return redirect("login"); }
-    VoteSession nowSession = wenMingService.getVoteSession();
+    if (getSupervisorId() == null) {
+      return redirect("login");
+    }
+    VoteSession nowSession = wenMingService.getVoteSession(getSupervisorId());
     VoteSession session = entityDao.get(VoteSession.class, getInt("session.id"));
 
     boolean isForTeaching = getBool("departmentType");
     List<AssessVote> assessVotes = findAssessVote(session.getId(), isForTeaching);
-    
-    if (nowSession!=null && nowSession.equals(session)) {
+
+    if (nowSession != null && nowSession.equals(session)) {
       if (assessVotes.isEmpty()) {
         Supervisor voter = getSupervisor();
         Date now = new Date();
-        for (AssessSchema schema : session.getSession().getSchemas()) {
-          if (schema.isForTeaching() == isForTeaching) {
-            for (Department department : schema.getDeparts()) {
-              AssessVote assessVote = new AssessVote();
-              assessVote.setDepartment(department);
-              assessVote.setVoter(voter);
-              assessVote.setUpdatedAt(now);
-              assessVotes.add(assessVote);
-            }
+        for (Department department : session.getDepartments()) {
+          if (department.isTeaching() == isForTeaching) {
+            AssessVote assessVote = new AssessVote();
+            assessVote.setDepartment(department);
+            assessVote.setVoter(voter);
+            assessVote.setUpdatedAt(now);
+            assessVotes.add(assessVote);
           }
         }
-      } else if (assessVotes.get(0).isSubmit()) { return redirect("info", null,
-          "session.id=" + session.getId() + "&departmentType=" + isForTeaching); }
+      } else if (assessVotes.get(0).isSubmit()) {
+        return redirect("info", null, "session.id=" + session.getId() + "&departmentType=" + isForTeaching);
+      }
       putData(session, isForTeaching, assessVotes);
       return forward();
     } else {
@@ -143,6 +146,7 @@ public class VoteAction extends SupervisorCommAction {
     }
     put("assessApplies", assessApplyMap);
     put("departmentType", isForTeaching);
+    put("voteSession", session);
   }
   
   private Map<String, Float> findAssessAvgScore(Integer sessionId, String assessTableName,
@@ -190,7 +194,7 @@ public class VoteAction extends SupervisorCommAction {
     if (getSupervisorId() == null) { return redirect("login"); }
 
     boolean departmentType = getBool("departmentType");
-    VoteSession session = wenMingService.getVoteSession();
+    VoteSession session = wenMingService.getVoteSession(getSupervisorId());
     List<AssessVote> list = (List<AssessVote>) getAll();
     Date now = new Date();
     Supervisor voter = getSupervisor();
