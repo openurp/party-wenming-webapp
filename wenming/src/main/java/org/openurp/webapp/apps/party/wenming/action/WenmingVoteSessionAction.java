@@ -23,27 +23,27 @@ public class WenmingVoteSessionAction extends WenMingAction {
 
   @Override
   protected void editSetting(Entity<?> entity) {
-    WenmingVoteSession voteSession = (WenmingVoteSession) entity;
+    WenmingVoteSession wenmingVoteSession = (WenmingVoteSession) entity;
     List<WenmingProjectVoter> voters = findVoters();
-    voters.removeAll(voteSession.getVoters());
+    voters.removeAll(wenmingVoteSession.getVoters());
     put("voters", voters);
-    if (voteSession.getSession() == null) {
+    if (wenmingVoteSession.getSession() == null) {
       OqlBuilder<WenmingSession> builder = OqlBuilder.from(WenmingSession.class, "ss");
       builder.where("ss.beginOn < :now", new Date());
       builder.orderBy("ss.beginOn desc");
       builder.limit(1, 1);
       List<WenmingSession> wenmingSessions = entityDao.search(builder);
       if (wenmingSessions.isEmpty()) { throw new RuntimeException("不存在测评批次，无法创建投票批次"); }
-      voteSession.setSession(wenmingSessions.get(0));
+      wenmingVoteSession.setSession(wenmingSessions.get(0));
     }
-    List<GoodProject> projects = findGoodProjects(voteSession.getSession().getId());
-    projects.removeAll(voteSession.getProjects());
+    List<GoodProject> projects = findGoodProjects(wenmingVoteSession.getSession().getId());
+    projects.removeAll(wenmingVoteSession.getProjects());
     put("projects", projects);
-    List<GoodPerson> people = findGoodPeople(voteSession.getSession().getId());
-    people.removeAll(voteSession.getPersons());
+    List<GoodPerson> people = findGoodPeople(wenmingVoteSession.getSession().getId());
+    people.removeAll(wenmingVoteSession.getPersons());
     put("persons", people);
-    List<GoodPost> posts = findGoodPosts(voteSession.getSession().getId());
-    posts.removeAll(voteSession.getPosts());
+    List<GoodPost> posts = findGoodPosts(wenmingVoteSession.getSession().getId());
+    posts.removeAll(wenmingVoteSession.getPosts());
     put("posts", posts);
 
   }
@@ -76,6 +76,25 @@ public class WenmingVoteSessionAction extends WenMingAction {
     OqlBuilder<WenmingProjectVoter> builder = OqlBuilder.from(WenmingProjectVoter.class);
     builder.orderBy("fullname");
     return entityDao.search(builder);
+  }
+  
+  @Override
+  protected String saveAndForward(Entity<?> entity) {
+    WenmingVoteSession wenmingVoteSession = (WenmingVoteSession) entity;
+    Integer[] voterIds = getAll("voterId", Integer.class);
+    wenmingVoteSession.getVoters().clear();
+    wenmingVoteSession.getVoters().addAll(entityDao.get(WenmingProjectVoter.class, voterIds));
+    Long[] goodProjectId = getAll("goodProjectId", Long.class);
+    wenmingVoteSession.getProjects().clear();
+    wenmingVoteSession.getProjects().addAll(entityDao.get(GoodProject.class, goodProjectId));
+    Long[] goodPersonId = getAll("goodPersonId", Long.class);
+    wenmingVoteSession.getPersons().clear();
+    wenmingVoteSession.getPersons().addAll(entityDao.get(GoodPerson.class, goodPersonId));
+    Long[] goodPostId = getAll("goodPostId", Long.class);
+    wenmingVoteSession.getPosts().clear();
+    wenmingVoteSession.getPosts().addAll(entityDao.get(GoodPost.class, goodPostId));
+    return super.saveAndForward(entity);
+    
   }
 
 }

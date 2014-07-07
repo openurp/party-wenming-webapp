@@ -4,7 +4,7 @@
     "http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
 <hibernate-mapping package="org.openurp.webapp.apps.party.wenming.model">
  <class name="WenmingVoteSession">
-  <id name="id" type="long">
+  <id name="id" type="integer">
    <generator class="org.beangle.orm.hibernate.TableSeqGenerator" />
   </id>
   <property name="name" not-null="true"/>
