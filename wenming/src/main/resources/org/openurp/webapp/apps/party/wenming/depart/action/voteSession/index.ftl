@@ -1,5 +1,6 @@
 [#ftl]
 [@b.head/]
+[#include "nav.ftl"/]
 [@b.toolbar title='投票批次维护' /]
 <table  class="indexpanel">
   <tr>

@@ -1,5 +1,6 @@
 [#ftl]
 [@b.head/]
+[#include "../wenmingVoteSession/nav.ftl"/]
 [@b.toolbar title='文明项目投票成员维护' /]
 <style>
 .search-item input{width:80px;}

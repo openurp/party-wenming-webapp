@@ -4,7 +4,6 @@
 form.listform label.title{width:120px} 
 </style>
 [@b.toolbar title="投票批次编辑"]bar.addBack();[/@]
-[@b.tabs]
     [@b.form action="!save" theme="list"]
       [@b.field label="相关测评批次"]${wenmingVoteSession.session.name}[/@]
       [@b.textfield name="wenmingVoteSession.name" label="批次名称" value="${wenmingVoteSession.name!}" required="true" maxlength="50"/]
@@ -35,5 +34,4 @@ form.listform label.title{width:120px}
         [@b.reset/]&nbsp;&nbsp;[@b.submit value="action.submit"/]
       [/@]
     [/@]
-  [/@]
 [@b.foot/]

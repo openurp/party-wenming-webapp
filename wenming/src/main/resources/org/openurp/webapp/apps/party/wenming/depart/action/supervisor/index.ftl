@@ -1,5 +1,6 @@
 [#ftl]
 [@b.head/]
+[#include "../voteSession/nav.ftl"/]
 [@b.toolbar title='文明委成员维护' /]
 <style>
 .search-item input{width:80px;}

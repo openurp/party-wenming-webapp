@@ -1,7 +1,6 @@
 [#ftl]
 [@b.head/]
 [@b.toolbar title="考核批次编辑"]bar.addBack();[/@]
-[@b.tabs]
     [@b.form action="!save" theme="list"]
       [#if repeatDepartmentList??]
       [@b.field label="部门重复"]
@@ -25,5 +24,4 @@
         [@b.reset/]&nbsp;&nbsp;[@b.submit value="action.submit"/]
       [/@]
     [/@]
-  [/@]
 [@b.foot/]

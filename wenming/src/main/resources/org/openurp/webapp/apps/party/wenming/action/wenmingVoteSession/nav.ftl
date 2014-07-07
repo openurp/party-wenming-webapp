@@ -1,0 +1,5 @@
+[#ftl]
+[@b.navmenu title="投票设置"]
+  [@ems.guard res="/party/wenming/wenming-vote-session"][@b.navitem title="投票批次" href="/party/wenming/wenming-vote-session" /][/@]
+  [@ems.guard res="/party/wenming/wenming-project-voter"][@b.navitem title="文明委成员" href="/party/wenming/wenming-project-voter" /][/@]
+[/@]
