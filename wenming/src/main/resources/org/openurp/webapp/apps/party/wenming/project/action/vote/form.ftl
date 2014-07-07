@@ -86,7 +86,7 @@
       var ayessize = $("#voteTable .yes:checked").length;
       var result = (ayessize <= ${limitNum});
       if(!result){
-        alert("投票上限：5\n已投票数："+ayessize);
+        alert("投票上限：${limitNum}\n已投票数："+ayessize);
         return false;
         }
       $("#voteTable tbody tr").filter(function(){
