@@ -16,6 +16,8 @@ public class VoteManageAction extends WenmingProjectVoteManageAction{
         + " group by p.id, p.name order by count(*) desc";
     SqlBuilder query = SqlBuilder.sql(sql);
     query.param("sessionId", sessionId);
+    System.out.println(sql);
+    System.out.println(sessionId);
     List<Object[]> datas = entityDao.search(query);
     put("datas", datas);
     return forward();
