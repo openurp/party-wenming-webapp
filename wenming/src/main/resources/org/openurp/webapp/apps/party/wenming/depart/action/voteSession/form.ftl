@@ -1,5 +1,8 @@
 [#ftl]
 [@b.head/]
+<style>
+form.listform label.title{width:120px} 
+</style>
 [@b.toolbar title="投票批次编辑"]bar.addBack();[/@]
 [@b.tabs]
     [@b.form action="!save" theme="list"]

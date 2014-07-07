@@ -86,6 +86,7 @@
     </table>
     <div style="text-align:center; padding:30px;" class="footdiv">
       <input type="hidden" name="save" value="0" id="saveIpt"/>
+      <input type="hidden" name="session.id" value="${voteSession.id}"/>
       <input type="hidden" name="departmentType" value="${departmentType?c}">
       [@b.submit value="action.save" onsubmit="saveAssess"/]
       [@b.submit value="action.submit" onsubmit="submitAssess"/]
