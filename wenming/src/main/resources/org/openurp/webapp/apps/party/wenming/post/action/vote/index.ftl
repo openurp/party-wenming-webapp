@@ -1,7 +1,7 @@
 [#ftl]
 [@b.head/]
-[@b.toolbar title=title!"文明示范岗投票"/]
 <div id="voteIndex" class="ajax_container">
+  [@b.toolbar title=title!"文明示范岗投票"/]
   <div style="padding:10px;">
     <div class="div_bar inline">
       <div class="inline_forms">
@@ -11,8 +11,8 @@
         [/@]
       </div>
     </div>
-    [#if wenmingSessions?size gt 0]
-      [@b.div id="voteEdit" href = "!info?session.id=${wenmingSessions[0].id}"][/@]
+    [#if wenmingSession??]
+      [@b.div id="voteEdit" href = "!info?session.id=${wenmingSession.id}"][/@]
     [/#if]
   </div>
   <script>

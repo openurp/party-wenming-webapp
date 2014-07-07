@@ -11,13 +11,16 @@ public class WenmingProjectVoterCommAction extends WenMingAction{
   
   protected Integer getWenmingProjectVoterId() {
     Integer wenmingProjectVoterId = (Integer) getSession().get(WENMINGPROJECTVOTER_ID);
-    if(wenmingProjectVoterId == null && getUserId() != null) {
-      User user = getUrpUser();
-      List<WenmingProjectVoter> list = entityDao.get(WenmingProjectVoter.class, "name",user.getName());
-      if(!list.isEmpty()) {
-        wenmingProjectVoterId = list.get(0).getId();
-        getSession().put(WENMINGPROJECTVOTER_ID, wenmingProjectVoterId);
+    try {
+      if(wenmingProjectVoterId == null && getUserId() != null) {
+        User user = getUrpUser();
+        List<WenmingProjectVoter> list = entityDao.get(WenmingProjectVoter.class, "name",user.getName());
+        if(!list.isEmpty()) {
+          wenmingProjectVoterId = list.get(0).getId();
+          getSession().put(WENMINGPROJECTVOTER_ID, wenmingProjectVoterId);
+        }
       }
+    } catch (Exception e) {
     }
     return wenmingProjectVoterId;
   }

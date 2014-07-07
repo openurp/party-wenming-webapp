@@ -1,9 +1,12 @@
 package org.openurp.webapp.apps.party.wenming.person.action;
 
+import java.util.List;
+
 import org.openurp.webapp.apps.party.wenming.action.WenmingProjectVoteAction;
 import org.openurp.webapp.apps.party.wenming.model.AbstractWenmingObject;
 import org.openurp.webapp.apps.party.wenming.model.AbstractWenmingVote;
 import org.openurp.webapp.apps.party.wenming.model.WenmingType;
+import org.openurp.webapp.apps.party.wenming.model.WenmingVoteSession;
 import org.openurp.webapp.apps.party.wenming.person.model.GoodPerson;
 import org.openurp.webapp.apps.party.wenming.person.model.GoodPersonVote;
 
@@ -24,5 +27,14 @@ public class VoteAction extends WenmingProjectVoteAction{
     return (Class<T>) GoodPersonVote.class;
   }
 
+  @Override
+  protected Object getLimitNum(WenmingVoteSession wenmingSession) {
+    return wenmingSession.getLimit2();
+  }
+
+  @Override
+  protected List findAbstractWenmingObject(WenmingVoteSession session) {
+    return session.getPersons();
+  }
 
 }

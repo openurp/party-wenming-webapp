@@ -43,6 +43,6 @@ public interface WenMingService {
 
   WenmingVoteSession getWenmingVoteSession();
 
-  List<WenmingVoteSession> findWenmingVoteSession();
+  List<WenmingVoteSession> findWenmingVoteSession(Integer voterId);
 
 }

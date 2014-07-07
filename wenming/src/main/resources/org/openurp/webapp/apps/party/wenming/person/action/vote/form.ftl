@@ -27,7 +27,7 @@
           <th width="32%">事迹</th>
           <th width="33%">特色与创新点</th>
           <th width="5%">支撑材料</th>
-          <th width="10%">投票（投票上限：<span style="color:red">5</span>票）</th>
+          <th width="10%">投票（投票上限：<span style="color:red">${limitNum}</span>票）</th>
         </tr>
       </thead>
       <tbody>
@@ -63,6 +63,7 @@
     </table>
     <div style="text-align:center; padding:30px;" class="footdiv">
       <input type="hidden" name="save" value="0" id="saveIpt"/>
+      <input type="hidden" name="session.id" value="${wenmingVoteSession.id}"/>
       [@b.submit value="action.save" onsubmit="saveAssess"/]
       [@b.submit value="action.submit" onsubmit="submitAssess"/]
     </div>
@@ -73,7 +74,7 @@
     jQuery.struts2_jquery.require("/js/base/jquery-ui.js",null,bg.getContextPath() + "/static");
     function isallselected(){
       var ayessize = $("#voteTable .yes:checked").length;
-      var result = (ayessize <= 5);
+      var result = (ayessize <= ${limitNum});
       if(!result){
         alert("投票上限：5\n已投票数："+ayessize);
         return false;

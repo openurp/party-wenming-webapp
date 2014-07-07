@@ -42,7 +42,7 @@ public abstract class WenmingProjectVoteAction extends WenmingProjectVoterCommAc
   @Override
   public String index() throws Exception {
     if (getWenmingProjectVoterId() == null) { return redirect("login"); }
-    List<WenmingVoteSession> wenmingSessions = wenMingService.findWenmingVoteSession();
+    List<WenmingVoteSession> wenmingSessions = wenMingService.findWenmingVoteSession(getWenmingProjectVoterId());
     Integer sessionId = getInt("session.id");
     WenmingVoteSession wenmingSession = null;
     if (sessionId != null) {
@@ -55,17 +55,19 @@ public abstract class WenmingProjectVoteAction extends WenmingProjectVoterCommAc
     return super.index();
   }
 
+  abstract protected Object getLimitNum(WenmingVoteSession wenmingSession);
+
   @Override
   public String info() throws Exception {
     if (getWenmingProjectVoterId() == null) { return redirect("login"); }
     Integer sessionId = getInt("session.id");
     List<AbstractWenmingVote> abstractWenmingVotes = findAbstractWenmingVote(sessionId);
-    WenmingVoteSession nowSession = wenMingService.getWenmingVoteSession();
     WenmingVoteSession session = entityDao.get(WenmingVoteSession.class, getInt("session.id"));
-    if (abstractWenmingVotes.isEmpty() && nowSession != null && nowSession.equals(session)) { return redirect(
-        "edit", null, "session.id=" + sessionId); }
-    if (nowSession!=null && modifyable(abstractWenmingVotes)) {
-      put("modifyable", true);
+    boolean modifyable =  modifyable(abstractWenmingVotes, session);
+    if (abstractWenmingVotes.isEmpty() && modifyable) { return redirect(
+        "edit", null, "session.id=" + sessionId);
+    }else if(modifyable){
+      put("modifyable", modifyable);
     }
     if (!abstractWenmingVotes.isEmpty() && abstractWenmingVotes.get(0).isSubmit()){
       put("isSubmit", true);
@@ -75,21 +77,22 @@ public abstract class WenmingProjectVoteAction extends WenmingProjectVoterCommAc
     return forward();
   }
 
-  private boolean modifyable(List<AbstractWenmingVote> abstractWenmingVotes) {
-    return !abstractWenmingVotes.isEmpty() && !abstractWenmingVotes.get(0).isSubmit();
+  private boolean modifyable(List<AbstractWenmingVote> abstractWenmingVotes, WenmingVoteSession session) {
+    Date now = new Date();
+    return session != null && now.after(session.getBeginOn()) && now.before(session.getEndOn()) &&
+        (abstractWenmingVotes.isEmpty() || (!abstractWenmingVotes.isEmpty() && !abstractWenmingVotes.get(0).isSubmit()));
   }
 
   @Override
   public String edit() {
     if (getWenmingProjectVoterId() == null) { return redirect("login"); }
-    WenmingVoteSession nowSession = wenMingService.getWenmingVoteSession();
     WenmingVoteSession session = entityDao.get(WenmingVoteSession.class, getInt("session.id"));
     List<AbstractWenmingVote> abstractWenmingVotes = findAbstractWenmingVote(session.getId());
-    List<AbstractWenmingObject> objects = findAbstractWenmingObject(session.getId());
-    if (nowSession != null && nowSession.equals(session)) {
+    if (modifyable(abstractWenmingVotes, session)) {
       if (abstractWenmingVotes.isEmpty()) {
         WenmingProjectVoter voter = getWenmingProjectVoter();
         Date now = new Date();
+        List<AbstractWenmingObject> objects = findAbstractWenmingObject(session);
         for (AbstractWenmingObject obj : objects) {
           AbstractWenmingVote abstractWenmingVote;
           try {
@@ -105,21 +108,25 @@ public abstract class WenmingProjectVoteAction extends WenmingProjectVoterCommAc
       } else if (abstractWenmingVotes.get(0).isSubmit()) { return redirect("info", null, "session.id="
           + session.getId()); }
       put("abstractWenmingVotes", abstractWenmingVotes);
+      put("wenmingVoteSession", session);
+      put("limitNum", getLimitNum(session));
       return forward();
     } else {
       return redirect("info", null, "session.id=" + session.getId());
     }
   }
 
-  private List<AbstractWenmingObject> findAbstractWenmingObject(Integer sessionId) {
-    @SuppressWarnings("rawtypes")
-    OqlBuilder<AbstractWenmingObject> builder = OqlBuilder.from(getWenmingObjectClass(), "awo");
-    builder.where("awo.session.id=:sessionId", sessionId);
-    //FIXME 这次评选仅仅过滤掉草稿和不通过的
-    builder.where("awo.state not in(:states)",CollectUtils.newArrayList(AssessState.SchoolUnpassed,AssessState.DepartUnpassed,AssessState.Draft));
-    List<AbstractWenmingObject> objects = entityDao.search(builder);
-    return objects;
-  }
+  abstract protected List<AbstractWenmingObject> findAbstractWenmingObject(WenmingVoteSession session);
+
+//  private List<AbstractWenmingObject> findAbstractWenmingObject(Integer sessionId) {
+//    @SuppressWarnings("rawtypes")
+//    OqlBuilder<AbstractWenmingObject> builder = OqlBuilder.from(getWenmingObjectClass(), "awo");
+//    builder.where("awo.session.id=:sessionId", sessionId);
+//    //FIXME 这次评选仅仅过滤掉草稿和不通过的
+//    builder.where("awo.state not in(:states)",CollectUtils.newArrayList(AssessState.SchoolUnpassed,AssessState.DepartUnpassed,AssessState.Draft));
+//    List<AbstractWenmingObject> objects = entityDao.search(builder);
+//    return objects;
+//  }
 
   protected abstract <T extends AbstractWenmingObject> Class<T> getWenmingObjectClass();
 
@@ -136,23 +143,25 @@ public abstract class WenmingProjectVoteAction extends WenmingProjectVoterCommAc
   @Override
   public String save() throws Exception {
     if (getWenmingProjectVoterId() == null) { return redirect("login"); }
-    WenmingVoteSession session = wenMingService.getWenmingVoteSession();
+    WenmingVoteSession session = entityDao.get(WenmingVoteSession.class, getInt("session.id"));
     List<AbstractWenmingVote> list = (List<AbstractWenmingVote>) getAll(getWenmingObjectVoteClass(),"index");
-    Date now = new Date();
-    WenmingProjectVoter voter = getWenmingProjectVoter();
-    boolean save = getBool("save");
-    for(AbstractWenmingVote vote : list){
-      if(vote.getCreatedAt() == null) {
-        vote.setCreatedAt(now);
+    if(modifyable(list, session)){
+      Date now = new Date();
+      WenmingProjectVoter voter = getWenmingProjectVoter();
+      boolean save = getBool("save");
+      for(AbstractWenmingVote vote : list){
+        if(vote.getCreatedAt() == null) {
+          vote.setCreatedAt(now);
+        }
+        vote.setSession(session);
+        vote.setUpdatedAt(now);
+        vote.setVoter(voter);
+        if(!save){
+          vote.setSubmit(true);
+        }
       }
-      vote.setSession(session);
-      vote.setUpdatedAt(now);
-      vote.setVoter(voter);
-      if(!save){
-        vote.setSubmit(true);
-      }
+      entityDao.saveOrUpdate(list);
     }
-    entityDao.saveOrUpdate(list);
     return redirect("info", null, "session.id="+session.getId());
   }
 }
