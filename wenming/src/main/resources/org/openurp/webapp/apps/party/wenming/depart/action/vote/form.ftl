@@ -39,7 +39,7 @@
           <th width="4%">相关支撑材料</th>
           <th width="4%">加分项分值</th>
           <th width="4%">测评总分</th>
-          <th width="8%">投票（投票上限：<span class="voteMaxNum" style="color:red"></span>票）</th>
+          <th width="8%">投票（投票上限：<span class="voteMaxNum" style="color:red">${limitNum}</span>票）</th>
         </tr>
       </thead>
       <tbody>
@@ -95,7 +95,6 @@
   
   <script>
     jQuery.struts2_jquery.require("/js/base/jquery-ui.js",null,bg.getContextPath() + "/static");
-    $(".voteMaxNum").html(${limitNum});
     function isallselected(){
       var ayessize = $("#voteTable .yes:checked").length;
       var limitNum = ${limitNum};

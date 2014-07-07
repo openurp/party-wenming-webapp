@@ -77,6 +77,7 @@ public class VoteAction extends SupervisorCommAction {
       put("isSubmit", true);
     }
     put("assessSession", session);
+    put("limitNum", isForTeaching ? session.getLimit() : session.getLimit2());
     putData(session, isForTeaching, assessVotes);
     return forward();
   }
@@ -109,7 +110,7 @@ public class VoteAction extends SupervisorCommAction {
         return redirect("info", null, "session.id=" + session.getId() + "&departmentType=" + isForTeaching);
       }
       putData(session, isForTeaching, assessVotes);
-      put("limitNum", Math.ceil((isForTeaching ? nowSession.getLimit() : nowSession.getLimit2()) * 0.01 * assessVotes.size()));
+      put("limitNum", isForTeaching ? session.getLimit() : session.getLimit2());
       return forward();
     } else {
       return redirect("info", null, "session.id=" + session.getId() + "&departmentType=" + isForTeaching);

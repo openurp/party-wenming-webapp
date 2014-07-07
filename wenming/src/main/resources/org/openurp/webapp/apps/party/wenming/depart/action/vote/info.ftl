@@ -32,7 +32,7 @@
           <th width="4%">相关支撑材料</th>
           <th width="4%">加分项分值</th>
           <th width="4%">测评总分</th>
-          <th width="8%">投票（投票上限：<span class="voteMaxNum" style="color:red"></span>票）</th>
+          <th width="8%">投票（投票上限：<span class="voteMaxNum" style="color:red">${limitNum}</span>票）</th>
         </tr>
       </thead>
       <tbody>
@@ -81,23 +81,21 @@
 [@b.foot/]
 <script>
   jQuery.struts2_jquery.require("/js/base/jquery-ui.js",null,bg.getContextPath() + "/static");
-  var needsize = Math.round($("#voteTable tbody tr").length/5);
-  $(".voteMaxNum").html(needsize);
-    $(".assessTable tr").each(function (){
-      $(this).find("td").not(function (i){return i == 7|| i==4;}).each(function (){
-        var td = $(this);
-        var content = td.html(), text = td.text(), max = 150; 
-        td.html(text.substring(0, max));
-        if(text.length > max){
-          var a = $("<a href='#' style='margin-left:10px;'>查看更多...</a>");
-          td.append(a);
-          a.click(function (){
-            var detailDiv = $("#detailDiv");
-            detailDiv.empty().html(content);
-            detailDiv.dialog({width:"90%", modal:true});
-            return false;
-          });
-        }
-      });
+  $(".assessTable tr").each(function (){
+    $(this).find("td").not(function (i){return i == 7|| i==4;}).each(function (){
+      var td = $(this);
+      var content = td.html(), text = td.text(), max = 150; 
+      td.html(text.substring(0, max));
+      if(text.length > max){
+        var a = $("<a href='#' style='margin-left:10px;'>查看更多...</a>");
+        td.append(a);
+        a.click(function (){
+          var detailDiv = $("#detailDiv");
+          detailDiv.empty().html(content);
+          detailDiv.dialog({width:"90%", modal:true});
+          return false;
+        });
+      }
     });
+  });
 </script>
