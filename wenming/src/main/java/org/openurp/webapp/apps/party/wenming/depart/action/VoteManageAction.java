@@ -4,16 +4,17 @@ import java.util.List;
 
 import org.beangle.commons.dao.query.builder.SqlBuilder;
 import org.openurp.webapp.apps.party.wenming.depart.model.AssessSession;
+import org.openurp.webapp.apps.party.wenming.depart.model.VoteSession;
 
 public class VoteManageAction extends WenMingAction{
   
   @Override
   public String index() throws Exception {
-    List<AssessSession> assessSessions = wenMingService.findAssessSessions();
+    List<VoteSession> assessSessions = wenMingService.findVoteSession(null);
     Integer sessionId = getInt("session.id");
-    AssessSession assessSession = null;
+    VoteSession assessSession = null;
     if (sessionId != null) {
-      assessSession = entityDao.get(AssessSession.class, sessionId);
+      assessSession = entityDao.get(VoteSession.class, sessionId);
     } else if (!assessSessions.isEmpty()) {
       assessSession = assessSessions.get(0);
     }

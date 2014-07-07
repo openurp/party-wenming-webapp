@@ -72,17 +72,6 @@ public class WenMingServiceImpl extends BaseServiceImpl implements WenMingServic
   }
 
   @Override
-  public List<VoteSession> findVoteSession(Department department) {
-    OqlBuilder<VoteSession> query = OqlBuilder.from(VoteSession.class, "o");
-    query.orderBy("o.beginOn desc");
-    query.join("o.session.schemas", "s");
-    query.join("s.departs", "d");
-    query.where("d = :d", department);
-    query.select("distinct o");
-    return entityDao.search(query);
-  }
-
-  @Override
   public List<AssessSession> findAssessSessions() {
     OqlBuilder<AssessSession> query = OqlBuilder.from(AssessSession.class, "o");
 //    query.where("o.enabled=true");
@@ -143,10 +132,17 @@ public class WenMingServiceImpl extends BaseServiceImpl implements WenMingServic
   @Override
   public List<VoteSession> findVoteSession(Integer supervisorId) {
     OqlBuilder<VoteSession> query = OqlBuilder.from(VoteSession.class, "o");
-    query.join("o.voters", "v");
-    query.where("v.id = :supervisorId", supervisorId);
+    if( supervisorId != null){
+      query.join("o.voters", "v");
+      query.where("v.id = :supervisorId", supervisorId);
+    }
     query.orderBy("o.beginOn desc");
     return entityDao.search(query);
+  }
+
+  @Override
+  public List<VoteSession> findVoteSession() {
+    return findVoteSession(null);
   }
 
   @Override

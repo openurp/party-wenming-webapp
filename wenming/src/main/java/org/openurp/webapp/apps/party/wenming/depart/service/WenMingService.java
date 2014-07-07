@@ -21,7 +21,8 @@ public interface WenMingService {
 
   List<AssessSession> findSessions(Department department);
 
-  List<VoteSession> findVoteSession(Department department);
+  List<VoteSession> findVoteSession(Integer supervisorId);
+  List<VoteSession> findVoteSession();
 
   List<AssessSession> findAssessSessions();
 
@@ -39,7 +40,6 @@ public interface WenMingService {
   
   VoteSession getVoteSession(Integer supervisorId);
 
-  List<VoteSession> findVoteSession(Integer supervisorId);
 
   WenmingVoteSession getWenmingVoteSession();
 

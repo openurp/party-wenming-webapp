@@ -25,7 +25,7 @@ public class VoteStatAction extends SecurityActionSupport {
   @Override
   protected void indexSetting() {
     UrpUserBean user = (UrpUserBean) entityDao.get(User.class, getUserId());
-    List<VoteSession> sessions = wenMingService.findVoteSession(user.getDepartment());
+    List<VoteSession> sessions = wenMingService.findVoteSession();
     Integer sessionId = getInt("session.id");
     if (null != sessionId) put("assessSession", entityDao.get(VoteSession.class, sessionId));
     put("user", user);

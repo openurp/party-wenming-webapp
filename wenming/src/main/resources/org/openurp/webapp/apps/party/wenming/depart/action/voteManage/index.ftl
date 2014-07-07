@@ -1,8 +1,8 @@
 [#ftl]
 [@b.head/]
-[#include "../voteStat/voteStatNav.ftl"/]
-[@b.toolbar title='文明委投票汇总' /]
 <div id="voteManageIndex" class="ajax_container">
+  [#include "../voteStat/voteStatNav.ftl"/]
+  [@b.toolbar title='文明委投票汇总' /]
   <div class="inline_forms">
     [@b.form action="!index" target="voteManageIndex"]
       [@b.select name="session.id" label="测评批次" items=assessSessions value=assessSession onchange="bg.form.submit(this.form)"][/@]

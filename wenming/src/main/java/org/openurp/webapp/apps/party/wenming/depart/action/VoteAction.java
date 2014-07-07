@@ -69,7 +69,7 @@ public class VoteAction extends SupervisorCommAction {
     List<AssessVote> assessVotes = findAssessVote(sessionId, isForTeaching);
     VoteSession session = entityDao.get(VoteSession.class, getInt("session.id"));
     boolean modifyable = modifyable(assessVotes,session);
-    if (assessVotes.isEmpty() && modifyable) { return redirect("edit"); }
+    if (assessVotes.isEmpty() && modifyable) { return redirect("edit", null, "session.id=" +  sessionId + "&departmentType=" + isForTeaching); }
     else if (modifyable){
       put("modifyable", modifyable);
     }

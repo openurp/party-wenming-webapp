@@ -101,7 +101,7 @@
       var limitNum = ${limitNum};
       var result = (ayessize <= limitNum);
       if(!result){
-        alert("投票上限："+needsize+"\n已投票数："+ayessize);
+        alert("投票上限："+limitNum+"\n已投票数："+ayessize);
         return false;
         }
       $("#voteTable tbody tr").filter(function(){
