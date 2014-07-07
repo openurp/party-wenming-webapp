@@ -25,7 +25,7 @@
           <th width="33%">项目方案</th>
           <th width="34%">特色与创新点</th>
           <th width="7%">材料</th>
-          <th width="7%">投票（投票上限：<span style="color:red">5</span>票）</th>
+          <th width="7%">投票</th>
         </tr>
       </thead>
       <tbody>

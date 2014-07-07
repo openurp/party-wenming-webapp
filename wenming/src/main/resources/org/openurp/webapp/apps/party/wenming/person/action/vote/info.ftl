@@ -25,7 +25,7 @@
           <th width="32%">事迹</th>
           <th width="33%">特色与创新点</th>
           <th width="5%">支撑材料</th>
-          <th width="10%">投票（投票上限：<span style="color:red">5</span>票）</th>
+          <th width="10%">投票</th>
         </tr>
       </thead>
       <tbody>
